@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable name="viewmodel" type="kaleidot725.highestpeaks.main.MainViewModel"/>
+    </data>
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="100dp"
+            android:orientation="vertical"
+            tools:context=".main.MainFragment">
+
+        <TextView
+                android:id="@+id/altitude_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewmodel.altitude}"
+                android:textSize="80dp"
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif"
+                android:gravity="center"/>
+
+        <TextView
+                android:id="@+id/latitude_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewmodel.latitude}"
+                android:textSize="80dp"
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif"
+                android:gravity="center"/>
+
+        <TextView
+                android:id="@+id/longitude_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewmodel.longitude}"
+                android:textSize="80dp"
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif"
+                android:gravity="center"/>
+    </LinearLayout>
+</layout>
