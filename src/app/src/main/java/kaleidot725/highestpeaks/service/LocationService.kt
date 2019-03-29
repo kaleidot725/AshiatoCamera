@@ -8,18 +8,25 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
+import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import java.lang.IllegalStateException
+import java.util.*
 
-class LocationService(context : Context) {
-    val context : Context = context
-    var running : Boolean = false
-    val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+class LocationService(context : Context) : Disposable {
+
+    private val context : Context = context
+    private var running : Boolean = false
+    private var disposed : Boolean = false
+    private val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+    val update : BehaviorSubject<Date> = BehaviorSubject.create()
     val altitude : BehaviorSubject<Double> = BehaviorSubject.create()
     val latitude : BehaviorSubject<Double> = BehaviorSubject.create()
     val longitude : BehaviorSubject<Double> = BehaviorSubject.create()
     val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
+            update.onNext(Date())
             altitude.onNext(location.altitude)
             latitude.onNext(location.latitude)
             longitude.onNext(location.longitude)
@@ -64,4 +71,14 @@ class LocationService(context : Context) {
         running = false
         locationManager.removeUpdates(locationListener)
     }
+
+    override fun dispose() {
+        update.onComplete()
+        altitude.onComplete()
+        latitude.onComplete()
+        longitude.onComplete()
+        disposed = true
+    }
+
+    override fun isDisposed() = disposed
 }
