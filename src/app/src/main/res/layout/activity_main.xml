@@ -13,7 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:alpha="0.5"
+            android:alpha="0"
+            android:background="#000000"
             android:src="@drawable/main_wallpaper"/>
 
     <FrameLayout
@@ -21,11 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-    <com.leinardi.android.speeddial.SpeedDialView
-            android:id="@+id/speedDial"
-            android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:sdMainFabClosedSrc="@drawable/ic_add" />
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimary"
+            app:itemIconTint="#ffffff"
+            app:itemTextColor="#ffffff"
+            app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

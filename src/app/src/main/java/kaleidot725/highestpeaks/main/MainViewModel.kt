@@ -19,7 +19,7 @@ class MainViewModel(locationService: LocationService) : ViewModel(), Disposable 
     private val compositeDisposable : CompositeDisposable = CompositeDisposable()
 
     init {
-        update.postValue("Unknown")
+        update.postValue("Updating")
         altitude.postValue("Unknown")
         latitude.postValue("Unknown")
         longitude.postValue("Unknown")

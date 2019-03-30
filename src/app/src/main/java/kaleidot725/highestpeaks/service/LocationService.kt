@@ -26,7 +26,7 @@ class LocationService(context : Context) : Disposable {
     val longitude : BehaviorSubject<Double> = BehaviorSubject.create()
     val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            update.onNext(Date())
+            update.onNext(Date(location.time))
             altitude.onNext(location.altitude)
             latitude.onNext(location.latitude)
             longitude.onNext(location.longitude)
