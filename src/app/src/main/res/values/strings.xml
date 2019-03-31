@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">HighestPeaks</string>
+    <string name="main_title">Highest Peaks</string>
     <string name="action_settings">Settings</string>
 </resources>

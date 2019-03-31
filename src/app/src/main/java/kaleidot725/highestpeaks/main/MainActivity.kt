@@ -1,35 +1,51 @@
 package kaleidot725.highestpeaks.main
 
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.Menu
-import android.view.MenuItem
-import androidx.core.content.ContextCompat
 
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import com.google.android.material.bottomnavigation.BottomNavigationMenu
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kaleidot725.highestpeaks.R
 
 
 class MainActivity : AppCompatActivity() {
 
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.action_home -> {
+                supportFragmentManager.beginTransaction().
+                    replace(R.id.content, HomeFragment.newInstance()).commit()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.action_history -> {
+                supportFragmentManager.beginTransaction().
+                    replace(R.id.content, HistoryFragment.newInstance()).commit()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.action_setting -> {
+                supportFragmentManager.beginTransaction().
+                    replace(R.id.content, SettingFragment.newInstance()).commit()
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+
+        false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // UserにPermissionが必要な項目の了承を得る
         val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
         ActivityCompat.requestPermissions( this, permissions, 0)
 
         val transaction = supportFragmentManager.beginTransaction()
-        val fragment = MainFragment.newInstance()
+        val fragment = HomeFragment.newInstance()
         transaction.replace(R.id.content, fragment)
         transaction.commit()
+
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 }
