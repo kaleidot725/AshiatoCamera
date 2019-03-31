@@ -9,56 +9,61 @@
     </data>
 
 
-    <LinearLayout
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-        <TextView
-                android:id="@+id/update_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="@={viewmodel.update}"
-                android:textSize="32dp"
-                android:textColor="#FFFFFF"
-                android:textAlignment="center"
-                android:fontFamily="sans-serif"
-                android:gravity="center"/>
+            android:layout_margin="32dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_margin="32dp"
-                android:layout_gravity="center"
+                android:layout_gravity="top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/update_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/altitude_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@={viewmodel.update}"
+                    android:textSize="36dp"
+                    android:textColor="@color/colorText"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"/>
 
             <TextView
                     android:id="@+id/altitude_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/update_text"
                     app:layout_constraintBottom_toTopOf="@id/latitude_title"
                     app:layout_constraintEnd_toStartOf="@id/altitude_text"
-                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="Altitude"
-                    android:textSize="32dp"
-                    android:textColor="#FFFFFF"
+                    android:textSize="30dp"
+                    android:textColor="@color/colorText"
                     android:fontFamily="sans-serif"/>
 
             <TextView
                     android:id="@+id/altitude_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
                     app:layout_constraintStart_toEndOf="@id/altitude_title"
-                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/update_text"
                     app:layout_constraintBottom_toTopOf="@id/latitude_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="@={viewmodel.altitude}"
-                    android:textSize="32dp"
-                    android:textColor="#FFFFFF"
+                    android:textSize="30dp"
+                    android:textColor="@color/colorText"
                     android:fontFamily="sans-serif"
                     android:gravity="right"/>
 
@@ -66,29 +71,30 @@
                     android:id="@+id/latitude_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/altitude_title"
                     app:layout_constraintEnd_toStartOf="@id/altitude_text"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="Latitude"
-                    android:textSize="32dp"
-                    android:textColor="#FFFFFF"
+                    android:textSize="30dp"
+                    android:textColor="@color/colorText"
                     android:fontFamily="sans-serif"/>
 
             <TextView
                     android:id="@+id/latitude_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
                     app:layout_constraintStart_toEndOf="@id/latitude_title"
                     app:layout_constraintTop_toBottomOf="@id/altitude_text"
-                    app:layout_constraintBottom_toTopOf="@id/longitude_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="@={viewmodel.latitude}"
-                    android:textSize="32dp"
-                    android:textColor="#FFFFFF"
+                    android:textSize="30dp"
+                    android:textColor="@color/colorText"
                     android:fontFamily="sans-serif"
                     android:gravity="right"/>
 
@@ -96,30 +102,40 @@
                     android:id="@+id/longitude_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/latitude_title"
                     app:layout_constraintEnd_toStartOf="@id/longitude_text"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="Longitude"
-                    android:textSize="32dp"
-                    android:textColor="#FFFFFF"
+                    android:textSize="30dp"
+                    android:textColor="@color/colorText"
                     android:fontFamily="sans-serif"/>
 
             <TextView
                     android:id="@+id/longitude_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
                     app:layout_constraintStart_toEndOf="@id/longitude_title"
                     app:layout_constraintTop_toBottomOf="@id/latitude_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="@={viewmodel.longitude}"
-                    android:textSize="32dp"
-                    android:textColor="#FFFFFF"
+                    android:textSize="30dp"
+                    android:textColor="@color/colorText"
                     android:fontFamily="sans-serif"
                     android:gravity="right"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                app:elevation="0dp"
+                android:src="@drawable/ic_camera"/>
+    </FrameLayout>
+
 </layout>

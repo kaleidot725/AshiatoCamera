@@ -5,31 +5,23 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
+        android:background="@color/background"
         tools:context=".main.MainActivity">
-
-    <ImageView
-            android:id="@+id/background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:alpha="0"
-            android:background="#000000"
-            android:src="@drawable/main_wallpaper"/>
 
     <FrameLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/navigation_bar_height"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/navigation_bar_height"
             android:layout_gravity="bottom"
             android:background="@color/colorPrimary"
-            app:itemIconTint="#ffffff"
-            app:itemTextColor="#ffffff"
+            app:itemIconTint="@color/colorTextAccent"
+            app:itemTextColor="@color/colorTextAccent"
             app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
