@@ -5,7 +5,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
         tools:context=".main.MainActivity">
 
     <FrameLayout
@@ -19,9 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/navigation_bar_height"
             android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
-            app:itemIconTint="@color/colorTextAccent"
-            app:itemTextColor="@color/colorTextAccent"
+            android:background="@color/background"
+            app:itemIconTint="@color/bottom_nav_color"
+            app:itemTextColor="@color/bottom_nav_color"
             app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

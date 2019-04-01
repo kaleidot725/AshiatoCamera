@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:paddingTop="100dp">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable name="viewmodel" type="kaleidot725.highestpeaks.main.MainViewModel"/>
     </data>
 
 
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="32dp">
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_margin="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_gravity="top"
+                android:layout_marginTop="100dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -28,10 +27,9 @@
                     app:layout_constraintBottom_toTopOf="@id/altitude_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:text="@={viewmodel.update}"
-                    android:textSize="36dp"
+                    android:textSize="30dp"
                     android:textColor="@color/colorText"
                     android:textAlignment="center"
-                    android:fontFamily="sans-serif"
                     android:gravity="center"/>
 
             <TextView
@@ -46,9 +44,8 @@
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="Altitude"
-                    android:textSize="30dp"
-                    android:textColor="@color/colorText"
-                    android:fontFamily="sans-serif"/>
+                    android:textSize="24dp"
+                    android:textColor="@color/colorText"/>
 
             <TextView
                     android:id="@+id/altitude_text"
@@ -62,9 +59,8 @@
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="@={viewmodel.altitude}"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/colorText"
-                    android:fontFamily="sans-serif"
                     android:gravity="right"/>
 
             <TextView
@@ -78,9 +74,8 @@
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="Latitude"
-                    android:textSize="30dp"
-                    android:textColor="@color/colorText"
-                    android:fontFamily="sans-serif"/>
+                    android:textSize="24dp"
+                    android:textColor="@color/colorText"/>
 
             <TextView
                     android:id="@+id/latitude_text"
@@ -93,9 +88,8 @@
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="@={viewmodel.latitude}"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/colorText"
-                    android:fontFamily="sans-serif"
                     android:gravity="right"/>
 
             <TextView
@@ -109,9 +103,8 @@
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="Longitude"
-                    android:textSize="30dp"
-                    android:textColor="@color/colorText"
-                    android:fontFamily="sans-serif"/>
+                    android:textSize="24dp"
+                    android:textColor="@color/colorText"/>
 
             <TextView
                     android:id="@+id/longitude_text"
@@ -124,9 +117,8 @@
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
                     android:text="@={viewmodel.longitude}"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/colorText"
-                    android:fontFamily="sans-serif"
                     android:gravity="right"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -137,5 +129,4 @@
                 app:elevation="0dp"
                 android:src="@drawable/ic_camera"/>
     </FrameLayout>
-
 </layout>
