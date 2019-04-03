@@ -1,53 +1,40 @@
 package kaleidot725.highestpeaks.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
-import io.reactivex.disposables.CompositeDisposable
+import androidx.lifecycle.ViewModel
+import android.view.MenuItem
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
-import kaleidot725.highestpeaks.service.LocationService
-import java.text.SimpleDateFormat
-import java.util.*
 
-class MainViewModel(locationService: LocationService) : ViewModel(), Disposable {
-    val update : MutableLiveData<String> = MutableLiveData()
-    val altitude : MutableLiveData<String> = MutableLiveData()
-    val latitude : MutableLiveData<String> = MutableLiveData()
-    val longitude : MutableLiveData<String> = MutableLiveData()
+class MainViewModel(navigator: MainNavigator) : ViewModel(), Disposable {
 
-    private val df : SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault())
-    private val compositeDisposable : CompositeDisposable = CompositeDisposable()
+    val navigator : MainNavigator = navigator
+    var disposed : Boolean = false
 
-    init {
-        update.postValue("Updating")
-        altitude.postValue("Unknown")
-        latitude.postValue("Unknown")
-        longitude.postValue("Unknown")
-
-        var disposable = locationService.update.subscribe {
-            update.postValue(df.format(it))
+    fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            kaleidot725.highestpeaks.R.id.action_home -> {
+                return navigator.navigateHome()
+            }
+            kaleidot725.highestpeaks.R.id.action_history -> {
+                return navigator.navigateHistory()
+            }
+            kaleidot725.highestpeaks.R.id.action_setting -> {
+                return navigator.navigateSetting()
+            }
         }
-        compositeDisposable.add(disposable)
 
-        disposable = locationService.altitude.subscribe {
-            altitude.postValue("${it.toInt()}m")
-        }
-        compositeDisposable.add(disposable)
-
-        disposable = locationService.latitude.subscribe {
-            latitude.postValue("${it.toInt()}°")
-        }
-        compositeDisposable.add(disposable)
-
-        disposable = locationService.longitude.subscribe {
-            longitude.postValue("${it.toInt()}°")
-        }
-        compositeDisposable.add(disposable)
+        return false
     }
 
-    override fun dispose(){
-        compositeDisposable.dispose()
+    override fun dispose() {
+        if (disposed) {
+            throw IllegalStateException("already disposed")
+        }
+
+        disposed = true
     }
 
-    override fun isDisposed(): Boolean = compositeDisposable.isDisposed()
+    override fun isDisposed(): Boolean {
+        return disposed
+    }
 }

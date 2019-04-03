@@ -4,9 +4,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewmodel" type="kaleidot725.highestpeaks.main.MainViewModel"/>
+        <variable name="viewmodel" type="kaleidot725.highestpeaks.main.home.HomeViewModel"/>
     </data>
-
 
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="match_parent"

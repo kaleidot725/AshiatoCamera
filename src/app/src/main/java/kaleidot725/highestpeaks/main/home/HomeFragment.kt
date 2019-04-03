@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks.main
+package kaleidot725.highestpeaks.main.home
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProviders
@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
         fun newInstance() = HomeFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: HomeViewModel
     private lateinit var locationService: LocationService
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
         locationService = LocationService(context as Context)
         locationService.start()
 
-        viewModel = ViewModelProviders.of(this, MainFragmentViewModelFactory()).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, MainFragmentViewModelFactory()).get(HomeViewModel::class.java)
         val binding = DataBindingUtil.bind<HomeFragmentBinding>(view)
         binding?.viewmodel =  viewModel
         binding?.lifecycleOwner = this
@@ -48,8 +48,8 @@ class HomeFragment : Fragment() {
 
     private inner class MainFragmentViewModelFactory() : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass == MainViewModel::class.java) {
-                return MainViewModel(locationService) as  T
+            if (modelClass == HomeViewModel::class.java) {
+                return HomeViewModel(locationService) as  T
             }
 
             throw Exception("have created unknown class type")

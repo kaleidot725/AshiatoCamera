@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks.main
+package kaleidot725.highestpeaks.main.setting
 
 import androidx.lifecycle.ViewModel;
 
