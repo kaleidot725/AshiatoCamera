@@ -10,20 +10,20 @@ class MainViewModel(navigator: MainNavigator) : ViewModel(), Disposable {
     val navigator : MainNavigator = navigator
     var disposed : Boolean = false
 
-    fun onNavigationItemSelected(item: MenuItem): Boolean {
+    val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             kaleidot725.highestpeaks.R.id.action_home -> {
-                return navigator.navigateHome()
+                navigator.navigateHome()
             }
             kaleidot725.highestpeaks.R.id.action_history -> {
-                return navigator.navigateHistory()
+                navigator.navigateHistory()
             }
             kaleidot725.highestpeaks.R.id.action_setting -> {
-                return navigator.navigateSetting()
+                navigator.navigateSetting()
             }
         }
 
-        return false
+        false
     }
 
     override fun dispose() {
