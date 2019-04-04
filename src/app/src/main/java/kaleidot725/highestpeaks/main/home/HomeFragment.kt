@@ -10,8 +10,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HomeFragmentBinding
+import kaleidot725.highestpeaks.main.MainNavigator
+import kaleidot725.highestpeaks.main.camera.CameraFragment
 import kaleidot725.highestpeaks.service.LocationService
 import java.lang.Exception
 
@@ -36,6 +39,11 @@ class HomeFragment : Fragment() {
         val binding = DataBindingUtil.bind<HomeFragmentBinding>(view)
         binding?.viewmodel =  viewModel
         binding?.lifecycleOwner = this
+
+        val cameraFab : FloatingActionButton = view.findViewById(R.id.camera)
+        cameraFab.setOnClickListener {
+            fragmentManager?.beginTransaction()?.replace(R.id.content, CameraFragment.newInstance())?.commit()
+        }
 
         super.onViewCreated(view, savedInstanceState)
     }

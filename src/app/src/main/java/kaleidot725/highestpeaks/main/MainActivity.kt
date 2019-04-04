@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.ActivityMainBinding
+import kaleidot725.highestpeaks.main.camera.CameraFragment
 import kaleidot725.highestpeaks.main.history.HistoryFragment
 import kaleidot725.highestpeaks.main.home.HomeFragment
 import kaleidot725.highestpeaks.main.setting.SettingFragment
@@ -35,7 +36,8 @@ class MainActivity : AppCompatActivity(), MainNavigator {
     }
 
     override fun navigateCamera() : Boolean{
-        return false
+        supportFragmentManager.beginTransaction().replace(R.id.content, CameraFragment.newInstance()).commit()
+        return true
     }
 
     override fun navigateHome() : Boolean{
