@@ -9,11 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.ActivityMainBinding
-import kaleidot725.highestpeaks.main.camera.CameraFragment
 import kaleidot725.highestpeaks.main.history.HistoryFragment
 import kaleidot725.highestpeaks.main.home.HomeFragment
 import kaleidot725.highestpeaks.main.setting.SettingFragment
 import java.lang.Exception
+import android.content.Intent
+import kaleidot725.highestpeaks.main.camera.CameraActivity
 
 
 class MainActivity : AppCompatActivity(), MainNavigator {
@@ -36,22 +37,23 @@ class MainActivity : AppCompatActivity(), MainNavigator {
     }
 
     override fun navigateCamera() : Boolean{
-        supportFragmentManager.beginTransaction().replace(R.id.content, CameraFragment.newInstance()).commit()
+        val intent = Intent(this, CameraActivity::class.java)
+        startActivity(intent)
         return true
     }
 
     override fun navigateHome() : Boolean{
-        supportFragmentManager.beginTransaction().replace(R.id.content, HomeFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.main_content, HomeFragment.newInstance()).commit()
         return true
     }
 
     override fun navigateHistory(): Boolean {
-        supportFragmentManager.beginTransaction().replace(R.id.content, HistoryFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.main_content, HistoryFragment.newInstance()).commit()
         return true
     }
 
     override fun navigateSetting() : Boolean{
-        supportFragmentManager.beginTransaction().replace(R.id.content, SettingFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.main_content, SettingFragment.newInstance()).commit()
         return true
     }
 

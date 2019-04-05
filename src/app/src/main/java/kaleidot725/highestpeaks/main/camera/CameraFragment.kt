@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.camerakit.CameraKitView
 import kaleidot725.highestpeaks.R
+import kaleidot725.highestpeaks.databinding.CameraFragmentBinding
 
 
 class CameraFragment : Fragment() {
@@ -20,14 +22,17 @@ class CameraFragment : Fragment() {
     private lateinit var viewModel: CameraViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.camera_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        cameraKitView = view.findViewById(R.id.camera_kit_view)
+
         viewModel = ViewModelProviders.of(this).get(CameraViewModel::class.java)
-        cameraKitView = view.findViewById(R.id.camera)
+        val binding = DataBindingUtil.bind<CameraFragmentBinding>(view)
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
     }
 
     override fun onStart() {

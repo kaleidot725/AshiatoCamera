@@ -14,7 +14,7 @@
             tools:context=".main.MainActivity">
 
         <FrameLayout
-                android:id="@+id/content"
+                android:id="@+id/main_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/navigation_bar_height"/>
