@@ -7,9 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.camerakit.CameraKitView
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.CameraFragmentBinding
+import android.os.Environment.getExternalStorageDirectory
+import java.io.File
+import java.io.FileOutputStream
+import android.media.MediaActionSound
+import android.media.AudioManager
+import android.content.Context
 
 
 class CameraFragment : Fragment() {
@@ -27,12 +34,16 @@ class CameraFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cameraKitView = view.findViewById(R.id.camera_kit_view)
 
         viewModel = ViewModelProviders.of(this).get(CameraViewModel::class.java)
         val binding = DataBindingUtil.bind<CameraFragmentBinding>(view)
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
+
+        cameraKitView = view.findViewById(R.id.camera_kit_view)
+        viewModel.facing.observe(this, Observer { setFacing(it) })
+        viewModel.flash.observe(this, Observer { setFlash(it)})
+        viewModel.capture = { capture() }
     }
 
     override fun onStart() {
@@ -53,6 +64,33 @@ class CameraFragment : Fragment() {
     override fun onStop() {
         cameraKitView.onStop()
         super.onStop()
+    }
+
+    fun setFacing(value : Int) {
+        cameraKitView.facing = value
+    }
+
+    fun setFlash(value : Int) {
+        cameraKitView.flash = value
+    }
+
+    fun capture() {
+        val audio = activity!!.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val mSound = MediaActionSound()
+        mSound.play(MediaActionSound.SHUTTER_CLICK)
+
+        cameraKitView.captureImage(object : CameraKitView.ImageCallback{
+            override fun onImage(cameraKitView: CameraKitView?, capturedImage: ByteArray?) {
+                val savedPhoto = File(getExternalStorageDirectory(), "photo.jpg")
+                try {
+                    val outputStream = FileOutputStream(savedPhoto.path)
+                    outputStream.write(capturedImage)
+                    outputStream.close()
+                } catch (e: java.io.IOException) {
+                    e.printStackTrace()
+                }
+            }
+        })
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
