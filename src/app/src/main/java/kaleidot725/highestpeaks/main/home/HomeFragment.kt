@@ -15,8 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HomeFragmentBinding
 import kaleidot725.highestpeaks.main.camera.CameraActivity
-import kaleidot725.highestpeaks.main.camera.CameraFragment
-import kaleidot725.highestpeaks.service.LocationService
+import kaleidot725.highestpeaks.model.service.LocationService
 import java.lang.Exception
 
 class HomeFragment : Fragment() {

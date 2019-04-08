@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks.service
+package kaleidot725.highestpeaks.model.service
 
 import android.content.Context
 import android.content.pm.PackageManager

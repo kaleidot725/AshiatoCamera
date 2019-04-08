@@ -6,12 +6,11 @@
         android:layout_height="match_parent"
         tools:context=".main.setting.SettingFragment">
 
-    <TextView
+    <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:text="SETTING"
-            android:textColor="#ffffff"/>
-
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:entries="@array/setting_array"/>
 </FrameLayout>

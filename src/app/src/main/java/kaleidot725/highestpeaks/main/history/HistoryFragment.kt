@@ -25,5 +25,4 @@ class HistoryFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HistoryViewModel::class.java)
     }
-
 }

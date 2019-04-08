@@ -1,11 +1,10 @@
 package kaleidot725.highestpeaks.main.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import kaleidot725.highestpeaks.service.LocationService
+import kaleidot725.highestpeaks.model.service.LocationService
 import java.text.SimpleDateFormat
 import java.util.*
 

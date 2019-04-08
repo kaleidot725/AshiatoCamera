@@ -14,16 +14,20 @@ class MainViewModel(navigator: MainNavigator) : ViewModel(), Disposable {
         when (item.itemId) {
             kaleidot725.highestpeaks.R.id.action_home -> {
                 navigator.navigateHome()
+                true
             }
             kaleidot725.highestpeaks.R.id.action_history -> {
                 navigator.navigateHistory()
+                true
             }
             kaleidot725.highestpeaks.R.id.action_setting -> {
                 navigator.navigateSetting()
+                true
+            }
+            else -> {
+                false
             }
         }
-
-        false
     }
 
     override fun dispose() {

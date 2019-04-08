@@ -13,5 +13,4 @@
             android:gravity="center"
             android:text="HISTORY"
             android:textColor="@color/colorText"/>
-
 </FrameLayout>

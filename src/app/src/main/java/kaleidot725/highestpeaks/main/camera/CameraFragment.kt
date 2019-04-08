@@ -17,6 +17,7 @@ import java.io.FileOutputStream
 import android.media.MediaActionSound
 import android.media.AudioManager
 import android.content.Context
+import android.os.Environment
 
 
 class CameraFragment : Fragment() {
@@ -81,7 +82,8 @@ class CameraFragment : Fragment() {
 
         cameraKitView.captureImage(object : CameraKitView.ImageCallback{
             override fun onImage(cameraKitView: CameraKitView?, capturedImage: ByteArray?) {
-                val savedPhoto = File(getExternalStorageDirectory(), "photo.jpg")
+                val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+                val savedPhoto = File(path, "/photo.jpg")
                 try {
                     val outputStream = FileOutputStream(savedPhoto.path)
                     outputStream.write(capturedImage)

@@ -3,4 +3,9 @@
     <string name="main_title">Highest Peaks</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_camera">CameraActivity</string>
+    <string-array name="setting_array">
+        <item>GPS</item>
+        <item>License</item>
+        <item>Version</item>
+    </string-array>
 </resources>

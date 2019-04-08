@@ -50,6 +50,6 @@
                 android:layout_gravity="bottom|right"
                 android:layout_margin="16dp"
                 android:onClick="@{viewModel::toggleFlash}"
-                android:src="@drawable/ic_flush"/>
+                app:imageResource="@{viewModel.flashIcon}"/>
     </FrameLayout>
 </layout>
