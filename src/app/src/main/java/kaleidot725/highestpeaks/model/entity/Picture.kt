@@ -1,5 +1,3 @@
 package kaleidot725.highestpeaks.model.entity
 
-class Picture {
-
-}
+data class Picture(val name : String, val data : ByteArray)

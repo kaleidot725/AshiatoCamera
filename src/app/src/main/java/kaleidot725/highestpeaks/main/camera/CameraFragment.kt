@@ -11,13 +11,13 @@ import androidx.lifecycle.Observer
 import com.camerakit.CameraKitView
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.CameraFragmentBinding
-import android.os.Environment.getExternalStorageDirectory
 import java.io.File
 import java.io.FileOutputStream
 import android.media.MediaActionSound
 import android.media.AudioManager
 import android.content.Context
 import android.os.Environment
+import java.util.*
 
 
 class CameraFragment : Fragment() {
@@ -28,6 +28,29 @@ class CameraFragment : Fragment() {
 
     private lateinit var cameraKitView : CameraKitView
     private lateinit var viewModel: CameraViewModel
+    private val imageCallback = object : CameraKitView.ImageCallback{
+        override fun onImage(cameraKitView: CameraKitView?, capturedImage: ByteArray?) {
+            try {
+                val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+                val dirPath = "${dcimPath}/Highest-Peak"
+                val dirFile = File(dirPath)
+                val b = dirFile.exists()
+                if (!b) {
+                    dirFile.mkdirs()
+                }
+
+                val photoPath = "${dirPath}/IMG_${Date()}.jpg"
+                val outputStream = FileOutputStream(photoPath)
+                outputStream.write(capturedImage)
+                outputStream.close()
+
+                val mSound = MediaActionSound()
+                mSound.play(MediaActionSound.SHUTTER_CLICK)
+            } catch (e: java.io.IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.camera_fragment, container, false)
@@ -76,23 +99,7 @@ class CameraFragment : Fragment() {
     }
 
     fun capture() {
-        val audio = activity!!.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val mSound = MediaActionSound()
-        mSound.play(MediaActionSound.SHUTTER_CLICK)
-
-        cameraKitView.captureImage(object : CameraKitView.ImageCallback{
-            override fun onImage(cameraKitView: CameraKitView?, capturedImage: ByteArray?) {
-                val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-                val savedPhoto = File(path, "/photo.jpg")
-                try {
-                    val outputStream = FileOutputStream(savedPhoto.path)
-                    outputStream.write(capturedImage)
-                    outputStream.close()
-                } catch (e: java.io.IOException) {
-                    e.printStackTrace()
-                }
-            }
-        })
+        cameraKitView.captureImage(imageCallback)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

@@ -4,13 +4,12 @@ import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import kaleidot725.highestpeaks.model.entity.Picture
 
-class PictureRepository(persistence: Persistence<Picture>) : Repository<Picture> {
-
-    private val persistence : Persistence<Picture> = persistence
-    private var list     : ObservableList<Picture> = ObservableArrayList()
+class PictureRepository(path : String) : Repository<Picture> {
+    private val path : String = path
+    private var list : ObservableList<Picture> = ObservableArrayList()
 
     init {
-        list.addAll(persistence.load())
+        //
     }
 
     override fun add(item: Picture) {
