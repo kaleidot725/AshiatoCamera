@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
 import io.reactivex.disposables.Disposable
-import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 import java.lang.IllegalStateException
 import java.util.*
 
@@ -20,10 +20,10 @@ class LocationService(context : Context) : Disposable {
     private var disposed : Boolean = false
     private val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-    val update : BehaviorSubject<Date> = BehaviorSubject.create()
-    val altitude : BehaviorSubject<Double> = BehaviorSubject.create()
-    val latitude : BehaviorSubject<Double> = BehaviorSubject.create()
-    val longitude : BehaviorSubject<Double> = BehaviorSubject.create()
+    val update : PublishSubject<Date> = PublishSubject.create()
+    val altitude : PublishSubject<Double> = PublishSubject.create()
+    val latitude : PublishSubject<Double> = PublishSubject.create()
+    val longitude : PublishSubject<Double> = PublishSubject.create()
     val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             update.onNext(Date(location.time))

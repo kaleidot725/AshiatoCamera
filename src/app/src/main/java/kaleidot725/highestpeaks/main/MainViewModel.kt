@@ -1,7 +1,6 @@
 package kaleidot725.highestpeaks.main
 
 import androidx.lifecycle.ViewModel
-import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
 

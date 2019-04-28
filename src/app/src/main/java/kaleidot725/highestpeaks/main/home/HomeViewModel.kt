@@ -1,7 +1,7 @@
 package kaleidot725.highestpeaks.main.home
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import kaleidot725.highestpeaks.model.service.LocationService

@@ -28,29 +28,6 @@ class CameraFragment : Fragment() {
 
     private lateinit var cameraKitView : CameraKitView
     private lateinit var viewModel: CameraViewModel
-    private val imageCallback = object : CameraKitView.ImageCallback{
-        override fun onImage(cameraKitView: CameraKitView?, capturedImage: ByteArray?) {
-            try {
-                val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-                val dirPath = "${dcimPath}/Highest-Peak"
-                val dirFile = File(dirPath)
-                val b = dirFile.exists()
-                if (!b) {
-                    dirFile.mkdirs()
-                }
-
-                val photoPath = "${dirPath}/IMG_${Date()}.jpg"
-                val outputStream = FileOutputStream(photoPath)
-                outputStream.write(capturedImage)
-                outputStream.close()
-
-                val mSound = MediaActionSound()
-                mSound.play(MediaActionSound.SHUTTER_CLICK)
-            } catch (e: java.io.IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.camera_fragment, container, false)
@@ -105,5 +82,29 @@ class CameraFragment : Fragment() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         cameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private val imageCallback = object : CameraKitView.ImageCallback{
+        override fun onImage(cameraKitView: CameraKitView?, capturedImage: ByteArray?) {
+            try {
+                val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+                val dirPath = "${dcimPath}/Highest-Peak"
+                val dirFile = File(dirPath)
+                val b = dirFile.exists()
+                if (!b) {
+                    dirFile.mkdirs()
+                }
+
+                val photoPath = "${dirPath}/IMG_${Date()}.jpg"
+                val outputStream = FileOutputStream(photoPath)
+                outputStream.write(capturedImage)
+                outputStream.close()
+
+                val mSound = MediaActionSound()
+                mSound.play(MediaActionSound.SHUTTER_CLICK)
+            } catch (e: java.io.IOException) {
+                e.printStackTrace()
+            }
+        }
     }
 }
