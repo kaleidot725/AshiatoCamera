@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+        <data>
+                <variable name="vm" type="kaleidot725.highestpeaks.main.history.PictureViewModel"/>
+        </data>
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/picture_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:imageUrl="@{vm.path}"
+                android:background="@android:color/black"/>
+        </FrameLayout>
+</layout>

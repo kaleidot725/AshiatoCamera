@@ -8,7 +8,6 @@ class MainViewModel(navigator: MainNavigator) : ViewModel(), Disposable {
 
     val navigator : MainNavigator = navigator
     var disposed : Boolean = false
-
     val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             kaleidot725.highestpeaks.R.id.action_home -> {

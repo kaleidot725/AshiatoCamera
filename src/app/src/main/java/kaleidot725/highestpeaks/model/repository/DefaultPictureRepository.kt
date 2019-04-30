@@ -6,7 +6,7 @@ import java.io.File
 import java.lang.IllegalStateException
 import java.security.InvalidKeyException
 
-class DefaultPictureRepository(path : String) : PictureRepository<Picture> {
+class DefaultPictureRepository(path : String) : PictureRepository {
     private val path  = path
     private var list = ObservableArrayList<Picture>()
     private var initialized : Boolean = false
