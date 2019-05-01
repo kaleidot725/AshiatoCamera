@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         tools:context=".main.setting.SettingFragment">
 
-    <ListView
+    <data>
+        <variable name="vm" type="kaleidot725.highestpeaks.main.setting.SettingViewModel"/>
+    </data>
+
+    <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
-            android:entries="@array/setting_array"/>
-</FrameLayout>
+            android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/menu_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"/>
+    </FrameLayout>
+</layout>
