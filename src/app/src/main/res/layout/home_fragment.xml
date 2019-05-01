@@ -25,7 +25,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/altitude_text"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="@={viewmodel.update}"
+                    android:text="@{viewmodel.update}"
                     android:textSize="30dp"
                     android:textColor="@color/colorText"
                     android:textAlignment="center"
@@ -57,7 +57,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
-                    android:text="@={viewmodel.altitude}"
+                    android:text="@{viewmodel.altitude}"
                     android:textSize="24dp"
                     android:textColor="@color/colorText"
                     android:gravity="right"/>
@@ -86,7 +86,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
-                    android:text="@={viewmodel.latitude}"
+                    android:text="@{viewmodel.latitude}"
                     android:textSize="24dp"
                     android:textColor="@color/colorText"
                     android:gravity="right"/>
@@ -115,7 +115,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintHorizontal_weight="0.5"
-                    android:text="@={viewmodel.longitude}"
+                    android:text="@{viewmodel.longitude}"
                     android:textSize="24dp"
                     android:textColor="@color/colorText"
                     android:gravity="right"/>
