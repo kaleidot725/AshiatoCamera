@@ -27,16 +27,7 @@ class PictureViewModel(picture : Picture) : ViewModel() {
     }
 }
 
-@BindingAdapter("app:imageUrl")
-fun loadImage(view : ImageView, imagePath : String?) {
-    try {
-        val file = File(imagePath)
-        Picasso.get().load(file).into(view)
-    }
-    catch ( e : Exception) {
-        print(e.toString())
-    }
-}
+
 
 
 

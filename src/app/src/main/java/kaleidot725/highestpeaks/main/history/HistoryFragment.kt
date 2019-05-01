@@ -35,9 +35,11 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // FIXME
         val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
         val dirPath = "${dcimPath}/Highest-Peak"
         repository = DefaultPictureRepository(dirPath).also { it.init() }
+
         viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(repository)).get(HistoryViewModel::class.java)
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this
