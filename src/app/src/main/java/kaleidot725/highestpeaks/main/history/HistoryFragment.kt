@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -44,7 +45,7 @@ class HistoryFragment : Fragment() {
 
         val recyclerView =view.findViewById<RecyclerView>(R.id.picture_recycler_view)
         recyclerView.adapter = PictureAdapter(this, viewModel.pictureViewModels.value ?: listOf())
-        recyclerView.layoutManager = LinearLayoutManager(context) as RecyclerView.LayoutManager?
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.setHasFixedSize(true)
     }
 }

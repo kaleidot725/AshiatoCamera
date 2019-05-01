@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import kaleidot725.highestpeaks.model.repository.Picture
 import kaleidot725.michetimer.model.repository.PictureRepository
+import java.io.File
 import java.lang.Exception
 
 class PictureViewModel(picture : Picture) : ViewModel() {
@@ -19,16 +20,22 @@ class PictureViewModel(picture : Picture) : ViewModel() {
 
     private val _path : MutableLiveData<String> = MutableLiveData()
     val path : LiveData<String> get() = _path
+
+    init {
+        _path.value = picture.path
+        _name.value = picture.name
+    }
 }
 
 @BindingAdapter("app:imageUrl")
 fun loadImage(view : ImageView, imagePath : String?) {
-//    try {
-//        Picasso.get().load(imagePath).into(view)
-//    }
-//    catch ( e : Exception) {
-//        print(e.toString())
-//    }
+    try {
+        val file = File(imagePath)
+        Picasso.get().load(file).into(view)
+    }
+    catch ( e : Exception) {
+        print(e.toString())
+    }
 }
 
 
