@@ -1,10 +1,9 @@
-package kaleidot725.highestpeaks.main.setting
+package kaleidot725.highestpeaks.main.settinglist
 
-import androidx.appcompat.view.menu.MenuView
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProviders
+import kaleidot725.highestpeaks.model.repository.Menu
 
-class SettingViewModel(menuList : List<Menu>) : ViewModel() {
+class SettingListViewModel(menuList : List<Menu>) : ViewModel() {
     private val _menus : MutableList<MenuViewModel> = mutableListOf()
     val menus : List<MenuViewModel> get() = _menus
 

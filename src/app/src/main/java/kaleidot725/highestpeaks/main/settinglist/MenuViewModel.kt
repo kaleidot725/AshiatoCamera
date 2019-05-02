@@ -1,8 +1,9 @@
-package kaleidot725.highestpeaks.main.setting
+package kaleidot725.highestpeaks.main.settinglist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kaleidot725.highestpeaks.model.repository.Menu
 
 class MenuViewModel(menu : Menu) : ViewModel() {
     private val _icon : MutableLiveData<Int> = MutableLiveData<Int>()

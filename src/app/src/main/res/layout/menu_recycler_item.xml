@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:myApplication="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="vm" type="kaleidot725.highestpeaks.main.setting.MenuViewModel"/>
+        <variable name="vm" type="kaleidot725.highestpeaks.main.settinglist.MenuViewModel"/>
     </data>
 
     <FrameLayout
@@ -25,7 +25,7 @@
                     android:gravity="center"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    app:imageResource="@{vm.icon}"/>
+                    myApplication:imageResource="@{vm.icon}"/>
 
             <TextView
                     android:id="@+id/menu_text"

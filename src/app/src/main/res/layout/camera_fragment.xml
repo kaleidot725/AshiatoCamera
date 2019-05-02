@@ -2,11 +2,11 @@
 <layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".main.camera.CameraFragment">
+        xmlns:myApplication="http://schemas.android.com/apk/res-auto"
+        tools:context=".camera.CameraFragment">
 
     <data>
-        <variable name="viewModel" type="kaleidot725.highestpeaks.main.camera.CameraViewModel"/>
+        <variable name="viewModel" type="kaleidot725.highestpeaks.camera.CameraViewModel"/>
     </data>
 
     <FrameLayout
@@ -20,9 +20,9 @@
                 android:background="#000000"
                 android:adjustViewBounds="true"
                 android:keepScreenOn="true"
-                app:camera_facing="back"
-                app:camera_focus="continuous"
-                app:camera_permissions="camera"/>
+                myApplication:camera_facing="back"
+                myApplication:camera_focus="continuous"
+                myApplication:camera_permissions="camera"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/rotate_button"
@@ -50,6 +50,6 @@
                 android:layout_gravity="bottom|right"
                 android:layout_margin="16dp"
                 android:onClick="@{viewModel::toggleFlash}"
-                app:imageResource="@{viewModel.flashIcon}"/>
+                myApplication:imageResource="@{viewModel.flashIcon}"/>
     </FrameLayout>
 </layout>

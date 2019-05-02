@@ -12,11 +12,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import dagger.android.support.AndroidSupportInjection
+import kaleidot725.highestpeaks.MyApplicationNavigator
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HomeFragmentBinding
-import kaleidot725.highestpeaks.main.camera.CameraActivity
+import kaleidot725.highestpeaks.camera.CameraActivity
 import kaleidot725.highestpeaks.model.service.LocationService
 import java.lang.Exception
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
 
@@ -24,16 +27,21 @@ class HomeFragment : Fragment() {
         fun newInstance() = HomeFragment()
     }
 
+    @Inject
+    lateinit var navigator : MyApplicationNavigator
+
+    @Inject
+    lateinit var locationService: LocationService
+
     private lateinit var viewModel: HomeViewModel
-    private lateinit var locationService: LocationService
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        locationService = LocationService(context as Context)
-        locationService.start()
+        AndroidSupportInjection.inject(this)
 
         viewModel = ViewModelProviders.of(this, MainFragmentViewModelFactory()).get(HomeViewModel::class.java)
         val binding = DataBindingUtil.bind<HomeFragmentBinding>(view)
@@ -41,17 +49,13 @@ class HomeFragment : Fragment() {
         binding?.lifecycleOwner = this
 
         val cameraFab: FloatingActionButton = view.findViewById(R.id.cameraFab)
-        cameraFab.setOnClickListener {
-            val intent = Intent(context, CameraActivity::class.java)
-            startActivity(intent)
-        }
+        cameraFab.setOnClickListener { navigator.navigateCamera() }
 
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
         viewModel.dispose()
-        locationService.stop()
         super.onDestroyView()
     }
 

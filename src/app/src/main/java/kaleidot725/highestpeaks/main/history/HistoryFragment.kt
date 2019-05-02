@@ -13,11 +13,14 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.android.support.AndroidSupportInjection
+import kaleidot725.highestpeaks.MyApplicationNavigator
 
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HistoryFragmentBinding
 import kaleidot725.michetimer.model.repository.DefaultPictureRepository
 import kaleidot725.michetimer.model.repository.PictureRepository
+import javax.inject.Inject
 
 class HistoryFragment : Fragment() {
 
@@ -25,20 +28,21 @@ class HistoryFragment : Fragment() {
         fun newInstance() = HistoryFragment()
     }
 
+    @Inject
+    lateinit var navigator : MyApplicationNavigator
+
+    @Inject
+    lateinit var repository : PictureRepository
+
     private lateinit var viewModel: HistoryViewModel
-    private lateinit var repository : PictureRepository
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.history_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // FIXME
-        val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-        val dirPath = "${dcimPath}/Highest-Peak"
-        repository = DefaultPictureRepository(dirPath).also { it.init() }
 
         viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(repository)).get(HistoryViewModel::class.java)
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)

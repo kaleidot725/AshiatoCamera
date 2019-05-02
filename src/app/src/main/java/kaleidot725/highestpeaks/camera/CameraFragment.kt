@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks.main.camera
+package kaleidot725.highestpeaks.camera
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -14,9 +14,8 @@ import kaleidot725.highestpeaks.databinding.CameraFragmentBinding
 import java.io.File
 import java.io.FileOutputStream
 import android.media.MediaActionSound
-import android.media.AudioManager
-import android.content.Context
 import android.os.Environment
+import dagger.android.support.AndroidSupportInjection
 import java.util.*
 
 
@@ -30,6 +29,7 @@ class CameraFragment : Fragment() {
     private lateinit var viewModel: CameraViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.camera_fragment, container, false)
     }
 

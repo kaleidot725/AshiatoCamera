@@ -19,7 +19,7 @@ class MainViewModel(navigator: MainNavigator) : ViewModel(), Disposable {
                 true
             }
             kaleidot725.highestpeaks.R.id.action_setting -> {
-                navigator.navigateSetting()
+                navigator.navigateSettingList()
                 true
             }
             else -> {

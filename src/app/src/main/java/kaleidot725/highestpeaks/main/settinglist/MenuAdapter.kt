@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks.main.setting
+package kaleidot725.highestpeaks.main.settinglist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.MenuRecyclerItemBinding
-import kaleidot725.highestpeaks.main.history.PictureViewModel
 
 class MenuAdapter(owner : LifecycleOwner, vms: List<MenuViewModel>) : RecyclerView.Adapter<MenuViewHolder>()   {
     private val owner : LifecycleOwner = owner

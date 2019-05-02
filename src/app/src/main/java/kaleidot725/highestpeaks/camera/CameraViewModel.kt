@@ -1,7 +1,6 @@
-package kaleidot725.highestpeaks.main.camera
+package kaleidot725.highestpeaks.camera
 
 import android.view.View
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.camerakit.CameraKit

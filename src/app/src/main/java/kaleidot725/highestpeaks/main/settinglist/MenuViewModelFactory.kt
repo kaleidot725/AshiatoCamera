@@ -1,8 +1,8 @@
-package kaleidot725.highestpeaks.main.setting
+package kaleidot725.highestpeaks.main.settinglist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.highestpeaks.main.history.HistoryViewModel
+import kaleidot725.highestpeaks.model.repository.Menu
 
 class MenuViewModelFactory(menu : Menu) : ViewModelProvider.Factory {
     private val menu : Menu = menu

@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks.main
+package kaleidot725.highestpeaks
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
