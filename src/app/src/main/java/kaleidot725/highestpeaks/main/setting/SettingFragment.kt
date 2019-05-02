@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -33,7 +34,7 @@ class SettingFragment : Fragment() {
 
         val recycler = view.findViewById<RecyclerView>(R.id.menu_recycler_view)
         recycler.adapter = MenuAdapter(this,  viewModel.menus)
-        recycler.layoutManager = LinearLayoutManager(context)
+        recycler.layoutManager = GridLayoutManager(context, 2)
         recycler.setHasFixedSize(true)
 
         super.onViewCreated(view, savedInstanceState)

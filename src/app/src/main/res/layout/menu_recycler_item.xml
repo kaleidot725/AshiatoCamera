@@ -7,34 +7,36 @@
         <variable name="vm" type="kaleidot725.highestpeaks.main.setting.MenuViewModel"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="250dp"
+            android:layout_margin="2dp"
+            android:background="@android:color/white">
 
-        <ImageView
-                android:id="@+id/menu_icon"
-                android:gravity="center"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_margin="10dp"
-                app:imageResource="@{vm.icon}"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toStartOf="@+id/menu_text"/>
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-        <TextView
-                android:id="@+id/menu_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center_vertical"
-                android:text="@{vm.title}"
-                android:textSize="20dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/menu_icon"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toEndOf="parent"/>
+            <ImageView
+                    android:id="@+id/menu_icon"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:imageResource="@{vm.icon}"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                    android:id="@+id/menu_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="@{vm.title}"/>
+        </FrameLayout>
+    </FrameLayout>
+
 </layout>

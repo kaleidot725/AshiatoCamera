@@ -6,15 +6,18 @@
         </data>
 
         <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_margin="2dp"
+                android:background="@android:color/black">
+
 
                 <ImageView
                         android:id="@+id/picture_image"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="match_parent"
                         app:imageUrl="@{vm.path}"
-                        android:layout_margin="2dp"
-                        android:background="@android:color/black"/>
+                        android:clickable="true"
+                        android:background="?android:attr/selectableItemBackground"/>
         </FrameLayout>
 </layout>
