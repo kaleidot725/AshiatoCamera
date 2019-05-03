@@ -9,7 +9,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_margin="2dp"
-                android:background="@android:color/black">
+                android:elevation="4dp"
+                android:background="@android:color/white">
 
 
                 <ImageView
@@ -18,6 +19,7 @@
                         android:layout_height="match_parent"
                         myApplication:imageUrl="@{vm.path}"
                         android:clickable="true"
+                        android:scaleType="centerCrop"
                         android:background="?android:attr/selectableItemBackground"/>
         </FrameLayout>
 </layout>
