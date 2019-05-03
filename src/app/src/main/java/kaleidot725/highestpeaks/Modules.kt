@@ -7,8 +7,6 @@ import kaleidot725.highestpeaks.camera.CameraActivity
 import kaleidot725.highestpeaks.camera.CameraFragment
 import kaleidot725.highestpeaks.contact.ContactActivity
 import kaleidot725.highestpeaks.contact.ContactFragment
-import kaleidot725.highestpeaks.license.LicenseActivity
-import kaleidot725.highestpeaks.license.LicenseFragment
 import kaleidot725.highestpeaks.main.MainActivity
 import kaleidot725.highestpeaks.main.history.HistoryFragment
 import kaleidot725.highestpeaks.main.home.HomeFragment
@@ -67,9 +65,6 @@ abstract class ActivityModule {
     abstract fun contributeSettingActivity(): SettingActivity
 
     @ContributesAndroidInjector
-    abstract fun contributeLicenseActivity(): LicenseActivity
-
-    @ContributesAndroidInjector
     abstract fun contributeContactActivity(): ContactActivity
 }
 
@@ -106,13 +101,6 @@ abstract class SettingActivityModule {
     abstract fun contributeSettingFragment(): SettingFragment
 }
 
-@Module
-abstract class LicenseActivityModule {
-    @ContributesAndroidInjector
-    abstract fun contributeLicenseFragment(): LicenseFragment
-}
-
-
 @Singleton
 @Component(modules = [
     AppModule::class,
@@ -121,8 +109,7 @@ abstract class LicenseActivityModule {
     MainActivityModule::class,
     CameraActivityModule::class,
     ContactActivityModule::class,
-    SettingActivityModule::class,
-    LicenseActivityModule::class
+    SettingActivityModule::class
 ])
 interface AppComponent {
     @Component.Builder

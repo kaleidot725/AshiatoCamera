@@ -15,17 +15,11 @@ import kaleidot725.highestpeaks.main.history.HistoryFragment
 import kaleidot725.highestpeaks.main.home.HomeFragment
 import kaleidot725.highestpeaks.main.settinglist.SettingListFragment
 import java.lang.Exception
-import android.content.Intent
 import androidx.fragment.app.Fragment
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import kaleidot725.highestpeaks.camera.CameraActivity
-import kaleidot725.highestpeaks.contact.ContactActivity
-import kaleidot725.highestpeaks.license.LicenseActivity
-import kaleidot725.highestpeaks.setting.SettingActivity
-import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Inject
 
 
@@ -39,6 +33,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         AndroidInjection.inject(this)
 
         val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE)

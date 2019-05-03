@@ -24,14 +24,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".setting.SettingActivity"/>
-        <activity android:name=".license.LicenseActivity"/>
-        <activity android:name=".contact.ContactActivity"/>
+        <activity
+                android:name=".setting.SettingActivity"
+                android:label="Setting"
+                android:parentActivityName=".main.MainActivity"/>
+        <activity
+                android:name=".contact.ContactActivity"
+                android:label="Contact"
+                android:parentActivityName=".main.MainActivity"/>
 
         <activity
-                android:label="@string/title_activity_camera"
                 android:name=".camera.CameraActivity"
-                android:theme="@style/AppTheme.NoActionBar"/>
+                android:label="Camera"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:parentActivityName=".main.MainActivity"/>
     </application>
 
 </manifest>

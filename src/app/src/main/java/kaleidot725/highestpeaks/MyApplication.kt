@@ -3,12 +3,13 @@ package kaleidot725.highestpeaks
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.LibsBuilder
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import kaleidot725.highestpeaks.camera.CameraActivity
 import kaleidot725.highestpeaks.contact.ContactActivity
-import kaleidot725.highestpeaks.license.LicenseActivity
 import kaleidot725.highestpeaks.setting.SettingActivity
 import javax.inject.Inject
 
@@ -41,9 +42,10 @@ class MyApplication : Application(), MyApplicationNavigator, HasActivityInjector
     }
 
     override fun navigateLicense(): Boolean {
-        val intent = Intent(this, LicenseActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+        LibsBuilder()
+            .withActivityTitle("License")
+            .withShowLoadingProgress(false)
+            .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR).start(this)
         return true
     }
 
