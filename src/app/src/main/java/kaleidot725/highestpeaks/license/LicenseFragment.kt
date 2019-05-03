@@ -18,7 +18,6 @@ class LicenseFragment : Fragment() {
     private lateinit var viewModel: LicenseViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.license_fragment, container, false)
     }
 

@@ -9,7 +9,6 @@ import kaleidot725.highestpeaks.R
 class LicenseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.license_activity)
         if (savedInstanceState == null) {

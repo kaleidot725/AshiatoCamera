@@ -28,24 +28,28 @@ class MyApplication : Application(), MyApplicationNavigator, HasActivityInjector
 
     override fun navigateCamera() : Boolean{
         val intent = Intent(this, CameraActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         return true
     }
 
     override fun navigateSetting(): Boolean {
         val intent = Intent(this, SettingActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         return true
     }
 
     override fun navigateLicense(): Boolean {
         val intent = Intent(this, LicenseActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         return true
     }
 
     override fun navigateContact(): Boolean {
         val intent = Intent(this, ContactActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         return true
     }

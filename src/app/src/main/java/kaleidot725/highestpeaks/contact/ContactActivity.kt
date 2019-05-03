@@ -8,7 +8,6 @@ import kaleidot725.highestpeaks.R
 class ContactActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.contact_activity)
         if (savedInstanceState == null) {

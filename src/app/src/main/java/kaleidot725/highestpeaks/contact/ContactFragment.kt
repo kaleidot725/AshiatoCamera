@@ -18,7 +18,6 @@ class ContactFragment : Fragment() {
     private lateinit var viewModel: ContactViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.contact_fragment, container, false)
     }
 
