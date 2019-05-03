@@ -1,146 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/contact"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:background="@android:color/white"
         tools:context=".contact.ContactFragment">
 
-    <LinearLayout
+    <data>
+        <variable name="vm" type="kaleidot725.highestpeaks.contact.ContactViewModel"/>
+    </data>
+
+    <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:padding="8dp"
-            android:orientation="vertical"
-            android:focusable="true"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:foreground="?selectableItemBackground"
-            android:background="@android:color/white"
-            android:layoutDirection="ltr">
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contact_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="@dimen/textSizeLarge_contact"
-                    android:textStyle="normal"
-                    android:ellipsize="end"
-                    android:textColor="@android:color/black"
-                    android:gravity="start"
-                    android:text="Developer"/>
-
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="@dimen/textSizeSmall_contact"
-                    android:textStyle="normal"
-                    android:gravity="end"
-                    android:text="Yusuke Katsuragawa"/>
-        </LinearLayout>
-
-        <View
-                android:id="@+id/libraryDescriptionDivider"
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@android:color/darker_gray"
-                android:layout_marginTop="@dimen/margin_contact"
-                android:layout_marginBottom="@dimen/margin_contact"/>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
-                    android:text="Twitter"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
-                    android:text=":"/>
-
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="8"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
-                    android:text="https://twitter.com/kaleidot725"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
-                    android:text="GitHub"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
-                    android:text=":"/>
-
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="8"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
-                    android:text="https://github.com/kaleidot725"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
-                    android:text="Email"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
-                    android:text=":"/>
-
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="8"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
-                    android:text="highest.peak.contact@gmail.com"/>
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"/>
+    </FrameLayout>
+</layout>

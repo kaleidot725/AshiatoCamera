@@ -21,6 +21,8 @@ import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Singleton
 import dagger.android.support.AndroidSupportInjectionModule
 import kaleidot725.highestpeaks.main.MainNavigator
+import kaleidot725.highestpeaks.model.repository.DefaultDeveloperRepository
+import kaleidot725.highestpeaks.model.repository.DeveloperRepository
 
 
 @Module
@@ -44,6 +46,12 @@ class AppModule {
         val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
         val dirPath = "${dcimPath}/Highest-Peak"
         return DefaultPictureRepository(dirPath).also { it.init() }
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeveloperRepository(myApplication: MyApplication) : DeveloperRepository {
+        return DefaultDeveloperRepository().also { it.init() }
     }
 
     @Provides

@@ -25,6 +25,7 @@
                 android:layout_height="@dimen/navigation_bar_height"
                 android:layout_gravity="bottom"
                 android:background="@color/background"
+                android:elevation="16dp"
                 myApplication:itemIconTint="@color/bottom_nav_color"
                 myApplication:itemTextColor="@color/bottom_nav_color"
                 myApplication:setOnNavigationItemSelectedListener="@{viewModel.onNavigationItemSelectedListener}"

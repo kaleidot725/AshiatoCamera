@@ -12,7 +12,6 @@
                 android:elevation="4dp"
                 android:background="@android:color/white">
 
-
                 <ImageView
                         android:id="@+id/picture_image"
                         android:layout_width="match_parent"

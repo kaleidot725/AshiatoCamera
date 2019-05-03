@@ -56,7 +56,7 @@ class LocationService(context : Context) : Disposable {
         }
 
         running = true
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 50f, locationListener)
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1f, locationListener)
     }
 
     fun stop(){
