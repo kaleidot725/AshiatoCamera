@@ -8,4 +8,27 @@
         <item>License</item>
         <item>Contact</item>
     </string-array>
+
+    <string-array name="gps_providers">
+        <item>NETWORK</item>
+        <item>GPS</item>
+    </string-array>
+
+    <string-array name="gps_mintime">
+        <item>1Sec</item>
+        <item>5Sec</item>
+        <item>10Sec</item>
+        <item>15Sec</item>
+        <item>30Sec</item>
+        <item>60Sec</item>
+    </string-array>
+
+    <string-array name="gps_mindistance">
+        <item>1m</item>
+        <item>5m</item>
+        <item>10m</item>
+        <item>25m</item>
+        <item>50m</item>
+        <item>100m</item>
+    </string-array>
 </resources>

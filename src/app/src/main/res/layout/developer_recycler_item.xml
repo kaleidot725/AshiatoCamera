@@ -28,7 +28,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:textSize="@dimen/textSizeLarge_contact"
+                    android:textSize="@dimen/textSizeLarge"
                     android:textStyle="normal"
                     android:ellipsize="end"
                     android:textColor="@android:color/black"
@@ -39,7 +39,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:textSize="@dimen/textSizeSmall_contact"
+                    android:textSize="@dimen/textSizeSmall"
                     android:textStyle="normal"
                     android:gravity="end"
                     android:text="@{vm.name}"/>
@@ -50,8 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@android:color/darker_gray"
-                android:layout_marginTop="@dimen/margin_contact"
-                android:layout_marginBottom="@dimen/margin_contact"/>
+                android:layout_marginTop="@dimen/marginSmall"
+                android:layout_marginBottom="@dimen/marginSmall"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -62,23 +62,23 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
                     android:text="Twitter"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
                     android:text=":"/>
 
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
                     android:text="@{vm.twitter}"/>
         </LinearLayout>
 
@@ -91,23 +91,23 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
                     android:text="GitHub"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
                     android:text=":"/>
 
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
                     android:text="@{vm.github}"/>
         </LinearLayout>
 
@@ -120,23 +120,23 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
                     android:text="Email"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
                     android:text=":"/>
 
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
-                    android:layout_margin="@dimen/margin_contact"
-                    android:textSize="@dimen/textSizeSmall_contact"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
                     android:text="@{vm.email}"/>
         </LinearLayout>
     </LinearLayout>

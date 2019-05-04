@@ -2,7 +2,8 @@
     <dimen name="navigation_bar_height">48dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="textSizeLarge_contact">20sp</dimen>
-    <dimen name="textSizeSmall_contact">14sp</dimen>
-    <dimen name="margin_contact">4dp</dimen>
+    <dimen name="textSizeLarge">20sp</dimen>
+    <dimen name="textSizeSmall">14sp</dimen>
+    <dimen name="marginLarge">8dp</dimen>
+    <dimen name="marginSmall">4dp</dimen>
 </resources>
