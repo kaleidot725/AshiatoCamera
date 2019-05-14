@@ -1,24 +1,19 @@
 package kaleidot725.highestpeaks.main.history
 
-import android.graphics.Picture
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.os.Environment
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.highestpeaks.MyApplicationNavigator
 
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HistoryFragmentBinding
-import kaleidot725.michetimer.model.repository.DefaultPictureRepository
 import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Inject
 

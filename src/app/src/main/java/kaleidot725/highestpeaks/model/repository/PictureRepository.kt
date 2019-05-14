@@ -1,6 +1,6 @@
 package kaleidot725.michetimer.model.repository
 
-import kaleidot725.highestpeaks.model.repository.Picture
+import kaleidot725.highestpeaks.model.data.Picture
 
 interface PictureRepository {
     fun init()

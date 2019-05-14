@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks.model.repository
+package kaleidot725.highestpeaks.model.data
 
 import java.util.*
 

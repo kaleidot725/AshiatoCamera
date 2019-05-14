@@ -1,16 +1,9 @@
 package kaleidot725.highestpeaks.main.history
 
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.squareup.picasso.Picasso
-import kaleidot725.highestpeaks.model.repository.Picture
-import kaleidot725.michetimer.model.repository.PictureRepository
-import java.io.File
-import java.lang.Exception
+import kaleidot725.highestpeaks.model.data.Picture
 
 class PictureViewModel(picture : Picture) : ViewModel() {
     private val picture : Picture = picture

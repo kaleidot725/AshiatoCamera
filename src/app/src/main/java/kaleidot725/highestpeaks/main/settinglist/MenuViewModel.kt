@@ -4,9 +4,8 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.highestpeaks.MyApplication
 import kaleidot725.highestpeaks.MyApplicationNavigator
-import kaleidot725.highestpeaks.model.repository.Menu
+import kaleidot725.highestpeaks.model.data.Menu
 
 class MenuViewModel(navigator : MyApplicationNavigator,  menu : Menu) : ViewModel() {
     private val navigator : MyApplicationNavigator = navigator

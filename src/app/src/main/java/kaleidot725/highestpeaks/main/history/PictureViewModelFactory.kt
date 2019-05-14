@@ -2,7 +2,7 @@ package kaleidot725.highestpeaks.main.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.highestpeaks.model.repository.Picture
+import kaleidot725.highestpeaks.model.data.Picture
 
 class PictureViewModelFactory(picture : Picture) : ViewModelProvider.Factory {
     private val picture : Picture = picture

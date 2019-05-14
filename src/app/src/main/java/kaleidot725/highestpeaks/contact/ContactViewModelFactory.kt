@@ -2,7 +2,6 @@ package kaleidot725.highestpeaks.contact
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.highestpeaks.model.repository.Developer
 import kaleidot725.highestpeaks.model.repository.DeveloperRepository
 
 class ContactViewModelFactory(developerRepository : DeveloperRepository) : ViewModelProvider.Factory {

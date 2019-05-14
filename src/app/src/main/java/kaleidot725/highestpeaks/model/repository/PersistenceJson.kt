@@ -12,11 +12,11 @@ open class PersistenceJson<T>(name : String, clazz : Class<T>) : Persistence<T> 
 
     private val moshi: Moshi = Moshi.Builder().build()
     private val type: ParameterizedType = Types.newParameterizedType(List::class.java, clazz)
-    private val adapter: JsonAdapter<T> = moshi.adapter(type)
+    private val adapter: JsonAdapter<List<T>> = moshi.adapter(type)
 
-    override fun save(list: T) {
+    override fun save(item: T) {
         try {
-            val json = adapter.toJson(list)
+            val json = adapter.toJson(arrayListOf(item))
             val file = File(name)
             file.absoluteFile.bufferedWriter().use { it.write(json) }
         } catch (e: Exception) {
@@ -30,7 +30,7 @@ open class PersistenceJson<T>(name : String, clazz : Class<T>) : Persistence<T> 
             val file = File(name)
             if (file.exists()) {
                 val contents = file.absoluteFile.bufferedReader().use { it.readText() }
-                return adapter.fromJson(contents) ?: throw java.lang.Exception("Unexpected Error")
+                return adapter.fromJson(contents)?.first() ?: throw java.lang.Exception("Unexpected Error")
             }
             throw java.lang.Exception("Unexpected Error")
         } catch (e: Exception) {

@@ -1,7 +1,7 @@
 package kaleidot725.highestpeaks.model.repository
 
 import androidx.databinding.ObservableArrayList
-import kaleidot725.highestpeaks.R
+import kaleidot725.highestpeaks.model.data.Developer
 import java.lang.IllegalStateException
 
 class DeveloperRepositoryImpl : DeveloperRepository {
@@ -11,10 +11,10 @@ class DeveloperRepositoryImpl : DeveloperRepository {
     override fun init() {
         list.add(
             Developer(
-            "Yusuke Katsuragawa",
-            "https://github.com/kaleidot725",
-            "https://twitter.com/kaleidot725",
-             "hakodate.katsuragawa.yusuke@gmail.com"
+                "Yusuke Katsuragawa",
+                "https://github.com/kaleidot725",
+                "https://twitter.com/kaleidot725",
+                "hakodate.katsuragawa.yusuke@gmail.com"
             )
         )
         initialized = true

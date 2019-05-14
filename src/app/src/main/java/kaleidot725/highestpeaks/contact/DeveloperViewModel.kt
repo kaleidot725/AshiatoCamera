@@ -3,7 +3,7 @@ package kaleidot725.highestpeaks.contact
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.highestpeaks.model.repository.Developer
+import kaleidot725.highestpeaks.model.data.Developer
 
 class DeveloperViewModel(developer : Developer) : ViewModel() {
     private val _name : MutableLiveData<String> = MutableLiveData()

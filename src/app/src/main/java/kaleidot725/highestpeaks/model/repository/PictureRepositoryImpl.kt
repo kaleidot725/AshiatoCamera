@@ -1,10 +1,9 @@
 package kaleidot725.michetimer.model.repository
 
 import androidx.databinding.ObservableArrayList
-import kaleidot725.highestpeaks.model.repository.Picture
+import kaleidot725.highestpeaks.model.data.Picture
 import java.io.File
 import java.lang.IllegalStateException
-import java.security.InvalidKeyException
 
 class PictureRepositoryImpl(path : String) : PictureRepository {
     private val path  = path
@@ -14,7 +13,13 @@ class PictureRepositoryImpl(path : String) : PictureRepository {
     override fun init() {
         File(path).walkTopDown().forEach {
             if (it.path != path) {
-                list.add(Picture(Picture.createID(),it.path, it.name))
+                list.add(
+                    Picture(
+                        Picture.createID(),
+                        it.path,
+                        it.name
+                    )
+                )
             }
         }
 

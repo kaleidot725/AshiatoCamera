@@ -1,8 +1,7 @@
 package kaleidot725.highestpeaks.contact
 
 import androidx.lifecycle.ViewModel
-import kaleidot725.highestpeaks.main.settinglist.MenuViewModel
-import kaleidot725.highestpeaks.model.repository.Developer
+import kaleidot725.highestpeaks.model.data.Developer
 
 class ContactViewModel(developerList : List<Developer>) : ViewModel() {
     private val _developers : MutableList<DeveloperViewModel> = mutableListOf()

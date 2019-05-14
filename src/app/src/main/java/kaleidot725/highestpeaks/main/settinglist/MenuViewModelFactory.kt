@@ -3,7 +3,7 @@ package kaleidot725.highestpeaks.main.settinglist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kaleidot725.highestpeaks.MyApplicationNavigator
-import kaleidot725.highestpeaks.model.repository.Menu
+import kaleidot725.highestpeaks.model.data.Menu
 
 class MenuViewModelFactory(navigaor : MyApplicationNavigator, menu : Menu) : ViewModelProvider.Factory {
     private val navigaor : MyApplicationNavigator = navigaor

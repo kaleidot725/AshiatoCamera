@@ -2,6 +2,7 @@ package kaleidot725.highestpeaks.model.repository
 
 import androidx.databinding.ObservableArrayList
 import kaleidot725.highestpeaks.R
+import kaleidot725.highestpeaks.model.data.Menu
 import java.lang.IllegalStateException
 
 class MenuRepositoryImpl : MenuRepository {

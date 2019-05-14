@@ -11,18 +11,16 @@ import kaleidot725.highestpeaks.main.MainActivity
 import kaleidot725.highestpeaks.main.history.HistoryFragment
 import kaleidot725.highestpeaks.main.home.HomeFragment
 import kaleidot725.highestpeaks.main.settinglist.SettingListFragment
-import kaleidot725.highestpeaks.model.repository.DefaultMenuRepository
-import kaleidot725.highestpeaks.model.repository.MenuRepository
 import kaleidot725.highestpeaks.model.service.LocationService
 import kaleidot725.highestpeaks.setting.SettingActivity
 import kaleidot725.highestpeaks.setting.SettingFragment
-import kaleidot725.michetimer.model.repository.DefaultPictureRepository
+import kaleidot725.michetimer.model.repository.PictureRepositoryImpl
 import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Singleton
 import dagger.android.support.AndroidSupportInjectionModule
 import kaleidot725.highestpeaks.main.MainNavigator
-import kaleidot725.highestpeaks.model.repository.DefaultDeveloperRepository
-import kaleidot725.highestpeaks.model.repository.DeveloperRepository
+import kaleidot725.highestpeaks.model.repository.*
+import kaleidot725.highestpeaks.model.repository.PersistenceSetting
 
 
 @Module
@@ -42,22 +40,28 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun providePersistenceSettings(myApplication : MyApplication) : PersistenceSetting {
+        return PersistenceSetting("settings.json")
+    }
+
+    @Provides
+    @Singleton
     fun providePictureRepository(myApplication : MyApplication): PictureRepository {
         val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
         val dirPath = "${dcimPath}/Highest-Peak"
-        return DefaultPictureRepository(dirPath).also { it.init() }
+        return PictureRepositoryImpl(dirPath).also { it.init() }
     }
 
     @Provides
     @Singleton
     fun provideDeveloperRepository(myApplication: MyApplication) : DeveloperRepository {
-        return DefaultDeveloperRepository().also { it.init() }
+        return DeveloperRepositoryImpl().also { it.init() }
     }
 
     @Provides
     @Singleton
     fun provideMenuRepository(myApplication : MyApplication) : MenuRepository {
-        return DefaultMenuRepository().also { it.init() }
+        return MenuRepositoryImpl().also { it.init() }
     }
 }
 

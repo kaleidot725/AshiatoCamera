@@ -1,5 +1,6 @@
 package kaleidot725.highestpeaks
 
+import android.R
 import android.app.Activity
 import android.app.Application
 import android.content.Intent

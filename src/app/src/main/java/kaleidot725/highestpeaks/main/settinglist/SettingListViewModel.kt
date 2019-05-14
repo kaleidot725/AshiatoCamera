@@ -1,13 +1,8 @@
 package kaleidot725.highestpeaks.main.settinglist
 
-import android.content.DialogInterface
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import androidx.lifecycle.ViewModel;
-import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.highestpeaks.MyApplicationNavigator
-import kaleidot725.highestpeaks.model.repository.Menu
+import kaleidot725.highestpeaks.model.data.Menu
 
 class SettingListViewModel(navigator : MyApplicationNavigator, menuList : List<Menu>) : ViewModel() {
     private val _menus : MutableList<MenuViewModel> = mutableListOf()

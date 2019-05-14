@@ -1,6 +1,6 @@
 package kaleidot725.highestpeaks
 
-import kaleidot725.michetimer.model.repository.DefaultPictureRepository
+import kaleidot725.michetimer.model.repository.PictureRepositoryImpl
 import org.junit.After
 import org.junit.Assert
 import org.junit.Test
@@ -14,24 +14,24 @@ import java.nio.file.Paths
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class DefaultPictureRepositoryUnitTest {
+class PictureRepositoryImplUnitTest {
 
     private val currentDirectory = Paths.get("").toAbsolutePath().toString()
     private val directory = "tests"
     private val directoryPath = "${currentDirectory}/${directory}"
     private val names = listOf("A", "B", "C", "D", "E")
-    private lateinit var repository : DefaultPictureRepository
+    private lateinit var repositoryImpl : PictureRepositoryImpl
 
     fun createFilePath(name : String) : String { return "${directoryPath}/${name}" }
 
     @Before
     fun initialize() {
-        repository = DefaultPictureRepository(directoryPath)
+        repositoryImpl = PictureRepositoryImpl(directoryPath)
         File(directoryPath).mkdir()
         for (name in names) {
             File(createFilePath(name)).createNewFile()
         }
-        repository.init()
+        repositoryImpl.init()
     }
 
     @After
@@ -41,7 +41,7 @@ class DefaultPictureRepositoryUnitTest {
 
     @Test
     fun all() {
-        val pictures = repository.all()
+        val pictures = repositoryImpl.all()
         for (name in names ) {
             val picture = pictures.find { it.path == createFilePath(name) }
             Assert.assertEquals(true, picture != null)
@@ -52,7 +52,7 @@ class DefaultPictureRepositoryUnitTest {
 
     @Test
     fun count() {
-        val pictures = repository.all()
+        val pictures = repositoryImpl.all()
         Assert.assertEquals(names.count(), pictures.count())
     }
 }
