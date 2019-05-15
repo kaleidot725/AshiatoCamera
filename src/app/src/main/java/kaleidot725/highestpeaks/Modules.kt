@@ -1,5 +1,6 @@
 package kaleidot725.highestpeaks
 
+import android.location.LocationManager
 import android.os.Environment
 import dagger.*
 import dagger.android.ContributesAndroidInjector
@@ -19,8 +20,10 @@ import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Singleton
 import dagger.android.support.AndroidSupportInjectionModule
 import kaleidot725.highestpeaks.main.MainNavigator
+import kaleidot725.highestpeaks.model.data.Setting
 import kaleidot725.highestpeaks.model.repository.*
 import kaleidot725.highestpeaks.model.repository.PersistenceSetting
+import java.lang.Exception
 
 
 @Module
@@ -35,13 +38,19 @@ class AppModule {
     @Provides
     @Singleton
     fun proviceLocationService(myApplication : MyApplication) : LocationService {
-        return LocationService(myApplication).also { it.start() }
+        try {
+            val setting = PersistenceSetting(myApplication.filesDir.path + "settings.json").load()
+            return LocationService(myApplication).also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
+        } catch (e : Exception) {
+            val setting = Setting(LocationManager.GPS_PROVIDER, 1, 1)
+            return LocationService(myApplication).also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
+        }
     }
 
     @Provides
     @Singleton
     fun providePersistenceSettings(myApplication : MyApplication) : PersistenceSetting {
-        return PersistenceSetting("settings.json")
+        return PersistenceSetting(myApplication.filesDir.path + "settings.json")
     }
 
     @Provides

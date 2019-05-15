@@ -90,7 +90,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="8"
                             android:layout_margin="@dimen/marginSmall"
-                            android:onItemSelected="@{(parent, view, position, id) -> vm.onGpsProviderMenuSelected(parent, view, position, id)}"
+                            android:selectedItemPosition="@={vm.gpsProviderItemPosition}"
                             android:entries="@{vm.gpsProviderMenus}"
                             android:textSize="@dimen/textSizeSmall"/>
                 </LinearLayout>
@@ -121,7 +121,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="8"
                             android:layout_margin="@dimen/marginSmall"
-                            android:onItemSelected="@{(parent, view, position, id) -> vm.onGpsMinTimeMenuSelected(parent, view, position, id)}"
+                            android:selectedItemPosition="@={vm.gpsMinTimeItemPosition}"
                             android:entries="@{vm.gpsMinTimeMenus}"
                             android:textSize="@dimen/textSizeSmall"/>
                 </LinearLayout>
@@ -152,7 +152,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="8"
                             android:layout_margin="@dimen/marginSmall"
-                            android:onItemSelected="@{(parent, view, position, id) -> vm.onGpsMinDistanceMenuSelected(parent, view, position, id)}"
+                            android:selectedItemPosition="@={vm.gpsMinDistancePosition}"
                             android:entries="@{vm.gpsMinDistanceMenus}"
                             android:textSize="@dimen/textSizeSmall"/>
                 </LinearLayout>

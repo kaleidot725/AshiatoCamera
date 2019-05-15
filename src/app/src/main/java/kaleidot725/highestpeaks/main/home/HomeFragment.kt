@@ -17,6 +17,7 @@ import kaleidot725.highestpeaks.MyApplicationNavigator
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HomeFragmentBinding
 import kaleidot725.highestpeaks.camera.CameraActivity
+import kaleidot725.highestpeaks.model.repository.PersistenceSetting
 import kaleidot725.highestpeaks.model.service.LocationService
 import java.lang.Exception
 import javax.inject.Inject
@@ -52,11 +53,6 @@ class HomeFragment : Fragment() {
         cameraFab.setOnClickListener { navigator.navigateCamera() }
 
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onDestroyView() {
-        viewModel.dispose()
-        super.onDestroyView()
     }
 
     private inner class MainFragmentViewModelFactory() : ViewModelProvider.Factory {

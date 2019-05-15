@@ -11,14 +11,18 @@ import androidx.core.content.ContextCompat
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import java.lang.IllegalStateException
+import java.security.Provider
 import java.util.*
 
-class LocationService(context : Context) : Disposable {
+class LocationService(val context : Context) : Disposable {
 
-    private val context : Context = context
-    private var running : Boolean = false
-    private var disposed : Boolean = false
     private val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+    private var _running : Boolean = false
+    val running get() = _running
+
+    private var _disposed : Boolean = false
+    val diposed get() = _disposed
 
     val update : PublishSubject<Date> = PublishSubject.create()
     val altitude : PublishSubject<Double> = PublishSubject.create()
@@ -46,17 +50,17 @@ class LocationService(context : Context) : Disposable {
         }
     }
 
-    fun start(){
+    fun start(provider : String, minTime : Int, minDistance: Int){
         if (!(ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED)) {
             throw IllegalStateException("don`t have permited ACCESS_FILE_LOCATION")
         }
 
-        if (running) {
+        if (_running) {
             throw IllegalStateException("already have started")
         }
 
-        running = true
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1f, locationListener)
+        _running = true
+        locationManager.requestLocationUpdates(provider, minTime.toLong(), minDistance.toFloat(), locationListener)
     }
 
     fun stop(){
@@ -64,11 +68,11 @@ class LocationService(context : Context) : Disposable {
             throw IllegalStateException("don`t have permited ACCESS_FILE_LOCATION")
         }
 
-        if (!running) {
+        if (!_running) {
             throw IllegalStateException("already have started")
         }
 
-        running = false
+        _running = false
         locationManager.removeUpdates(locationListener)
     }
 
@@ -77,8 +81,8 @@ class LocationService(context : Context) : Disposable {
         altitude.onComplete()
         latitude.onComplete()
         longitude.onComplete()
-        disposed = true
+        _disposed = true
     }
 
-    override fun isDisposed() = disposed
+    override fun isDisposed() = _disposed
 }
