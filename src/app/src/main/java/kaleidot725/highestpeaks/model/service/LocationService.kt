@@ -25,15 +25,39 @@ class LocationService(val context : Context) : Disposable {
     val diposed get() = _disposed
 
     val update : PublishSubject<Date> = PublishSubject.create()
+    var lastUpdate : Date? = null
+        private set
+        get
+
     val altitude : PublishSubject<Double> = PublishSubject.create()
+    var lastAltitude : Double? = null
+        private set
+        get
+
     val latitude : PublishSubject<Double> = PublishSubject.create()
+    var lastLatitude : Double? = null
+        private set
+        get
+
     val longitude : PublishSubject<Double> = PublishSubject.create()
+    var lastLongitude : Double? = null
+        private set
+        get
+
     val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             update.onNext(Date(location.time))
+            lastUpdate = Date(location.time)
+
             altitude.onNext(location.altitude)
+            lastAltitude = location.altitude
+
             latitude.onNext(location.latitude)
+            lastLatitude = location.latitude
+
             longitude.onNext(location.longitude)
+            lastLongitude = location.longitude
+
             Log.v("GPS", "高度:${location.altitude} 緯度:${location.latitude} 経度:${location.longitude}")
         }
 

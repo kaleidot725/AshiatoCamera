@@ -27,10 +27,18 @@ class HomeViewModel(locationService: LocationService) : ViewModel() {
     private val compositeDisposable : CompositeDisposable = CompositeDisposable()
 
     init {
-        _update.postValue("Updating")
-        _altitude.postValue("Unknown")
-        _latitude.postValue("Unknown")
-        _longitude.postValue("Unknown")
+
+        val lastUpdate = if (locationService.lastUpdate == null) ("Updating") else (df.format(locationService.lastUpdate))
+        _update.postValue(lastUpdate)
+
+        val lastAltitude = if (locationService.lastAltitude == null) ("Unknown") else ("${locationService.lastAltitude?.toInt()}m")
+        _altitude.postValue(lastAltitude)
+
+        val lastLatitude = if (locationService.lastLatitude == null) ("Unknown") else ("${locationService.lastLatitude?.toInt()}°")
+        _latitude.postValue(lastLatitude)
+
+        val lastLongitude = if (locationService.lastLongitude == null) ("Unknown") else ("${locationService.lastLongitude?.toInt()}°")
+        _longitude.postValue(lastLongitude)
 
         var disposable = locationService.update.subscribe {
             _update.postValue(df.format(it))
