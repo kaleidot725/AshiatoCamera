@@ -58,19 +58,19 @@ class AppModule {
     fun providePictureRepository(myApplication : MyApplication): PictureRepository {
         val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
         val dirPath = "${dcimPath}/Highest-Peak"
-        return PictureRepositoryImpl(dirPath).also { it.init() }
+        return PictureRepositoryImpl(dirPath)
     }
 
     @Provides
     @Singleton
     fun provideDeveloperRepository(myApplication: MyApplication) : DeveloperRepository {
-        return DeveloperRepositoryImpl().also { it.init() }
+        return DeveloperRepositoryImpl()
     }
 
     @Provides
     @Singleton
     fun provideMenuRepository(myApplication : MyApplication) : MenuRepository {
-        return MenuRepositoryImpl().also { it.init() }
+        return MenuRepositoryImpl()
     }
 }
 

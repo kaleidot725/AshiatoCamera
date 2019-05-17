@@ -9,7 +9,7 @@ class MenuRepositoryImpl : MenuRepository {
     private val list : ArrayList<Menu> = ObservableArrayList<Menu>()
     private var initialized : Boolean = false
 
-    override fun init() {
+    init {
         list.add(Menu(R.drawable.ic_setting, "Setting"))
         list.add(Menu(R.drawable.ic_license, "License"))
         list.add(Menu(R.drawable.ic_contact, "Contact"))

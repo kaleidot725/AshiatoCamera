@@ -8,9 +8,19 @@ import java.lang.IllegalStateException
 class PictureRepositoryImpl(path : String) : PictureRepository {
     private val path  = path
     private var list = ObservableArrayList<Picture>()
-    private var initialized : Boolean = false
 
-    override fun init() {
+    override fun all() : List<Picture> {
+        update()
+        return this.list.toList()
+    }
+
+    override fun count() : Int {
+        update()
+        return this.list.count()
+    }
+
+    private fun update() {
+        list.clear()
         File(path).walkTopDown().forEach {
             if (it.path != path) {
                 list.add(
@@ -22,23 +32,5 @@ class PictureRepositoryImpl(path : String) : PictureRepository {
                 )
             }
         }
-
-        initialized = true
-    }
-
-    override fun all() : List<Picture> {
-        if (!initialized) {
-            throw IllegalStateException("not initialized")
-        }
-
-        return this.list.toList()
-    }
-
-    override fun count() : Int {
-        if (!initialized) {
-            throw IllegalStateException("not initialized")
-        }
-
-        return this.list.count()
     }
 }

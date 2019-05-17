@@ -40,6 +40,8 @@ class HistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(repository)).get(HistoryViewModel::class.java)
+        viewModel.load()
+
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this
         binding?.vm = viewModel

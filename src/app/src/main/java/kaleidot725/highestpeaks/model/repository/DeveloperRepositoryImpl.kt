@@ -8,7 +8,7 @@ class DeveloperRepositoryImpl : DeveloperRepository {
     private val list : ArrayList<Developer> = ObservableArrayList<Developer>()
     private var initialized : Boolean = false
 
-    override fun init() {
+    init {
         list.add(
             Developer(
                 "Yusuke Katsuragawa",

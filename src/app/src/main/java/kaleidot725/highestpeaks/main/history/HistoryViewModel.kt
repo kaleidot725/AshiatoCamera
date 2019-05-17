@@ -13,12 +13,19 @@ class HistoryViewModel(pictureRepository: PictureRepository) : ViewModel() {
     val pictureViewModels : LiveData<List<PictureViewModel>> get() = _pictureViewModels
 
     init {
-        val pictures = pictureRepository.all()
+        _pictureViewModels.value = createPictureViewModels()
+    }
+
+    fun load() {
+        _pictureViewModels.postValue(createPictureViewModels())
+    }
+
+    private fun createPictureViewModels() : List<PictureViewModel> {
+        val pictures = pictureRepository.all().reversed()
         val vms : MutableList<PictureViewModel> = mutableListOf()
         for (picture in pictures) {
             vms.add(PictureViewModel(picture))
         }
-
-        _pictureViewModels.value = vms
+        return vms
     }
 }

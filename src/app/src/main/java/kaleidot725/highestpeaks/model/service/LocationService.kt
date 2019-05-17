@@ -18,31 +18,27 @@ class LocationService(val context : Context) : Disposable {
 
     private val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-    private var _running : Boolean = false
-    val running get() = _running
+    var running : Boolean = false
+        private set
 
-    private var _disposed : Boolean = false
-    val diposed get() = _disposed
+    var disposed : Boolean = false
+        private set
 
     val update : PublishSubject<Date> = PublishSubject.create()
     var lastUpdate : Date? = null
         private set
-        get
 
     val altitude : PublishSubject<Double> = PublishSubject.create()
     var lastAltitude : Double? = null
         private set
-        get
 
     val latitude : PublishSubject<Double> = PublishSubject.create()
     var lastLatitude : Double? = null
         private set
-        get
 
     val longitude : PublishSubject<Double> = PublishSubject.create()
     var lastLongitude : Double? = null
         private set
-        get
 
     val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
@@ -79,11 +75,11 @@ class LocationService(val context : Context) : Disposable {
             throw IllegalStateException("don`t have permited ACCESS_FILE_LOCATION")
         }
 
-        if (_running) {
+        if (running) {
             throw IllegalStateException("already have started")
         }
 
-        _running = true
+        running = true
         locationManager.requestLocationUpdates(provider, minTime.toLong(), minDistance.toFloat(), locationListener)
     }
 
@@ -92,11 +88,11 @@ class LocationService(val context : Context) : Disposable {
             throw IllegalStateException("don`t have permited ACCESS_FILE_LOCATION")
         }
 
-        if (!_running) {
+        if (!running) {
             throw IllegalStateException("already have started")
         }
 
-        _running = false
+        running = false
         locationManager.removeUpdates(locationListener)
     }
 
@@ -105,8 +101,8 @@ class LocationService(val context : Context) : Disposable {
         altitude.onComplete()
         latitude.onComplete()
         longitude.onComplete()
-        _disposed = true
+        disposed = true
     }
 
-    override fun isDisposed() = _disposed
+    override fun isDisposed() = disposed
 }
