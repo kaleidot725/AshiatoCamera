@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         ActivityCompat.requestPermissions( this, permissions, 0)
 
-        viewModel = ViewModelProviders.of(this, MainViewModelFactory()).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, MainViewModelFactory(this)).get(MainViewModel::class.java)
         val binding : ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel =  viewModel
         binding.lifecycleOwner = this
@@ -63,15 +63,5 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return dispatchingAndroidInjector
-    }
-
-    private inner class MainViewModelFactory() : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass == MainViewModel::class.java) {
-                return MainViewModel(this@MainActivity) as  T
-            }
-
-            throw Exception("have created unknown class type")
-        }
     }
 }
