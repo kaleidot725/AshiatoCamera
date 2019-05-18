@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <uses-feature android:name="android.hardware.location.gps"/>
 
     <application
@@ -13,17 +14,18 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
+        <activity android:name=".preview.PreviewActivity">
+        </activity>
         <activity
-                android:label="@string/main_title"
                 android:name=".main.MainActivity"
+                android:label="@string/main_title"
                 android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
                 android:name=".setting.SettingActivity"
                 android:label="Setting"
@@ -32,12 +34,11 @@
                 android:name=".contact.ContactActivity"
                 android:label="Contact"
                 android:parentActivityName=".main.MainActivity"/>
-
         <activity
                 android:name=".camera.CameraActivity"
                 android:label="Camera"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:parentActivityName=".main.MainActivity"/>
+                android:parentActivityName=".main.MainActivity"
+                android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

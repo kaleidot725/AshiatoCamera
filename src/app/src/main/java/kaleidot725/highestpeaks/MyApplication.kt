@@ -11,6 +11,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import kaleidot725.highestpeaks.camera.CameraActivity
 import kaleidot725.highestpeaks.contact.ContactActivity
+import kaleidot725.highestpeaks.preview.PreviewActivity
 import kaleidot725.highestpeaks.setting.SettingActivity
 import javax.inject.Inject
 
@@ -52,6 +53,13 @@ class MyApplication : Application(), MyApplicationNavigator, HasActivityInjector
 
     override fun navigateContact(): Boolean {
         val intent = Intent(this, ContactActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        return true
+    }
+
+    override fun navigatePreview(): Boolean {
+        val intent = Intent(this, PreviewActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         return true

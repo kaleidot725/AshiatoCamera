@@ -39,7 +39,7 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(repository)).get(HistoryViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(navigator, repository)).get(HistoryViewModel::class.java)
         viewModel.load()
 
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)

@@ -19,6 +19,7 @@
                         myApplication:imageUrl="@{vm.path}"
                         android:clickable="true"
                         android:scaleType="centerCrop"
+                        android:onClick="@{vm::preview}"
                         android:background="?android:attr/selectableItemBackground"/>
         </FrameLayout>
 </layout>

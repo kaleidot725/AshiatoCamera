@@ -4,11 +4,14 @@ import android.graphics.Picture
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kaleidot725.highestpeaks.MyApplicationNavigator
 import kaleidot725.michetimer.model.repository.PictureRepository
 
-class HistoryViewModel(pictureRepository: PictureRepository) : ViewModel() {
-    private val pictureRepository : PictureRepository = pictureRepository
-
+class HistoryViewModel(
+    private val navigator : MyApplicationNavigator,
+    private val pictureRepository: PictureRepository)
+    : ViewModel()
+{
     private val _pictureViewModels : MutableLiveData<List<PictureViewModel>> = MutableLiveData()
     val pictureViewModels : LiveData<List<PictureViewModel>> get() = _pictureViewModels
 
@@ -24,7 +27,7 @@ class HistoryViewModel(pictureRepository: PictureRepository) : ViewModel() {
         val pictures = pictureRepository.all().reversed()
         val vms : MutableList<PictureViewModel> = mutableListOf()
         for (picture in pictures) {
-            vms.add(PictureViewModel(picture))
+            vms.add(PictureViewModel(navigator, picture))
         }
         return vms
     }

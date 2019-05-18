@@ -5,4 +5,5 @@ interface MyApplicationNavigator {
     fun navigateSetting() : Boolean
     fun navigateLicense() : Boolean
     fun navigateContact() : Boolean
+    fun navigatePreview() : Boolean
 }
