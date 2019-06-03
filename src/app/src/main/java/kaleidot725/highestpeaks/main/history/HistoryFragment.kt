@@ -14,6 +14,8 @@ import kaleidot725.highestpeaks.MyApplicationNavigator
 
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HistoryFragmentBinding
+import kaleidot725.highestpeaks.model.data.Holder
+import kaleidot725.highestpeaks.model.data.Picture
 import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Inject
 
@@ -29,6 +31,9 @@ class HistoryFragment : Fragment() {
     @Inject
     lateinit var repository : PictureRepository
 
+    @Inject
+    lateinit var preview : Holder<Picture>
+
     private lateinit var viewModel: HistoryViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,7 +44,7 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(navigator, repository)).get(HistoryViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(navigator, repository, preview)).get(HistoryViewModel::class.java)
         viewModel.load()
 
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)

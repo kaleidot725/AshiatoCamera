@@ -20,9 +20,13 @@ import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Singleton
 import dagger.android.support.AndroidSupportInjectionModule
 import kaleidot725.highestpeaks.main.MainNavigator
+import kaleidot725.highestpeaks.model.data.Holder
+import kaleidot725.highestpeaks.model.data.Picture
 import kaleidot725.highestpeaks.model.data.Setting
 import kaleidot725.highestpeaks.model.repository.*
 import kaleidot725.highestpeaks.model.repository.PersistenceSetting
+import kaleidot725.highestpeaks.preview.PreviewActivity
+import kaleidot725.highestpeaks.preview.PreviewFragment
 import java.lang.Exception
 
 
@@ -63,6 +67,12 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun providePreviewPicture(myApplication: MyApplication) : Holder<Picture> {
+        return Holder(Picture("", "", ""))
+    }
+
+    @Provides
+    @Singleton
     fun provideDeveloperRepository(myApplication: MyApplication) : DeveloperRepository {
         return DeveloperRepositoryImpl()
     }
@@ -87,6 +97,9 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract fun contributeContactActivity(): ContactActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributePreviewActivity() : PreviewActivity
 }
 
 @Module
@@ -122,6 +135,12 @@ abstract class SettingActivityModule {
     abstract fun contributeSettingFragment(): SettingFragment
 }
 
+@Module
+abstract class PreviewActivityModule {
+    @ContributesAndroidInjector
+    abstract fun contributePreviewFragment() : PreviewFragment
+}
+
 @Singleton
 @Component(modules = [
     AppModule::class,
@@ -130,7 +149,8 @@ abstract class SettingActivityModule {
     MainActivityModule::class,
     CameraActivityModule::class,
     ContactActivityModule::class,
-    SettingActivityModule::class
+    SettingActivityModule::class,
+    PreviewActivityModule::class
 ])
 interface AppComponent {
     @Component.Builder

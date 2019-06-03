@@ -14,7 +14,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".preview.PreviewActivity">
+        <activity android:name=".preview.PreviewActivity"
+                  android:label="Preview"
+                  android:parentActivityName=".main.MainActivity">
         </activity>
         <activity
                 android:name=".main.MainActivity"
