@@ -67,6 +67,9 @@ dependencies {
     // Moshi
     implementation("com.squareup.moshi:moshi:1.8.0")
 
+    // PhotoView
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
     // Test Frame Work
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

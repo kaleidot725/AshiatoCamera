@@ -11,15 +11,16 @@
             android:id="@+id/preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/black"
             tools:context="preview.PreviewFragment">
 
-        <ImageView
+        <com.github.chrisbanes.photoview.PhotoView
                 android:id="@+id/picture_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:imageUrl="@{vm.path}"
                 android:clickable="true"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 android:background="?android:attr/selectableItemBackground"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
