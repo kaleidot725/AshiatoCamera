@@ -1,13 +1,16 @@
 package kaleidot725.highestpeaks.main
 
+import android.view.Menu
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
+import kaleidot725.highestpeaks.model.data.Holder
 
 class MainViewModel(navigator: MainNavigator) : ViewModel(), Disposable {
 
-    val navigator : MainNavigator = navigator
-    var disposed : Boolean = false
+    private val navigator : MainNavigator = navigator
+    private var disposed : Boolean = false
+
     val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             kaleidot725.highestpeaks.R.id.action_home -> {

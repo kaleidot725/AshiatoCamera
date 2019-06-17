@@ -19,6 +19,7 @@ import kaleidot725.michetimer.model.repository.PictureRepositoryImpl
 import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Singleton
 import dagger.android.support.AndroidSupportInjectionModule
+import kaleidot725.highestpeaks.main.MainMenu
 import kaleidot725.highestpeaks.main.MainNavigator
 import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.model.data.Picture
@@ -69,6 +70,12 @@ class AppModule {
     @Singleton
     fun providePreviewPicture(myApplication: MyApplication) : Holder<Picture> {
         return Holder(Picture("", "", ""))
+    }
+
+    @Provides
+    @Singleton
+    fun provideMainMenuSelected(myApplication: MyApplication) : Holder<MainMenu> {
+        return Holder(MainMenu.Home)
     }
 
     @Provides
