@@ -44,7 +44,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="sans-serif-condensed"
                     android:text="Altitude"
-                    android:textSize="32dp"
+                    android:textSize="30dp"
                     android:textColor="@color/colorText"/>
 
             <TextView
@@ -60,7 +60,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="sans-serif-condensed"
                     android:text="@{viewmodel.altitude}"
-                    android:textSize="32dp"
+                    android:textSize="30dp"
                     android:textColor="@color/colorText"
                     android:gravity="right"/>
 
@@ -76,7 +76,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="sans-serif-condensed"
                     android:text="Latitude"
-                    android:textSize="32dp"
+                    android:textSize="30dp"
                     android:textColor="@color/colorText"/>
 
             <TextView
@@ -91,7 +91,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="sans-serif-condensed"
                     android:text="@{viewmodel.latitude}"
-                    android:textSize="32dp"
+                    android:textSize="30dp"
                     android:textColor="@color/colorText"
                     android:gravity="right"/>
 
@@ -107,7 +107,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="sans-serif-condensed"
                     android:text="Longitude"
-                    android:textSize="32dp"
+                    android:textSize="30dp"
                     android:textColor="@color/colorText"/>
 
             <TextView
@@ -122,7 +122,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="sans-serif-condensed"
                     android:text="@{viewmodel.longitude}"
-                    android:textSize="32dp"
+                    android:textSize="30dp"
                     android:textColor="@color/colorText"
                     android:gravity="right"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
