@@ -25,9 +25,9 @@
                     myApplication:layout_constraintTop_toTopOf="parent"
                     myApplication:layout_constraintBottom_toTopOf="@id/altitude_text"
                     myApplication:layout_constraintEnd_toEndOf="parent"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="@{viewmodel.update}"
-                    android:textSize="30dp"
-                    android:textColor="@color/colorText"
+                    android:textSize="36dp"
                     android:textAlignment="center"
                     android:gravity="center"/>
 
@@ -42,8 +42,9 @@
                     myApplication:layout_constraintEnd_toStartOf="@id/altitude_text"
                     myApplication:layout_constraintHorizontal_chainStyle="spread_inside"
                     myApplication:layout_constraintHorizontal_weight="0.5"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="Altitude"
-                    android:textSize="24dp"
+                    android:textSize="32dp"
                     android:textColor="@color/colorText"/>
 
             <TextView
@@ -57,8 +58,9 @@
                     myApplication:layout_constraintEnd_toEndOf="parent"
                     myApplication:layout_constraintHorizontal_chainStyle="spread"
                     myApplication:layout_constraintHorizontal_weight="0.5"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="@{viewmodel.altitude}"
-                    android:textSize="24dp"
+                    android:textSize="32dp"
                     android:textColor="@color/colorText"
                     android:gravity="right"/>
 
@@ -72,8 +74,9 @@
                     myApplication:layout_constraintEnd_toStartOf="@id/altitude_text"
                     myApplication:layout_constraintHorizontal_chainStyle="spread"
                     myApplication:layout_constraintHorizontal_weight="0.5"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="Latitude"
-                    android:textSize="24dp"
+                    android:textSize="32dp"
                     android:textColor="@color/colorText"/>
 
             <TextView
@@ -86,8 +89,9 @@
                     myApplication:layout_constraintEnd_toEndOf="parent"
                     myApplication:layout_constraintHorizontal_chainStyle="spread"
                     myApplication:layout_constraintHorizontal_weight="0.5"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="@{viewmodel.latitude}"
-                    android:textSize="24dp"
+                    android:textSize="32dp"
                     android:textColor="@color/colorText"
                     android:gravity="right"/>
 
@@ -101,8 +105,9 @@
                     myApplication:layout_constraintEnd_toStartOf="@id/longitude_text"
                     myApplication:layout_constraintHorizontal_chainStyle="spread"
                     myApplication:layout_constraintHorizontal_weight="0.5"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="Longitude"
-                    android:textSize="24dp"
+                    android:textSize="32dp"
                     android:textColor="@color/colorText"/>
 
             <TextView
@@ -115,8 +120,9 @@
                     myApplication:layout_constraintEnd_toEndOf="parent"
                     myApplication:layout_constraintHorizontal_chainStyle="spread"
                     myApplication:layout_constraintHorizontal_weight="0.5"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="@{viewmodel.longitude}"
-                    android:textSize="24dp"
+                    android:textSize="32dp"
                     android:textColor="@color/colorText"
                     android:gravity="right"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
