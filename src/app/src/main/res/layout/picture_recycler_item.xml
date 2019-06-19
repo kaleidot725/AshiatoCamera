@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:myApplication="http://schemas.android.com/apk/res-auto">
 
         <data>
+                <import type="android.view.View"/>
                 <variable name="vm" type="kaleidot725.highestpeaks.main.history.PictureViewModel"/>
         </data>
 
@@ -20,6 +21,13 @@
                         android:clickable="true"
                         android:scaleType="centerCrop"
                         android:onClick="@{vm::preview}"
+                        android:onLongClick="@{vm::longClick}"
                         android:background="?android:attr/selectableItemBackground"/>
+
+                <View   android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="@{vm.isChecked ? View.VISIBLE : View.GONE, default=gone}"
+                        android:background="@drawable/card_selected_border"/>
+
         </FrameLayout>
 </layout>

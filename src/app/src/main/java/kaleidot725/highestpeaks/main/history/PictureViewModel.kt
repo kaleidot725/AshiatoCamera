@@ -18,14 +18,23 @@ class PictureViewModel(private val navigation : MyApplicationNavigator,
     private val _path : MutableLiveData<String> = MutableLiveData()
     val path : LiveData<String> get() = _path
 
+    private val _isChecked : MutableLiveData<Boolean> = MutableLiveData()
+    val isChecked : LiveData<Boolean> = _isChecked
+
     init {
         _path.value = picture.path
         _name.value = picture.name
+        _isChecked.value = false
     }
 
     fun preview(view : View)  {
         preview.value = this.picture
         navigation.navigatePreview()
+    }
+
+    fun longClick(view : View) : Boolean {
+        _isChecked.postValue(!(isChecked.value ?: true))
+        return true
     }
 }
 
