@@ -15,7 +15,7 @@ import kaleidot725.highestpeaks.preview.PreviewActivity
 import kaleidot725.highestpeaks.setting.SettingActivity
 import javax.inject.Inject
 
-class MyApplication : Application(), MyApplicationNavigator, HasActivityInjector {
+class MyApplication : Application(), HasActivityInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
@@ -27,41 +27,5 @@ class MyApplication : Application(), MyApplicationNavigator, HasActivityInjector
 
     override fun activityInjector(): AndroidInjector<Activity> {
         return dispatchingAndroidInjector
-    }
-
-    override fun navigateCamera() : Boolean{
-        val intent = Intent(this, CameraActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        return true
-    }
-
-    override fun navigateSetting(): Boolean {
-        val intent = Intent(this, SettingActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        return true
-    }
-
-    override fun navigateLicense(): Boolean {
-        LibsBuilder()
-            .withActivityTitle("License")
-            .withShowLoadingProgress(false)
-            .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR).start(this)
-        return true
-    }
-
-    override fun navigateContact(): Boolean {
-        val intent = Intent(this, ContactActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        return true
-    }
-
-    override fun navigatePreview(): Boolean {
-        val intent = Intent(this, PreviewActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        return true
     }
 }

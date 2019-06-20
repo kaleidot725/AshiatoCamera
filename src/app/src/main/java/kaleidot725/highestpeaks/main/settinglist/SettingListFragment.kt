@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
-import kaleidot725.highestpeaks.MyApplicationNavigator
 
 import kaleidot725.highestpeaks.R
+import kaleidot725.highestpeaks.main.MainNavigator
 import kaleidot725.highestpeaks.model.repository.MenuRepository
 import javax.inject.Inject
 
@@ -22,7 +22,7 @@ class SettingListFragment : Fragment() {
     }
 
     @Inject
-    lateinit var navigator : MyApplicationNavigator
+    lateinit var navigator : MainNavigator
 
     @Inject
     lateinit var repository : MenuRepository

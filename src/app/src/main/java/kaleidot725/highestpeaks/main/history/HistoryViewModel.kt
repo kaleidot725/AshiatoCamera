@@ -3,13 +3,13 @@ package kaleidot725.highestpeaks.main.history
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.highestpeaks.MyApplicationNavigator
+import kaleidot725.highestpeaks.main.MainNavigator
 import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.model.data.Picture
 import kaleidot725.michetimer.model.repository.PictureRepository
 
 class HistoryViewModel(
-    private val navigator : MyApplicationNavigator,
+    private val navigator : MainNavigator,
     private val pictureRepository: PictureRepository,
     private val preview : Holder<Picture>)
     : ViewModel()

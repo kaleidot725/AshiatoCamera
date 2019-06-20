@@ -4,11 +4,11 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.highestpeaks.MyApplicationNavigator
+import kaleidot725.highestpeaks.main.MainNavigator
 import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.model.data.Picture
 
-class PictureViewModel(private val navigation : MyApplicationNavigator,
+class PictureViewModel(private val navigation : MainNavigator,
                        private val picture : Picture,
                        private val preview : Holder<Picture>) : ViewModel() {
 

@@ -9,11 +9,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.Binds
 import dagger.android.support.AndroidSupportInjection
-import kaleidot725.highestpeaks.MyApplicationNavigator
 
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HistoryFragmentBinding
+import kaleidot725.highestpeaks.main.MainNavigator
 import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.model.data.Picture
 import kaleidot725.michetimer.model.repository.PictureRepository
@@ -26,7 +27,7 @@ class HistoryFragment : Fragment() {
     }
 
     @Inject
-    lateinit var navigator : MyApplicationNavigator
+    lateinit var navigator : MainNavigator
 
     @Inject
     lateinit var repository : PictureRepository

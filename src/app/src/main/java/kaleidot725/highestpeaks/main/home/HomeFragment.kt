@@ -1,7 +1,5 @@
 package kaleidot725.highestpeaks.main.home
 
-import android.content.Context
-import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,11 +11,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.AndroidSupportInjection
-import kaleidot725.highestpeaks.MyApplicationNavigator
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HomeFragmentBinding
-import kaleidot725.highestpeaks.camera.CameraActivity
-import kaleidot725.highestpeaks.model.repository.PersistenceSetting
+import kaleidot725.highestpeaks.main.MainNavigator
 import kaleidot725.highestpeaks.model.service.LocationService
 import java.lang.Exception
 import javax.inject.Inject
@@ -29,7 +25,7 @@ class HomeFragment : Fragment() {
     }
 
     @Inject
-    lateinit var navigator : MyApplicationNavigator
+    lateinit var navigator : MainNavigator
 
     @Inject
     lateinit var locationService: LocationService

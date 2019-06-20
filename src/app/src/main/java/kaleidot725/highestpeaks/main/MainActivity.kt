@@ -1,7 +1,11 @@
 package kaleidot725.highestpeaks.main
 
 import android.Manifest
+import android.content.Intent
 import android.os.Bundle
+import android.view.ActionMode
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
@@ -13,15 +17,21 @@ import kaleidot725.highestpeaks.main.home.HomeFragment
 import kaleidot725.highestpeaks.main.settinglist.SettingListFragment
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.LibsBuilder
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import kaleidot725.highestpeaks.camera.CameraActivity
+import kaleidot725.highestpeaks.contact.ContactActivity
 import kaleidot725.highestpeaks.model.data.Holder
+import kaleidot725.highestpeaks.preview.PreviewActivity
+import kaleidot725.highestpeaks.setting.SettingActivity
 import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjector {
+class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjector, ActionMode.Callback {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -48,19 +58,54 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         restoreMenu()
     }
 
-    private fun restoreMenu() : Boolean {
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigation.menu.findItem(when(mainMenuSelected.value) {
-            MainMenu.Home -> kaleidot725.highestpeaks.R.id.action_home
-            MainMenu.History -> kaleidot725.highestpeaks.R.id.action_history
-            MainMenu.SettingList -> kaleidot725.highestpeaks.R.id.action_setting
-        }).setChecked(true)
+    override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+        val inflater = mode.menuInflater
+        inflater.inflate(R.menu.history_action_menu, menu)
+        return true
+    }
 
-        when(mainMenuSelected.value) {
-            MainMenu.Home -> return navigateHome()
-            MainMenu.History -> return navigateHistory()
-            MainMenu.SettingList -> return navigateSettingList()
-        }
+    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+        return false
+    }
+
+    override fun onDestroyActionMode(mode: ActionMode?) {
+
+    }
+
+    override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+        mode?.finish()
+        return true
+    }
+
+    override fun navigateCamera() : Boolean{
+        val intent = Intent(this, CameraActivity::class.java)
+        startActivity(intent)
+        return true
+    }
+
+    override fun navigateSetting(): Boolean {
+        val intent = Intent(this, SettingActivity::class.java)
+        startActivity(intent)
+        return true
+    }
+
+    override fun navigateLicense(): Boolean {
+        LibsBuilder()
+            .withActivityTitle("License")
+            .withShowLoadingProgress(false)
+            .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR).start(this)
+        return true
+    }
+
+    override fun navigateContact(): Boolean {
+        val intent = Intent(this, ContactActivity::class.java)
+        return true
+    }
+
+    override fun navigatePreview(): Boolean {
+        val intent = Intent(this, PreviewActivity::class.java)
+        startActivity(intent)
+        return true
     }
 
     override fun navigateHome() : Boolean{
@@ -83,5 +128,20 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return dispatchingAndroidInjector
+    }
+
+    private fun restoreMenu() : Boolean {
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.menu.findItem(when(mainMenuSelected.value) {
+            MainMenu.Home -> kaleidot725.highestpeaks.R.id.action_home
+            MainMenu.History -> kaleidot725.highestpeaks.R.id.action_history
+            MainMenu.SettingList -> kaleidot725.highestpeaks.R.id.action_setting
+        }).setChecked(true)
+
+        when(mainMenuSelected.value) {
+            MainMenu.Home -> return navigateHome()
+            MainMenu.History -> return navigateHistory()
+            MainMenu.SettingList -> return navigateSettingList()
+        }
     }
 }

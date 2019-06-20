@@ -33,13 +33,6 @@ import java.lang.Exception
 
 @Module
 class AppModule {
-
-    @Provides
-    @Singleton
-    fun provideMyApplicationNavigator(myApplication : MyApplication) : MyApplicationNavigator {
-        return myApplication
-    }
-
     @Provides
     @Singleton
     fun proviceLocationService(myApplication : MyApplication) : LocationService {
@@ -93,19 +86,19 @@ class AppModule {
 
 @Module
 abstract class ActivityModule {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [MainActivityModule::class])
     abstract fun contributeMainActivity(): MainActivity
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [CameraActivityModule::class])
     abstract fun contributeCameraActivity(): CameraActivity
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [SettingActivityModule::class])
     abstract fun contributeSettingActivity(): SettingActivity
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [ContactActivityModule::class])
     abstract fun contributeContactActivity(): ContactActivity
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [PreviewActivityModule::class])
     abstract fun contributePreviewActivity() : PreviewActivity
 }
 
@@ -114,51 +107,77 @@ abstract class MainActivityModule {
     @Binds
     abstract fun bindsMainNavigator(activity: MainActivity): MainNavigator
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [HistoryFragmentModule::class])
     abstract fun contributeHistoryFragment(): HistoryFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [HomeFramentModule::class])
     abstract fun contributeHomeFragment(): HomeFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [SettingListFramgnetModule::class])
     abstract fun contributeSettingListFragment(): SettingListFragment
 }
 
 @Module
+abstract class HistoryFragmentModule {
+
+}
+
+@Module
+abstract  class HomeFramentModule {
+
+}
+
+@Module
+abstract  class SettingListFramgnetModule {
+
+}
+
+@Module
 abstract class CameraActivityModule {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [CameraFragmentModule::class])
     abstract fun contributeCameraFragment(): CameraFragment
 }
 
 @Module
+abstract class CameraFragmentModule {
+
+}
+
+@Module
 abstract class ContactActivityModule {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [ContactFragmentModule::class])
     abstract fun contributeContactFragment(): ContactFragment
 }
 
 @Module
+abstract class ContactFragmentModule {
+
+}
+
+@Module
 abstract class SettingActivityModule {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [SettingFragmentModule::class])
     abstract fun contributeSettingFragment(): SettingFragment
 }
 
 @Module
+abstract class SettingFragmentModule {
+
+}
+
+@Module
 abstract class PreviewActivityModule {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [PreviewFragmentModule::class])
     abstract fun contributePreviewFragment() : PreviewFragment
 }
 
+@Module
+abstract class PreviewFragmentModule {
+
+}
+
 @Singleton
-@Component(modules = [
-    AppModule::class,
-    AndroidSupportInjectionModule::class,
-    ActivityModule::class,
-    MainActivityModule::class,
-    CameraActivityModule::class,
-    ContactActivityModule::class,
-    SettingActivityModule::class,
-    PreviewActivityModule::class
-])
+@Component(modules = [AppModule::class, AndroidSupportInjectionModule::class, ActivityModule::class])
 interface AppComponent {
     @Component.Builder
     interface Builder
