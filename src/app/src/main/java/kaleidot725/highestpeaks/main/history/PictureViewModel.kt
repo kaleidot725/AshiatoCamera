@@ -34,6 +34,7 @@ class PictureViewModel(private val navigation : MainNavigator,
 
     fun longClick(view : View) : Boolean {
         _isChecked.postValue(!(isChecked.value ?: true))
+        navigation.startHistoryActionMode()
         return true
     }
 }

@@ -1,6 +1,7 @@
 package kaleidot725.highestpeaks.main
 
 interface  MainNavigator {
+    // Activity
     fun navigateCamera() : Boolean
     fun navigateSetting() : Boolean
     fun navigateLicense() : Boolean
@@ -11,4 +12,7 @@ interface  MainNavigator {
     fun navigateHome() : Boolean
     fun navigateHistory() : Boolean
     fun navigateSettingList() : Boolean
+
+    // Action
+    fun startHistoryActionMode() : Boolean
 }

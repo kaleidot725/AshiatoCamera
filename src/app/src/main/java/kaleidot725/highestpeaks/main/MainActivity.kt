@@ -58,6 +58,11 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         restoreMenu()
     }
 
+    override fun startHistoryActionMode(): Boolean {
+        startActionMode(this, ActionMode.TYPE_PRIMARY)
+        return true
+    }
+
     override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
         val inflater = mode.menuInflater
         inflater.inflate(R.menu.history_action_menu, menu)
