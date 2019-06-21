@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     lateinit var mainMenuSelected : Holder<MainMenu>
 
     private lateinit var viewModel: MainViewModel
+    private var actionMode : ActionMode? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +60,13 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     }
 
     override fun startHistoryActionMode(): Boolean {
-        startActionMode(this, ActionMode.TYPE_PRIMARY)
+        actionMode = startActionMode(this, ActionMode.TYPE_PRIMARY)
+        return true
+    }
+
+    private fun finishActionMode() : Boolean {
+        actionMode?.finish()
+        actionMode = null
         return true
     }
 
@@ -83,12 +90,14 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     }
 
     override fun navigateCamera() : Boolean{
+        finishActionMode()
         val intent = Intent(this, CameraActivity::class.java)
         startActivity(intent)
         return true
     }
 
     override fun navigateSetting(): Boolean {
+        finishActionMode()
         val intent = Intent(this, SettingActivity::class.java)
         startActivity(intent)
         return true
@@ -103,29 +112,34 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     }
 
     override fun navigateContact(): Boolean {
+        finishActionMode()
         val intent = Intent(this, ContactActivity::class.java)
         return true
     }
 
     override fun navigatePreview(): Boolean {
+        finishActionMode()
         val intent = Intent(this, PreviewActivity::class.java)
         startActivity(intent)
         return true
     }
 
     override fun navigateHome() : Boolean{
+        finishActionMode()
         supportFragmentManager.beginTransaction().replace(R.id.main_content, HomeFragment.newInstance()).commit()
         mainMenuSelected.value = MainMenu.Home
         return true
     }
 
     override fun navigateHistory(): Boolean {
+        finishActionMode()
         supportFragmentManager.beginTransaction().replace(R.id.main_content, HistoryFragment.newInstance()).commit()
         mainMenuSelected.value = MainMenu.History
         return true
     }
 
     override fun navigateSettingList() : Boolean{
+        finishActionMode()
         supportFragmentManager.beginTransaction().replace(R.id.main_content, SettingListFragment.newInstance()).commit()
         mainMenuSelected.value = MainMenu.SettingList
         return true
