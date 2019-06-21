@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks
+package kaleidot725.highestpeaks.di
 
 import android.location.LocationManager
 import android.os.Environment
@@ -19,6 +19,7 @@ import kaleidot725.michetimer.model.repository.PictureRepositoryImpl
 import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Singleton
 import dagger.android.support.AndroidSupportInjectionModule
+import kaleidot725.highestpeaks.MyApplication
 import kaleidot725.highestpeaks.main.MainMenu
 import kaleidot725.highestpeaks.main.MainNavigator
 import kaleidot725.highestpeaks.model.data.Holder
