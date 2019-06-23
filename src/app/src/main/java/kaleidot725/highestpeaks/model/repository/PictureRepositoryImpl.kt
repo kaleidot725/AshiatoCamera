@@ -27,8 +27,7 @@ class PictureRepositoryImpl(path : String) : PictureRepository {
                     Picture(
                         Picture.createID(),
                         it.path,
-                        it.name
-                    )
+                        it.name)
                 )
             }
         }

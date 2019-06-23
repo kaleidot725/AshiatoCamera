@@ -62,7 +62,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providePreviewPicture(myApplication: MyApplication) : Holder<Picture> {
+    fun privceSelectedPicture(myApplication: MyApplication) : Holder<Picture> {
         return Holder(Picture("", "", ""))
     }
 

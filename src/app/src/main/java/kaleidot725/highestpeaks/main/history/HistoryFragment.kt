@@ -2,40 +2,45 @@ package kaleidot725.highestpeaks.main.history
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import dagger.Binds
 import dagger.android.support.AndroidSupportInjection
 
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HistoryFragmentBinding
+import kaleidot725.highestpeaks.main.MainMenu
 import kaleidot725.highestpeaks.main.MainNavigator
 import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.model.data.Picture
 import kaleidot725.michetimer.model.repository.PictureRepository
+import java.nio.file.Files
 import javax.inject.Inject
 
-class HistoryFragment : Fragment() {
+enum class HistoryFragmentMode(val value: Int) {
+    Display(1),
+    Action(2)
+}
+
+class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback{
 
     companion object {
         fun newInstance() = HistoryFragment()
     }
 
     @Inject
-    lateinit var navigator : MainNavigator
+    lateinit var navigator: MainNavigator
 
     @Inject
-    lateinit var repository : PictureRepository
+    lateinit var repository: PictureRepository
 
     @Inject
-    lateinit var preview : Holder<Picture>
+    lateinit var selected: Holder<Picture>
 
     private lateinit var viewModel: HistoryViewModel
+    private var actionMode : ActionMode? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         AndroidSupportInjection.inject(this)
@@ -44,17 +49,57 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        createView(HistoryFragmentMode.Display)
+    }
 
-        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(navigator, repository, preview)).get(HistoryViewModel::class.java)
-        viewModel.load()
+    override fun onDestroy() {
+        actionMode?.finish()
+        actionMode = null
+        super.onDestroy()
+    }
+
+    override fun action(): Boolean {
+        actionMode = this.activity?.startActionMode(this, ActionMode.TYPE_PRIMARY)
+        createView(HistoryFragmentMode.Action)
+        return true
+    }
+
+    override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+        val inflater = mode.menuInflater
+        inflater.inflate(R.menu.history_action_menu, menu)
+        return true
+    }
+
+    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+        return false
+    }
+
+    override fun onDestroyActionMode(mode: ActionMode?) {
+        actionMode = null
+        createView(HistoryFragmentMode.Display)
+    }
+
+    override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.delete -> viewModel.delete()
+        }
+
+        actionMode?.finish()
+        return true
+    }
+
+    private fun createView(mode : HistoryFragmentMode) {
+        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(navigator, this, repository, selected)).get(HistoryViewModel::class.java)
+        viewModel.load(mode)
 
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this
         binding?.vm = viewModel
 
-        val recyclerView =view.findViewById<RecyclerView>(R.id.picture_recycler_view)
-        recyclerView.adapter = PictureAdapter(this, viewModel.pictureViewModels.value ?: listOf())
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
-        recyclerView.setHasFixedSize(true)
+        val recyclerView = this.view?.findViewById<RecyclerView>(R.id.picture_recycler_view)
+        recyclerView?.adapter = PictureAdapter(this, viewModel.pictureViewModels.value ?: listOf())
+        recyclerView?.layoutManager = GridLayoutManager(context, 2)
+        recyclerView?.setHasFixedSize(true)
     }
 }
+

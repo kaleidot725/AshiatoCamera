@@ -12,7 +12,4 @@ interface  MainNavigator {
     fun navigateHome() : Boolean
     fun navigateHistory() : Boolean
     fun navigateSettingList() : Boolean
-
-    // Action
-    fun startHistoryActionMode() : Boolean
 }

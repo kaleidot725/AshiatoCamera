@@ -3,7 +3,7 @@
 
         <data>
                 <import type="android.view.View"/>
-                <variable name="vm" type="kaleidot725.highestpeaks.main.history.PictureViewModel"/>
+                <variable name="vm" type="kaleidot725.highestpeaks.main.history.PictureViewModelBase"/>
         </data>
 
         <FrameLayout
@@ -20,7 +20,7 @@
                         myApplication:imageUrl="@{vm.path}"
                         android:clickable="true"
                         android:scaleType="centerCrop"
-                        android:onClick="@{vm::preview}"
+                        android:onClick="@{vm::click}"
                         android:onLongClick="@{vm::longClick}"
                         android:background="?android:attr/selectableItemBackground"/>
 

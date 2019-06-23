@@ -9,11 +9,11 @@ import com.squareup.picasso.Picasso
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.PictureRecyclerItemBinding
 
-class PictureAdapter(owner : LifecycleOwner, vms: List<PictureViewModel>) : RecyclerView.Adapter<PictureViewHolder>() {
+class PictureAdapter(owner : LifecycleOwner, vms: List<PictureViewModelBase>) : RecyclerView.Adapter<PictureViewHolder>() {
     private val owner : LifecycleOwner = owner
-    private val vms: MutableList<PictureViewModel> = vms.toMutableList()
+    private val vms: MutableList<PictureViewModelBase> = vms.toMutableList()
 
-    fun update(new : List<PictureViewModel>) {
+    fun update(new : List<PictureViewModelBase>) {
         vms.clear()
         vms.addAll(new)
         this.notifyDataSetChanged()

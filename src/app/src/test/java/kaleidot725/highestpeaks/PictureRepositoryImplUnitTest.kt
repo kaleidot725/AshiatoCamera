@@ -31,7 +31,6 @@ class PictureRepositoryImplUnitTest {
         for (name in names) {
             File(createFilePath(name)).createNewFile()
         }
-        repositoryImpl.init()
     }
 
     @After
