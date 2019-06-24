@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
@@ -47,6 +48,9 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         setContentView(R.layout.activity_main)
 
         AndroidInjection.inject(this)
+
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.main_actionbar)
 
         val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         ActivityCompat.requestPermissions( this, permissions, 0)
