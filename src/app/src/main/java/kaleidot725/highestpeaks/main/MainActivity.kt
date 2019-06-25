@@ -2,13 +2,18 @@ package kaleidot725.highestpeaks.main
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import kaleidot725.highestpeaks.R
@@ -30,6 +35,10 @@ import kaleidot725.highestpeaks.main.history.HistoryFragmentMode
 import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.preview.PreviewActivity
 import kaleidot725.highestpeaks.setting.SettingActivity
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -63,9 +72,28 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         restoreMenu()
     }
 
+
+    val REQUEST_IMAGE_CAPTURE = 1
+    var currentPhotoPath: String = ""
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply { currentPhotoPath = absolutePath }
+    }
+
     override fun navigateCamera() : Boolean{
-        val intent = Intent(this, CameraActivity::class.java)
-        startActivity(intent)
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                val photoFile : File? = try { createImageFile() } catch(ex : IOException) { null }
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(this, "com.example.android.fileprovider", it)
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                }
+            }
+        }
         return true
     }
 

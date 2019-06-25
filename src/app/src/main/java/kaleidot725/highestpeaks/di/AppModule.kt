@@ -2,6 +2,8 @@ package kaleidot725.highestpeaks.di
 
 import android.location.LocationManager
 import android.os.Environment
+import android.util.Log
+import androidx.core.content.FileProvider
 import dagger.*
 import dagger.android.ContributesAndroidInjector
 import kaleidot725.highestpeaks.camera.CameraActivity
@@ -55,9 +57,8 @@ class AppModule {
     @Provides
     @Singleton
     fun providePictureRepository(myApplication : MyApplication): PictureRepository {
-        val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-        val dirPath = "${dcimPath}/Highest-Peak"
-        return PictureRepositoryImpl(dirPath)
+        val path = myApplication.getExternalFilesDir(Environment.DIRECTORY_PICTURES).absolutePath
+        return PictureRepositoryImpl(path)
     }
 
     @Provides
