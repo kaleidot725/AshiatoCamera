@@ -9,5 +9,5 @@ import java.io.File
 @BindingAdapter("app:imageUrl")
 fun loadImage(view : ImageView, imagePath : String?) {
     val file = File(imagePath)
-    Picasso.get().load(file).into(view)
+    Picasso.get().load(file).fit().centerInside().into(view)
 }
