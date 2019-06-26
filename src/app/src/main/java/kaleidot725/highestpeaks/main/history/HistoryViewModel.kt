@@ -23,12 +23,17 @@ class HistoryViewModel(
     private val _pictureViewModels : MutableLiveData<List<PictureViewModelBase>> = MutableLiveData()
     val pictureViewModels : LiveData<List<PictureViewModelBase>> get() = _pictureViewModels
 
+    private val _notFound : MutableLiveData<Boolean> = MutableLiveData()
+    val notFound : LiveData<Boolean> get() = _notFound
+
     init {
         _pictureViewModels.value = createPictureViewModels(HistoryFragmentMode.Display)
+        _notFound.value = (pictureRepository.count() == 0)
     }
 
     fun load(mode : HistoryFragmentMode) {
         _pictureViewModels.value = createPictureViewModels(mode)
+        _notFound.value = (pictureRepository.count() == 0)
     }
 
     fun delete() {
@@ -41,8 +46,11 @@ class HistoryViewModel(
             } catch (e : Exception) {
                 Log.e("HistoryViewModel", e.toString())
             }
+
             Log.v("HistoryViewModel", it.path.value)
         }
+
+        _notFound.value = (pictureRepository.count() == 0)
     }
 
     private fun createPictureViewModels(mode : HistoryFragmentMode) : List<PictureViewModelBase> {

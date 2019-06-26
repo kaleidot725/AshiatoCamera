@@ -4,6 +4,7 @@
         tools:context=".main.history.HistoryFragment">
 
     <data>
+        <import type="android.view.View"/>
         <variable name="vm" type="kaleidot725.highestpeaks.main.history.HistoryViewModel"/>
     </data>
 
@@ -17,5 +18,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:visibility="@{vm.notFound ? View.VISIBLE : View.GONE, default=gone}"
+                android:text="NO HISTORY"/>
     </FrameLayout>
 </layout>
