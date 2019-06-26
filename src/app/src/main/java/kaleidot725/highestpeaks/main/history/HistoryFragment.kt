@@ -52,10 +52,10 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback{
         createView(HistoryFragmentMode.Display)
     }
 
-    override fun onDestroy() {
+    override fun onPause() {
         actionMode?.finish()
         actionMode = null
-        super.onDestroy()
+        super.onPause()
     }
 
     override fun action(): Boolean {
