@@ -25,6 +25,6 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:visibility="@{vm.notFound ? View.VISIBLE : View.GONE, default=gone}"
-                android:text="NO HISTORY"/>
+                android:text="@string/nohistory"/>
     </FrameLayout>
 </layout>

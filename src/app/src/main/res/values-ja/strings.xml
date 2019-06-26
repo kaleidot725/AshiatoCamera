@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">HighestPeaks</string>
+    <string name="main_title">HIGEST PEAKS</string>
+
+    <!-- Main -->
+    <string name="navtitle_home">ホーム</string>
+    <string name="navtitle_history">履歴</string>
+    <string name="navtitle_setting">設定</string>
+
+    <!-- Main -> Home -->
+    <string name="altitude">高度</string>
+    <string name="latitude">緯度</string>
+    <string name="longitude">経度</string>
+
+    <!-- Main -> History -->
+    <string name="nohistory">履歴なし</string>
+
+    <!-- SettingList -> Setting -->
+    <string name="menu_setting">設定</string>
+    <string name="menu_license">ライセンス</string>
+    <string name="menu_contanct">連絡先</string>
+
+    <string name="gps">GPS</string>
+    <string name="acurracy_setting">精度設定</string>
+    <string name="provider">取得先</string>
+    <string name="minTime">最低時間</string>
+    <string name="minDistance">最低距離</string>
+
+    <string name="gpssetting_gps">GPS</string>
+    <string name="gpssetting_network">ネットワーク</string>
+
+    <string-array name="gps_mintime">
+        <item>1秒</item>
+        <item>5秒</item>
+        <item>10秒</item>
+        <item>15秒</item>
+        <item>30秒</item>
+        <item>60秒</item>
+    </string-array>
+
+    <string-array name="gps_mindistance">
+        <item>1メートル</item>
+        <item>5メートル</item>
+        <item>10メートル</item>
+        <item>25メートル</item>
+        <item>50メートル</item>
+        <item>100メートル</item>
+    </string-array>
+
+    <!-- SettingList -> Contact -->
+    <string name="developer">開発者</string>
+    <string name="twitter">Twitter</string>
+    <string name="github">GitHub</string>
+    <string name="email">Eメール</string>
+    <string name="separator">:</string>
+
+</resources>

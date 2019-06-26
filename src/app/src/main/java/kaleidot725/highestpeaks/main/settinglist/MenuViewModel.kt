@@ -1,15 +1,20 @@
 package kaleidot725.highestpeaks.main.settinglist
 
+import android.content.Context
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.main.MainNavigator
 import kaleidot725.highestpeaks.model.data.Menu
 
-class MenuViewModel(navigator : MainNavigator,  menu : Menu) : ViewModel() {
-    private val navigator : MainNavigator = navigator
-    private val menu : Menu = menu
+class MenuViewModel(
+    val context : Context,
+    val navigator : MainNavigator,
+    val menu : Menu)
+    : ViewModel()
+{
 
     private val _icon : MutableLiveData<Int> = MutableLiveData<Int>()
     val icon : LiveData<Int> get() = _icon
@@ -24,9 +29,9 @@ class MenuViewModel(navigator : MainNavigator,  menu : Menu) : ViewModel() {
 
     fun click(view : View) {
         when(menu.title) {
-            "Setting" -> navigator.navigateSetting()
-            "License" -> navigator.navigateLicense()
-            "Contact" -> navigator.navigateContact()
+            context.getString(R.string.menu_setting) -> navigator.navigateSetting()
+            context.getString(R.string.menu_license) -> navigator.navigateLicense()
+            context.getString(R.string.menu_contanct) -> navigator.navigateContact()
         }
     }
 }

@@ -33,7 +33,7 @@
                     android:ellipsize="end"
                     android:textColor="@android:color/black"
                     android:gravity="start"
-                    android:text="Developer"/>
+                    android:text="@string/developer"/>
 
             <TextView
                     android:layout_width="0dp"
@@ -64,14 +64,14 @@
                     android:layout_weight="1.5"
                     android:layout_margin="@dimen/marginSmall"
                     android:textSize="@dimen/textSizeSmall"
-                    android:text="Twitter"/>
+                    android:text="@string/twitter"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/marginSmall"
                     android:textSize="@dimen/textSizeSmall"
-                    android:text=":"/>
+                    android:text="@string/separator"/>
 
             <TextView
                     android:layout_width="0dp"
@@ -93,14 +93,14 @@
                     android:layout_weight="1.5"
                     android:layout_margin="@dimen/marginSmall"
                     android:textSize="@dimen/textSizeSmall"
-                    android:text="GitHub"/>
+                    android:text="@string/github"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/marginSmall"
                     android:textSize="@dimen/textSizeSmall"
-                    android:text=":"/>
+                    android:text="@string/separator"/>
 
             <TextView
                     android:layout_width="0dp"
@@ -122,14 +122,14 @@
                     android:layout_weight="1.5"
                     android:layout_margin="@dimen/marginSmall"
                     android:textSize="@dimen/textSizeSmall"
-                    android:text="Email"/>
+                    android:text="@string/email"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/marginSmall"
                     android:textSize="@dimen/textSizeSmall"
-                    android:text=":"/>
+                    android:text="@string/separator"/>
 
             <TextView
                     android:layout_width="0dp"

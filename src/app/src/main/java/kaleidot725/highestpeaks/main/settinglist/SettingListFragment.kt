@@ -1,5 +1,6 @@
 package kaleidot725.highestpeaks.main.settinglist
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -35,7 +36,8 @@ class SettingListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        listViewModel = ViewModelProviders.of(this, SettingListViewModelFactory(navigator, repository.all())).get(SettingListViewModel::class.java)
+        val factory = SettingListViewModelFactory(this.context as Context, navigator, repository.all())
+        listViewModel = ViewModelProviders.of(this, factory).get(SettingListViewModel::class.java)
 
         val recycler = view.findViewById<RecyclerView>(R.id.menu_recycler_view)
         recycler.adapter = MenuAdapter(this,  listViewModel.menus)

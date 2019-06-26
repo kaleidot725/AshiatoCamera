@@ -1,18 +1,33 @@
 <resources>
     <string name="app_name">HighestPeaks</string>
     <string name="main_title">HIGEST PEAKS</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_camera">CameraActivity</string>
-    <string-array name="setting_array">
-        <item>Setting</item>
-        <item>License</item>
-        <item>Contact</item>
-    </string-array>
 
-    <string-array name="gps_providers">
-        <item>NETWORK</item>
-        <item>GPS</item>
-    </string-array>
+    <!-- Main -->
+    <string name="navtitle_home">Home</string>
+    <string name="navtitle_history">History</string>
+    <string name="navtitle_setting">Setting</string>
+
+    <!-- Main -> Home -->
+    <string name="altitude">Altitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+
+    <!-- Main -> History -->
+    <string name="nohistory">NO HISTORY</string>
+
+    <!-- SettingList -> Setting -->
+    <string name="menu_setting">Setting</string>
+    <string name="menu_license">License</string>
+    <string name="menu_contanct">Contact</string>
+
+    <string name="gps">GPS</string>
+    <string name="acurracy_setting">Acurracy Setting</string>
+    <string name="provider">Provider</string>
+    <string name="minTime">MinTime</string>
+    <string name="minDistance">MinDistance</string>
+
+    <string name="gpssetting_gps">GPS</string>
+    <string name="gpssetting_network">Network</string>
 
     <string-array name="gps_mintime">
         <item>1Sec</item>
@@ -31,4 +46,11 @@
         <item>50m</item>
         <item>100m</item>
     </string-array>
+
+    <!-- SettingList -> Contact -->
+    <string name="developer">Developer</string>
+    <string name="twitter">Twitter</string>
+    <string name="github">GitHub</string>
+    <string name="email">Email</string>
+    <string name="separator">:</string>
 </resources>

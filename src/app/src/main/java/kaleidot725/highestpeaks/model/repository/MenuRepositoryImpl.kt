@@ -1,18 +1,19 @@
 package kaleidot725.highestpeaks.model.repository
 
+import android.content.Context
 import androidx.databinding.ObservableArrayList
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.model.data.Menu
 import java.lang.IllegalStateException
 
-class MenuRepositoryImpl : MenuRepository {
+class MenuRepositoryImpl(val context : Context) : MenuRepository {
     private val list : ArrayList<Menu> = ObservableArrayList<Menu>()
     private var initialized : Boolean = false
 
     init {
-        list.add(Menu(R.drawable.ic_setting, "Setting"))
-        list.add(Menu(R.drawable.ic_license, "License"))
-        list.add(Menu(R.drawable.ic_contact, "Contact"))
+        list.add(Menu(R.drawable.ic_setting, context.getString(R.string.menu_setting)))
+        list.add(Menu(R.drawable.ic_license, context.getString(R.string.menu_license)))
+        list.add(Menu(R.drawable.ic_contact, context.getString(R.string.menu_contanct)))
         initialized = true
     }
 

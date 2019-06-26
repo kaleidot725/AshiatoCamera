@@ -9,5 +9,5 @@
             android:id="@+id/action_bar_title"
             android:text="@string/main_title"
             android:textColor="#ffffff"
-            android:textSize="24dp"/>
+            android:textSize="20dp"/>
 </FrameLayout>

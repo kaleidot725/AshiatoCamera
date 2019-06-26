@@ -44,7 +44,7 @@
                             android:ellipsize="end"
                             android:textColor="@android:color/black"
                             android:gravity="start"
-                            android:text="GPS"/>
+                            android:text="@string/gps"/>
 
                     <TextView
                             android:layout_width="0dp"
@@ -53,7 +53,7 @@
                             android:textSize="@dimen/textSizeSmall"
                             android:textStyle="normal"
                             android:gravity="end"
-                            android:text="Acurracy Setting"/>
+                            android:text="@string/acurracy_setting"/>
                 </LinearLayout>
 
                 <View
@@ -75,14 +75,14 @@
                             android:layout_weight="3"
                             android:layout_margin="@dimen/marginSmall"
                             android:textSize="@dimen/textSizeSmall"
-                            android:text="Provider"/>
+                            android:text="@string/provider"/>
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/marginSmall"
                             android:textSize="@dimen/textSizeSmall"
-                            android:text=":"/>
+                            android:text="@string/separator"/>
 
                     <Spinner
                             android:id="@+id/provider_spinner"
@@ -106,14 +106,14 @@
                             android:layout_weight="3"
                             android:layout_margin="@dimen/marginSmall"
                             android:textSize="@dimen/textSizeSmall"
-                            android:text="MinTime"/>
+                            android:text="@string/minTime"/>
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/marginSmall"
                             android:textSize="@dimen/textSizeSmall"
-                            android:text=":"/>
+                            android:text="@string/separator"/>
 
                     <Spinner
                             android:id="@+id/mintime_spinner"
@@ -137,14 +137,14 @@
                             android:layout_weight="3"
                             android:layout_margin="@dimen/marginSmall"
                             android:textSize="@dimen/textSizeSmall"
-                            android:text="MinDistance"/>
+                            android:text="@string/minDistance"/>
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/marginSmall"
                             android:textSize="@dimen/textSizeSmall"
-                            android:text=":"/>
+                            android:text="@string/separator"/>
 
                     <Spinner
                             android:id="@+id/mindistance_spinner"

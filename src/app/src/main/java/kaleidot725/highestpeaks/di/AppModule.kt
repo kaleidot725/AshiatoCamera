@@ -81,7 +81,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideMenuRepository(myApplication : MyApplication) : MenuRepository {
-        return MenuRepositoryImpl()
+        return MenuRepositoryImpl(myApplication)
     }
 }
 

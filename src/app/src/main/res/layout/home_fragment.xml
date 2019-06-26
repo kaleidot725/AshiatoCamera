@@ -43,7 +43,7 @@
                     myApplication:layout_constraintHorizontal_chainStyle="spread_inside"
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="monospace"
-                    android:text="Altitude"
+                    android:text="@string/altitude"
                     android:textSize="24dp"/>
 
             <TextView
@@ -73,7 +73,7 @@
                     myApplication:layout_constraintHorizontal_chainStyle="spread"
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="monospace"
-                    android:text="Latitude"
+                    android:text="@string/latitude"
                     android:textSize="24dp"/>
 
             <TextView
@@ -102,7 +102,7 @@
                     myApplication:layout_constraintHorizontal_chainStyle="spread"
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="monospace"
-                    android:text="Longitude"
+                    android:text="@string/longitude"
                     android:textSize="24dp"/>
 
             <TextView
