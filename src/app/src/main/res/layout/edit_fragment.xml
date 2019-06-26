@@ -2,14 +2,15 @@
 <layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".camera.CameraActivity">
+        tools:context=".edit.EditFragment">
 
     <data>
-        <!-- view model definition -->
+        <variable name="viewModel" type="kaleidot725.highestpeaks.edit.EditViewModel"/>
     </data>
 
     <FrameLayout
-            android:id="@+id/camera_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+    </FrameLayout>
 </layout>

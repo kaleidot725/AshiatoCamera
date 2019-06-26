@@ -2,12 +2,10 @@ package kaleidot725.highestpeaks.di
 
 import android.location.LocationManager
 import android.os.Environment
-import android.util.Log
-import androidx.core.content.FileProvider
 import dagger.*
 import dagger.android.ContributesAndroidInjector
-import kaleidot725.highestpeaks.camera.CameraActivity
-import kaleidot725.highestpeaks.camera.CameraFragment
+import kaleidot725.highestpeaks.edit.EditActivity
+import kaleidot725.highestpeaks.edit.EditFragment
 import kaleidot725.highestpeaks.contact.ContactActivity
 import kaleidot725.highestpeaks.contact.ContactFragment
 import kaleidot725.highestpeaks.main.MainActivity
@@ -57,8 +55,9 @@ class AppModule {
     @Provides
     @Singleton
     fun providePictureRepository(myApplication : MyApplication): PictureRepository {
-        val path = myApplication.getExternalFilesDir(Environment.DIRECTORY_PICTURES).absolutePath
-        return PictureRepositoryImpl(path)
+        val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+        val dirPath = "${dcimPath}/Highest-Peak"
+        return PictureRepositoryImpl(dirPath)
     }
 
     @Provides
@@ -92,7 +91,7 @@ abstract class ActivityModule {
     abstract fun contributeMainActivity(): MainActivity
 
     @ContributesAndroidInjector(modules = [CameraActivityModule::class])
-    abstract fun contributeCameraActivity(): CameraActivity
+    abstract fun contributeCameraActivity(): EditActivity
 
     @ContributesAndroidInjector(modules = [SettingActivityModule::class])
     abstract fun contributeSettingActivity(): SettingActivity
@@ -137,7 +136,7 @@ abstract  class SettingListFramgnetModule {
 @Module
 abstract class CameraActivityModule {
     @ContributesAndroidInjector(modules = [CameraFragmentModule::class])
-    abstract fun contributeCameraFragment(): CameraFragment
+    abstract fun contributeCameraFragment(): EditFragment
 }
 
 @Module

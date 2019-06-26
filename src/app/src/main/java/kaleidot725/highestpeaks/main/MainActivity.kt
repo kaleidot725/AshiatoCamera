@@ -1,15 +1,12 @@
 package kaleidot725.highestpeaks.main
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.view.ActionMode
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat
@@ -29,9 +26,8 @@ import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import kaleidot725.highestpeaks.camera.CameraActivity
+import kaleidot725.highestpeaks.edit.EditActivity
 import kaleidot725.highestpeaks.contact.ContactActivity
-import kaleidot725.highestpeaks.main.history.HistoryFragmentMode
 import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.preview.PreviewActivity
 import kaleidot725.highestpeaks.setting.SettingActivity
@@ -72,28 +68,51 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         restoreMenu()
     }
 
-
     val REQUEST_IMAGE_CAPTURE = 1
-    var currentPhotoPath: String = ""
 
     @Throws(IOException::class)
-    private fun createImageFile(): File {
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+    private fun createTempFile(): File {
         val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply { currentPhotoPath = absolutePath }
+        return File("${storageDir}/temp.jpg")
     }
 
+    @Throws(IOException::class)
+    private fun createImageFile() : File {
+        val dcim = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+        val dirPath = "${dcim}/Highest-Peak"
+        val dirFile = File(dirPath)
+        if (!dirFile.exists()) {
+            dirFile.mkdirs()
+        }
+
+        val df = SimpleDateFormat("yyyyMMdd HH:mm:ss")
+        val imagePath = "${dirPath}/IMG_${df.format(Date())}.jpg"
+        return File(imagePath)
+    }
+
+    override fun onActivityResult(requestCode : Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            createTempFile().copyTo(createImageFile())
+            navigateEdit()
+        }
+    }
+
+    @Throws(IOException::class)
     override fun navigateCamera() : Boolean{
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
-                val photoFile : File? = try { createImageFile() } catch(ex : IOException) { null }
-                photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(this, "com.example.android.fileprovider", it)
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-                }
+                val photoFile = createTempFile()
+                val photoURI: Uri = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile)
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             }
         }
+        return true
+    }
+
+    override fun navigateEdit(): Boolean {
+        val intent = Intent(this, EditActivity::class.java)
+        startActivity(intent)
         return true
     }
 

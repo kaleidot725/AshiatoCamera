@@ -3,7 +3,7 @@
           package="kaleidot725.highestpeaks">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-feature android:name="android.hardware.camera" android:required="true" />
     <uses-feature android:name="android.hardware.location.gps"/>
 
@@ -29,6 +29,7 @@
         <activity
                 android:name=".main.MainActivity"
                 android:label="@string/main_title"
+                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
 
             <intent-filter>
@@ -41,21 +42,25 @@
         <activity
                 android:name=".setting.SettingActivity"
                 android:label="Setting"
+                android:screenOrientation="portrait"
                 android:parentActivityName=".main.MainActivity"/>
 
         <activity
                 android:name=".contact.ContactActivity"
                 android:label="Contact"
+                android:screenOrientation="portrait"
                 android:parentActivityName=".main.MainActivity"/>
 
         <activity
-                android:name=".camera.CameraActivity"
+                android:name=".edit.EditActivity"
                 android:label="Camera"
+                android:screenOrientation="portrait"
                 android:parentActivityName=".main.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity android:name=".preview.PreviewActivity"
                   android:label="Preview"
+                  android:screenOrientation="portrait"
                   android:parentActivityName=".main.MainActivity"/>
     </application>
 
