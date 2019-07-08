@@ -16,8 +16,12 @@ import android.media.MediaActionSound
 import android.os.Environment
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.highestpeaks.databinding.EditFragmentBinding
+import kaleidot725.highestpeaks.model.data.Holder
+import kaleidot725.highestpeaks.model.data.Picture
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Named
 
 
 class EditFragment : Fragment() {
@@ -26,8 +30,9 @@ class EditFragment : Fragment() {
         fun newInstance() = EditFragment()
     }
 
-    private lateinit var cameraKitView : CameraKitView
-    private lateinit var viewModel: EditViewModel
+    @Inject
+    @field:Named("EditPicture")
+    lateinit var editPicture : Holder<Picture>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         AndroidSupportInjection.inject(this)
@@ -36,10 +41,7 @@ class EditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProviders.of(this).get(EditViewModel::class.java)
-        val binding = DataBindingUtil.bind<EditFragmentBinding>(view)
-        binding?.viewModel = viewModel
-        binding?.lifecycleOwner = this
+        val canvas = view.findViewById<EditCanvas>(R.id.edit_canvas)
+        canvas.drawBitmap(editPicture.value)
     }
 }

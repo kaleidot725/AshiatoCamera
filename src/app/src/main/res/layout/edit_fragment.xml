@@ -4,13 +4,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".edit.EditFragment">
 
-    <data>
-        <variable name="viewModel" type="kaleidot725.highestpeaks.edit.EditViewModel"/>
-    </data>
-
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <kaleidot725.highestpeaks.edit.EditCanvas
+                    android:id="@+id/edit_canvas"
+                    android:background="#00ff00"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
     </FrameLayout>
 </layout>

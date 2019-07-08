@@ -12,6 +12,7 @@ import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.model.data.Picture
 import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Inject
+import javax.inject.Named
 
 class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
@@ -21,7 +22,7 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var repository : PictureRepository
 
-    @Inject
+    @Inject @field:Named("SelectedPicture")
     lateinit var preview : Holder<Picture>
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -30,6 +30,7 @@ import kaleidot725.highestpeaks.model.repository.PersistenceSetting
 import kaleidot725.highestpeaks.preview.PreviewActivity
 import kaleidot725.highestpeaks.preview.PreviewFragment
 import java.lang.Exception
+import javax.inject.Named
 
 
 @Module
@@ -60,9 +61,13 @@ class AppModule {
         return PictureRepositoryImpl(dirPath)
     }
 
-    @Provides
-    @Singleton
-    fun privceSelectedPicture(myApplication: MyApplication) : Holder<Picture> {
+    @Provides @Named("SelectedPicture") @Singleton
+    fun provideSelectedPicture(myApplication: MyApplication) : Holder<Picture> {
+        return Holder(Picture("", "", ""))
+    }
+
+    @Provides @Named("EditPicture") @Singleton
+    fun provideEditPicture(myApplication: MyApplication) : Holder<Picture> {
         return Holder(Picture("", "", ""))
     }
 

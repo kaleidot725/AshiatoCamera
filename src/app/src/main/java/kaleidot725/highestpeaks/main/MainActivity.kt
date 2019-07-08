@@ -29,6 +29,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.highestpeaks.edit.EditActivity
 import kaleidot725.highestpeaks.contact.ContactActivity
 import kaleidot725.highestpeaks.model.data.Holder
+import kaleidot725.highestpeaks.model.data.Picture
 import kaleidot725.highestpeaks.preview.PreviewActivity
 import kaleidot725.highestpeaks.setting.SettingActivity
 import java.io.File
@@ -36,6 +37,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Named
 
 
 class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjector {
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     lateinit var mainMenuSelected : Holder<MainMenu>
 
     private lateinit var viewModel: MainViewModel
+    private val REQUEST_IMAGE_CAPTURE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,45 +71,30 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         restoreMenu()
     }
 
-    val REQUEST_IMAGE_CAPTURE = 1
-
-    @Throws(IOException::class)
-    private fun createTempFile(): File {
-        val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File("${storageDir}/temp.jpg")
-    }
-
-    @Throws(IOException::class)
-    private fun createImageFile() : File {
-        val dcim = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-        val dirPath = "${dcim}/Highest-Peak"
-        val dirFile = File(dirPath)
-        if (!dirFile.exists()) {
-            dirFile.mkdirs()
-        }
-
-        val df = SimpleDateFormat("yyyyMMdd HH:mm:ss")
-        val imagePath = "${dirPath}/IMG_${df.format(Date())}.jpg"
-        return File(imagePath)
-    }
-
+    private var imageFile : File? = null
     override fun onActivityResult(requestCode : Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
-            createTempFile().copyTo(createImageFile())
-            navigateEdit()
+            if (imageFile != null) {
+                createTempFile().copyTo(imageFile as File)
+                navigateEdit()
+            }
         }
     }
 
     @Throws(IOException::class)
-    override fun navigateCamera() : Boolean{
+    override fun navigateCamera(picture : Picture) : Boolean {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
-                val photoFile = createTempFile()
+                val storageDir  = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                val photoFile = File("${storageDir}/temp.jpg")
                 val photoURI: Uri = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile)
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+
+                this.imageFile = File(picture.path)
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             }
         }
+
         return true
     }
 

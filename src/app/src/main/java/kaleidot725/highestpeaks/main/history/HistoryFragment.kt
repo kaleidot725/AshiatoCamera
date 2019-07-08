@@ -18,6 +18,7 @@ import kaleidot725.highestpeaks.model.data.Picture
 import kaleidot725.michetimer.model.repository.PictureRepository
 import java.nio.file.Files
 import javax.inject.Inject
+import javax.inject.Named
 
 enum class HistoryFragmentMode(val value: Int) {
     Display(1),
@@ -36,7 +37,7 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback{
     @Inject
     lateinit var repository: PictureRepository
 
-    @Inject
+    @Inject @field:Named("SelectedPicture")
     lateinit var selected: Holder<Picture>
 
     private lateinit var viewModel: HistoryViewModel

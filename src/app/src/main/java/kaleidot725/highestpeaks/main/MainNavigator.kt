@@ -1,8 +1,11 @@
 package kaleidot725.highestpeaks.main
 
+import kaleidot725.highestpeaks.model.data.Picture
+import java.io.File
+
 interface  MainNavigator {
     // Activity
-    fun navigateCamera() : Boolean
+    fun navigateCamera(picture : Picture) : Boolean
     fun navigateEdit() : Boolean
     fun navigateSetting() : Boolean
     fun navigateLicense() : Boolean
