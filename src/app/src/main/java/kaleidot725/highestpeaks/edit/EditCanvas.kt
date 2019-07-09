@@ -1,30 +1,39 @@
 package kaleidot725.highestpeaks.edit
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.model.data.Picture
-import javax.inject.Inject
-import javax.inject.Named
+import android.util.Log
 import android.graphics.BitmapFactory
-
+import android.graphics.ImageDecoder
+import android.os.Build
+import android.provider.Contacts
+import com.squareup.picasso.Picasso
+import java.io.File
+import java.io.FileInputStream
 
 class EditCanvas(context : Context, attrs : AttributeSet) : View(context, attrs) {
-
-    private var canvas : Canvas? = null
 
     @Override
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        this.canvas = canvas
     }
 
-    fun drawBitmap(picture : Picture) {
-        val bitmap = BitmapFactory.decodeFile(picture.path)
-        this.canvas = Canvas()
-        this.canvas?.drawBitmap(bitmap, 0f, 0f, Paint())
+    fun drawPicture(picture : Picture, width : Int, height : Int) {
+        val file = File(picture.path)
+        Log.v("EditCanvas", "exists ${file.exists()}")
+
+        val options = BitmapFactory.Options()
+        options.inMutable = true
+
+        val bitmap = BitmapFactory.decodeFile(picture.path, options)
+        if (bitmap != null) {
+            val canvas  = Canvas()
+            this.draw(canvas)
+        }
+        invalidate()
     }
 }

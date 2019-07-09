@@ -71,11 +71,14 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         restoreMenu()
     }
 
+    private var tempFile : File? = null
     private var imageFile : File? = null
+
     override fun onActivityResult(requestCode : Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
-            if (imageFile != null) {
-                createTempFile().copyTo(imageFile as File)
+            if (tempFile != null && imageFile != null) {
+                tempFile?.copyTo(imageFile as File)
+                Thread.sleep(1000 * 1)
                 navigateEdit()
             }
         }
@@ -86,8 +89,9 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
                 val storageDir  = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                val photoFile = File("${storageDir}/temp.jpg")
-                val photoURI: Uri = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile)
+                tempFile = File("${storageDir}/temp.jpg")
+
+                val photoURI: Uri = FileProvider.getUriForFile(this, "com.example.android.fileprovider", tempFile as File)
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
 
                 this.imageFile = File(picture.path)
