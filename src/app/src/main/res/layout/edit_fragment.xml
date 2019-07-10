@@ -4,9 +4,13 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".edit.EditFragment">
 
-        <kaleidot725.highestpeaks.edit.EditCanvas
-                android:id="@+id/edit_canvas"
-                android:background="#00ff00"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:background="@android:color/black">
+
+                <kaleidot725.highestpeaks.edit.EditCanvas
+                        android:id="@+id/edit_canvas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+        </FrameLayout>
 </layout>

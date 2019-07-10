@@ -11,6 +11,7 @@ import android.os.Looper
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.model.data.Picture
+import kaleidot725.highestpeaks.model.service.LocationService
 import javax.inject.Inject
 import javax.inject.Named
 import kotlinx.coroutines.*
@@ -25,6 +26,9 @@ class EditFragment : Fragment() {
     @Inject
     @field:Named("EditPicture")
     lateinit var editPicture : Holder<Picture>
+
+    @Inject
+    lateinit var locationService: LocationService
 
     lateinit var createdView : View
     lateinit var handler : Handler
@@ -41,8 +45,9 @@ class EditFragment : Fragment() {
         view.viewTreeObserver.addOnGlobalLayoutListener {
             handler.post(object : Runnable {
                 override fun run() {
+                    val text = "高度${locationService.lastAltitude?.toInt()}mで撮りました!!"
                     val canvas = view.findViewById<EditCanvas>(R.id.edit_canvas)
-                    canvas.drawPicture(editPicture.value, createdView.width, createdView.height )
+                    canvas.drawPicture(editPicture.value, text, createdView.width, createdView.height )
                 }
             })
         }
