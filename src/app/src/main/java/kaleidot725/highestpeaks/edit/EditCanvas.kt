@@ -11,9 +11,14 @@ import android.provider.Contacts
 import com.squareup.picasso.Picasso
 import java.io.File
 import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.OutputStream
+import android.graphics.Bitmap
+
+
 
 class EditCanvas(context : Context, attrs : AttributeSet) : View(context, attrs) {
-
+    var picture : Picture? = null
     var bitmap : Bitmap? = null
     var text : String? = null
     var btop : Float = 0f
@@ -22,12 +27,22 @@ class EditCanvas(context : Context, attrs : AttributeSet) : View(context, attrs)
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        if (bitmap != null && text != null) {
+        if (bitmap != null && text != null && picture != null) {
+
             val paint = Paint()
-            paint.color = Color.RED
+            paint.color = Color.WHITE
             paint.textSize = 64f
             canvas?.drawBitmap(bitmap!!, 0f, btop, paint)
             canvas?.drawText(text!!, 0f, btop + 64f, paint)
+
+            val out = FileOutputStream(File(picture!!.path + "__"))
+            val edit = Bitmap.createBitmap(bitmap!!.width, bitmap!!.height, Bitmap.Config.ARGB_8888)
+            val scanvas = Canvas(edit)
+            scanvas.drawBitmap(bitmap as Bitmap, 0f, 0f, paint)
+            scanvas.drawText(text!!, 0f, 64f, paint)
+            edit!!.compress(Bitmap.CompressFormat.JPEG, 90, out)
+            out.flush()
+            out.close()
         }
     }
 
@@ -52,6 +67,7 @@ class EditCanvas(context : Context, attrs : AttributeSet) : View(context, attrs)
 
         Log.v("TAG", "frameWidth ${frameWidth} frameHeight ${frameHeight} bitmapWidth ${bitmap!!.width} bitmapHeight ${bitmap!!.height} finalWidth ${finalWidth} finalHeight ${finalHeight}")
 
+        this.picture = picture
         this.bitmap = Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, true)
         this.text = text
         this.btop = ((frameHeight - finalHeight) / 2).toFloat() - ((frameHeight - finalHeight) / 4)

@@ -15,6 +15,7 @@ import kaleidot725.highestpeaks.model.service.LocationService
 import javax.inject.Inject
 import javax.inject.Named
 import kotlinx.coroutines.*
+import java.util.*
 
 
 class EditFragment : Fragment() {
@@ -45,7 +46,7 @@ class EditFragment : Fragment() {
         view.viewTreeObserver.addOnGlobalLayoutListener {
             handler.post(object : Runnable {
                 override fun run() {
-                    val text = "高度${locationService.lastAltitude?.toInt()}mで撮りました!!"
+                    val text = "${Date().toString()}    ${locationService.lastAltitude?.toInt()}m"
                     val canvas = view.findViewById<EditCanvas>(R.id.edit_canvas)
                     canvas.drawPicture(editPicture.value, text, createdView.width, createdView.height )
                 }
