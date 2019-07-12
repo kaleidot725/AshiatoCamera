@@ -11,7 +11,7 @@ import android.os.Looper
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.model.data.Picture
-import kaleidot725.highestpeaks.model.service.LocationService
+import kaleidot725.highestpeaks.model.repository.LocationRepositoryImpl
 import javax.inject.Inject
 import javax.inject.Named
 import kotlinx.coroutines.*
@@ -29,7 +29,7 @@ class EditFragment : Fragment() {
     lateinit var editPicture : Holder<Picture>
 
     @Inject
-    lateinit var locationService: LocationService
+    lateinit var locationService: LocationRepositoryImpl
 
     lateinit var createdView : View
     lateinit var handler : Handler

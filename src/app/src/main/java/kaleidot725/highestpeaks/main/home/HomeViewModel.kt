@@ -4,13 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import kaleidot725.highestpeaks.model.repository.PersistenceSetting
-import kaleidot725.highestpeaks.model.service.LocationService
+import kaleidot725.highestpeaks.model.repository.LocationRepositoryImpl
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeViewModel(locationService: LocationService) : ViewModel() {
+class HomeViewModel(locationService: LocationRepositoryImpl) : ViewModel() {
     private val _update : MutableLiveData<String> = MutableLiveData()
     val update : LiveData<String> get() = _update
 

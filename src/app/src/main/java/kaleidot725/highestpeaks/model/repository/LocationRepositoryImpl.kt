@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks.model.service
+package kaleidot725.highestpeaks.model.repository
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -14,7 +14,7 @@ import java.lang.IllegalStateException
 import java.security.Provider
 import java.util.*
 
-class LocationService(val context : Context) : Disposable {
+class LocationRepositoryImpl(val context : Context) : Disposable {
 
     private val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -40,7 +40,7 @@ class LocationService(val context : Context) : Disposable {
     var lastLongitude : Double? = null
         private set
 
-    val locationListener = object : LocationListener {
+    private val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             update.onNext(Date(location.time))
             lastUpdate = Date(location.time)
@@ -57,17 +57,9 @@ class LocationService(val context : Context) : Disposable {
             Log.v("GPS", "高度:${location.altitude} 緯度:${location.latitude} 経度:${location.longitude}")
         }
 
-        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
-
-        }
-
-        override fun onProviderEnabled(provider: String) {
-
-        }
-
-        override fun onProviderDisabled(provider: String) {
-
-        }
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onProviderDisabled(provider: String) {}
     }
 
     fun start(provider : String, minTime : Int, minDistance: Int){

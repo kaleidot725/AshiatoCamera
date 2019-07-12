@@ -12,7 +12,7 @@ import kaleidot725.highestpeaks.main.MainActivity
 import kaleidot725.highestpeaks.main.history.HistoryFragment
 import kaleidot725.highestpeaks.main.home.HomeFragment
 import kaleidot725.highestpeaks.main.settinglist.SettingListFragment
-import kaleidot725.highestpeaks.model.service.LocationService
+import kaleidot725.highestpeaks.model.repository.LocationRepositoryImpl
 import kaleidot725.highestpeaks.setting.SettingActivity
 import kaleidot725.highestpeaks.setting.SettingFragment
 import kaleidot725.michetimer.model.repository.PictureRepositoryImpl
@@ -37,13 +37,15 @@ import javax.inject.Named
 class AppModule {
     @Provides
     @Singleton
-    fun proviceLocationService(myApplication : MyApplication) : LocationService {
+    fun proviceLocationService(myApplication : MyApplication) : LocationRepositoryImpl {
         try {
             val setting = PersistenceSetting(myApplication.filesDir.path + "settings.json").load()
-            return LocationService(myApplication).also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
+            return LocationRepositoryImpl(myApplication)
+                .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
         } catch (e : Exception) {
             val setting = Setting(LocationManager.GPS_PROVIDER, 1, 1)
-            return LocationService(myApplication).also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
+            return LocationRepositoryImpl(myApplication)
+                .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
         }
     }
 

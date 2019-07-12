@@ -2,7 +2,6 @@ package kaleidot725.highestpeaks.main.home
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.os.Environment
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,13 +16,9 @@ import kaleidot725.highestpeaks.databinding.HomeFragmentBinding
 import kaleidot725.highestpeaks.main.MainNavigator
 import kaleidot725.highestpeaks.model.data.Holder
 import kaleidot725.highestpeaks.model.data.Picture
-import kaleidot725.highestpeaks.model.service.LocationService
+import kaleidot725.highestpeaks.model.repository.LocationRepositoryImpl
 import kaleidot725.michetimer.model.repository.PictureRepository
-import java.io.File
-import java.io.IOException
 import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -37,7 +32,7 @@ class HomeFragment : Fragment() {
     lateinit var navigator : MainNavigator
 
     @Inject
-    lateinit var locationService: LocationService
+    lateinit var locationService: LocationRepositoryImpl
 
     @Inject
     lateinit var pictureRepository : PictureRepository
