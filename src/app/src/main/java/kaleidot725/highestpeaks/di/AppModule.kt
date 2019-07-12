@@ -37,7 +37,7 @@ import javax.inject.Named
 class AppModule {
     @Provides
     @Singleton
-    fun proviceLocationService(myApplication : MyApplication) : LocationRepositoryImpl {
+    fun provideLocationService(myApplication : MyApplication) : LocationRepository {
         try {
             val setting = PersistenceSetting(myApplication.filesDir.path + "settings.json").load()
             return LocationRepositoryImpl(myApplication)

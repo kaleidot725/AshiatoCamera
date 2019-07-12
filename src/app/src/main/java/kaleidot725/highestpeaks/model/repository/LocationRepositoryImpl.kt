@@ -14,31 +14,24 @@ import java.lang.IllegalStateException
 import java.security.Provider
 import java.util.*
 
-class LocationRepositoryImpl(val context : Context) : Disposable {
+class LocationRepositoryImpl(val context : Context) : LocationRepository {
 
     private val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-    var running : Boolean = false
+    override var running : Boolean = false
         private set
 
-    var disposed : Boolean = false
-        private set
+    override val update : PublishSubject<Date> = PublishSubject.create()
+    override var lastUpdate : Date? = null
 
-    val update : PublishSubject<Date> = PublishSubject.create()
-    var lastUpdate : Date? = null
-        private set
+    override val altitude : PublishSubject<Double> = PublishSubject.create()
+    override var lastAltitude : Double? = null
 
-    val altitude : PublishSubject<Double> = PublishSubject.create()
-    var lastAltitude : Double? = null
-        private set
+    override val latitude : PublishSubject<Double> = PublishSubject.create()
+    override var lastLatitude : Double? = null
 
-    val latitude : PublishSubject<Double> = PublishSubject.create()
-    var lastLatitude : Double? = null
-        private set
-
-    val longitude : PublishSubject<Double> = PublishSubject.create()
-    var lastLongitude : Double? = null
-        private set
+    override val longitude : PublishSubject<Double> = PublishSubject.create()
+    override var lastLongitude : Double? = null
 
     private val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
@@ -62,7 +55,7 @@ class LocationRepositoryImpl(val context : Context) : Disposable {
         override fun onProviderDisabled(provider: String) {}
     }
 
-    fun start(provider : String, minTime : Int, minDistance: Int){
+    override fun start(provider : String, minTime : Int, minDistance: Int){
         if (!(ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED)) {
             throw IllegalStateException("don`t have permited ACCESS_FILE_LOCATION")
         }
@@ -75,7 +68,7 @@ class LocationRepositoryImpl(val context : Context) : Disposable {
         locationManager.requestLocationUpdates(provider, minTime.toLong(), minDistance.toFloat(), locationListener)
     }
 
-    fun stop(){
+    override fun stop(){
         if (!(ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED)) {
             throw IllegalStateException("don`t have permited ACCESS_FILE_LOCATION")
         }
@@ -96,5 +89,6 @@ class LocationRepositoryImpl(val context : Context) : Disposable {
         disposed = true
     }
 
+    private var disposed : Boolean = false
     override fun isDisposed() = disposed
 }

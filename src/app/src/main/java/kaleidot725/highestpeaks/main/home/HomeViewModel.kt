@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
+import kaleidot725.highestpeaks.model.repository.LocationRepository
 import kaleidot725.highestpeaks.model.repository.LocationRepositoryImpl
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeViewModel(locationService: LocationRepositoryImpl) : ViewModel() {
+class HomeViewModel(locationRepository: LocationRepository) : ViewModel() {
     private val _update : MutableLiveData<String> = MutableLiveData()
     val update : LiveData<String> get() = _update
 
@@ -26,34 +27,34 @@ class HomeViewModel(locationService: LocationRepositoryImpl) : ViewModel() {
 
     init {
 
-        val lastUpdate = if (locationService.lastUpdate == null) ("Updating") else (df.format(locationService.lastUpdate))
+        val lastUpdate = if (locationRepository.lastUpdate == null) ("Updating") else (df.format(locationRepository.lastUpdate))
         _update.postValue(lastUpdate)
 
-        val lastAltitude = if (locationService.lastAltitude == null) ("Unknown") else ("${locationService.lastAltitude?.toInt()}m")
+        val lastAltitude = if (locationRepository.lastAltitude == null) ("Unknown") else ("${locationRepository.lastAltitude?.toInt()}m")
         _altitude.postValue(lastAltitude)
 
-        val lastLatitude = if (locationService.lastLatitude == null) ("Unknown") else ("${locationService.lastLatitude?.toInt()}°")
+        val lastLatitude = if (locationRepository.lastLatitude == null) ("Unknown") else ("${locationRepository.lastLatitude?.toInt()}°")
         _latitude.postValue(lastLatitude)
 
-        val lastLongitude = if (locationService.lastLongitude == null) ("Unknown") else ("${locationService.lastLongitude?.toInt()}°")
+        val lastLongitude = if (locationRepository.lastLongitude == null) ("Unknown") else ("${locationRepository.lastLongitude?.toInt()}°")
         _longitude.postValue(lastLongitude)
 
-        var disposable = locationService.update.subscribe {
+        var disposable = locationRepository.update.subscribe {
             _update.postValue(df.format(it))
         }
         compositeDisposable.add(disposable)
 
-        disposable = locationService.altitude.subscribe {
+        disposable = locationRepository.altitude.subscribe {
             _altitude.postValue("${it.toInt()}m")
         }
         compositeDisposable.add(disposable)
 
-        disposable = locationService.latitude.subscribe {
+        disposable = locationRepository.latitude.subscribe {
             _latitude.postValue("${it.toInt()}°")
         }
         compositeDisposable.add(disposable)
 
-        disposable = locationService.longitude.subscribe {
+        disposable = locationRepository.longitude.subscribe {
             _longitude.postValue("${it.toInt()}°")
         }
         compositeDisposable.add(disposable)
