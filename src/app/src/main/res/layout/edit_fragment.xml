@@ -4,6 +4,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".ui.edit.EditFragment">
 
+        <data>
+                <variable name="vm" type="kaleidot725.highestpeaks.ui.edit.EditViewModel"/>
+        </data>
+
         <FrameLayout android:layout_width="match_parent"
                      android:layout_height="match_parent"
                      android:background="@android:color/black">

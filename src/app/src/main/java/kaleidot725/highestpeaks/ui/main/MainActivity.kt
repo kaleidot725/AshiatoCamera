@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         setContentView(R.layout.activity_main)
 
         AndroidInjection.inject(this)
-
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.main_actionbar)
 

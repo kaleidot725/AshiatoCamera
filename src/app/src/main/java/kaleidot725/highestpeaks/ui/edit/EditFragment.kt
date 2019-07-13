@@ -8,10 +8,16 @@ import android.view.ViewGroup
 import kaleidot725.highestpeaks.R
 import android.os.Handler
 import android.os.Looper
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
+import kaleidot725.highestpeaks.databinding.EditFragmentBinding
 import kaleidot725.highestpeaks.di.data.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.repository.LocationRepository
+import kaleidot725.highestpeaks.ui.main.MainNavigator
+import kaleidot725.highestpeaks.ui.main.home.HomeViewModel
 import javax.inject.Inject
 import javax.inject.Named
 import kotlinx.coroutines.*
@@ -31,16 +37,25 @@ class EditFragment : Fragment() {
     @Inject
     lateinit var locationRepository: LocationRepository
 
-    lateinit var createdView : View
-    lateinit var handler : Handler
+    private lateinit var viewModel : EditViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.edit_fragment, container, false)
     }
 
+    lateinit var createdView : View
+    lateinit var handler : Handler
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        AndroidSupportInjection.inject(this)
+        viewModel = ViewModelProviders.of(this, EditViewModelFactory()).get(EditViewModel::class.java)
+
+        val binding = DataBindingUtil.bind<EditFragmentBinding>(view)
+        binding?.lifecycleOwner = this
+        binding?.vm = viewModel
+
         createdView = view
         handler = Handler(Looper.getMainLooper())
         view.viewTreeObserver.addOnGlobalLayoutListener {

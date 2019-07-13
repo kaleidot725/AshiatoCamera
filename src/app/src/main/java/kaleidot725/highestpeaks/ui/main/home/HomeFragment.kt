@@ -43,7 +43,6 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
