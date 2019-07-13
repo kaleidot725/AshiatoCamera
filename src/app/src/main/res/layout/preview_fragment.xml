@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="vm" type="kaleidot725.highestpeaks.preview.PreviewViewModel"/>
+        <variable name="vm" type="kaleidot725.highestpeaks.ui.preview.PreviewViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/black"
-            tools:context="preview.PreviewFragment">
+            tools:context=".ui.preview.PreviewFragment">
 
         <com.github.chrisbanes.photoview.PhotoView
                 android:id="@+id/picture_image"

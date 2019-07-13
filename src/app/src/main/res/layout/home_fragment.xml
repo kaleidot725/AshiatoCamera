@@ -4,7 +4,7 @@
         xmlns:myApplication="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewmodel" type="kaleidot725.highestpeaks.main.home.HomeViewModel"/>
+        <variable name="viewmodel" type="kaleidot725.highestpeaks.ui.main.home.HomeViewModel"/>
     </data>
 
     <FrameLayout android:layout_width="match_parent"

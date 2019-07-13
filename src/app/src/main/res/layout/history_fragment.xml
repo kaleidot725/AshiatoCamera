@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".main.history.HistoryFragment">
+        tools:context=".ui.main.history.HistoryFragment">
 
     <data>
         <import type="android.view.View"/>
-        <variable name="vm" type="kaleidot725.highestpeaks.main.history.HistoryViewModel"/>
+        <variable name="vm" type="kaleidot725.highestpeaks.ui.main.history.HistoryViewModel"/>
     </data>
 
     <FrameLayout

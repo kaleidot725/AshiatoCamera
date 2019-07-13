@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <variable name="vm" type="kaleidot725.highestpeaks.setting.SettingViewModel"/>
+        <variable name="vm" type="kaleidot725.highestpeaks.ui.setting.SettingViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -10,7 +10,7 @@
             android:id="@+id/setting"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".setting.SettingFragment">
+            tools:context=".ui.setting.SettingFragment">
 
         <ScrollView
                 android:layout_width="match_parent"

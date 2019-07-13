@@ -4,31 +4,31 @@ import android.location.LocationManager
 import android.os.Environment
 import dagger.*
 import dagger.android.ContributesAndroidInjector
-import kaleidot725.highestpeaks.edit.EditActivity
-import kaleidot725.highestpeaks.edit.EditFragment
-import kaleidot725.highestpeaks.contact.ContactActivity
-import kaleidot725.highestpeaks.contact.ContactFragment
-import kaleidot725.highestpeaks.main.MainActivity
-import kaleidot725.highestpeaks.main.history.HistoryFragment
-import kaleidot725.highestpeaks.main.home.HomeFragment
-import kaleidot725.highestpeaks.main.settinglist.SettingListFragment
-import kaleidot725.highestpeaks.model.repository.LocationRepositoryImpl
-import kaleidot725.highestpeaks.setting.SettingActivity
-import kaleidot725.highestpeaks.setting.SettingFragment
+import kaleidot725.highestpeaks.ui.edit.EditActivity
+import kaleidot725.highestpeaks.ui.edit.EditFragment
+import kaleidot725.highestpeaks.ui.contact.ContactActivity
+import kaleidot725.highestpeaks.ui.contact.ContactFragment
+import kaleidot725.highestpeaks.ui.main.MainActivity
+import kaleidot725.highestpeaks.ui.main.history.HistoryFragment
+import kaleidot725.highestpeaks.ui.main.home.HomeFragment
+import kaleidot725.highestpeaks.ui.main.settinglist.SettingListFragment
+import kaleidot725.highestpeaks.di.repository.LocationRepositoryImpl
+import kaleidot725.highestpeaks.ui.setting.SettingActivity
+import kaleidot725.highestpeaks.ui.setting.SettingFragment
 import kaleidot725.michetimer.model.repository.PictureRepositoryImpl
 import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Singleton
 import dagger.android.support.AndroidSupportInjectionModule
-import kaleidot725.highestpeaks.MyApplication
-import kaleidot725.highestpeaks.main.MainMenu
-import kaleidot725.highestpeaks.main.MainNavigator
-import kaleidot725.highestpeaks.model.data.Holder
-import kaleidot725.highestpeaks.model.data.Picture
-import kaleidot725.highestpeaks.model.data.Setting
-import kaleidot725.highestpeaks.model.repository.*
-import kaleidot725.highestpeaks.model.repository.PersistenceSetting
-import kaleidot725.highestpeaks.preview.PreviewActivity
-import kaleidot725.highestpeaks.preview.PreviewFragment
+import kaleidot725.highestpeaks.ui.MyApplication
+import kaleidot725.highestpeaks.ui.main.MainMenu
+import kaleidot725.highestpeaks.ui.main.MainNavigator
+import kaleidot725.highestpeaks.di.data.Holder
+import kaleidot725.highestpeaks.di.data.Picture
+import kaleidot725.highestpeaks.di.data.Setting
+import kaleidot725.highestpeaks.di.repository.*
+import kaleidot725.highestpeaks.di.repository.PersistenceSetting
+import kaleidot725.highestpeaks.ui.preview.PreviewActivity
+import kaleidot725.highestpeaks.ui.preview.PreviewFragment
 import java.lang.Exception
 import javax.inject.Named
 
@@ -191,10 +191,10 @@ interface AppComponent {
     interface Builder
     {
         @BindsInstance
-        fun application(application:MyApplication): Builder
+        fun application(application: MyApplication): Builder
 
         fun build(): AppComponent
     }
 
-    fun inject (myApplication:MyApplication)
+    fun inject (myApplication: MyApplication)
 }
