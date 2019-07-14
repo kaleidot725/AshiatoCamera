@@ -50,7 +50,7 @@ class EditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         AndroidSupportInjection.inject(this)
-        viewModel = ViewModelProviders.of(this, EditViewModelFactory()).get(EditViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, EditViewModelFactory(editPicture)).get(EditViewModel::class.java)
 
         val binding = DataBindingUtil.bind<EditFragmentBinding>(view)
         binding?.lifecycleOwner = this
