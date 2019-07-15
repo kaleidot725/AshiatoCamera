@@ -8,10 +8,15 @@ import kaleidot725.highestpeaks.di.repository.LocationRepository
 import kaleidot725.highestpeaks.ui.main.MainNavigator
 import java.lang.Exception
 
-class EditViewModelFactory(val locationRepository: LocationRepository, val editPicture : Holder<Picture>) : ViewModelProvider.Factory {
+class EditViewModelFactory(
+    val navigator : EditNavigator,
+    val locationRepository: LocationRepository,
+    val editPicture : Holder<Picture>
+) : ViewModelProvider.Factory {
+
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == EditViewModel::class.java) {
-            return EditViewModel(locationRepository, editPicture) as  T
+            return EditViewModel(navigator, locationRepository, editPicture) as  T
         }
 
         throw Exception("have created unknown class type")

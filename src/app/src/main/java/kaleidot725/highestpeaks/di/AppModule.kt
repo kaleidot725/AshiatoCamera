@@ -27,6 +27,7 @@ import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.data.Setting
 import kaleidot725.highestpeaks.di.repository.*
 import kaleidot725.highestpeaks.di.repository.PersistenceSetting
+import kaleidot725.highestpeaks.ui.edit.EditNavigator
 import kaleidot725.highestpeaks.ui.preview.PreviewActivity
 import kaleidot725.highestpeaks.ui.preview.PreviewFragment
 import java.lang.Exception
@@ -97,7 +98,7 @@ abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [MainActivityModule::class])
     abstract fun contributeMainActivity(): MainActivity
 
-    @ContributesAndroidInjector(modules = [CameraActivityModule::class])
+    @ContributesAndroidInjector(modules = [EditActivityModule::class])
     abstract fun contributeCameraActivity(): EditActivity
 
     @ContributesAndroidInjector(modules = [SettingActivityModule::class])
@@ -141,15 +142,20 @@ abstract  class SettingListFramgnetModule {
 }
 
 @Module
-abstract class CameraActivityModule {
-    @ContributesAndroidInjector(modules = [CameraFragmentModule::class])
+abstract class EditActivityModule {
+    @Binds
+    abstract fun bindsEditNavigator(activity: EditActivity): EditNavigator
+
+    @ContributesAndroidInjector(modules = [EditFramgnetModule::class])
     abstract fun contributeCameraFragment(): EditFragment
 }
 
 @Module
-abstract class CameraFragmentModule {
+abstract class EditFramgnetModule {
 
 }
+
+
 
 @Module
 abstract class ContactActivityModule {

@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     @Throws(IOException::class)
     override fun navigateCamera(picture : Picture) : Boolean {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.putExtra("android.intent.extra.quickCapture",true)
             takePictureIntent.resolveActivity(packageManager)?.also {
                 val storageDir  = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
                 tempFile = File("${storageDir}/temp.jpg")

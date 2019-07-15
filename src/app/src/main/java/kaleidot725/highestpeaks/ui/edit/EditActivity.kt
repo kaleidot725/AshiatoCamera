@@ -10,7 +10,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.highestpeaks.R
 import javax.inject.Inject
 
-class EditActivity : AppCompatActivity(), HasSupportFragmentInjector {
+class EditActivity : AppCompatActivity(), HasSupportFragmentInjector, EditNavigator {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -24,5 +24,10 @@ class EditActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return dispatchingAndroidInjector
+    }
+
+    override fun exit(): Boolean {
+        finish()
+        return true
     }
 }
