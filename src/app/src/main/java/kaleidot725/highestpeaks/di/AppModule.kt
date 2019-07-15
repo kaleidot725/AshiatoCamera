@@ -24,7 +24,7 @@ import kaleidot725.highestpeaks.ui.main.MainMenu
 import kaleidot725.highestpeaks.ui.main.MainNavigator
 import kaleidot725.highestpeaks.di.data.Holder
 import kaleidot725.highestpeaks.di.data.Picture
-import kaleidot725.highestpeaks.di.data.Setting
+import kaleidot725.highestpeaks.di.data.Settings
 import kaleidot725.highestpeaks.di.repository.*
 import kaleidot725.highestpeaks.di.repository.PersistenceSetting
 import kaleidot725.highestpeaks.ui.edit.EditNavigator
@@ -44,7 +44,7 @@ class AppModule {
             return LocationRepositoryImpl(myApplication)
                 .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
         } catch (e : Exception) {
-            val setting = Setting(LocationManager.GPS_PROVIDER, 1, 1)
+            val setting = Settings(LocationManager.GPS_PROVIDER, 1, 1)
             return LocationRepositoryImpl(myApplication)
                 .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
         }

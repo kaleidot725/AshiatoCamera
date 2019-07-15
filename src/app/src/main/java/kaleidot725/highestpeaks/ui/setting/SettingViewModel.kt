@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 import kaleidot725.highestpeaks.di.repository.PersistenceSetting
-import kaleidot725.highestpeaks.di.data.Setting
+import kaleidot725.highestpeaks.di.data.Settings
 import java.lang.Exception
 
 class SettingViewModel(persistenceSetting: PersistenceSetting) : ViewModel() {
@@ -23,7 +23,7 @@ class SettingViewModel(persistenceSetting: PersistenceSetting) : ViewModel() {
     val gpsMinDistancePosition : MutableLiveData<Int> = MutableLiveData()
 
     private val persistenceSetting : PersistenceSetting = persistenceSetting
-    private var setting : Setting = Setting(LocationManager.GPS_PROVIDER, gpsMinTimes[0], gpsMinDistances[0])
+    private var setting : Settings = Settings(LocationManager.GPS_PROVIDER, gpsMinTimes[0], gpsMinDistances[0])
 
     init {
         try {

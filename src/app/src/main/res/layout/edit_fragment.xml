@@ -18,7 +18,7 @@
                         android:id="@+id/edit_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="50dp"
+                        android:layout_marginBottom="100dp"
                         myApplication:imageUrl="@{vm.editPath}">
                 </ImageView>
 
@@ -30,10 +30,19 @@
                         android:textColor="@android:color/white"/>
 
                 <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_gravity="bottom"
-                        android:layout_height="50dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="left|bottom"
                         android:onClick="@{vm::save}"
-                        android:src="@drawable/ic_setting"/>
+                        android:background="#00000000"
+                        android:src="@drawable/ic_check"/>
+
+                <ImageButton
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="right|bottom"
+                        android:onClick="@{vm::cancel}"
+                        android:background="#00000000"
+                        android:src="@drawable/ic_close"/>
         </FrameLayout>
 </layout>
