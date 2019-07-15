@@ -50,22 +50,22 @@ class EditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         AndroidSupportInjection.inject(this)
-        viewModel = ViewModelProviders.of(this, EditViewModelFactory(editPicture)).get(EditViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, EditViewModelFactory(locationRepository, editPicture)).get(EditViewModel::class.java)
 
         val binding = DataBindingUtil.bind<EditFragmentBinding>(view)
         binding?.lifecycleOwner = this
         binding?.vm = viewModel
 
-        createdView = view
-        handler = Handler(Looper.getMainLooper())
-        view.viewTreeObserver.addOnGlobalLayoutListener {
-            handler.post(object : Runnable {
-                override fun run() {
-                    val text = "${Date().toString()}    ${locationRepository.lastAltitude?.toInt()}m"
-                    val canvas = view.findViewById<EditCanvas>(R.id.edit_canvas)
-                    canvas.drawPicture(editPicture.value, text, createdView.width, createdView.height )
-                }
-            })
-        }
+//        createdView = view
+//        handler = Handler(Looper.getMainLooper())
+//        view.viewTreeObserver.addOnGlobalLayoutListener {
+//            handler.post(object : Runnable {
+//                override fun run() {
+//                    val text = "${Date().toString()}    ${locationRepository.lastAltitude?.toInt()}m"
+//                    val canvas = view.findViewById<EditCanvas>(R.id.edit_canvas)
+//                    canvas.drawPicture(editPicture.value, text, createdView.width, createdView.height )
+//                }
+//            })
+//        }
     }
 }

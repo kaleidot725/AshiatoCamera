@@ -3,24 +3,34 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:myApplication="http://schemas.android.com/apk/res-auto"
+        android:background="@android:color/black"
         tools:context=".ui.edit.EditFragment">
 
         <data>
                 <variable name="vm" type="kaleidot725.highestpeaks.ui.edit.EditViewModel"/>
         </data>
 
-        <FrameLayout android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     android:background="@android:color/black">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                     android:layout_height="match_parent">
 
                 <ImageView
+                        android:id="@+id/edit_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        myApplication:imageResource="@{vm.edit.path}"/>
+                        myApplication:layout_constraintTop_toTopOf="parent"
+                        myApplication:layout_constraintStart_toStartOf="parent"
+                        myApplication:imageUrl="@{vm.editPath}">
+                </ImageView>
 
-                <kaleidot725.highestpeaks.ui.edit.EditCanvas
-                        android:id="@+id/edit_canvas"
+                <TextView
+                        android:id="@+id/edit_text"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-        </FrameLayout>
+                        android:layout_height="wrap_content"
+                        myApplication:layout_constraintTop_toTopOf="@+id/edit_image"
+                        myApplication:layout_constraintStart_toStartOf="@+id/edit_image"
+                        android:text="@{vm.editText}"
+                        android:textColor="@android:color/white"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
