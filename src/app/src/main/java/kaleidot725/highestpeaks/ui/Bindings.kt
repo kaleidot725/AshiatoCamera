@@ -11,3 +11,9 @@ fun loadImage(view : ImageView, imagePath : String?) {
     val file = File(imagePath)
     Picasso.get().load(file).fit().centerInside().into(view)
 }
+
+@BindingAdapter("app:imageUrl2")
+fun loadImage2(view : ImageView, imagePath : String?) {
+    val file = File(imagePath)
+    Picasso.get().load(file).fit().into(view)
+}

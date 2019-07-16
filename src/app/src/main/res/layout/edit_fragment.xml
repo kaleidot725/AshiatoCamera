@@ -18,16 +18,12 @@
                         android:id="@+id/edit_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="100dp"
-                        myApplication:imageUrl="@{vm.editPath}">
+                        android:layout_marginTop="100dp"
+                        android:layout_marginBottom="150dp"
+                        android:scaleType="fitXY"
+                        android:layout_gravity="center"
+                        myApplication:imageUrl2="@{vm.tempPath}">
                 </ImageView>
-
-                <TextView
-                        android:id="@+id/edit_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{vm.editText}"
-                        android:textColor="@android:color/white"/>
 
                 <ImageButton
                         android:layout_width="100dp"
