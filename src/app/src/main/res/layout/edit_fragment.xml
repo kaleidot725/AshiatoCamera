@@ -14,16 +14,17 @@
                 android:layout_width="match_parent"
                      android:layout_height="match_parent">
 
-                <ImageView
-                        android:id="@+id/edit_image"
+                <com.github.chrisbanes.photoview.PhotoView
+                        android:id="@+id/picture_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="100dp"
                         android:layout_marginBottom="150dp"
-                        android:scaleType="fitXY"
+                        myApplication:imageUrl="@{vm.tempPath}"
+                        android:clickable="true"
+                        android:scaleType="fitCenter"
                         android:layout_gravity="center"
-                        myApplication:imageUrl2="@{vm.tempPath}">
-                </ImageView>
+                        android:background="?android:attr/selectableItemBackground"/>
 
                 <ImageButton
                         android:layout_width="100dp"

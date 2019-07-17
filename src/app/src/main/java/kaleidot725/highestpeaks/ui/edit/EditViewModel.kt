@@ -9,6 +9,7 @@ import kaleidot725.highestpeaks.di.repository.LocationRepository
 import kaleidot725.highestpeaks.di.service.PictureEditor
 import kaleidot725.highestpeaks.di.service.saveAsJpegFile
 import java.io.File
+import java.text.SimpleDateFormat
 import java.util.*
 
 class EditViewModel(
@@ -19,10 +20,10 @@ class EditViewModel(
 ) : ViewModel() {
 
     val tempPath : String = editPicture.value.path + "_temp"
-    val editText : String = "${Date().toString()}    ${locationRepository.lastAltitude?.toInt()}m"
+    val editText : String = "${SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Date())}" + " " + "${locationRepository.lastAltitude?.toInt()}m"
 
     init {
-        pictureEditor.drawText(editText, Color.WHITE, 128f)
+        pictureEditor.drawText(editText, Color.WHITE, 64f)
         pictureEditor.saveAsJpegFile(tempPath, 100)
     }
 
@@ -31,7 +32,6 @@ class EditViewModel(
     }
 
     fun save(view : View) {
-        pictureEditor.drawText(editText, Color.WHITE, 128f)
         pictureEditor.saveAsJpegFile(editPicture.value.path, 100)
         File(tempPath).delete()
         navigator.exit()

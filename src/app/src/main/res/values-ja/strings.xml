@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">dokocam</string>
-    <string name="main_title">DOKOCAM</string>
+    <string name="app_name">IzukoCamera</string>
+    <string name="main_title">IZUKO CAMERA</string>
 
     <!-- Main -->
     <string name="navtitle_home">ホーム</string>
