@@ -19,7 +19,7 @@ class EditActivity : AppCompatActivity(), HasSupportFragmentInjector, EditNaviga
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acitivity_edit)
-        supportFragmentManager.beginTransaction().replace(R.id.camera_content, EditFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.display_content, EditFragment.newInstance()).commit()
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {

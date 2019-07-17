@@ -2,14 +2,39 @@
 <layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        xmlns:myApplication="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.edit.EditActivity">
 
     <data>
         <!-- view model definition -->
     </data>
 
-    <FrameLayout
-            android:id="@+id/camera_content"
+    <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+        <FrameLayout
+                android:id="@+id/display_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="200dp"/>
+
+        <FrameLayout
+                android:id="@+id/editmenu_content"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:background="@color/colorAccent"
+                android:layout_height="200dp"/>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/navigation_bar_height"
+                android:layout_gravity="bottom"
+                android:background="@color/backgroundNegative"
+                android:elevation="16dp"
+                myApplication:itemIconTint="@android:color/white"
+                myApplication:itemTextColor="@android:color/white"
+                myApplication:menu="@menu/edit_picture_menu" />
+    </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
 </layout>

@@ -10,7 +10,7 @@
                 <variable name="vm" type="kaleidot725.highestpeaks.ui.edit.EditViewModel"/>
         </data>
 
-        <FrameLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                      android:layout_height="match_parent">
 
@@ -18,8 +18,6 @@
                         android:id="@+id/picture_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="100dp"
-                        android:layout_marginBottom="150dp"
                         myApplication:imageUrl="@{vm.tempPath}"
                         android:clickable="true"
                         android:scaleType="fitCenter"
@@ -27,19 +25,25 @@
                         android:background="?android:attr/selectableItemBackground"/>
 
                 <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="left|bottom"
-                        android:onClick="@{vm::save}"
-                        android:background="#00000000"
-                        android:src="@drawable/ic_check"/>
-
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="right|bottom"
+                        android:id="@+id/check_button"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right|top"
                         android:onClick="@{vm::cancel}"
                         android:background="#00000000"
+                        myApplication:layout_constraintStart_toStartOf="parent"
+                        myApplication:layout_constraintTop_toTopOf="parent"
                         android:src="@drawable/ic_close"/>
-        </FrameLayout>
+
+                <ImageButton
+                        android:id="@+id/close_button"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="left|top"
+                        android:onClick="@{vm::save}"
+                        android:background="#00000000"
+                        myApplication:layout_constraintEnd_toEndOf="parent"
+                        myApplication:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/ic_check"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

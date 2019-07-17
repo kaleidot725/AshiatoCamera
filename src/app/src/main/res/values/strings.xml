@@ -7,6 +7,11 @@
     <string name="navtitle_history">History</string>
     <string name="navtitle_setting">Setting</string>
 
+    <string name="edittitle_format">Format</string>
+    <string name="edittitle_color">Color</string>
+    <string name="edittitle_position">Position</string>
+    <string name="edittitle_rotation">Rotation</string>
+
     <!-- Main -> Home -->
     <string name="altitude">Altitude</string>
     <string name="latitude">Latitude</string>

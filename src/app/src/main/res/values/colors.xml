@@ -6,4 +6,5 @@
     <color name="colorText">#000000</color>
     <color name="colorTextAccent">#3F51B5</color>
     <color name="background">#ffffff</color>
+    <color name="backgroundNegative">#000000</color>
 </resources>

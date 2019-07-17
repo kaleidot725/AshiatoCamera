@@ -7,6 +7,11 @@
     <string name="navtitle_history">履歴</string>
     <string name="navtitle_setting">設定</string>
 
+    <string name="edittitle_format">形式</string>
+    <string name="edittitle_color">色</string>
+    <string name="edittitle_position">位置</string>
+    <string name="edittitle_rotation">回転</string>
+
     <!-- Main -> Home -->
     <string name="altitude">高度</string>
     <string name="latitude">緯度</string>
