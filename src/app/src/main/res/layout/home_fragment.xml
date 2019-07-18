@@ -44,7 +44,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="monospace"
                     android:text="@string/altitude"
-                    android:textSize="24dp"/>
+                    android:textSize="@dimen/textSizeMainParam"/>
 
             <TextView
                     android:id="@+id/altitude_text"
@@ -59,7 +59,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="monospace"
                     android:text="@{viewmodel.altitude}"
-                    android:textSize="24dp"
+                    android:textSize="@dimen/textSizeMainParam"
                     android:gravity="right"/>
 
             <TextView
@@ -74,7 +74,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="monospace"
                     android:text="@string/latitude"
-                    android:textSize="24dp"/>
+                    android:textSize="@dimen/textSizeMainParam"/>
 
             <TextView
                     android:id="@+id/latitude_text"
@@ -88,7 +88,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="monospace"
                     android:text="@{viewmodel.latitude}"
-                    android:textSize="24dp"
+                    android:textSize="@dimen/textSizeMainParam"
                     android:gravity="right"/>
 
             <TextView
@@ -103,7 +103,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="monospace"
                     android:text="@string/longitude"
-                    android:textSize="24dp"/>
+                    android:textSize="@dimen/textSizeMainParam"/>
 
             <TextView
                     android:id="@+id/longitude_text"
@@ -117,7 +117,7 @@
                     myApplication:layout_constraintHorizontal_weight="0.5"
                     android:fontFamily="monospace"
                     android:text="@{viewmodel.longitude}"
-                    android:textSize="24dp"
+                    android:textSize="@dimen/textSizeMainParam"
                     android:gravity="right"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
