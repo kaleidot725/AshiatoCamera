@@ -7,126 +7,181 @@
         <variable name="viewmodel" type="kaleidot725.highestpeaks.ui.main.home.HomeViewModel"/>
     </data>
 
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:layout_margin="16dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_gravity="top"
-                android:layout_marginTop="100dp"
+    <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="2dp">
 
-            <TextView
-                    android:id="@+id/update_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    myApplication:layout_constraintStart_toStartOf="parent"
-                    myApplication:layout_constraintTop_toTopOf="parent"
-                    myApplication:layout_constraintBottom_toTopOf="@id/altitude_text"
-                    myApplication:layout_constraintEnd_toEndOf="parent"
-                    android:fontFamily="monospace"
-                    android:text="@{viewmodel.update}"
-                    android:textSize="28dp"
-                    android:textAlignment="center"
-                    android:gravity="center"/>
-
-            <TextView
-                    android:id="@+id/altitude_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    myApplication:layout_constraintStart_toStartOf="parent"
-                    myApplication:layout_constraintTop_toBottomOf="@id/update_text"
-                    myApplication:layout_constraintBottom_toTopOf="@id/latitude_title"
-                    myApplication:layout_constraintEnd_toStartOf="@id/altitude_text"
-                    myApplication:layout_constraintHorizontal_chainStyle="spread_inside"
-                    myApplication:layout_constraintHorizontal_weight="0.5"
-                    android:fontFamily="monospace"
-                    android:text="@string/altitude"
-                    android:textSize="@dimen/textSizeMainParam"/>
-
-            <TextView
-                    android:id="@+id/altitude_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    myApplication:layout_constraintStart_toEndOf="@id/altitude_title"
-                    myApplication:layout_constraintTop_toBottomOf="@id/update_text"
-                    myApplication:layout_constraintBottom_toTopOf="@id/latitude_text"
-                    myApplication:layout_constraintEnd_toEndOf="parent"
-                    myApplication:layout_constraintHorizontal_chainStyle="spread"
-                    myApplication:layout_constraintHorizontal_weight="0.5"
-                    android:fontFamily="monospace"
-                    android:text="@{viewmodel.altitude}"
-                    android:textSize="@dimen/textSizeMainParam"
-                    android:gravity="right"/>
-
-            <TextView
-                    android:id="@+id/latitude_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    myApplication:layout_constraintStart_toStartOf="parent"
-                    myApplication:layout_constraintTop_toBottomOf="@id/altitude_title"
-                    myApplication:layout_constraintEnd_toStartOf="@id/altitude_text"
-                    myApplication:layout_constraintHorizontal_chainStyle="spread"
-                    myApplication:layout_constraintHorizontal_weight="0.5"
-                    android:fontFamily="monospace"
-                    android:text="@string/latitude"
-                    android:textSize="@dimen/textSizeMainParam"/>
-
-            <TextView
-                    android:id="@+id/latitude_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    myApplication:layout_constraintStart_toEndOf="@id/latitude_title"
-                    myApplication:layout_constraintTop_toBottomOf="@id/altitude_text"
-                    myApplication:layout_constraintEnd_toEndOf="parent"
-                    myApplication:layout_constraintHorizontal_chainStyle="spread"
-                    myApplication:layout_constraintHorizontal_weight="0.5"
-                    android:fontFamily="monospace"
-                    android:text="@{viewmodel.latitude}"
-                    android:textSize="@dimen/textSizeMainParam"
-                    android:gravity="right"/>
-
-            <TextView
-                    android:id="@+id/longitude_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    myApplication:layout_constraintStart_toStartOf="parent"
-                    myApplication:layout_constraintTop_toBottomOf="@id/latitude_title"
-                    myApplication:layout_constraintEnd_toStartOf="@id/longitude_text"
-                    myApplication:layout_constraintHorizontal_chainStyle="spread"
-                    myApplication:layout_constraintHorizontal_weight="0.5"
-                    android:fontFamily="monospace"
-                    android:text="@string/longitude"
-                    android:textSize="@dimen/textSizeMainParam"/>
-
-            <TextView
-                    android:id="@+id/longitude_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    myApplication:layout_constraintStart_toEndOf="@id/longitude_title"
-                    myApplication:layout_constraintTop_toBottomOf="@id/latitude_text"
-                    myApplication:layout_constraintEnd_toEndOf="parent"
-                    myApplication:layout_constraintHorizontal_chainStyle="spread"
-                    myApplication:layout_constraintHorizontal_weight="0.5"
-                    android:fontFamily="monospace"
-                    android:text="@{viewmodel.longitude}"
-                    android:textSize="@dimen/textSizeMainParam"
-                    android:gravity="right"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/cameraFab"
-                android:layout_width="wrap_content"
+        <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom"
-                myApplication:elevation="0dp"
-                android:src="@drawable/ic_camera"/>
-    </FrameLayout>
+                android:orientation="horizontal">
+
+            <FrameLayout
+                    android:layout_gravity="top"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:elevation="4dp"
+                    android:background="@android:color/white">
+
+                <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:background="?android:attr/selectableItemBackground">
+
+                    <TextView
+                            android:id="@+id/update_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            myApplication:layout_constraintStart_toStartOf="parent"
+                            myApplication:layout_constraintTop_toTopOf="parent"
+                            myApplication:layout_constraintEnd_toEndOf="parent"
+                            android:fontFamily="monospace"
+                            android:text="@{viewmodel.update}"
+                            android:textSize="@dimen/textSizeMainDate"
+                            android:textAlignment="center"/>
+                </FrameLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:background="@android:color/white">
+
+                <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:background="?android:attr/selectableItemBackground">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/altitude_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                myApplication:layout_constraintStart_toStartOf="parent"
+                                myApplication:layout_constraintTop_toTopOf="parent"
+                                myApplication:layout_constraintBottom_toTopOf="@id/latitude_title"
+                                myApplication:layout_constraintEnd_toStartOf="@id/altitude_text"
+                                myApplication:layout_constraintHorizontal_chainStyle="spread_inside"
+                                myApplication:layout_constraintHorizontal_weight="0.5"
+                                android:fontFamily="monospace"
+                                android:text="@string/altitude"
+                                android:textSize="@dimen/textSizeMainParam"/>
+
+                        <TextView
+                                android:id="@+id/altitude_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                myApplication:layout_constraintStart_toEndOf="@id/altitude_title"
+                                myApplication:layout_constraintTop_toTopOf="parent"
+                                myApplication:layout_constraintBottom_toTopOf="@id/latitude_text"
+                                myApplication:layout_constraintEnd_toEndOf="parent"
+                                myApplication:layout_constraintHorizontal_chainStyle="spread"
+                                myApplication:layout_constraintHorizontal_weight="0.5"
+                                android:fontFamily="monospace"
+                                android:text="@{viewmodel.altitude}"
+                                android:textSize="@dimen/textSizeMainParam"
+                                android:gravity="right"/>
+
+                        <TextView
+                                android:id="@+id/latitude_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                myApplication:layout_constraintStart_toStartOf="parent"
+                                myApplication:layout_constraintTop_toBottomOf="@id/altitude_title"
+                                myApplication:layout_constraintEnd_toStartOf="@id/altitude_text"
+                                myApplication:layout_constraintHorizontal_chainStyle="spread"
+                                myApplication:layout_constraintHorizontal_weight="0.5"
+                                android:fontFamily="monospace"
+                                android:text="@string/latitude"
+                                android:textSize="@dimen/textSizeMainParam"/>
+
+                        <TextView
+                                android:id="@+id/latitude_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                myApplication:layout_constraintStart_toEndOf="@id/latitude_title"
+                                myApplication:layout_constraintTop_toBottomOf="@id/altitude_text"
+                                myApplication:layout_constraintEnd_toEndOf="parent"
+                                myApplication:layout_constraintHorizontal_chainStyle="spread"
+                                myApplication:layout_constraintHorizontal_weight="0.5"
+                                android:fontFamily="monospace"
+                                android:text="@{viewmodel.latitude}"
+                                android:textSize="@dimen/textSizeMainParam"
+                                android:gravity="right"/>
+
+                        <TextView
+                                android:id="@+id/longitude_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                myApplication:layout_constraintStart_toStartOf="parent"
+                                myApplication:layout_constraintTop_toBottomOf="@id/latitude_title"
+                                myApplication:layout_constraintEnd_toStartOf="@id/longitude_text"
+                                myApplication:layout_constraintHorizontal_chainStyle="spread"
+                                myApplication:layout_constraintHorizontal_weight="0.5"
+                                android:fontFamily="monospace"
+                                android:text="@string/longitude"
+                                android:textSize="@dimen/textSizeMainParam"/>
+
+                        <TextView
+                                android:id="@+id/longitude_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                myApplication:layout_constraintStart_toEndOf="@id/longitude_title"
+                                myApplication:layout_constraintTop_toBottomOf="@id/latitude_text"
+                                myApplication:layout_constraintEnd_toEndOf="parent"
+                                myApplication:layout_constraintHorizontal_chainStyle="spread"
+                                myApplication:layout_constraintHorizontal_weight="0.5"
+                                android:fontFamily="monospace"
+                                android:text="@{viewmodel.longitude}"
+                                android:textSize="@dimen/textSizeMainParam"
+                                android:gravity="right"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </FrameLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:id="@+id/cameraFab"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/rouding_background"
+                    myApplication:elevation="4dp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:text="Take a picture"/>
+        </FrameLayout>
+
+    </LinearLayout>
 </layout>

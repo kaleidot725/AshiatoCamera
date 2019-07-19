@@ -21,7 +21,7 @@ class HomeViewModel(locationRepository: LocationRepository) : ViewModel() {
     private val _longitude : MutableLiveData<String> = MutableLiveData()
     val longitude : LiveData<String> get() = _longitude
 
-    private val df : SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault())
+    private val df : SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd\nHH:mm:ss", Locale.getDefault())
     private val compositeDisposable : CompositeDisposable = CompositeDisposable()
 
     init {
@@ -29,13 +29,13 @@ class HomeViewModel(locationRepository: LocationRepository) : ViewModel() {
         val lastUpdate = if (locationRepository.lastUpdate == null) ("Updating") else (df.format(locationRepository.lastUpdate))
         _update.postValue(lastUpdate)
 
-        val lastAltitude = if (locationRepository.lastAltitude == null) ("Unknown") else ("${locationRepository.lastAltitude?.toInt()}m")
+        val lastAltitude = if (locationRepository.lastAltitude == null) ("???m") else ("${locationRepository.lastAltitude?.toInt()}m")
         _altitude.postValue(lastAltitude)
 
-        val lastLatitude = if (locationRepository.lastLatitude == null) ("Unknown") else ("${locationRepository.lastLatitude?.toInt()}°")
+        val lastLatitude = if (locationRepository.lastLatitude == null) ("???°") else ("${locationRepository.lastLatitude?.toInt()}°")
         _latitude.postValue(lastLatitude)
 
-        val lastLongitude = if (locationRepository.lastLongitude == null) ("Unknown") else ("${locationRepository.lastLongitude?.toInt()}°")
+        val lastLongitude = if (locationRepository.lastLongitude == null) ("???°") else ("${locationRepository.lastLongitude?.toInt()}°")
         _longitude.postValue(lastLongitude)
 
         var disposable = locationRepository.update.subscribe {

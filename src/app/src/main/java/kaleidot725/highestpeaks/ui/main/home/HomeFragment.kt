@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -53,7 +55,7 @@ class HomeFragment : Fragment() {
         binding?.viewmodel = viewModel
         binding?.lifecycleOwner = this
 
-        val cameraFab: FloatingActionButton = view.findViewById(R.id.cameraFab)
+        val cameraFab: Button = view.findViewById(R.id.cameraFab)
         cameraFab.setOnClickListener {
             editPicture.value = pictureRepository.newPicture()
             navigator.navigateCamera(editPicture.value)
@@ -61,8 +63,6 @@ class HomeFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
     }
-
-
 
     private inner class MainFragmentViewModelFactory() : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
