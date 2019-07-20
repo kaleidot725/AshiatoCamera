@@ -66,12 +66,12 @@ class AppModule {
 
     @Provides @Named("SelectedPicture") @Singleton
     fun provideSelectedPicture(myApplication: MyApplication) : Holder<Picture> {
-        return Holder(Picture("", "", ""))
+        return Holder(Picture( "", ""))
     }
 
     @Provides @Named("EditPicture") @Singleton
     fun provideEditPicture(myApplication: MyApplication) : Holder<Picture> {
-        return Holder(Picture("", "", ""))
+        return Holder(Picture( "", ""))
     }
 
     @Provides

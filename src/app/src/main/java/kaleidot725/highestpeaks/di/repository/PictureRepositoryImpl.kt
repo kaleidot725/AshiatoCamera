@@ -9,16 +9,14 @@ import java.util.*
 
 class PictureRepositoryImpl(path : String) : PictureRepository {
     private val path  = path
-    private var list = ObservableArrayList<Picture>()
 
     override fun all() : List<Picture> {
-        update()
-        return this.list.toList()
+        return update().reversed()
     }
 
     override fun count() : Int {
-        update()
-        return this.list.count()
+        val list = update()
+        return list.count()
     }
 
     override fun newPicture(): Picture {
@@ -27,15 +25,17 @@ class PictureRepositoryImpl(path : String) : PictureRepository {
         val df = SimpleDateFormat("yyyyMMdd HH:mm:ss")
         val name = "IMG_${df.format(Date())}.jpg"
         val path = "${dirPath}/${name}"
-        return Picture(Picture.createID(), path, name)
+        return Picture(path, name)
     }
 
-    private fun update() {
-        list.clear()
+    private fun update() : ObservableArrayList<Picture>{
+        val list = ObservableArrayList<Picture>()
         File(path).walkTopDown().forEach {
             if (it.path != path) {
-                list.add(Picture(Picture.createID(), it.path, it.name))
+                list.add(Picture(it.path, it.name))
             }
         }
+
+        return list
     }
 }

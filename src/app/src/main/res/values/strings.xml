@@ -13,9 +13,10 @@
     <string name="edittitle_rotation">Rotation</string>
 
     <!-- Main -> Home -->
-    <string name="altitude">Alt</string>
-    <string name="latitude">Lat</string>
-    <string name="longitude">Lng</string>
+    <string name="altitude">ALT</string>
+    <string name="latitude">LAT</string>
+    <string name="longitude">LNG</string>
+    <string name="takeapicture">Take A PICTURE</string>
 
     <!-- Main -> History -->
     <string name="nohistory">NO HISTORY</string>

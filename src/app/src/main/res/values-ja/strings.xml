@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">IzukoCamera</string>
-    <string name="main_title">IZUKO CAMERA</string>
+    <string name="main_title">IzukoCamera</string>
 
     <!-- Main -->
     <string name="navtitle_home">ホーム</string>
@@ -16,6 +16,7 @@
     <string name="altitude">高度</string>
     <string name="latitude">緯度</string>
     <string name="longitude">経度</string>
+    <string name="takeapicture">写真を撮る</string>
 
     <!-- Main -> History -->
     <string name="nohistory">履歴なし</string>

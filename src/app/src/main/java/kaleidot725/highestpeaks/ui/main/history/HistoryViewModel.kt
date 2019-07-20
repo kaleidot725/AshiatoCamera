@@ -52,7 +52,7 @@ class HistoryViewModel(
     }
 
     private fun createPictureViewModels(mode : HistoryFragmentMode) : List<PictureViewModelBase> {
-        val pictures = pictureRepository.all().reversed()
+        val pictures = pictureRepository.all()
         val vms : MutableList<PictureViewModelBase> = mutableListOf()
         for (picture in pictures) {
             vms.add(createPictureViewModel(navigator, actor, picture, selected, mode))
