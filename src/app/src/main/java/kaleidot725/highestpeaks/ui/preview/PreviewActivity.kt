@@ -37,8 +37,6 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         val viewPager = findViewById<ViewPager>(R.id.viewpager)
         val all = repository.all()
-        viewPager.currentItem = all.indexOf(selected.lastedValue)
-
         viewPager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getCount(): Int {
                 return repository.count()
@@ -48,6 +46,7 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 return PreviewFragment.newInstance(position)
             }
         }
+        viewPager.currentItem = all.indexOf(selected.lastedValue)
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
