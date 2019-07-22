@@ -22,7 +22,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import kaleidot725.highestpeaks.ui.MyApplication
 import kaleidot725.highestpeaks.ui.main.MainMenu
 import kaleidot725.highestpeaks.ui.main.MainNavigator
-import kaleidot725.highestpeaks.di.data.Holder
+import kaleidot725.highestpeaks.di.repository.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.data.Settings
 import kaleidot725.highestpeaks.di.repository.*
@@ -66,18 +66,18 @@ class AppModule {
 
     @Provides @Named("SelectedPicture") @Singleton
     fun provideSelectedPicture(myApplication: MyApplication) : Holder<Picture> {
-        return Holder(Picture( "", ""))
+        return HolderImpl<Picture>(Picture("", ""))
     }
 
     @Provides @Named("EditPicture") @Singleton
     fun provideEditPicture(myApplication: MyApplication) : Holder<Picture> {
-        return Holder(Picture( "", ""))
+        return HolderImpl<Picture>(Picture("", ""))
     }
 
     @Provides
     @Singleton
     fun provideMainMenuSelected(myApplication: MyApplication) : Holder<MainMenu> {
-        return Holder(MainMenu.Home)
+        return HolderImpl<MainMenu>(MainMenu.Home)
     }
 
     @Provides

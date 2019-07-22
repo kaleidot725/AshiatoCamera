@@ -7,12 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kaleidot725.highestpeaks.R
-import android.os.Handler
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.highestpeaks.databinding.EditFragmentBinding
-import kaleidot725.highestpeaks.di.data.Holder
+import kaleidot725.highestpeaks.di.repository.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.repository.LocationRepository
 import kaleidot725.highestpeaks.di.service.PictureEditor
@@ -49,7 +48,7 @@ class EditFragment : Fragment() {
 
         AndroidSupportInjection.inject(this)
 
-        editor = PictureEditorImpl(editPicture.value, Bitmap.Config.ARGB_8888)
+        editor = PictureEditorImpl(editPicture.lastedValue, Bitmap.Config.ARGB_8888)
         viewModel = ViewModelProviders.of(this, EditViewModelFactory(navigator, locationRepository, editPicture, editor)).get(EditViewModel::class.java)
 
         val binding = DataBindingUtil.bind<EditFragmentBinding>(view)

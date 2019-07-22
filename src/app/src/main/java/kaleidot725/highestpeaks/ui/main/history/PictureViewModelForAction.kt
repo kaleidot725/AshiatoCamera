@@ -2,7 +2,7 @@ package kaleidot725.highestpeaks.ui.main.history
 
 import android.view.View
 import kaleidot725.highestpeaks.ui.main.MainNavigator
-import kaleidot725.highestpeaks.di.data.Holder
+import kaleidot725.highestpeaks.di.repository.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 
 class PictureViewModelForAction(private val navigation : MainNavigator,
@@ -12,7 +12,7 @@ class PictureViewModelForAction(private val navigation : MainNavigator,
 ) : PictureViewModelBase(navigation, actor, picture, selected) {
 
     init {
-        _isChecked.value = selected.value.path == picture.path
+        _isChecked.value = selected.lastedValue.path == picture.path
     }
 
     override fun click(view : View)  {

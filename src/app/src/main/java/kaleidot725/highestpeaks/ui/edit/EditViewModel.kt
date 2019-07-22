@@ -3,7 +3,7 @@ package kaleidot725.highestpeaks.ui.edit
 import android.graphics.*
 import android.view.View
 import androidx.lifecycle.ViewModel
-import kaleidot725.highestpeaks.di.data.Holder
+import kaleidot725.highestpeaks.di.repository.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.repository.LocationRepository
 import kaleidot725.highestpeaks.di.service.PictureEditor
@@ -19,7 +19,7 @@ class EditViewModel(
     val pictureEditor : PictureEditor
 ) : ViewModel() {
 
-    val tempPath : String = editPicture.value.path + "_temp"
+    val tempPath : String = editPicture.lastedValue.path + "_temp"
     val editText : String = "${SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Date())}" + " " + "${locationRepository.lastAltitude?.toInt()}m"
 
     init {
@@ -32,7 +32,7 @@ class EditViewModel(
     }
 
     fun save(view : View) {
-        pictureEditor.saveAsJpegFile(editPicture.value.path, 100)
+        pictureEditor.saveAsJpegFile(editPicture.lastedValue.path, 100)
         File(tempPath).delete()
         navigator.exit()
     }

@@ -7,16 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.HomeFragmentBinding
 import kaleidot725.highestpeaks.ui.main.MainNavigator
-import kaleidot725.highestpeaks.di.data.Holder
+import kaleidot725.highestpeaks.di.repository.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.repository.LocationRepository
 import kaleidot725.michetimer.model.repository.PictureRepository
@@ -57,8 +55,8 @@ class HomeFragment : Fragment() {
 
         val cameraFab: Button = view.findViewById(R.id.cameraFab)
         cameraFab.setOnClickListener {
-            editPicture.value = pictureRepository.newPicture()
-            navigator.navigateCamera(editPicture.value)
+            editPicture.update(pictureRepository.newPicture())
+            navigator.navigateCamera(editPicture.lastedValue)
         }
 
         super.onViewCreated(view, savedInstanceState)

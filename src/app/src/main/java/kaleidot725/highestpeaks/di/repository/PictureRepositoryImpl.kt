@@ -6,6 +6,8 @@ import kaleidot725.highestpeaks.di.data.Picture
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 class PictureRepositoryImpl(path : String) : PictureRepository {
     private val path  = path
@@ -28,14 +30,14 @@ class PictureRepositoryImpl(path : String) : PictureRepository {
         return Picture(path, name)
     }
 
-    private fun update() : ObservableArrayList<Picture>{
-        val list = ObservableArrayList<Picture>()
+    private fun update() : List<Picture>{
+        val list = ArrayList<Picture>()
         File(path).walkTopDown().forEach {
             if (it.path != path) {
                 list.add(Picture(it.path, it.name))
             }
         }
 
-        return list
+        return list.sortedWith(compareBy { it.name })
     }
 }

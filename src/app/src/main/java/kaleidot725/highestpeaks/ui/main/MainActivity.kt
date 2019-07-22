@@ -28,7 +28,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.highestpeaks.ui.edit.EditActivity
 import kaleidot725.highestpeaks.ui.contact.ContactActivity
-import kaleidot725.highestpeaks.di.data.Holder
+import kaleidot725.highestpeaks.di.repository.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.ui.preview.PreviewActivity
 import kaleidot725.highestpeaks.ui.setting.SettingActivity
@@ -133,19 +133,19 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
 
     override fun navigateHome() : Boolean{
         supportFragmentManager.beginTransaction().replace(R.id.main_content, HomeFragment.newInstance()).commit()
-        mainMenuSelected.value = MainMenu.Home
+        mainMenuSelected.update(MainMenu.Home)
         return true
     }
 
     override fun navigateHistory(): Boolean {
         supportFragmentManager.beginTransaction().replace(R.id.main_content, HistoryFragment.newInstance()).commit()
-        mainMenuSelected.value = MainMenu.History
+        mainMenuSelected.update(MainMenu.History)
         return true
     }
 
     override fun navigateSettingList() : Boolean{
         supportFragmentManager.beginTransaction().replace(R.id.main_content, SettingListFragment.newInstance()).commit()
-        mainMenuSelected.value = MainMenu.SettingList
+        mainMenuSelected.update(MainMenu.SettingList)
         return true
     }
 
@@ -155,13 +155,13 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
 
     private fun restoreMenu() : Boolean {
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigation.menu.findItem(when(mainMenuSelected.value) {
+        bottomNavigation.menu.findItem(when(mainMenuSelected.lastedValue) {
             MainMenu.Home -> kaleidot725.highestpeaks.R.id.action_home
             MainMenu.History -> kaleidot725.highestpeaks.R.id.action_history
             MainMenu.SettingList -> kaleidot725.highestpeaks.R.id.action_setting
         }).setChecked(true)
 
-        when(mainMenuSelected.value) {
+        when(mainMenuSelected.lastedValue) {
             MainMenu.Home -> return navigateHome()
             MainMenu.History -> return navigateHistory()
             MainMenu.SettingList -> return navigateSettingList()

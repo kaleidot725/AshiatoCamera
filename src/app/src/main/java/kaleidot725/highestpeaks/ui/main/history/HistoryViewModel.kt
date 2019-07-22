@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kaleidot725.highestpeaks.ui.main.MainNavigator
-import kaleidot725.highestpeaks.di.data.Holder
+import kaleidot725.highestpeaks.di.repository.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.michetimer.model.repository.PictureRepository
 import java.io.File
@@ -15,7 +15,8 @@ class HistoryViewModel(
     private val navigator : MainNavigator,
     private val actor : HistoryFragmentActor,
     private val pictureRepository: PictureRepository,
-    private val selected : Holder<Picture>)
+    private val selected : Holder<Picture>
+)
     : ViewModel()
 {
     private val _pictureViewModels : MutableLiveData<List<PictureViewModelBase>> = MutableLiveData()
