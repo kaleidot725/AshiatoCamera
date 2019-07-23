@@ -29,7 +29,7 @@ import kaleidot725.highestpeaks.di.repository.*
 import kaleidot725.highestpeaks.di.repository.PersistenceSetting
 import kaleidot725.highestpeaks.ui.edit.EditNavigator
 import kaleidot725.highestpeaks.ui.preview.PreviewActivity
-import kaleidot725.highestpeaks.ui.preview.PreviewFragment
+import kaleidot725.highestpeaks.ui.preview.PageFragment
 import java.lang.Exception
 import javax.inject.Named
 
@@ -182,7 +182,7 @@ abstract class SettingFragmentModule {
 @Module
 abstract class PreviewActivityModule {
     @ContributesAndroidInjector(modules = [PreviewFragmentModule::class])
-    abstract fun contributePreviewFragment() : PreviewFragment
+    abstract fun contributePreviewFragment() : PageFragment
 }
 
 @Module

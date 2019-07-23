@@ -10,26 +10,23 @@ import androidx.databinding.DataBindingUtil
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.PreviewFragmentBinding
-import kaleidot725.highestpeaks.di.repository.Holder
-import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Inject
-import javax.inject.Named
 
-class PreviewFragment : Fragment() {
+class PageFragment : Fragment() {
 
     companion object {
-        fun newInstance(position : Int) = PreviewFragment().also {
+        fun newInstance(position : Int) = PageFragment().also {
             val bundle = Bundle()
             bundle.putInt("position", position)
             it.arguments = bundle
         }
     }
 
-    private lateinit var viewModel: PreviewViewModel
-
     @Inject
     lateinit var repository : PictureRepository
+
+    private lateinit var viewModel: PageViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         AndroidSupportInjection.inject(this)
@@ -40,7 +37,8 @@ class PreviewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val position = arguments?.getInt("position")
-        viewModel = ViewModelProviders.of(this, PreviewViewModelFactory(repository, repository.all()[position ?: 0])).get(PreviewViewModel::class.java)
+        val factory = PageViewModelFactory(repository, position ?: 0)
+        viewModel = ViewModelProviders.of(this, factory).get(PageViewModel::class.java)
 
         val binding = DataBindingUtil.bind<PreviewFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this
