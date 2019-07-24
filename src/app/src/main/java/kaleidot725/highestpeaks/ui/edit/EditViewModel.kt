@@ -1,44 +1,30 @@
 package kaleidot725.highestpeaks.ui.edit
 
-import android.graphics.*
-import android.view.View
 import androidx.lifecycle.ViewModel
-import kaleidot725.highestpeaks.di.repository.Holder
-import kaleidot725.highestpeaks.di.data.Picture
-import kaleidot725.highestpeaks.di.repository.LocationRepository
-import kaleidot725.highestpeaks.di.service.PictureEditor
-import kaleidot725.highestpeaks.di.service.saveAsJpegFile
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class EditViewModel(
-    val navigator: EditNavigator,
-    val locationRepository: LocationRepository,
-    val editPicture : Holder<Picture>,
-    val pictureEditor : PictureEditor
-) : ViewModel() {
-
-    val tempPath : String = editPicture.lastedValue.path + "_temp"
-    val editText : String = "${SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Date())}" + " " + "${locationRepository.lastAltitude?.toInt()}m"
-
-    init {
-        pictureEditor.drawText(editText, Color.WHITE, 64f)
-        pictureEditor.saveAsJpegFile(tempPath, 100)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-    }
-
-    fun save(view : View) {
-        pictureEditor.saveAsJpegFile(editPicture.lastedValue.path, 100)
-        File(tempPath).delete()
-        navigator.exit()
-    }
-
-    fun cancel(view : View) {
-        File(tempPath).delete()
-        navigator.exit()
+class EditViewModel(val navigator: EditNavigator) : ViewModel() {
+    val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
+        when (it.itemId) {
+            kaleidot725.highestpeaks.R.id.action_format -> {
+                navigator.navigateFormatEditor()
+                true
+            }
+            kaleidot725.highestpeaks.R.id.action_color -> {
+                navigator.navigateColorEditor()
+                true
+            }
+            kaleidot725.highestpeaks.R.id.action_position -> {
+                navigator.navigatePositionEditor()
+                true
+            }
+            kaleidot725.highestpeaks.R.id.action_rotation -> {
+                navigator.navigateRotationEditor()
+                true
+            }
+            else -> {
+                false
+            }
+        }
     }
 }

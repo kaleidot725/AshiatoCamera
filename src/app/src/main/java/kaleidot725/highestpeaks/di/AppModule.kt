@@ -5,7 +5,7 @@ import android.os.Environment
 import dagger.*
 import dagger.android.ContributesAndroidInjector
 import kaleidot725.highestpeaks.ui.edit.EditActivity
-import kaleidot725.highestpeaks.ui.edit.EditFragment
+import kaleidot725.highestpeaks.ui.edit.confirm.ConfirmFragment
 import kaleidot725.highestpeaks.ui.contact.ContactActivity
 import kaleidot725.highestpeaks.ui.contact.ContactFragment
 import kaleidot725.highestpeaks.ui.main.MainActivity
@@ -147,7 +147,7 @@ abstract class EditActivityModule {
     abstract fun bindsEditNavigator(activity: EditActivity): EditNavigator
 
     @ContributesAndroidInjector(modules = [EditFramgnetModule::class])
-    abstract fun contributeCameraFragment(): EditFragment
+    abstract fun contributeCameraFragment(): ConfirmFragment
 }
 
 @Module

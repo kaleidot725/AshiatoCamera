@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks.ui.edit
+package kaleidot725.highestpeaks.ui.edit.confirm
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -10,20 +10,21 @@ import kaleidot725.highestpeaks.R
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
-import kaleidot725.highestpeaks.databinding.EditFragmentBinding
+import kaleidot725.highestpeaks.databinding.ConfirmFragmentBinding
 import kaleidot725.highestpeaks.di.repository.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.repository.LocationRepository
 import kaleidot725.highestpeaks.di.service.PictureEditor
 import kaleidot725.highestpeaks.di.service.PictureEditorImpl
+import kaleidot725.highestpeaks.ui.edit.EditNavigator
 import javax.inject.Inject
 import javax.inject.Named
 
 
-class EditFragment : Fragment() {
+class ConfirmFragment : Fragment() {
 
     companion object {
-        fun newInstance() = EditFragment()
+        fun newInstance() = ConfirmFragment()
     }
 
     @Inject
@@ -37,10 +38,10 @@ class EditFragment : Fragment() {
     lateinit var locationRepository: LocationRepository
 
     private lateinit var editor : PictureEditor
-    private lateinit var viewModel : EditViewModel
+    private lateinit var viewModel : ConfirmViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.edit_fragment, container, false)
+        return inflater.inflate(R.layout.confirm_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,9 +50,16 @@ class EditFragment : Fragment() {
         AndroidSupportInjection.inject(this)
 
         editor = PictureEditorImpl(editPicture.lastedValue, Bitmap.Config.ARGB_8888)
-        viewModel = ViewModelProviders.of(this, EditViewModelFactory(navigator, locationRepository, editPicture, editor)).get(EditViewModel::class.java)
+        viewModel = ViewModelProviders.of(this,
+            ConfirmViewModelFactory(
+                navigator,
+                locationRepository,
+                editPicture,
+                editor
+            )
+        ).get(ConfirmViewModel::class.java)
 
-        val binding = DataBindingUtil.bind<EditFragmentBinding>(view)
+        val binding = DataBindingUtil.bind<ConfirmFragmentBinding>(view)
         binding?.lifecycleOwner = this
         binding?.vm = viewModel
     }

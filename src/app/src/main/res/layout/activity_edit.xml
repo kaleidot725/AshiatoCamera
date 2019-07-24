@@ -6,7 +6,7 @@
         tools:context=".ui.edit.EditActivity">
 
     <data>
-        <!-- view model definition -->
+        <variable name="viewmodel" type="kaleidot725.highestpeaks.ui.edit.EditViewModel"/>
     </data>
 
     <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
@@ -23,7 +23,6 @@
                 android:id="@+id/editmenu_content"
                 android:layout_gravity="bottom"
                 android:layout_width="match_parent"
-                android:background="@color/colorAccent"
                 android:layout_height="200dp"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -35,6 +34,7 @@
                 android:elevation="16dp"
                 myApplication:itemIconTint="@android:color/white"
                 myApplication:itemTextColor="@android:color/white"
+                myApplication:setOnNavigationItemSelectedListener="@{viewmodel.onNavigationItemSelectedListener}"
                 myApplication:menu="@menu/edit_picture_menu" />
     </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
 </layout>
