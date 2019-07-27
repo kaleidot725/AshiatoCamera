@@ -1,6 +1,5 @@
-package kaleidot725.highestpeaks.di.repository
+package kaleidot725.highestpeaks.di.holder
 
-import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 
 interface Holder<T> {

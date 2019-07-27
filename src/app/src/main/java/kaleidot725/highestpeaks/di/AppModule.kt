@@ -22,12 +22,17 @@ import dagger.android.support.AndroidSupportInjectionModule
 import kaleidot725.highestpeaks.ui.MyApplication
 import kaleidot725.highestpeaks.ui.main.MainMenu
 import kaleidot725.highestpeaks.ui.main.MainNavigator
-import kaleidot725.highestpeaks.di.repository.Holder
+import kaleidot725.highestpeaks.di.holder.Holder
+import kaleidot725.highestpeaks.di.holder.HolderImpl
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.data.Settings
 import kaleidot725.highestpeaks.di.repository.*
-import kaleidot725.highestpeaks.di.repository.PersistenceSetting
+import kaleidot725.highestpeaks.di.persistence.PersistenceSetting
 import kaleidot725.highestpeaks.ui.edit.EditNavigator
+import kaleidot725.highestpeaks.ui.edit.color.ColorFragment
+import kaleidot725.highestpeaks.ui.edit.format.FormatFragment
+import kaleidot725.highestpeaks.ui.edit.position.PositionFragment
+import kaleidot725.highestpeaks.ui.edit.rotation.RotationFragment
 import kaleidot725.highestpeaks.ui.preview.PreviewActivity
 import kaleidot725.highestpeaks.ui.preview.PageFragment
 import java.lang.Exception
@@ -40,7 +45,8 @@ class AppModule {
     @Singleton
     fun provideLocationService(myApplication : MyApplication) : LocationRepository {
         try {
-            val setting = PersistenceSetting(myApplication.filesDir.path + "settings.json").load()
+            val setting = PersistenceSetting(myApplication.filesDir.path + "settings.json")
+                .load()
             return LocationRepositoryImpl(myApplication)
                 .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
         } catch (e : Exception) {
@@ -84,6 +90,12 @@ class AppModule {
     @Singleton
     fun provideDeveloperRepository(myApplication: MyApplication) : DeveloperRepository {
         return DeveloperRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFormatRepository(myApplication : MyApplication) : FormatRepository {
+        return FormatRepositoryImpl()
     }
 
     @Provides
@@ -146,16 +158,46 @@ abstract class EditActivityModule {
     @Binds
     abstract fun bindsEditNavigator(activity: EditActivity): EditNavigator
 
-    @ContributesAndroidInjector(modules = [EditFramgnetModule::class])
-    abstract fun contributeCameraFragment(): ConfirmFragment
+    @ContributesAndroidInjector(modules = [ColorFragmentModule::class])
+    abstract fun contributeColorFragment(): ColorFragment
+
+    @ContributesAndroidInjector(modules = [ConfirmFragmentModule::class])
+    abstract fun contributeConfirmFragment(): ConfirmFragment
+
+    @ContributesAndroidInjector(modules = [FormatFragmentModule::class])
+    abstract fun contributeFormatFragment(): FormatFragment
+
+    @ContributesAndroidInjector(modules = [PositionFragmentModule::class])
+    abstract fun contributePositionFragment(): PositionFragment
+
+    @ContributesAndroidInjector(modules = [RotationFragmentModule::class])
+    abstract fun contributeRotationFragment(): RotationFragment
 }
 
 @Module
-abstract class EditFramgnetModule {
+abstract class ColorFragmentModule {
 
 }
 
+@Module
+abstract class ConfirmFragmentModule {
 
+}
+
+@Module
+abstract class FormatFragmentModule {
+
+}
+
+@Module
+abstract class PositionFragmentModule {
+
+}
+
+@Module
+abstract class RotationFragmentModule {
+
+}
 
 @Module
 abstract class ContactActivityModule {

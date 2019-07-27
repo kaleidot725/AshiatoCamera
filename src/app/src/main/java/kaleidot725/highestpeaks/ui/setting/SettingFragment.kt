@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.SettingFragmentBinding
-import kaleidot725.highestpeaks.di.repository.PersistenceSetting
+import kaleidot725.highestpeaks.di.persistence.PersistenceSetting
 import javax.inject.Inject
 
 class SettingFragment : Fragment() {

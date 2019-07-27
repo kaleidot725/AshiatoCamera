@@ -4,7 +4,7 @@ import android.location.LocationManager
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
-import kaleidot725.highestpeaks.di.repository.PersistenceSetting
+import kaleidot725.highestpeaks.di.persistence.PersistenceSetting
 import kaleidot725.highestpeaks.di.data.Settings
 import java.lang.Exception
 

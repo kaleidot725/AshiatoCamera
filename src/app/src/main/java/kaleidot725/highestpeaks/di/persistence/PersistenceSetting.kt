@@ -1,4 +1,4 @@
-package kaleidot725.highestpeaks.di.repository
+package kaleidot725.highestpeaks.di.persistence
 
 import kaleidot725.highestpeaks.di.data.Settings
 import kaleidot725.todo.model.persistence.PersistenceJson

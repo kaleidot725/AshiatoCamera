@@ -2,7 +2,7 @@ package kaleidot725.highestpeaks.ui.main.history
 
 import android.view.View
 import kaleidot725.highestpeaks.ui.main.MainNavigator
-import kaleidot725.highestpeaks.di.repository.Holder
+import kaleidot725.highestpeaks.di.holder.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 
 class PictureViewModelForAction(private val navigation : MainNavigator,

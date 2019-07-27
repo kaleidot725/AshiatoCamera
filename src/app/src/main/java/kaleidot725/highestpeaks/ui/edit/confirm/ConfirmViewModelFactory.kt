@@ -2,7 +2,7 @@ package kaleidot725.highestpeaks.ui.edit.confirm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.highestpeaks.di.repository.Holder
+import kaleidot725.highestpeaks.di.holder.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.repository.LocationRepository
 import kaleidot725.highestpeaks.di.service.PictureEditor

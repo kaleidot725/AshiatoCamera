@@ -28,7 +28,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.highestpeaks.ui.edit.EditActivity
 import kaleidot725.highestpeaks.ui.contact.ContactActivity
-import kaleidot725.highestpeaks.di.repository.Holder
+import kaleidot725.highestpeaks.di.holder.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.ui.preview.PreviewActivity
 import kaleidot725.highestpeaks.ui.setting.SettingActivity

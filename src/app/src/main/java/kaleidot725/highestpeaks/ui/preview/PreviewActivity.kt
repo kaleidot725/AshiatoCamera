@@ -1,10 +1,7 @@
 package kaleidot725.highestpeaks.ui.preview
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
@@ -16,8 +13,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.PreviewActivityBinding
-import kaleidot725.highestpeaks.databinding.PreviewFragmentBinding
-import kaleidot725.highestpeaks.di.repository.Holder
+import kaleidot725.highestpeaks.di.holder.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Inject

@@ -1,9 +1,9 @@
-package kaleidot725.highestpeaks.di.repository
+package kaleidot725.highestpeaks.di.holder
 
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 
-class HolderImpl<T>(t : T) : Holder<T>{
+class HolderImpl<T>(t : T) : Holder<T> {
     private var _lastedValue : T = t
     override val lastedValue get() = _lastedValue
 

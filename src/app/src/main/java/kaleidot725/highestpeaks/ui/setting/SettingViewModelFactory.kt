@@ -2,7 +2,7 @@ package kaleidot725.highestpeaks.ui.setting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.highestpeaks.di.repository.PersistenceSetting
+import kaleidot725.highestpeaks.di.persistence.PersistenceSetting
 
 class SettingViewModelFactory(persistenceSetting : PersistenceSetting) : ViewModelProvider.Factory {
     private val persistenceSetting : PersistenceSetting = persistenceSetting
