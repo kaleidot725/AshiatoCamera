@@ -12,11 +12,15 @@ class FormatRecyclerViewModel(val format : Format) : ViewModel() {
     private val _detail : MutableLiveData<String> = MutableLiveData()
     val detail : LiveData<String> get() = _detail
 
+    private val _enabled : MutableLiveData<Boolean> = MutableLiveData()
+    val enabled : LiveData<Boolean> = _enabled
+
     init {
-        _detail.postValue(format.detail)
+        _detail.value = format.detail
+        _enabled.value = false
     }
 
     fun click(v : View) {
-        Log.v("tag", "ForartRecylcerItemClick")
+        _enabled.postValue(!(_enabled.value ?: true))
     }
 }
