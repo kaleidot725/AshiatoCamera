@@ -51,12 +51,7 @@ class ConfirmFragment : Fragment() {
 
         editor = PictureEditorImpl(editPicture.lastedValue, Bitmap.Config.ARGB_8888)
         viewModel = ViewModelProviders.of(this,
-            ConfirmViewModelFactory(
-                navigator,
-                locationRepository,
-                editPicture,
-                editor
-            )
+            ConfirmViewModelFactory(navigator, editPicture, editor)
         ).get(ConfirmViewModel::class.java)
 
         val binding = DataBindingUtil.bind<ConfirmFragmentBinding>(view)

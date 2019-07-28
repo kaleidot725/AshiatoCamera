@@ -15,16 +15,14 @@ import java.util.*
 
 class ConfirmViewModel(
     val navigator: EditNavigator,
-    val locationRepository: LocationRepository,
     val editPicture : Holder<Picture>,
     val pictureEditor : PictureEditor
 ) : ViewModel() {
 
     val tempPath : String = editPicture.lastedValue.path + "_temp"
-    val editText : String = "${SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Date())}" + " " + "${locationRepository.lastAltitude?.toInt()}m"
 
     init {
-        pictureEditor.drawText(editText, Color.WHITE, 64f)
+        pictureEditor.drawText("Sample Text", Color.WHITE, 64f)
         pictureEditor.saveAsJpegFile(tempPath, 100)
     }
 

@@ -3,16 +3,17 @@ package kaleidot725.highestpeaks.di.repository
 import androidx.databinding.ObservableArrayList
 import kaleidot725.highestpeaks.di.data.Developer
 import kaleidot725.highestpeaks.di.data.Format
+import kaleidot725.highestpeaks.di.data.FormatType
 
 class FormatRepositoryImpl() : FormatRepository {
     private val list : ArrayList<Format> = ObservableArrayList<Format>()
 
     init {
-        list.add(Format(0, "Date"))
-        list.add(Format(1, "Time"))
-        list.add(Format(2, "Alt"))
-        list.add(Format(3, "Lat"))
-        list.add(Format(4, "Lng"))
+        list.add(Format(FormatType.Date, "Date"))
+        list.add(Format(FormatType.Altitude, "Time"))
+        list.add(Format(FormatType.Altitude, "Alt"))
+        list.add(Format(FormatType.Latitude, "Lat"))
+        list.add(Format(FormatType.Longitude, "Lng"))
     }
 
     override fun all(): List<Format> {

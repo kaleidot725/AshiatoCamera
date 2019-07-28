@@ -11,19 +11,13 @@ import java.lang.Exception
 
 class ConfirmViewModelFactory(
     val navigator : EditNavigator,
-    val locationRepository: LocationRepository,
     val editPicture : Holder<Picture>,
     val bitmapEditor : PictureEditor
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == ConfirmViewModel::class.java) {
-            return ConfirmViewModel(
-                navigator,
-                locationRepository,
-                editPicture,
-                bitmapEditor
-            ) as  T
+            return ConfirmViewModel(navigator, editPicture, bitmapEditor) as  T
         }
 
         throw Exception("have created unknown class type")

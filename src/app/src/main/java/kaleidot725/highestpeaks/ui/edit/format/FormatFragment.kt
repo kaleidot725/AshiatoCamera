@@ -16,6 +16,7 @@ import dagger.android.support.AndroidSupportInjection
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.FormatFragmentBindingImpl
 import kaleidot725.highestpeaks.di.repository.FormatRepository
+import kaleidot725.highestpeaks.di.service.FormatEditor
 import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Inject
 
@@ -25,6 +26,9 @@ class FormatFragment : Fragment() {
         fun newInstance() = FormatFragment()
     }
 
+
+    @Inject
+    lateinit var editor : FormatEditor
 
     @Inject
     lateinit var repository: FormatRepository
@@ -38,7 +42,7 @@ class FormatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this, FormatViewModelFactory(repository)).get(FormatViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, FormatViewModelFactory(editor, repository)).get(FormatViewModel::class.java)
 
         val binding = DataBindingUtil.bind<FormatFragmentBindingImpl>(this.view as View)
         binding?.lifecycleOwner = this
