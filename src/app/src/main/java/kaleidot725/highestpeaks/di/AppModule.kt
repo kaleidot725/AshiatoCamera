@@ -28,6 +28,8 @@ import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.data.Settings
 import kaleidot725.highestpeaks.di.repository.*
 import kaleidot725.highestpeaks.di.persistence.PersistenceSetting
+import kaleidot725.highestpeaks.di.service.FormatEditor
+import kaleidot725.highestpeaks.di.service.FormatEditorImpl
 import kaleidot725.highestpeaks.ui.edit.EditNavigator
 import kaleidot725.highestpeaks.ui.edit.color.ColorFragment
 import kaleidot725.highestpeaks.ui.edit.format.FormatFragment
@@ -41,27 +43,14 @@ import javax.inject.Named
 
 @Module
 class AppModule {
-    @Provides
-    @Singleton
-    fun provideLocationService(myApplication : MyApplication) : LocationRepository {
-        try {
-            val setting = PersistenceSetting(myApplication.filesDir.path + "settings.json")
-                .load()
-            return LocationRepositoryImpl(myApplication)
-                .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
-        } catch (e : Exception) {
-            val setting = Settings(LocationManager.GPS_PROVIDER, 1, 1)
-            return LocationRepositoryImpl(myApplication)
-                .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
-        }
-    }
-
+    // Setting
     @Provides
     @Singleton
     fun providePersistenceSettings(myApplication : MyApplication) : PersistenceSetting {
         return PersistenceSetting(myApplication.filesDir.path + "settings.json")
     }
 
+    // Repository
     @Provides
     @Singleton
     fun providePictureRepository(myApplication : MyApplication): PictureRepository {
@@ -70,20 +59,18 @@ class AppModule {
         return PictureRepositoryImpl(dirPath)
     }
 
-    @Provides @Named("SelectedPicture") @Singleton
-    fun provideSelectedPicture(myApplication: MyApplication) : Holder<Picture> {
-        return HolderImpl<Picture>(Picture("", ""))
-    }
-
-    @Provides @Named("EditPicture") @Singleton
-    fun provideEditPicture(myApplication: MyApplication) : Holder<Picture> {
-        return HolderImpl<Picture>(Picture("", ""))
-    }
-
     @Provides
     @Singleton
-    fun provideMainMenuSelected(myApplication: MyApplication) : Holder<MainMenu> {
-        return HolderImpl<MainMenu>(MainMenu.Home)
+    fun provideLocationRepository(myApplication : MyApplication) : LocationRepository {
+        try {
+            val setting = PersistenceSetting(myApplication.filesDir.path + "settings.json").load()
+            return LocationRepositoryImpl(myApplication)
+                .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
+        } catch (e : Exception) {
+            val setting = Settings(LocationManager.GPS_PROVIDER, 1, 1)
+            return LocationRepositoryImpl(myApplication)
+                .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
+        }
     }
 
     @Provides
@@ -100,8 +87,40 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun provideDateTimeRepository(myApplication: MyApplication) : DateTimeRepository {
+        val repository = DateTimeRepositoryImpl()
+        repository.start(1000)
+        return repository
+    }
+
+    @Provides
+    @Singleton
     fun provideMenuRepository(myApplication : MyApplication) : MenuRepository {
         return MenuRepositoryImpl(myApplication)
+    }
+
+    // Holder
+    @Provides @Named("SelectedPicture") @Singleton
+    fun provideSelectedPicture(myApplication: MyApplication) : Holder<Picture> {
+        return HolderImpl<Picture>(Picture("", ""))
+    }
+
+    @Provides @Named("EditPicture") @Singleton
+    fun provideEditPicture(myApplication: MyApplication) : Holder<Picture> {
+        return HolderImpl<Picture>(Picture("", ""))
+    }
+
+    @Provides
+    @Singleton
+    fun provideMainMenuSelected(myApplication: MyApplication) : Holder<MainMenu> {
+        return HolderImpl<MainMenu>(MainMenu.Home)
+    }
+
+    // Editor
+    @Provides
+    @Singleton
+    fun provideFormatEditor(myApplication: MyApplication) : FormatEditor {
+        return FormatEditorImpl(provideDateTimeRepository(myApplication), provideLocationRepository(myApplication))
     }
 }
 

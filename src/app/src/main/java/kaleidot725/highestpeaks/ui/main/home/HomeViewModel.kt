@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
+import kaleidot725.highestpeaks.di.repository.DateTimeRepository
 import kaleidot725.highestpeaks.di.repository.LocationRepository
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeViewModel(locationRepository: LocationRepository) : ViewModel() {
+class HomeViewModel(dateTimeRepository : DateTimeRepository, locationRepository: LocationRepository) : ViewModel() {
     private val _update : MutableLiveData<String> = MutableLiveData()
     val update : LiveData<String> get() = _update
 
@@ -26,7 +27,7 @@ class HomeViewModel(locationRepository: LocationRepository) : ViewModel() {
 
     init {
 
-        val lastUpdate = if (locationRepository.lastUpdate == null) ("Updating") else (df.format(locationRepository.lastUpdate))
+        val lastUpdate = if (dateTimeRepository.lastDate == null) ("Updating") else (df.format(dateTimeRepository.lastDate))
         _update.postValue(lastUpdate)
 
         val lastAltitude = if (locationRepository.lastAltitude == null) ("???m") else ("${locationRepository.lastAltitude?.toInt()}m")
@@ -38,7 +39,7 @@ class HomeViewModel(locationRepository: LocationRepository) : ViewModel() {
         val lastLongitude = if (locationRepository.lastLongitude == null) ("???°") else ("${locationRepository.lastLongitude?.toInt()}°")
         _longitude.postValue(lastLongitude)
 
-        var disposable = locationRepository.update.subscribe {
+        var disposable = dateTimeRepository.date.subscribe {
             _update.postValue(df.format(it))
         }
         compositeDisposable.add(disposable)

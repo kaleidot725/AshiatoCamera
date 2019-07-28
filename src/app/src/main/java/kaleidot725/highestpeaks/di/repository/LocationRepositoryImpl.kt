@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
 import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.Subject
 import java.lang.IllegalStateException
 import java.util.*
 
@@ -19,17 +20,26 @@ class LocationRepositoryImpl(val context : Context) : LocationRepository {
     override var running : Boolean = false
         private set
 
-    override val update : PublishSubject<Date> = PublishSubject.create()
-    override var lastUpdate : Date? = null
+    private val _update : PublishSubject<Date> = PublishSubject.create()
+    override val update : Subject<Date> get() = _update
 
-    override val altitude : PublishSubject<Double> = PublishSubject.create()
-    override var lastAltitude : Double? = null
 
-    override val latitude : PublishSubject<Double> = PublishSubject.create()
-    override var lastLatitude : Double? = null
+    override var lastUpdate : Date = Date()
+        private set
+
+    private val _altitude : PublishSubject<Double> = PublishSubject.create()
+    override val altitude : Subject<Double> = _altitude
+    override var lastAltitude : Double = 0.0
+        private set
+
+    private val _latitude : PublishSubject<Double> = PublishSubject.create()
+    override val latitude : Subject<Double> = _latitude
+    override var lastLatitude : Double = 0.0
+        private set
 
     override val longitude : PublishSubject<Double> = PublishSubject.create()
-    override var lastLongitude : Double? = null
+    override var lastLongitude : Double = 0.0
+        private set
 
     private val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {

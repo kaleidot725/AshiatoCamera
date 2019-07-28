@@ -16,6 +16,7 @@ import kaleidot725.highestpeaks.databinding.HomeFragmentBinding
 import kaleidot725.highestpeaks.ui.main.MainNavigator
 import kaleidot725.highestpeaks.di.holder.Holder
 import kaleidot725.highestpeaks.di.data.Picture
+import kaleidot725.highestpeaks.di.repository.DateTimeRepository
 import kaleidot725.highestpeaks.di.repository.LocationRepository
 import kaleidot725.michetimer.model.repository.PictureRepository
 import java.lang.Exception
@@ -35,7 +36,11 @@ class HomeFragment : Fragment() {
     lateinit var locationRepository: LocationRepository
 
     @Inject
+    lateinit var dateTimeRepository : DateTimeRepository
+
+    @Inject
     lateinit var pictureRepository : PictureRepository
+
 
     @Inject @field:Named("EditPicture")
     lateinit var editPicture : Holder<Picture>
@@ -65,7 +70,7 @@ class HomeFragment : Fragment() {
     private inner class MainFragmentViewModelFactory() : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass == HomeViewModel::class.java) {
-                return HomeViewModel(locationRepository) as  T
+                return HomeViewModel(dateTimeRepository, locationRepository) as  T
             }
 
             throw Exception("have created unknown class type")
