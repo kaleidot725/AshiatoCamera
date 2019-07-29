@@ -11,14 +11,13 @@ import kaleidot725.michetimer.model.repository.PictureRepository
 class HistoryViewModelFactory(
     private val navigator : MainNavigator,
     private val actor : HistoryFragmentActor,
-    private val repository : PictureRepository,
-    private val selected : Holder<Picture>
+    private val repository : PictureRepository
 )
     : ViewModelProvider.Factory
 {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == HistoryViewModel::class.java) {
-            return HistoryViewModel(navigator, actor, repository, selected) as T
+            return HistoryViewModel(navigator, actor, repository) as T
         }
 
         throw IllegalArgumentException("undefined class")

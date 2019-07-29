@@ -1,6 +1,5 @@
 package kaleidot725.highestpeaks.ui.edit.confirm
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,12 +13,12 @@ import kaleidot725.highestpeaks.databinding.ConfirmFragmentBinding
 import kaleidot725.highestpeaks.di.holder.Holder
 import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.repository.LocationRepository
+import kaleidot725.highestpeaks.di.service.FormatEditor
 import kaleidot725.highestpeaks.di.service.PictureEditor
-import kaleidot725.highestpeaks.di.service.PictureEditorImpl
 import kaleidot725.highestpeaks.ui.edit.EditNavigator
+import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Inject
 import javax.inject.Named
-
 
 class ConfirmFragment : Fragment() {
 
@@ -31,13 +30,17 @@ class ConfirmFragment : Fragment() {
     lateinit var navigator: EditNavigator
 
     @Inject
-    @field:Named("EditPicture")
-    lateinit var editPicture : Holder<Picture>
+    lateinit var formatEditor : FormatEditor
+
+    @Inject
+    lateinit var pictureEditor : PictureEditor
 
     @Inject
     lateinit var locationRepository: LocationRepository
 
-    private lateinit var editor : PictureEditor
+    @Inject
+    lateinit var pictureRepository: PictureRepository
+
     private lateinit var viewModel : ConfirmViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,14 +49,9 @@ class ConfirmFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         AndroidSupportInjection.inject(this)
 
-        editor = PictureEditorImpl(editPicture.lastedValue, Bitmap.Config.ARGB_8888)
-        viewModel = ViewModelProviders.of(this,
-            ConfirmViewModelFactory(navigator, editPicture, editor)
-        ).get(ConfirmViewModel::class.java)
-
+        viewModel = ViewModelProviders.of(this, ConfirmViewModelFactory(navigator, pictureRepository, formatEditor, pictureEditor)).get(ConfirmViewModel::class.java)
         val binding = DataBindingUtil.bind<ConfirmFragmentBinding>(view)
         binding?.lifecycleOwner = this
         binding?.vm = viewModel

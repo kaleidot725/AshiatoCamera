@@ -4,7 +4,7 @@ import kaleidot725.highestpeaks.di.data.Picture
 
 interface  MainNavigator {
     // Activity
-    fun navigateCamera(picture : Picture) : Boolean
+    fun navigateCamera() : Boolean
     fun navigateEdit() : Boolean
     fun navigateSetting() : Boolean
     fun navigateLicense() : Boolean

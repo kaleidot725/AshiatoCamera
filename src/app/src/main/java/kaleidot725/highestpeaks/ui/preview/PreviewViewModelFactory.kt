@@ -7,10 +7,10 @@ import kaleidot725.highestpeaks.di.holder.Holder
 import kaleidot725.michetimer.model.repository.PictureRepository
 import java.lang.Exception
 
-class PreviewViewModelFactory(val repository : PictureRepository, val selected : Holder<Picture>) : ViewModelProvider.Factory {
+class PreviewViewModelFactory(val repository : PictureRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == PreviewViewModel::class.java) {
-            return PreviewViewModel(repository, selected) as  T
+            return PreviewViewModel(repository) as  T
         }
 
         throw Exception("have created unknown class type")

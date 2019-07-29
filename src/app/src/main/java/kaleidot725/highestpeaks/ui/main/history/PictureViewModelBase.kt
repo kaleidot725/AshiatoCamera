@@ -7,12 +7,13 @@ import androidx.lifecycle.ViewModel
 import kaleidot725.highestpeaks.ui.main.MainNavigator
 import kaleidot725.highestpeaks.di.holder.Holder
 import kaleidot725.highestpeaks.di.data.Picture
+import kaleidot725.michetimer.model.repository.PictureRepository
 
 abstract class PictureViewModelBase(
     private val navigation : MainNavigator,
     private val actor : HistoryFragmentActor,
-    private val picture : Picture,
-    private val selected : Holder<Picture>
+    private val pictureRepository: PictureRepository,
+    private val picture : Picture
 ) : ViewModel() {
 
     internal val _name : MutableLiveData<String> = MutableLiveData()

@@ -1,16 +1,23 @@
 package kaleidot725.michetimer.model.repository
 
 import android.os.Environment
-import androidx.databinding.ObservableArrayList
 import kaleidot725.highestpeaks.di.data.Picture
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.Comparator
 import kotlin.collections.ArrayList
 
 class PictureRepositoryImpl(path : String) : PictureRepository {
     private val path  = path
+
+    override var took: Picture? = null
+        private set
+
+    override var actioned: Picture? = null
+        private set
+
+    override var previewed: Picture? = null
+        private set
 
     override fun all() : List<Picture> {
         return update().reversed()
@@ -28,6 +35,18 @@ class PictureRepositoryImpl(path : String) : PictureRepository {
         val name = "IMG_${df.format(Date())}.jpg"
         val path = "${dirPath}/${name}"
         return Picture(path, name)
+    }
+
+    override fun action(picture: Picture) {
+        actioned = picture
+    }
+
+    override fun take(picture: Picture) {
+        took = picture
+    }
+
+    override fun preview(picture: Picture) {
+        previewed = picture
     }
 
     private fun update() : List<Picture>{

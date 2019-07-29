@@ -181,6 +181,7 @@
                     android:background="@drawable/rouding_background"
                     myApplication:elevation="4dp"
                     android:textStyle="bold"
+                    android:onClick="@{viewmodel::takePhoto}"
                     android:textColor="@android:color/white"
                     android:text="@string/takeapicture"/>
         </FrameLayout>

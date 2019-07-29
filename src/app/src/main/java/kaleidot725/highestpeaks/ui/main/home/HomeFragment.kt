@@ -41,10 +41,6 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var pictureRepository : PictureRepository
 
-
-    @Inject @field:Named("EditPicture")
-    lateinit var editPicture : Holder<Picture>
-
     private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -53,24 +49,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
+
         viewModel = ViewModelProviders.of(this, MainFragmentViewModelFactory()).get(HomeViewModel::class.java)
         val binding = DataBindingUtil.bind<HomeFragmentBinding>(view)
         binding?.viewmodel = viewModel
         binding?.lifecycleOwner = this
-
-        val cameraFab: Button = view.findViewById(R.id.cameraFab)
-        cameraFab.setOnClickListener {
-            editPicture.update(pictureRepository.newPicture())
-            navigator.navigateCamera(editPicture.lastedValue)
-        }
-
         super.onViewCreated(view, savedInstanceState)
     }
 
     private inner class MainFragmentViewModelFactory() : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass == HomeViewModel::class.java) {
-                return HomeViewModel(dateTimeRepository, locationRepository) as  T
+                return HomeViewModel(navigator, dateTimeRepository, locationRepository, pictureRepository) as  T
             }
 
             throw Exception("have created unknown class type")

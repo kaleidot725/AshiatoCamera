@@ -1,8 +1,10 @@
 package kaleidot725.highestpeaks.ui
 
+import android.app.PendingIntent.getActivity
 import android.widget.ImageView
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
+import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import java.io.File
 
@@ -12,8 +14,8 @@ fun loadImage(view : ImageView, imagePath : String?) {
     Picasso.get().load(file).fit().centerInside().into(view)
 }
 
-@BindingAdapter("app:imageUrl2")
-fun loadImage2(view : ImageView, imagePath : String?) {
+@BindingAdapter("app:imageUrlNoCache")
+fun loadImageNoCache(view : ImageView, imagePath : String?) {
     val file = File(imagePath)
-    Picasso.get().load(file).fit().into(view)
+    Picasso.get().load(file).memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerInside().into(view)
 }

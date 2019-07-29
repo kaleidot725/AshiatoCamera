@@ -6,9 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
@@ -17,7 +15,7 @@ import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.FormatFragmentBindingImpl
 import kaleidot725.highestpeaks.di.repository.FormatRepository
 import kaleidot725.highestpeaks.di.service.FormatEditor
-import kaleidot725.michetimer.model.repository.PictureRepository
+import kaleidot725.highestpeaks.di.service.PictureEditor
 import javax.inject.Inject
 
 class FormatFragment : Fragment() {
@@ -28,7 +26,10 @@ class FormatFragment : Fragment() {
 
 
     @Inject
-    lateinit var editor : FormatEditor
+    lateinit var pictureEditor: PictureEditor
+
+    @Inject
+    lateinit var formatEditor : FormatEditor
 
     @Inject
     lateinit var repository: FormatRepository
@@ -42,7 +43,7 @@ class FormatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this, FormatViewModelFactory(editor, repository)).get(FormatViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, FormatViewModelFactory(pictureEditor, formatEditor, repository)).get(FormatViewModel::class.java)
 
         val binding = DataBindingUtil.bind<FormatFragmentBindingImpl>(this.view as View)
         binding?.lifecycleOwner = this

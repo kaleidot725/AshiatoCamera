@@ -1,5 +1,6 @@
 package kaleidot725.highestpeaks.ui.edit.format
 
+import android.graphics.Color
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
@@ -7,8 +8,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kaleidot725.highestpeaks.di.data.Format
 import kaleidot725.highestpeaks.di.service.FormatEditor
+import kaleidot725.highestpeaks.di.service.PictureEditor
 
 class FormatRecyclerViewModel(
+    private val pictureEditor : PictureEditor,
     private val formatEditor: FormatEditor,
     private val format : Format
 ) : ViewModel()
@@ -28,5 +31,6 @@ class FormatRecyclerViewModel(
         val enable = !(_enabled.value ?: true)
         _enabled.postValue(enable)
         formatEditor.enable(format.type, enable)
+        pictureEditor.modifyText(formatEditor.create())
     }
 }

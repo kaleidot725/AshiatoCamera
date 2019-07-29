@@ -1,39 +1,47 @@
 package kaleidot725.highestpeaks.ui.edit.confirm
 
-import android.graphics.*
 import android.view.View
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.highestpeaks.di.holder.Holder
-import kaleidot725.highestpeaks.di.data.Picture
-import kaleidot725.highestpeaks.di.repository.LocationRepository
+import io.reactivex.disposables.CompositeDisposable
+import kaleidot725.highestpeaks.di.service.FormatEditor
 import kaleidot725.highestpeaks.di.service.PictureEditor
-import kaleidot725.highestpeaks.di.service.saveAsJpegFile
 import kaleidot725.highestpeaks.ui.edit.EditNavigator
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
+import kaleidot725.michetimer.model.repository.PictureRepository
 
 class ConfirmViewModel(
     val navigator: EditNavigator,
-    val editPicture : Holder<Picture>,
+    val pictureRepository: PictureRepository,
+    val formatEditor : FormatEditor,
     val pictureEditor : PictureEditor
 ) : ViewModel() {
 
-    val tempPath : String = editPicture.lastedValue.path + "_temp"
+    private val _editPath : MutableLiveData<String> = MutableLiveData()
+    val editPath : LiveData<String> = _editPath
+
+    private val compositeDisposable : CompositeDisposable = CompositeDisposable()
 
     init {
-        pictureEditor.drawText("Sample Text", Color.WHITE, 64f)
-        pictureEditor.saveAsJpegFile(tempPath, 100)
+        _editPath.value = pictureRepository.took!!.path
+        val test= pictureEditor.start(pictureRepository.took!!.path)
+        val disposable = test.subscribe { _editPath.postValue(it) }
+        compositeDisposable.add(disposable)
+        pictureEditor.modifyText(formatEditor.create())
     }
 
     fun save(view : View) {
-        pictureEditor.saveAsJpegFile(editPicture.lastedValue.path, 100)
-        File(tempPath).delete()
+        pictureEditor.end(pictureRepository.took!!.path)
         navigator.exit()
     }
 
     fun cancel(view : View) {
-        File(tempPath).delete()
+        pictureEditor.cancel()
         navigator.exit()
+    }
+
+    override fun onCleared() {
+        compositeDisposable.dispose()
+        super.onCleared()
     }
 }

@@ -1,15 +1,24 @@
 package kaleidot725.highestpeaks.ui.main.home
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.highestpeaks.di.repository.DateTimeRepository
 import kaleidot725.highestpeaks.di.repository.LocationRepository
+import kaleidot725.highestpeaks.ui.main.MainNavigator
+import kaleidot725.michetimer.model.repository.PictureRepository
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeViewModel(dateTimeRepository : DateTimeRepository, locationRepository: LocationRepository) : ViewModel() {
+class HomeViewModel(
+    private val navigator : MainNavigator,
+    private val dateTimeRepository : DateTimeRepository,
+    private val locationRepository: LocationRepository,
+    private val  pictureRepository: PictureRepository) :
+    ViewModel()
+{
     private val _update : MutableLiveData<String> = MutableLiveData()
     val update : LiveData<String> get() = _update
 
@@ -58,6 +67,11 @@ class HomeViewModel(dateTimeRepository : DateTimeRepository, locationRepository:
             _longitude.postValue("${it.toInt()}°")
         }
         compositeDisposable.add(disposable)
+    }
+
+    fun takePhoto(view : View) {
+        pictureRepository.take(pictureRepository.newPicture())
+        navigator.navigateCamera()
     }
 
     override fun onCleared() {

@@ -29,9 +29,9 @@ import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.highestpeaks.ui.edit.EditActivity
 import kaleidot725.highestpeaks.ui.contact.ContactActivity
 import kaleidot725.highestpeaks.di.holder.Holder
-import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.ui.preview.PreviewActivity
 import kaleidot725.highestpeaks.ui.setting.SettingActivity
+import kaleidot725.michetimer.model.repository.PictureRepository
 import java.io.File
 import java.io.IOException
 import javax.inject.Inject
@@ -44,6 +44,9 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
 
     @Inject
     lateinit var mainMenuSelected : Holder<MainMenu>
+
+    @Inject
+    lateinit var pictureRepository: PictureRepository
 
     private lateinit var viewModel: MainViewModel
     private val REQUEST_IMAGE_CAPTURE = 1
@@ -81,7 +84,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     }
 
     @Throws(IOException::class)
-    override fun navigateCamera(picture : Picture) : Boolean {
+    override fun navigateCamera() : Boolean {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.putExtra("android.intent.extra.quickCapture",true)
             takePictureIntent.resolveActivity(packageManager)?.also {
@@ -91,7 +94,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
                 val photoURI: Uri = FileProvider.getUriForFile(this, "com.example.android.fileprovider", tempFile as File)
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
 
-                this.imageFile = File(picture.path)
+                this.imageFile = File(pictureRepository.took!!.path)
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             }
         }

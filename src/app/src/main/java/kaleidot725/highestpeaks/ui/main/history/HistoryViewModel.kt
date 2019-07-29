@@ -14,8 +14,7 @@ import java.lang.Exception
 class HistoryViewModel(
     private val navigator : MainNavigator,
     private val actor : HistoryFragmentActor,
-    private val pictureRepository: PictureRepository,
-    private val selected : Holder<Picture>
+    private val pictureRepository: PictureRepository
 )
     : ViewModel()
 {
@@ -56,7 +55,7 @@ class HistoryViewModel(
         val pictures = pictureRepository.all()
         val vms : MutableList<PictureViewModelBase> = mutableListOf()
         for (picture in pictures) {
-            vms.add(createPictureViewModel(navigator, actor, picture, selected, mode))
+            vms.add(createPictureViewModel(navigator, actor, pictureRepository, picture, mode))
         }
 
         return vms
@@ -65,13 +64,13 @@ class HistoryViewModel(
     private fun createPictureViewModel(
         navigator: MainNavigator,
         actor : HistoryFragmentActor,
+        pictureRepository: PictureRepository,
         picture : Picture,
-        preview : Holder<Picture>,
         mode : HistoryFragmentMode) : PictureViewModelBase {
 
         when(mode) {
-            HistoryFragmentMode.Action -> return PictureViewModelForAction(navigator, actor, picture, preview)
-            HistoryFragmentMode.Display -> return PictureViewModelForDisplay(navigator, actor, picture, preview)
+            HistoryFragmentMode.Action -> return PictureViewModelForAction(navigator, actor, pictureRepository, picture)
+            HistoryFragmentMode.Display -> return PictureViewModelForDisplay(navigator, actor, pictureRepository, picture)
         }
     }
 }

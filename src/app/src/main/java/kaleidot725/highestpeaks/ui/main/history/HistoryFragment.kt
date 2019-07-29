@@ -35,9 +35,6 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback{
     @Inject
     lateinit var repository: PictureRepository
 
-    @Inject @field:Named("SelectedPicture")
-    lateinit var selected: Holder<Picture>
-
     private lateinit var viewModel: HistoryViewModel
     private var actionMode : ActionMode? = null
 
@@ -88,7 +85,7 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback{
     }
 
     private fun createView(mode : HistoryFragmentMode) {
-        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(navigator, this, repository, selected)).get(HistoryViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(navigator, this, repository)).get(HistoryViewModel::class.java)
         viewModel.load(mode)
 
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)

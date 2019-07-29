@@ -7,7 +7,7 @@ import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.holder.Holder
 import kaleidot725.michetimer.model.repository.PictureRepository
 
-class PreviewViewModel(val repository: PictureRepository, val selected : Holder<Picture>) : ViewModel() {
+class PreviewViewModel(val repository: PictureRepository) : ViewModel() {
 
     private val _currentPage : MutableLiveData<Int> = MutableLiveData()
     val currentPage : LiveData<Int> get() = _currentPage
@@ -16,7 +16,7 @@ class PreviewViewModel(val repository: PictureRepository, val selected : Holder<
     val pageCount : LiveData<Int> get() = _pageCount
 
     init {
-        _currentPage.value = repository.all().indexOf(selected.lastedValue)
+        _currentPage.value = repository.all().indexOf(repository.previewed)
         _pageCount.value = repository.all().count()
     }
 }

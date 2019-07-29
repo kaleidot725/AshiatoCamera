@@ -27,9 +27,6 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var repository : PictureRepository
 
-    @Inject @field:Named("SelectedPicture")
-    lateinit var selected : Holder<Picture>
-
     private lateinit var viewModel: PreviewViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +34,7 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.preview_activity)
 
-        val factory = PreviewViewModelFactory(repository, selected)
+        val factory = PreviewViewModelFactory(repository)
         viewModel = ViewModelProviders.of(this, factory).get(PreviewViewModel::class.java)
 
         val binding = DataBindingUtil.setContentView<PreviewActivityBinding>(this, R.layout.preview_activity)

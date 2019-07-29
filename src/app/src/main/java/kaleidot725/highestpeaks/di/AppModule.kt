@@ -30,6 +30,8 @@ import kaleidot725.highestpeaks.di.repository.*
 import kaleidot725.highestpeaks.di.persistence.PersistenceSetting
 import kaleidot725.highestpeaks.di.service.FormatEditor
 import kaleidot725.highestpeaks.di.service.FormatEditorImpl
+import kaleidot725.highestpeaks.di.service.PictureEditor
+import kaleidot725.highestpeaks.di.service.PictureEditorImpl
 import kaleidot725.highestpeaks.ui.edit.EditNavigator
 import kaleidot725.highestpeaks.ui.edit.color.ColorFragment
 import kaleidot725.highestpeaks.ui.edit.format.FormatFragment
@@ -99,17 +101,6 @@ class AppModule {
         return MenuRepositoryImpl(myApplication)
     }
 
-    // Holder
-    @Provides @Named("SelectedPicture") @Singleton
-    fun provideSelectedPicture(myApplication: MyApplication) : Holder<Picture> {
-        return HolderImpl<Picture>(Picture("", ""))
-    }
-
-    @Provides @Named("EditPicture") @Singleton
-    fun provideEditPicture(myApplication: MyApplication) : Holder<Picture> {
-        return HolderImpl<Picture>(Picture("", ""))
-    }
-
     @Provides
     @Singleton
     fun provideMainMenuSelected(myApplication: MyApplication) : Holder<MainMenu> {
@@ -121,6 +112,12 @@ class AppModule {
     @Singleton
     fun provideFormatEditor(myApplication: MyApplication) : FormatEditor {
         return FormatEditorImpl(provideDateTimeRepository(myApplication), provideLocationRepository(myApplication))
+    }
+
+    @Provides
+    @Singleton
+    fun providePictureEditor(myApplication: MyApplication) : PictureEditor {
+        return PictureEditorImpl()
     }
 }
 
