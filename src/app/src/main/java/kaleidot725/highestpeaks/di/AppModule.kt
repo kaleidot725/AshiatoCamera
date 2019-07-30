@@ -28,10 +28,7 @@ import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.data.Settings
 import kaleidot725.highestpeaks.di.repository.*
 import kaleidot725.highestpeaks.di.persistence.PersistenceSetting
-import kaleidot725.highestpeaks.di.service.FormatEditor
-import kaleidot725.highestpeaks.di.service.FormatEditorImpl
-import kaleidot725.highestpeaks.di.service.PictureEditor
-import kaleidot725.highestpeaks.di.service.PictureEditorImpl
+import kaleidot725.highestpeaks.di.service.*
 import kaleidot725.highestpeaks.ui.edit.EditNavigator
 import kaleidot725.highestpeaks.ui.edit.color.ColorFragment
 import kaleidot725.highestpeaks.ui.edit.format.FormatFragment
@@ -58,8 +55,10 @@ class AppModule {
     fun providePictureRepository(myApplication : MyApplication): PictureRepository {
         val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
         val dirPath = "${dcimPath}/Highest-Peak"
-        return PictureRepositoryImpl(dirPath)
+        pictureRepository = PictureRepositoryImpl(dirPath)
+        return pictureRepository
     }
+    private lateinit var  pictureRepository: PictureRepository
 
     @Provides
     @Singleton
@@ -115,9 +114,15 @@ class AppModule {
     }
 
     @Provides
-    @Singleton
     fun providePictureEditor(myApplication: MyApplication) : PictureEditor {
-        return PictureEditorImpl()
+        if (pictureRepository.took == null) {
+            throw Exception("invalid operation")
+        }
+
+        val target = pictureRepository.took as Picture
+        val preview = pictureRepository.newPicture()
+        val drawableCanvas = DrawableCanvasImpl()
+        return PictureEditorImpl(target, preview, drawableCanvas)
     }
 }
 
