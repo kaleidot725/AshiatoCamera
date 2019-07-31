@@ -8,11 +8,11 @@ import io.reactivex.subjects.Subject
 import kaleidot725.highestpeaks.di.data.Picture
 
 interface PictureEditor  {
-    val preview : Picture
-    val target : Picture
+    var preview : Picture?
+    var target : Picture?
     val state : Subject<PictureEditorState>
 
-    fun start()
+    fun start(target : Picture, preview : Picture)
     fun modifyText(text : String)
     fun modifyColor(color : Int)
     fun modifyPosition(position : Int)

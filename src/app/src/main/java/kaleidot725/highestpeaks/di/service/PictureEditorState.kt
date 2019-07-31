@@ -4,5 +4,4 @@ enum class PictureEditorState {
     Init,
     Start,
     Update,
-    End,
 }

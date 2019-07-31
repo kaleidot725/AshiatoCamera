@@ -55,10 +55,8 @@ class AppModule {
     fun providePictureRepository(myApplication : MyApplication): PictureRepository {
         val dcimPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
         val dirPath = "${dcimPath}/Highest-Peak"
-        pictureRepository = PictureRepositoryImpl(dirPath)
-        return pictureRepository
+        return PictureRepositoryImpl(dirPath)
     }
-    private lateinit var  pictureRepository: PictureRepository
 
     @Provides
     @Singleton
@@ -114,15 +112,10 @@ class AppModule {
     }
 
     @Provides
+    @Singleton
     fun providePictureEditor(myApplication: MyApplication) : PictureEditor {
-        if (pictureRepository.took == null) {
-            throw Exception("invalid operation")
-        }
-
-        val target = pictureRepository.took as Picture
-        val preview = pictureRepository.newPicture()
         val drawableCanvas = DrawableCanvasImpl()
-        return PictureEditorImpl(target, preview, drawableCanvas)
+        return PictureEditorImpl(drawableCanvas)
     }
 }
 

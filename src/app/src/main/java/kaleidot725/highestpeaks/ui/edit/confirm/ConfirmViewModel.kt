@@ -26,17 +26,22 @@ class ConfirmViewModel(
 
     init {
         if (pictureRepository.took == null) {
-            throw Exception("editable picture doesn't exist!!")
+            navigator.exit()
         }
 
-        _editPath.value = pictureEditor.preview.path
+        val target = pictureRepository.took as Picture
+        val preview = pictureRepository.newPicture()
+
+        pictureEditor.start(target, preview)
+        pictureEditor.modifyText(formatEditor.create())
+
+        _editPath.value = pictureEditor.preview!!.path
         val disposable = pictureEditor.state.subscribe {
-            _editPath.postValue(pictureEditor.preview.path)
+            if (pictureEditor.preview != null) {
+                _editPath.postValue(pictureEditor.preview!!.path)
+            }
         }
         compositeDisposable.add(disposable)
-
-        pictureEditor.start()
-        pictureEditor.modifyText(formatEditor.create())
     }
 
     fun save(view : View) {
