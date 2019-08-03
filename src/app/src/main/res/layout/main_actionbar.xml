@@ -8,7 +8,8 @@
             android:layout_gravity="center"
             android:id="@+id/action_bar_title"
             android:text="@string/main_title"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorText"
             android:fontFamily="monospace"
-            android:textSize="20dp"/>
+            android:textStyle="normal"
+            android:textSize="22dp"/>
 </FrameLayout>
