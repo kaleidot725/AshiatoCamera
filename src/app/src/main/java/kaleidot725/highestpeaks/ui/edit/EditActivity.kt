@@ -12,6 +12,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.highestpeaks.R
 import kaleidot725.highestpeaks.databinding.ActivityEditBinding
 import kaleidot725.highestpeaks.ui.edit.color.ColorFragment
+import kaleidot725.highestpeaks.ui.edit.style.StyleFragment
 import kaleidot725.highestpeaks.ui.edit.confirm.ConfirmFragment
 import kaleidot725.highestpeaks.ui.edit.format.FormatFragment
 import kaleidot725.highestpeaks.ui.edit.position.PositionFragment
@@ -47,7 +48,12 @@ class EditActivity : AppCompatActivity(), HasSupportFragmentInjector, EditNaviga
         return true
     }
 
-    override fun navigateColorEditor(): Boolean {
+    override fun navigateStyleEditor(): Boolean {
+        supportFragmentManager.beginTransaction().replace(R.id.editmenu_content, StyleFragment.newInstance()).commit()
+        return true
+    }
+
+    override fun navigateColorEditor() : Boolean {
         supportFragmentManager.beginTransaction().replace(R.id.editmenu_content, ColorFragment.newInstance()).commit()
         return true
     }

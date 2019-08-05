@@ -27,7 +27,7 @@
                     android:clickable="true"
                     android:elevation="4dp"
                     android:foreground="?selectableItemBackground"
-                    android:background="@android:color/white"
+                    android:background="@drawable/card_background"
                     android:layoutDirection="ltr">
 
                 <LinearLayout

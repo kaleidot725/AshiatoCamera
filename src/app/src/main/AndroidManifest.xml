@@ -30,6 +30,7 @@
                 android:name="kaleidot725.highestpeaks.ui.main.MainActivity"
                 android:label="@string/main_title"
                 android:screenOrientation="portrait"
+                android:exported="true"
                 android:theme="@style/AppTheme">
 
             <intent-filter>

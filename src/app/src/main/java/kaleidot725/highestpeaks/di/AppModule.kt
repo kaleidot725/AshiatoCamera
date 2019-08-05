@@ -24,20 +24,18 @@ import kaleidot725.highestpeaks.ui.main.MainMenu
 import kaleidot725.highestpeaks.ui.main.MainNavigator
 import kaleidot725.highestpeaks.di.holder.Holder
 import kaleidot725.highestpeaks.di.holder.HolderImpl
-import kaleidot725.highestpeaks.di.data.Picture
 import kaleidot725.highestpeaks.di.data.Settings
 import kaleidot725.highestpeaks.di.repository.*
 import kaleidot725.highestpeaks.di.persistence.PersistenceSetting
 import kaleidot725.highestpeaks.di.service.*
 import kaleidot725.highestpeaks.ui.edit.EditNavigator
-import kaleidot725.highestpeaks.ui.edit.color.ColorFragment
+import kaleidot725.highestpeaks.ui.edit.style.StyleFragment
 import kaleidot725.highestpeaks.ui.edit.format.FormatFragment
 import kaleidot725.highestpeaks.ui.edit.position.PositionFragment
 import kaleidot725.highestpeaks.ui.edit.rotation.RotationFragment
 import kaleidot725.highestpeaks.ui.preview.PreviewActivity
 import kaleidot725.highestpeaks.ui.preview.PageFragment
 import java.lang.Exception
-import javax.inject.Named
 
 
 @Module
@@ -173,7 +171,7 @@ abstract class EditActivityModule {
     abstract fun bindsEditNavigator(activity: EditActivity): EditNavigator
 
     @ContributesAndroidInjector(modules = [ColorFragmentModule::class])
-    abstract fun contributeColorFragment(): ColorFragment
+    abstract fun contributeColorFragment(): StyleFragment
 
     @ContributesAndroidInjector(modules = [ConfirmFragmentModule::class])
     abstract fun contributeConfirmFragment(): ConfirmFragment
