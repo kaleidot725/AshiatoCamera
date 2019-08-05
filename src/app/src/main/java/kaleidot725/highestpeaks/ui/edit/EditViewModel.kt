@@ -10,7 +10,7 @@ class EditViewModel(val navigator: EditNavigator) : ViewModel() {
                 navigator.navigateFormatEditor()
                 true
             }
-            kaleidot725.highestpeaks.R.id.action_color -> {
+            kaleidot725.highestpeaks.R.id.action_style -> {
                 navigator.navigateColorEditor()
                 true
             }

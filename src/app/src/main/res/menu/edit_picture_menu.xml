@@ -8,10 +8,10 @@
             android:title="@string/edittitle_format"/>
 
     <item
-            android:id="@+id/action_color"
+            android:id="@+id/action_style"
             android:enabled="true"
-            android:icon="@drawable/ic_palette"
-            android:title="@string/edittitle_color"/>
+            android:icon="@drawable/ic_format_style"
+            android:title="@string/edittitle_style"/>
 
     <item
             android:id="@+id/action_position"

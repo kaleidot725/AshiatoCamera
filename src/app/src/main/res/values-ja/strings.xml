@@ -8,7 +8,7 @@
     <string name="navtitle_setting">設定</string>
 
     <string name="edittitle_format">形式</string>
-    <string name="edittitle_color">色</string>
+    <string name="edittitle_style">書式</string>
     <string name="edittitle_position">位置</string>
     <string name="edittitle_rotation">回転</string>
 
