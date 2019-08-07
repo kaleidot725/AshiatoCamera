@@ -14,6 +14,7 @@ interface PictureEditor  {
 
     fun start(target : Picture, preview : Picture)
     fun modifyText(text : String)
+    fun modifyTextSize(size : Float)
     fun modifyColor(color : Int)
     fun modifyPosition(position : Int)
     fun modifyRotation(degree : Int)

@@ -51,6 +51,20 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
         _state.onNext(PictureEditorState.Update)
     }
 
+    override fun modifyTextSize(size: Float) {
+        if (lastState == PictureEditorState.Init) {
+            throw Exception("invalid operation")
+        }
+
+        this.textSize = size
+        canvas.load(target!!.path)
+        canvas.draw(0f, this.textSize, this.text, this.color, this.textSize)
+        canvas.write(preview!!.path)
+
+        lastState = PictureEditorState.Update
+        _state.onNext(PictureEditorState.Update)
+    }
+
     override fun modifyColor(color: Int) {
         if (lastState == PictureEditorState.Init) {
             throw Exception("invalid operation")

@@ -84,6 +84,12 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun provideStyleRepositor(myApplication: MyApplication) : StyleRepository {
+        return StyleRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
     fun provideDateTimeRepository(myApplication: MyApplication) : DateTimeRepository {
         val repository = DateTimeRepositoryImpl()
         repository.start(1000)
@@ -107,6 +113,12 @@ class AppModule {
     @Singleton
     fun provideFormatEditor(myApplication: MyApplication) : FormatEditor {
         return FormatEditorImpl(provideDateTimeRepository(myApplication), provideLocationRepository(myApplication))
+    }
+
+    @Provides
+    @Singleton
+    fun provideStyleEditor(myApplication: MyApplication) : StyleEditor {
+        return StyleEditorImpl(provideStyleRepositor(myApplication))
     }
 
     @Provides
@@ -179,11 +191,19 @@ abstract class EditActivityModule {
     @ContributesAndroidInjector(modules = [FormatFragmentModule::class])
     abstract fun contributeFormatFragment(): FormatFragment
 
+    @ContributesAndroidInjector(modules = [StyleFragmentModule::class])
+    abstract fun contributeStyleFragment(): StyleFragmentModule
+
     @ContributesAndroidInjector(modules = [PositionFragmentModule::class])
     abstract fun contributePositionFragment(): PositionFragment
 
     @ContributesAndroidInjector(modules = [RotationFragmentModule::class])
     abstract fun contributeRotationFragment(): RotationFragment
+}
+
+@Module
+abstract class StyleFragmentModule {
+
 }
 
 @Module
