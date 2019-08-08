@@ -3,6 +3,7 @@ package kaleidot725.highestpeaks.ui.main
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -59,7 +60,10 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.main_actionbar)
 
-        val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val permissions = arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA)
         ActivityCompat.requestPermissions( this, permissions, 0)
 
         viewModel = ViewModelProviders.of(this, MainViewModelFactory(this)).get(MainViewModel::class.java)
