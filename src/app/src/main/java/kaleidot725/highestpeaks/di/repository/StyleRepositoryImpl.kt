@@ -20,6 +20,15 @@ class StyleRepositoryImpl() : StyleRepository {
         list.add(Style(56f, "56"))
         list.add(Style(60f, "60"))
         list.add(Style(64f, "64"))
+        list.add(Style(68f, "68"))
+        list.add(Style(72f, "72"))
+        list.add(Style(76f, "76"))
+        list.add(Style(80f, "80"))
+        list.add(Style(84f, "84"))
+        list.add(Style(88f, "88"))
+        list.add(Style(92f, "92"))
+        list.add(Style(96f, "96"))
+        list.add(Style(100f, "100"))
     }
 
     override fun all(): List<Style> {
