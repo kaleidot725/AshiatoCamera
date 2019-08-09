@@ -11,7 +11,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
     override var target: Picture? = null
     override var preview: Picture? = null
 
-    private val _state : PublishSubject<PictureEditorState> = PublishSubject.create()
+    private var _state : PublishSubject<PictureEditorState> = PublishSubject.create()
     override val state: Subject<PictureEditorState> get() = _state
     private var lastState : PictureEditorState = PictureEditorState.Init
 
@@ -116,6 +116,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
         canvas.write(target!!.path)
         lastState = PictureEditorState.Init
         _state.onComplete()
+        _state = PublishSubject.create()
     }
 
     override fun cancel() {
@@ -127,5 +128,6 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
         canvas.delete(preview!!.path)
         lastState = PictureEditorState.Init
         _state.onComplete()
+        _state = PublishSubject.create()
     }
 }

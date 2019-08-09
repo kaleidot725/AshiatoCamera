@@ -6,6 +6,7 @@ interface PictureRepository {
     fun all() : List<Picture>
     fun count() : Int
 
+    fun tmpPicture() : Picture
     fun newPicture() : Picture
 
     fun take(picture : Picture)

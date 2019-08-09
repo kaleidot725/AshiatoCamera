@@ -28,6 +28,14 @@ class PictureRepositoryImpl(path : String) : PictureRepository {
         return list.count()
     }
 
+    override fun tmpPicture(): Picture {
+        val dcim = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+        val dirPath = "${dcim}/Highest-Peak"
+        val name = "tmp.jpg"
+        val path = "${dirPath}/${name}"
+        return Picture(path, name)
+    }
+
     override fun newPicture(): Picture {
         val dcim = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
         val dirPath = "${dcim}/Highest-Peak"

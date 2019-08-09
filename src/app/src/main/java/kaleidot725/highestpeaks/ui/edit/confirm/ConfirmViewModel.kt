@@ -30,7 +30,7 @@ class ConfirmViewModel(
         }
 
         val target = pictureRepository.took as Picture
-        val preview = pictureRepository.newPicture()
+        val preview = pictureRepository.tmpPicture()
 
         pictureEditor.start(target, preview)
         pictureEditor.modifyText(formatEditor.create())
