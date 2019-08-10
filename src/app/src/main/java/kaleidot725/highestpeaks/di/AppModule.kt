@@ -29,6 +29,7 @@ import kaleidot725.highestpeaks.di.repository.*
 import kaleidot725.highestpeaks.di.persistence.PersistenceSetting
 import kaleidot725.highestpeaks.di.service.*
 import kaleidot725.highestpeaks.ui.edit.EditNavigator
+import kaleidot725.highestpeaks.ui.edit.color.ColorFragment
 import kaleidot725.highestpeaks.ui.edit.style.StyleFragment
 import kaleidot725.highestpeaks.ui.edit.format.FormatFragment
 import kaleidot725.highestpeaks.ui.edit.position.PositionFragment
@@ -84,8 +85,14 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideStyleRepositor(myApplication: MyApplication) : StyleRepository {
+    fun provideStyleRepository(myApplication: MyApplication) : StyleRepository {
         return StyleRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideColorRepository(myApplication: MyApplication) : ColorRepository {
+        return ColorRepositoryImpl()
     }
 
     @Provides
@@ -117,8 +124,14 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun provideColorEditor(myApplication: MyApplication) : ColorEditor {
+        return ColorEditorImpl(provideColorRepository(myApplication))
+    }
+
+    @Provides
+    @Singleton
     fun provideStyleEditor(myApplication: MyApplication) : StyleEditor {
-        return StyleEditorImpl(provideStyleRepositor(myApplication))
+        return StyleEditorImpl(provideStyleRepository(myApplication))
     }
 
     @Provides
@@ -183,7 +196,7 @@ abstract class EditActivityModule {
     abstract fun bindsEditNavigator(activity: EditActivity): EditNavigator
 
     @ContributesAndroidInjector(modules = [ColorFragmentModule::class])
-    abstract fun contributeColorFragment(): StyleFragment
+    abstract fun contributeColorFragment(): ColorFragment
 
     @ContributesAndroidInjector(modules = [ConfirmFragmentModule::class])
     abstract fun contributeConfirmFragment(): ConfirmFragment
@@ -192,7 +205,7 @@ abstract class EditActivityModule {
     abstract fun contributeFormatFragment(): FormatFragment
 
     @ContributesAndroidInjector(modules = [StyleFragmentModule::class])
-    abstract fun contributeStyleFragment(): StyleFragmentModule
+    abstract fun contributeStyleFragment(): StyleFragment
 
     @ContributesAndroidInjector(modules = [PositionFragmentModule::class])
     abstract fun contributePositionFragment(): PositionFragment

@@ -20,7 +20,7 @@ class FormatRecyclerViewModel(
     val detail : LiveData<String> get() = _detail
 
     private val _enabled : MutableLiveData<Boolean> = MutableLiveData()
-    val enabled : LiveData<Boolean> = _enabled
+    val enabled : LiveData<Boolean> get() =  _enabled
 
     init {
         _detail.value = format.detail
