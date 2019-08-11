@@ -4,6 +4,7 @@ import android.graphics.*
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import kaleidot725.highestpeaks.di.data.Picture
+import kaleidot725.highestpeaks.di.data.PositionType
 import java.lang.Exception
 
 class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
@@ -18,8 +19,8 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
     private var canvas : DrawableCanvas = drwableCnavas
     private var text : String = ""
     private var color : Int = Color.WHITE
-    private var textSize : Float = 64f
-    private var postion : Int = 0
+    private var textSize : Float = 16f
+    private var position : PositionType = PositionType.TopLeft
     private var degree : Int = 0
 
     override fun start(target : Picture, preview : Picture) {
@@ -44,7 +45,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.text = text
         canvas.load(target!!.path)
-        canvas.draw(0f, this.textSize, this.text, this.color, this.textSize)
+        canvas.draw(position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
         lastState = PictureEditorState.Update
@@ -58,7 +59,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.textSize = size
         canvas.load(target!!.path)
-        canvas.draw(0f, this.textSize, this.text, this.color, this.textSize)
+        canvas.draw(position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
         lastState = PictureEditorState.Update
@@ -72,21 +73,21 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.color = color
         canvas.load(target!!.path)
-        canvas.draw(0f, this.textSize, this.text, this.color, this.textSize)
+        canvas.draw(position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
         lastState = PictureEditorState.Update
         _state.onNext(PictureEditorState.Update)
     }
 
-    override fun modifyPosition(position: Int) {
+    override fun modifyPosition(position: PositionType) {
         if (lastState == PictureEditorState.Init) {
             throw Exception("invalid operation")
         }
 
-        this.postion = postion
+        this.position = this.position
         canvas.load(target!!.path)
-        canvas.draw(0f, this.textSize, this.text, this.color, this.textSize)
+        canvas.draw(position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
         lastState = PictureEditorState.Update
@@ -100,7 +101,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.degree = degree
         canvas.load(target!!.path)
-        canvas.draw(0f, this.textSize, this.text, this.color, this.textSize)
+        canvas.draw(position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
         lastState = PictureEditorState.Update

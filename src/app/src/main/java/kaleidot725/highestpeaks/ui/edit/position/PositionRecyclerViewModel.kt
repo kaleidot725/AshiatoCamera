@@ -32,7 +32,7 @@ class PositionRecyclerViewModel(
 
     fun click(v: View) {
         positionEditor.enable(position)
-        pictureEditor.modifyPosition(position.type as Int)
+        pictureEditor.modifyPosition(position.type)
     }
 
     override fun onCleared() {

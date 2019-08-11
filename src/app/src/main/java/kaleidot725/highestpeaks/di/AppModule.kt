@@ -142,6 +142,12 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun providePositionEditor(myApplication: MyApplication) : PositionEditor {
+        return PositionEditorImpl(providePositionRepository(myApplication))
+    }
+
+    @Provides
+    @Singleton
     fun providePictureEditor(myApplication: MyApplication) : PictureEditor {
         val drawableCanvas = DrawableCanvasImpl()
         return PictureEditorImpl(drawableCanvas)

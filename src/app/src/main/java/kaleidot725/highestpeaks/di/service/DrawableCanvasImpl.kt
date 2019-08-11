@@ -2,8 +2,13 @@ package kaleidot725.highestpeaks.di.service
 
 import android.graphics.*
 import android.media.ExifInterface
+import kaleidot725.highestpeaks.di.data.PositionType
 import java.io.File
 import java.io.FileOutputStream
+import android.opengl.ETC1.getHeight
+import android.opengl.ETC1.getWidth
+
+
 
 class DrawableCanvasImpl() : DrawableCanvas {
     private var currentPath : String = ""
@@ -31,6 +36,54 @@ class DrawableCanvasImpl() : DrawableCanvas {
             it.textSize = size
         }
         canvas.drawText(text, x, y, paint)
+    }
+
+    override fun draw(pos: PositionType, text: String, color: Int, size: Float) {
+        val paint = Paint().also {
+            it.color = color
+            it.textSize = size
+        }
+        canvas.drawText(text, calcX(pos, text, paint), calcY(pos, text, paint), paint)
+    }
+
+    private fun calcY(position : PositionType, text : String, paint : Paint) : Float{
+        val bounds = Rect().also {
+            paint.getTextBounds(text, 0, text.length, it)
+        }
+
+        when(position) {
+            PositionType.TopLeft      -> return bounds.height().toFloat()
+            PositionType.TopCenter    -> return bounds.height().toFloat()
+            PositionType.TopRight     -> return bounds.height().toFloat()
+            PositionType.CenterLeft   -> return (canvas.height / 2 - bounds.height() / 2).toFloat()
+            PositionType.Center       -> return (canvas.height / 2 - bounds.height() / 2).toFloat()
+            PositionType.CenterRight  -> return (canvas.height / 2 - bounds.height() / 2).toFloat()
+            PositionType.BottomLeft   -> return (canvas.height - bounds.height()).toFloat()
+            PositionType.BottomCenter -> return (canvas.height - bounds.height()).toFloat()
+            PositionType.BottomRight  -> return (canvas.height - bounds.height()).toFloat()
+        }
+
+        return 0f
+    }
+
+    private fun calcX(position : PositionType, text : String, paint : Paint) : Float{
+        val bounds = Rect().also {
+            paint.getTextBounds(text, 0, text.length, it)
+        }
+
+        when(position) {
+            PositionType.TopLeft      -> return 0f
+            PositionType.TopCenter    -> return (canvas.width / 2 - bounds.width() / 2).toFloat()
+            PositionType.TopRight     -> return (canvas.width - bounds.width()).toFloat()
+            PositionType.CenterLeft   -> return 0f
+            PositionType.Center       -> return (canvas.width / 2 - bounds.width() / 2).toFloat()
+            PositionType.CenterRight  -> return (canvas.width - bounds.width()).toFloat()
+            PositionType.BottomLeft   -> return 0f
+            PositionType.BottomCenter -> return (canvas.width / 2 - bounds.width() / 2).toFloat()
+            PositionType.BottomRight  -> return (canvas.width - bounds.width()).toFloat()
+        }
+
+        return 0f
     }
 
     override fun rotation(degree: Float) {

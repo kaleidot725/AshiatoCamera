@@ -15,7 +15,7 @@ class PositionRepositoryImpl() : PositionRepository {
         list.add(Position(PositionType.Center, "Center"))
         list.add(Position(PositionType.CenterRight, "CenterRight"))
         list.add(Position(PositionType.BottomLeft, "BottomLeft"))
-        list.add(Position(PositionType.TopLeft, "BottomCenter"))
+        list.add(Position(PositionType.BottomCenter, "BottomCenter"))
         list.add(Position(PositionType.BottomRight, "BottomRight"))
     }
 
