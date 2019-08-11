@@ -105,6 +105,12 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun providePositionRepository(myApplication: MyApplication) : PositionRepository {
+        return PositionRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
     fun provideMenuRepository(myApplication : MyApplication) : MenuRepository {
         return MenuRepositoryImpl(myApplication)
     }
