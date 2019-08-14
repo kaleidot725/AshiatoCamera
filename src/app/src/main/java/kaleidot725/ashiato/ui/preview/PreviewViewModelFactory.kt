@@ -6,6 +6,7 @@ import kaleidot725.michetimer.model.repository.PictureRepository
 import java.lang.Exception
 
 class PreviewViewModelFactory(val repository : PictureRepository) : ViewModelProvider.Factory {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == PreviewViewModel::class.java) {
             return PreviewViewModel(repository) as  T

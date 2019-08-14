@@ -28,5 +28,5 @@ class FormatRecyclerAdapter(owner : LifecycleOwner, vms: List<FormatRecyclerView
         holder.bind(vms[position])
     }
 
-    override fun getItemCount(): Int = vms?.count() ?: 0
+    override fun getItemCount(): Int = vms.count()
 }

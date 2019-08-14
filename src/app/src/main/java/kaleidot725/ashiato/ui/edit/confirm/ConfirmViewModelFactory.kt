@@ -15,6 +15,7 @@ class ConfirmViewModelFactory(
     val bitmapEditor : PictureEditor
 ) : ViewModelProvider.Factory {
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == ConfirmViewModel::class.java) {
             return ConfirmViewModel(navigator, pictureRepository, formatEditor, bitmapEditor) as  T

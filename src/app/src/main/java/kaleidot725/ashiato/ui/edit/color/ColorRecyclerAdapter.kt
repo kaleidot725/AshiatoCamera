@@ -29,5 +29,5 @@ class ColorRecyclerAdapter(owner : LifecycleOwner, vms : List<ColorRecyclerViewM
         holder.bind(vms[position])
     }
 
-    override fun getItemCount(): Int = vms?.count() ?: 0
+    override fun getItemCount(): Int = vms.count()
 }

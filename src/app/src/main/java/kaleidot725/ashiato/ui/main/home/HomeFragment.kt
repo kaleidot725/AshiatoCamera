@@ -53,6 +53,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    @Suppress("UNCHECKED_CAST")
     private inner class MainFragmentViewModelFactory() : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass == HomeViewModel::class.java) {

@@ -28,5 +28,5 @@ class MenuAdapter(owner : LifecycleOwner, vms: List<MenuViewModel>) : RecyclerVi
         holder.bind(vms[position])
     }
 
-    override fun getItemCount(): Int = vms?.count() ?: 0
+    override fun getItemCount(): Int = vms.count()
 }

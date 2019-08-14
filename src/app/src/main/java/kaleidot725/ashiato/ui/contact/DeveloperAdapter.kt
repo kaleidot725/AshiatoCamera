@@ -28,5 +28,5 @@ class DeveloperAdapter(owner : LifecycleOwner, vms: List<DeveloperViewModel>) : 
         holder.bind(vms[position])
     }
 
-    override fun getItemCount(): Int = vms?.count() ?: 0
+    override fun getItemCount(): Int = vms.count()
 }

@@ -33,15 +33,15 @@ class FormatEditorImpl(
         }
 
         if (altitudeEnable) {
-            value += "${locationRepository.lastAltitude?.toInt()}m" + space
+            value += "${locationRepository.lastAltitude.toInt()}m" + space
         }
 
         if (latitudeEnable) {
-            value += "${locationRepository.lastLatitude?.toInt()}°" + space
+            value += "${locationRepository.lastLatitude.toInt()}°" + space
         }
 
         if (longitudeEnable) {
-            value += "${locationRepository.lastLongitude?.toInt()}°" + space
+            value += "${locationRepository.lastLongitude.toInt()}°" + space
         }
 
         return value

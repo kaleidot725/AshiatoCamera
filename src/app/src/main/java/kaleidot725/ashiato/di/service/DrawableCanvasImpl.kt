@@ -79,8 +79,6 @@ class DrawableCanvasImpl() : DrawableCanvas {
             PositionType.BottomCenter -> return (canvas.width / 2 - bounds.width() / 2).toFloat()
             PositionType.BottomRight  -> return (canvas.width - bounds.width()).toFloat()
         }
-
-        return 0f
     }
 
     override fun rotation(degree: Float) {
@@ -103,7 +101,7 @@ class DrawableCanvasImpl() : DrawableCanvas {
     private fun getRotationAngle(path : String) : Float {
         val exif = ExifInterface(path)
         val orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION)
-        val orientation = if (orientString != null) Integer.parseInt(orientString!!) else ExifInterface.ORIENTATION_NORMAL
+        val orientation = if (orientString != null) Integer.parseInt(orientString) else ExifInterface.ORIENTATION_NORMAL
 
         if (orientation == ExifInterface.ORIENTATION_ROTATE_90)
             return 90f

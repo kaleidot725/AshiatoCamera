@@ -36,16 +36,16 @@ class HomeViewModel(
 
     init {
 
-        val lastUpdate = if (dateTimeRepository.lastDate == null) ("Updating") else (df.format(dateTimeRepository.lastDate))
+        val lastUpdate = df.format(dateTimeRepository.lastDate)
         _update.postValue(lastUpdate)
 
-        val lastAltitude = if (locationRepository.lastAltitude == null) ("???m") else ("${locationRepository.lastAltitude?.toInt()}m")
+        val lastAltitude = "${locationRepository.lastAltitude.toInt()}m"
         _altitude.postValue(lastAltitude)
 
-        val lastLatitude = if (locationRepository.lastLatitude == null) ("???°") else ("${locationRepository.lastLatitude?.toInt()}°")
+        val lastLatitude = "${locationRepository.lastLatitude.toInt()}°"
         _latitude.postValue(lastLatitude)
 
-        val lastLongitude = if (locationRepository.lastLongitude == null) ("???°") else ("${locationRepository.lastLongitude?.toInt()}°")
+        val lastLongitude = "${locationRepository.lastLongitude.toInt()}°"
         _longitude.postValue(lastLongitude)
 
         var disposable = dateTimeRepository.date.subscribe {

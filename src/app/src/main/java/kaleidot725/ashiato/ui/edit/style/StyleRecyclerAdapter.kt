@@ -28,5 +28,5 @@ class StyleRecyclerAdapter(owner : LifecycleOwner, vms: List<StyleRecyclerViewMo
         holder.bind(vms[position])
     }
 
-    override fun getItemCount(): Int = vms?.count() ?: 0
+    override fun getItemCount(): Int = vms.count()
 }

@@ -29,5 +29,5 @@ class PositionRecyclerAdapter(owner : LifecycleOwner, vms : List<PositionRecycle
         holder.bind(vms[position])
     }
 
-    override fun getItemCount(): Int = vms?.count() ?: 0
+    override fun getItemCount(): Int = vms.count()
 }

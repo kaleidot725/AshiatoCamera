@@ -13,6 +13,7 @@ class PositionViewModelFactory(
     private val positionRepository: PositionRepository
 ) : ViewModelProvider.Factory
 {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == PositionViewModel::class.java) {
             return PositionViewModel(pictureEditor, positionEditor, positionRepository) as T

@@ -7,6 +7,7 @@ import kaleidot725.ashiato.di.persistence.PersistenceSetting
 class SettingViewModelFactory(persistenceSetting : PersistenceSetting) : ViewModelProvider.Factory {
     private val persistenceSetting : PersistenceSetting = persistenceSetting
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == SettingViewModel::class.java) {
             return SettingViewModel(persistenceSetting) as T

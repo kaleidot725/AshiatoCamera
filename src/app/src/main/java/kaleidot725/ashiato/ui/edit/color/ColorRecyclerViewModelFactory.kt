@@ -13,6 +13,7 @@ class ColorRecyclerViewModelFactory(
     private val color: Color
 ) : ViewModelProvider.Factory
 {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == ColorRecyclerViewModel::class.java) {
             return ColorRecyclerViewModel(pictureEditor, colorEditor, color) as T

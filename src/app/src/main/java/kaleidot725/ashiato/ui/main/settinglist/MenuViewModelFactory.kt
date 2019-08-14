@@ -12,6 +12,7 @@ class MenuViewModelFactory(
     val menu : Menu) :
     ViewModelProvider.Factory
 {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == MenuViewModel::class.java) {
             return MenuViewModel(context, navigaor, menu) as T

@@ -13,6 +13,7 @@ class ColorViewModelFactory(
     private val colorRepository: ColorRepository
 ) : ViewModelProvider.Factory
 {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == ColorViewModel::class.java) {
             return ColorViewModel(pictureEditor, colorEditor, colorRepository) as T

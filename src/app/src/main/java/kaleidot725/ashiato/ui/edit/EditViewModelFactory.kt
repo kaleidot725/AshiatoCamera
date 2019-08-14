@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import java.lang.Exception
 
 class EditViewModelFactory(val navigator : EditNavigator) : ViewModelProvider.Factory{
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == EditViewModel::class.java) {
             return EditViewModel(navigator) as  T

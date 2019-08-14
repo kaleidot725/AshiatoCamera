@@ -12,6 +12,7 @@ class StyleRecyclerViewModelFactory(
     private val style : Style
 ) : ViewModelProvider.Factory
 {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == StyleRecyclerViewModel::class.java) {
             return StyleRecyclerViewModel(pictureEditor, styleEditor, style) as T

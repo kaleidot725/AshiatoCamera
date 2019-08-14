@@ -12,6 +12,7 @@ class FormatViewModelFactory(
     private val formatRepository : FormatRepository
 ) : ViewModelProvider.Factory
 {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == FormatViewModel::class.java) {
             return FormatViewModel(pictureEditor, formatEditor, formatRepository) as T
