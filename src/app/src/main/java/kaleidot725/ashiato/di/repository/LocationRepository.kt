@@ -1,5 +1,6 @@
 package kaleidot725.ashiato.di.repository
 
+import android.app.Activity
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.Subject
 import java.util.*
@@ -19,6 +20,6 @@ interface LocationRepository : Disposable {
     val longitude : Subject<Double>
     val lastLongitude : Double
 
-    fun start(provider : String, minTime : Int, minDistance : Int)
+    fun start(activity : Activity)
     fun stop()
 }

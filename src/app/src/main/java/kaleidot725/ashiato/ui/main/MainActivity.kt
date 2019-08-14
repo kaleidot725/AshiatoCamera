@@ -29,6 +29,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.ashiato.ui.edit.EditActivity
 import kaleidot725.ashiato.ui.contact.ContactActivity
 import kaleidot725.ashiato.di.holder.Holder
+import kaleidot725.ashiato.di.repository.LocationRepository
 import kaleidot725.ashiato.ui.preview.PreviewActivity
 import kaleidot725.ashiato.ui.setting.SettingActivity
 import kaleidot725.michetimer.model.repository.PictureRepository
@@ -41,6 +42,9 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+
+    @Inject
+    lateinit var locationRepository: LocationRepository
 
     @Inject
     lateinit var mainMenuSelected : Holder<MainMenu>
@@ -65,12 +69,19 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
             Manifest.permission.CAMERA)
         ActivityCompat.requestPermissions( this, permissions, 0)
 
+        locationRepository.start(this)
+
         viewModel = ViewModelProviders.of(this, MainViewModelFactory(this)).get(MainViewModel::class.java)
         val binding : ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel =  viewModel
         binding.lifecycleOwner = this
 
         restoreMenu()
+    }
+
+    override fun onDestroy() {
+        locationRepository.stop()
+        super.onDestroy()
     }
 
     private var tempFile : File? = null

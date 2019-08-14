@@ -61,13 +61,11 @@ class AppModule {
     @Singleton
     fun provideLocationRepository(myApplication : MyApplication) : LocationRepository {
         try {
-            val setting = PersistenceSetting(myApplication.filesDir.path + "settings.json").load()
-            return LocationRepositoryImpl(myApplication)
-                .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
+            val s = PersistenceSetting(myApplication.filesDir.path + "settings.json").load()
+            return LocationRepositoryImpl(myApplication, s.gpsGpsLocationProvider, s.gpsMinTime, s.gpsMinDistance)
         } catch (e : Exception) {
-            val setting = Settings(LocationManager.GPS_PROVIDER, 1, 1)
-            return LocationRepositoryImpl(myApplication)
-                .also { it.start(setting.gpsGpsLocationProvider, setting.gpsMinTime, setting.gpsMinDistance) }
+            val s = Settings(LocationManager.GPS_PROVIDER, 1, 1)
+            return LocationRepositoryImpl(myApplication, s.gpsGpsLocationProvider, s.gpsMinTime, s.gpsMinDistance)
         }
     }
 
