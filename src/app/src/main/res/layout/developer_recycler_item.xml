@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="vm" type="kaleidot725.highestpeaks.ui.contact.DeveloperViewModel"/>
+        <variable name="vm" type="kaleidot725.ashiato.ui.contact.DeveloperViewModel"/>
     </data>
 
     <LinearLayout

@@ -3,7 +3,7 @@
 
         <data>
                 <import type="android.view.View"/>
-                <variable name="vm" type="kaleidot725.highestpeaks.ui.main.history.PictureViewModelBase"/>
+                <variable name="vm" type="kaleidot725.ashiato.ui.main.history.PictureViewModelBase"/>
         </data>
 
         <FrameLayout

@@ -4,7 +4,7 @@
         tools:context=".ui.main.settinglist.SettingListFragment">
 
     <data>
-        <variable name="vm" type="kaleidot725.highestpeaks.ui.main.settinglist.SettingListViewModel"/>
+        <variable name="vm" type="kaleidot725.ashiato.ui.main.settinglist.SettingListViewModel"/>
     </data>
 
     <FrameLayout

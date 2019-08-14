@@ -5,7 +5,7 @@
         tools:context=".ui.edit.position.PositionFragment">
 
     <data>
-        <variable name="vm" type="kaleidot725.highestpeaks.ui.edit.position.PositionViewModel"/>
+        <variable name="vm" type="kaleidot725.ashiato.ui.edit.position.PositionViewModel"/>
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

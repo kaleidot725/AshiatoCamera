@@ -5,7 +5,7 @@
         tools:context=".ui.contact.ContactFragment">
 
     <data>
-        <variable name="vm" type="kaleidot725.highestpeaks.ui.contact.ContactViewModel"/>
+        <variable name="vm" type="kaleidot725.ashiato.ui.contact.ContactViewModel"/>
     </data>
 
     <FrameLayout

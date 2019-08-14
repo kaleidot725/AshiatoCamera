@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="kaleidot725.highestpeaks.ui.main.MainViewModel"/>
+        <variable name="viewModel" type="kaleidot725.ashiato.ui.main.MainViewModel"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

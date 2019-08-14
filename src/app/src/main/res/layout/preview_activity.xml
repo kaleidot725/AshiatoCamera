@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewmodel" type="kaleidot725.highestpeaks.ui.preview.PreviewViewModel"/>
+        <variable name="viewmodel" type="kaleidot725.ashiato.ui.preview.PreviewViewModel"/>
     </data>
 
     <FrameLayout

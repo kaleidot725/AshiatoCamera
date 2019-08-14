@@ -4,7 +4,7 @@
         xmlns:myApplication="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="vm" type="kaleidot725.highestpeaks.ui.main.settinglist.MenuViewModel"/>
+        <variable name="vm" type="kaleidot725.ashiato.ui.main.settinglist.MenuViewModel"/>
     </data>
 
     <FrameLayout

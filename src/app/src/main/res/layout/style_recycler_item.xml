@@ -3,7 +3,7 @@
         xmlns:myApplication="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="vm" type="kaleidot725.highestpeaks.ui.edit.style.StyleRecyclerViewModel"/>
+        <variable name="vm" type="kaleidot725.ashiato.ui.edit.style.StyleRecyclerViewModel"/>
     </data>
 
     <FrameLayout

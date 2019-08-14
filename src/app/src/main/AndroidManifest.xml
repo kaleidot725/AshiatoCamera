@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="kaleidot725.highestpeaks">
+          package="kaleidot725.ashiato">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -27,7 +27,7 @@
         </provider>
 
         <activity
-                android:name="kaleidot725.highestpeaks.ui.main.MainActivity"
+                android:name=".ui.main.MainActivity"
                 android:label="@string/main_title"
                 android:screenOrientation="portrait"
                 android:exported="true"
@@ -41,28 +41,28 @@
         </activity>
 
         <activity
-                android:name="kaleidot725.highestpeaks.ui.setting.SettingActivity"
+                android:name=".ui.setting.SettingActivity"
                 android:label="Setting"
                 android:screenOrientation="portrait"
-                android:parentActivityName="kaleidot725.highestpeaks.ui.main.MainActivity"/>
+                android:parentActivityName=".ui.main.MainActivity"/>
 
         <activity
-                android:name="kaleidot725.highestpeaks.ui.contact.ContactActivity"
+                android:name=".ui.contact.ContactActivity"
                 android:label="Contact"
                 android:screenOrientation="portrait"
-                android:parentActivityName="kaleidot725.highestpeaks.ui.main.MainActivity"/>
+                android:parentActivityName=".ui.main.MainActivity"/>
 
         <activity
-                android:name="kaleidot725.highestpeaks.ui.edit.EditActivity"
+                android:name=".ui.edit.EditActivity"
                 android:label="Camera"
                 android:screenOrientation="portrait"
-                android:parentActivityName="kaleidot725.highestpeaks.ui.main.MainActivity"
+                android:parentActivityName=".ui.main.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name="kaleidot725.highestpeaks.ui.preview.PreviewActivity"
+        <activity android:name=".ui.preview.PreviewActivity"
                   android:label="Preview"
                   android:screenOrientation="portrait"
-                  android:parentActivityName="kaleidot725.highestpeaks.ui.main.MainActivity"/>
+                  android:parentActivityName=".ui.main.MainActivity"/>
     </application>
 
 </manifest>

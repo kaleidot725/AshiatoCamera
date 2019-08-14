@@ -5,7 +5,7 @@
         tools:context=".ui.edit.color.ColorFragment">
 
     <data>
-        <variable name="vm" type="kaleidot725.highestpeaks.ui.edit.color.ColorViewModel"/>
+        <variable name="vm" type="kaleidot725.ashiato.ui.edit.color.ColorViewModel"/>
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

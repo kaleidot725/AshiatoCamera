@@ -6,7 +6,7 @@
         tools:context=".ui.edit.EditActivity">
 
     <data>
-        <variable name="viewmodel" type="kaleidot725.highestpeaks.ui.edit.EditViewModel"/>
+        <variable name="viewmodel" type="kaleidot725.ashiato.ui.edit.EditViewModel"/>
     </data>
 
     <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
