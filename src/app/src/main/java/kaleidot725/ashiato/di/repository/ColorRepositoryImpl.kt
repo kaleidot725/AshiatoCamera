@@ -8,17 +8,15 @@ class ColorRepositoryImpl() : ColorRepository {
 
 
     init {
-        list.add(Color(android.graphics.Color.WHITE, "White"))
-        list.add(Color(android.graphics.Color.BLACK, "Black"))
-        list.add(Color(android.graphics.Color.BLUE, "Blue"))
-        list.add(Color(android.graphics.Color.CYAN, "Cyan"))
-        list.add(Color(android.graphics.Color.DKGRAY, "DarkGray"))
-        list.add(Color(android.graphics.Color.GRAY, "Gray"))
-        list.add(Color(android.graphics.Color.GREEN, "Green"))
-        list.add(Color(android.graphics.Color.LTGRAY, "LightGray"))
-        list.add(Color(android.graphics.Color.MAGENTA, "Magenta"))
-        list.add(Color(android.graphics.Color.RED, "Red"))
-        list.add(Color(android.graphics.Color.YELLOW, "Yellow"))
+        list.add(Color(android.graphics.Color.rgb(220, 159, 180), "Nadeshiko"))
+        list.add(Color(android.graphics.Color.rgb(240, 94, 28), "Ohni"))
+        list.add(Color(android.graphics.Color.rgb(255, 177, 27), "Yamabuki"))
+        list.add(Color(android.graphics.Color.rgb(131, 138, 45), "Koke"))
+        list.add(Color(android.graphics.Color.rgb(129, 199, 212), "Mizu"))
+        list.add(Color(android.graphics.Color.rgb(87, 129, 195), "Fuji"))
+        list.add(Color(android.graphics.Color.rgb(193, 50, 142), "Botan"))
+        list.add(Color(android.graphics.Color.rgb(130, 130, 130), "Hai"))
+        list.add(Color(android.graphics.Color.rgb(28, 28, 28), "Sumi"))
     }
 
     override fun all(): List<Color> {
