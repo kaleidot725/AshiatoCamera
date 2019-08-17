@@ -45,7 +45,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.text = text
         canvas.load(target!!.path)
-        canvas.draw(position, this.text, this.color, this.textSize)
+        canvas.draw(this.position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
         lastState = PictureEditorState.Update
@@ -59,7 +59,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.textSize = size
         canvas.load(target!!.path)
-        canvas.draw(position, this.text, this.color, this.textSize)
+        canvas.draw(this.position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
         lastState = PictureEditorState.Update
@@ -73,7 +73,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.color = color
         canvas.load(target!!.path)
-        canvas.draw(position, this.text, this.color, this.textSize)
+        canvas.draw(this.position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
         lastState = PictureEditorState.Update
@@ -85,9 +85,9 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
             throw Exception("invalid operation")
         }
 
-        this.position = this.position
+        this.position = position
         canvas.load(target!!.path)
-        canvas.draw(position, this.text, this.color, this.textSize)
+        canvas.draw(this.position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
         lastState = PictureEditorState.Update
