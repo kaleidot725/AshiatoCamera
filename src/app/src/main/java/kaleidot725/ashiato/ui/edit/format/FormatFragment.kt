@@ -1,16 +1,15 @@
 package kaleidot725.ashiato.ui.edit.format
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
-
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.FormatFragmentBindingImpl
 import kaleidot725.ashiato.di.repository.FormatRepository
@@ -29,7 +28,7 @@ class FormatFragment : Fragment() {
     lateinit var pictureEditor: PictureEditor
 
     @Inject
-    lateinit var formatEditor : FormatEditor
+    lateinit var formatEditor: FormatEditor
 
     @Inject
     lateinit var repository: FormatRepository
@@ -43,7 +42,8 @@ class FormatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this, FormatViewModelFactory(pictureEditor, formatEditor, repository)).get(FormatViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, FormatViewModelFactory(pictureEditor, formatEditor, repository))
+            .get(FormatViewModel::class.java)
 
         val binding = DataBindingUtil.bind<FormatFragmentBindingImpl>(this.view as View)
         binding?.lifecycleOwner = this
@@ -53,7 +53,7 @@ class FormatFragment : Fragment() {
         recyclerView?.adapter = FormatRecyclerAdapter(this, viewModel.formatRecyclerViewModels.value ?: listOf())
         recyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         recyclerView?.setHasFixedSize(true)
-     }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

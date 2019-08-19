@@ -4,11 +4,10 @@ import android.content.Context
 import androidx.databinding.ObservableArrayList
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.di.data.Menu
-import java.lang.IllegalStateException
 
-class MenuRepositoryImpl(val context : Context) : MenuRepository {
-    private val list : ArrayList<Menu> = ObservableArrayList<Menu>()
-    private var initialized : Boolean = false
+class MenuRepositoryImpl(val context: Context) : MenuRepository {
+    private val list: ArrayList<Menu> = ObservableArrayList<Menu>()
+    private var initialized: Boolean = false
 
     init {
         list.add(Menu(R.drawable.ic_setting, context.getString(R.string.menu_setting)))

@@ -12,19 +12,19 @@ import kaleidot725.ashiato.di.service.PictureEditor
 class ColorRecyclerViewModel(
     private val pictureEditor: PictureEditor,
     private val colorEditor: ColorEditor,
-    private val color : Color
+    private val color: Color
 ) : ViewModel() {
 
-    private val _detail : MutableLiveData<String> = MutableLiveData()
-    val detail : LiveData<String> get() = _detail
+    private val _detail: MutableLiveData<String> = MutableLiveData()
+    val detail: LiveData<String> get() = _detail
 
-    private val _txtColor : MutableLiveData<Int> = MutableLiveData()
-    val txtColor : LiveData<Int> get() = _txtColor
+    private val _txtColor: MutableLiveData<Int> = MutableLiveData()
+    val txtColor: LiveData<Int> get() = _txtColor
 
-    private val _enabled : MutableLiveData<Boolean> = MutableLiveData()
-    val enabled : LiveData<Boolean> get() = _enabled
+    private val _enabled: MutableLiveData<Boolean> = MutableLiveData()
+    val enabled: LiveData<Boolean> get() = _enabled
 
-    private  val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
 
     init {
         _txtColor.value = color.value
@@ -35,7 +35,7 @@ class ColorRecyclerViewModel(
         )
     }
 
-    fun click(v : View) {
+    fun click(v: View) {
         colorEditor.enable(color)
         pictureEditor.modifyColor(color.value)
     }

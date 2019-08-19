@@ -19,15 +19,15 @@ class ConfirmViewModel(
     val dateTimeRepository: DateTimeRepository,
     val locationRepository: LocationRepository,
     val pictureRepository: PictureRepository,
-    val formatEditor : FormatEditor,
+    val formatEditor: FormatEditor,
     val rotationEditor: RotationEditor,
-    val pictureEditor : PictureEditor
+    val pictureEditor: PictureEditor
 ) : ViewModel() {
 
-    private val _editPath : MutableLiveData<String> = MutableLiveData()
-    val editPath : LiveData<String> = _editPath
+    private val _editPath: MutableLiveData<String> = MutableLiveData()
+    val editPath: LiveData<String> = _editPath
 
-    private val compositeDisposable : CompositeDisposable = CompositeDisposable()
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     init {
         if (pictureRepository.took == null) {
@@ -35,7 +35,11 @@ class ConfirmViewModel(
         }
 
         formatEditor.setDate(dateTimeRepository.lastDate)
-        formatEditor.setLocation(locationRepository.lastAltitude, locationRepository.lastLatitude, locationRepository.lastLongitude)
+        formatEditor.setLocation(
+            locationRepository.lastAltitude,
+            locationRepository.lastLatitude,
+            locationRepository.lastLongitude
+        )
         val target = pictureRepository.took as Picture
         val preview = pictureRepository.tmpPicture()
         pictureEditor.start(target, preview)
@@ -51,12 +55,12 @@ class ConfirmViewModel(
         compositeDisposable.add(disposable)
     }
 
-    fun save(view : View) {
+    fun save(view: View) {
         pictureEditor.end()
         navigator.exit()
     }
 
-    fun cancel(view : View) {
+    fun cancel(view: View) {
         pictureEditor.cancel()
         navigator.exit()
     }

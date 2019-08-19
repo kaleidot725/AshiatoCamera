@@ -9,9 +9,8 @@ import kaleidot725.ashiato.di.service.PictureEditor
 class FormatRecyclerViewModelFactory(
     private val pictureEditor: PictureEditor,
     private val formatEditor: FormatEditor,
-    private val format : Format
-) : ViewModelProvider.Factory
-{
+    private val format: Format
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == FormatRecyclerViewModel::class.java) {

@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.DeveloperRecyclerItemBinding
 
-class DeveloperAdapter(owner : LifecycleOwner, vms: List<DeveloperViewModel>) : RecyclerView.Adapter<DeveloperViewHolder>()   {
-    private val owner : LifecycleOwner = owner
+class DeveloperAdapter(owner: LifecycleOwner, vms: List<DeveloperViewModel>) :
+    RecyclerView.Adapter<DeveloperViewHolder>() {
+    private val owner: LifecycleOwner = owner
     private val vms: MutableList<DeveloperViewModel> = vms.toMutableList()
 
-    fun update(new : List<DeveloperViewModel>) {
+    fun update(new: List<DeveloperViewModel>) {
         vms.clear()
         vms.addAll(new)
         this.notifyDataSetChanged()
@@ -20,7 +21,12 @@ class DeveloperAdapter(owner : LifecycleOwner, vms: List<DeveloperViewModel>) : 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeveloperViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<DeveloperRecyclerItemBinding>(inflater, R.layout.developer_recycler_item, parent, false)
+        val binding = DataBindingUtil.inflate<DeveloperRecyclerItemBinding>(
+            inflater,
+            R.layout.developer_recycler_item,
+            parent,
+            false
+        )
         return DeveloperViewHolder(owner, binding.root, binding)
     }
 

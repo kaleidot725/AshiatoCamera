@@ -9,14 +9,13 @@ import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.RotationRecyclerItemBinding
 
 class RotationRecyclerAdapter(
-    owner : LifecycleOwner,
-    vms : List<RotationRecyclerViewModel>)
-    : RecyclerView.Adapter<RotationRecyclerHolder>()
-{
-    private val owner : LifecycleOwner = owner
-    private val vms : MutableList<RotationRecyclerViewModel> = vms.toMutableList()
+    owner: LifecycleOwner,
+    vms: List<RotationRecyclerViewModel>
+) : RecyclerView.Adapter<RotationRecyclerHolder>() {
+    private val owner: LifecycleOwner = owner
+    private val vms: MutableList<RotationRecyclerViewModel> = vms.toMutableList()
 
-    fun update(new : List<RotationRecyclerViewModel>) {
+    fun update(new: List<RotationRecyclerViewModel>) {
         vms.clear()
         vms.addAll(new)
         this.notifyDataSetChanged()
@@ -24,7 +23,12 @@ class RotationRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RotationRecyclerHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<RotationRecyclerItemBinding>(inflater, R.layout.rotation_recycler_item, parent,false)
+        val binding = DataBindingUtil.inflate<RotationRecyclerItemBinding>(
+            inflater,
+            R.layout.rotation_recycler_item,
+            parent,
+            false
+        )
         return RotationRecyclerHolder(owner, binding.root, binding)
     }
 

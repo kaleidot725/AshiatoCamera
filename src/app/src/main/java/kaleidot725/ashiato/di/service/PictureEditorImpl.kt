@@ -1,30 +1,28 @@
 package kaleidot725.ashiato.di.service
 
-import android.graphics.*
-import android.media.ExifInterface
+import android.graphics.Color
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import kaleidot725.ashiato.di.data.Picture
 import kaleidot725.ashiato.di.data.PositionType
-import java.lang.Exception
 
-class PictureEditorImpl(drawableCanvas : DrawableCanvas) : PictureEditor {
+class PictureEditorImpl(drawableCanvas: DrawableCanvas) : PictureEditor {
 
     override var target: Picture? = null
     override var preview: Picture? = null
 
-    private var _state : PublishSubject<PictureEditorState> = PublishSubject.create()
+    private var _state: PublishSubject<PictureEditorState> = PublishSubject.create()
     override val state: Subject<PictureEditorState> get() = _state
-    private var lastState : PictureEditorState = PictureEditorState.Init
+    private var lastState: PictureEditorState = PictureEditorState.Init
 
-    private var canvas : DrawableCanvas = drawableCanvas
-    private var text : String = ""
-    private var color : Int = Color.WHITE
-    private var textSize : Float = 16f
-    private var position : PositionType = PositionType.TopLeft
-    private var angle : Float = 0f
+    private var canvas: DrawableCanvas = drawableCanvas
+    private var text: String = ""
+    private var color: Int = Color.WHITE
+    private var textSize: Float = 16f
+    private var position: PositionType = PositionType.TopLeft
+    private var angle: Float = 0f
 
-    override fun start(target : Picture, preview : Picture) {
+    override fun start(target: Picture, preview: Picture) {
         if (lastState != PictureEditorState.Init) {
             throw Exception("invalid operation")
         }
@@ -129,7 +127,8 @@ class PictureEditorImpl(drawableCanvas : DrawableCanvas) : PictureEditor {
 
     override fun cancel() {
         if (lastState != PictureEditorState.Init &&
-            lastState != PictureEditorState.Update) {
+            lastState != PictureEditorState.Update
+        ) {
             throw Exception("invalid operation")
         }
 

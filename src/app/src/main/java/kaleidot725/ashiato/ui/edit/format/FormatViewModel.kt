@@ -11,10 +11,9 @@ class FormatViewModel(
     private val pictureEditor: PictureEditor,
     private val formatEditor: FormatEditor,
     private val formatRepository: FormatRepository
-) : ViewModel()
-{
-    private val _formatRecyclerViewModels : MutableLiveData<List<FormatRecyclerViewModel>> = MutableLiveData()
-    val formatRecyclerViewModels : LiveData<List<FormatRecyclerViewModel>> get() = _formatRecyclerViewModels
+) : ViewModel() {
+    private val _formatRecyclerViewModels: MutableLiveData<List<FormatRecyclerViewModel>> = MutableLiveData()
+    val formatRecyclerViewModels: LiveData<List<FormatRecyclerViewModel>> get() = _formatRecyclerViewModels
 
     init {
         val all = formatRepository.all()

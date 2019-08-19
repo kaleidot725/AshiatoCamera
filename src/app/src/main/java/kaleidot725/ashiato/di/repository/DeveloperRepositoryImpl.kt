@@ -4,7 +4,7 @@ import androidx.databinding.ObservableArrayList
 import kaleidot725.ashiato.di.data.Developer
 
 class DeveloperRepositoryImpl : DeveloperRepository {
-    private val list : ArrayList<Developer> = ObservableArrayList<Developer>()
+    private val list: ArrayList<Developer> = ObservableArrayList<Developer>()
 
     init {
         list.add(

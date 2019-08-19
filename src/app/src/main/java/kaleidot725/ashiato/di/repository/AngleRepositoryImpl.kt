@@ -3,8 +3,8 @@ package kaleidot725.ashiato.di.repository
 import androidx.databinding.ObservableArrayList
 import kaleidot725.ashiato.di.data.Angle
 
-class  AngleRepositoryImpl : AngleRepository {
-    private val list : ArrayList<Angle> = ObservableArrayList<Angle>()
+class AngleRepositoryImpl : AngleRepository {
+    private val list: ArrayList<Angle> = ObservableArrayList<Angle>()
 
     init {
         list.add(Angle(0f, "0°"))

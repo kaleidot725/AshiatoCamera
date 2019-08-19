@@ -7,13 +7,11 @@ import kaleidot725.ashiato.di.repository.PositionRepository
 
 class PositionEditorImpl(
     private val positionRepository: PositionRepository
-)
-    : PositionEditor
-{
-    private var _lastEnabled : Position = positionRepository.all().first()
+) : PositionEditor {
+    private var _lastEnabled: Position = positionRepository.all().first()
     override val lastEnabled: Position get() = _lastEnabled
 
-    private val _enabled : PublishSubject<Position> = PublishSubject.create()
+    private val _enabled: PublishSubject<Position> = PublishSubject.create()
     override val enabled: Subject<Position> get() = _enabled
 
     override fun enable(position: Position) {

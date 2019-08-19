@@ -6,8 +6,8 @@ import io.reactivex.disposables.Disposable
 
 class MainViewModel(navigator: MainNavigator) : ViewModel(), Disposable {
 
-    private val navigator : MainNavigator = navigator
-    private var disposed : Boolean = false
+    private val navigator: MainNavigator = navigator
+    private var disposed: Boolean = false
 
     val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {

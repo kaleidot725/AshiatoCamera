@@ -6,12 +6,10 @@ import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.ui.main.MainNavigator
 
 class HistoryViewModelFactory(
-    private val navigator : MainNavigator,
-    private val actor : HistoryFragmentActor,
-    private val repository : PictureRepository
-)
-    : ViewModelProvider.Factory
-{
+    private val navigator: MainNavigator,
+    private val actor: HistoryFragmentActor,
+    private val repository: PictureRepository
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == HistoryViewModel::class.java) {

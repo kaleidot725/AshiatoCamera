@@ -4,31 +4,28 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.ashiato.ui.main.MainNavigator
 import kaleidot725.ashiato.di.data.Picture
 import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.ui.main.MainNavigator
 import java.io.File
-import java.lang.Exception
 
 class HistoryViewModel(
-    private val navigator : MainNavigator,
-    private val actor : HistoryFragmentActor,
+    private val navigator: MainNavigator,
+    private val actor: HistoryFragmentActor,
     private val pictureRepository: PictureRepository
-)
-    : ViewModel()
-{
-    private val _pictureViewModels : MutableLiveData<List<PictureViewModelBase>> = MutableLiveData()
-    val pictureViewModels : LiveData<List<PictureViewModelBase>> get() = _pictureViewModels
+) : ViewModel() {
+    private val _pictureViewModels: MutableLiveData<List<PictureViewModelBase>> = MutableLiveData()
+    val pictureViewModels: LiveData<List<PictureViewModelBase>> get() = _pictureViewModels
 
-    private val _notFound : MutableLiveData<Boolean> = MutableLiveData()
-    val notFound : LiveData<Boolean> get() = _notFound
+    private val _notFound: MutableLiveData<Boolean> = MutableLiveData()
+    val notFound: LiveData<Boolean> get() = _notFound
 
     init {
         _pictureViewModels.value = createPictureViewModels(HistoryFragmentMode.Display)
         _notFound.value = (pictureRepository.count() == 0)
     }
 
-    fun load(mode : HistoryFragmentMode) {
+    fun load(mode: HistoryFragmentMode) {
         _pictureViewModels.value = createPictureViewModels(mode)
         _notFound.value = (pictureRepository.count() == 0)
     }
@@ -40,7 +37,7 @@ class HistoryViewModel(
                 if (deletable) {
                     File(it.path.value).delete()
                 }
-            } catch (e : Exception) {
+            } catch (e: Exception) {
                 Log.e("HistoryViewModel", e.toString())
             }
 
@@ -50,9 +47,9 @@ class HistoryViewModel(
         _notFound.value = (pictureRepository.count() == 0)
     }
 
-    private fun createPictureViewModels(mode : HistoryFragmentMode) : List<PictureViewModelBase> {
+    private fun createPictureViewModels(mode: HistoryFragmentMode): List<PictureViewModelBase> {
         val pictures = pictureRepository.all()
-        val vms : MutableList<PictureViewModelBase> = mutableListOf()
+        val vms: MutableList<PictureViewModelBase> = mutableListOf()
         for (picture in pictures) {
             vms.add(createPictureViewModel(navigator, actor, pictureRepository, picture, mode))
         }
@@ -62,14 +59,20 @@ class HistoryViewModel(
 
     private fun createPictureViewModel(
         navigator: MainNavigator,
-        actor : HistoryFragmentActor,
+        actor: HistoryFragmentActor,
         pictureRepository: PictureRepository,
-        picture : Picture,
-        mode : HistoryFragmentMode) : PictureViewModelBase {
+        picture: Picture,
+        mode: HistoryFragmentMode
+    ): PictureViewModelBase {
 
-        when(mode) {
+        when (mode) {
             HistoryFragmentMode.Action -> return PictureViewModelForAction(navigator, actor, pictureRepository, picture)
-            HistoryFragmentMode.Display -> return PictureViewModelForDisplay(navigator, actor, pictureRepository, picture)
+            HistoryFragmentMode.Display -> return PictureViewModelForDisplay(
+                navigator,
+                actor,
+                pictureRepository,
+                picture
+            )
         }
     }
 }

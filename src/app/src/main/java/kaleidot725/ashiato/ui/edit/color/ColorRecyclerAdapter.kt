@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ColorRecyclerItemBinding
 
-class ColorRecyclerAdapter(owner : LifecycleOwner, vms : List<ColorRecyclerViewModel>) :  RecyclerView.Adapter<ColorRecyclerHolder>() {
+class ColorRecyclerAdapter(owner: LifecycleOwner, vms: List<ColorRecyclerViewModel>) :
+    RecyclerView.Adapter<ColorRecyclerHolder>() {
 
-    private val owner : LifecycleOwner = owner
+    private val owner: LifecycleOwner = owner
     private val vms: MutableList<ColorRecyclerViewModel> = vms.toMutableList()
 
-    fun update(new : List<ColorRecyclerViewModel>) {
+    fun update(new: List<ColorRecyclerViewModel>) {
         vms.clear()
         vms.addAll(new)
         this.notifyDataSetChanged()
@@ -21,7 +22,8 @@ class ColorRecyclerAdapter(owner : LifecycleOwner, vms : List<ColorRecyclerViewM
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorRecyclerHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ColorRecyclerItemBinding>(inflater, R.layout.color_recycler_item, parent, false)
+        val binding =
+            DataBindingUtil.inflate<ColorRecyclerItemBinding>(inflater, R.layout.color_recycler_item, parent, false)
         return ColorRecyclerHolder(owner, binding.root, binding)
     }
 

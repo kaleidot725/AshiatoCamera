@@ -1,16 +1,15 @@
 package kaleidot725.ashiato.ui.edit.style
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
-
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.StyleFragmentBinding
 import kaleidot725.ashiato.di.repository.StyleRepository
@@ -30,7 +29,7 @@ class StyleFragment : Fragment() {
     lateinit var pictureEditor: PictureEditor
 
     @Inject
-    lateinit var styleEditor : StyleEditor
+    lateinit var styleEditor: StyleEditor
 
     @Inject
     lateinit var repository: StyleRepository
@@ -44,7 +43,8 @@ class StyleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this, StyleViewModelFactory(pictureEditor, styleEditor, repository)).get(
-            StyleViewModel::class.java)
+            StyleViewModel::class.java
+        )
 
         val binding = DataBindingUtil.bind<StyleFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this

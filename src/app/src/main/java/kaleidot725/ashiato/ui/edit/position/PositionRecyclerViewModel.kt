@@ -11,8 +11,8 @@ import kaleidot725.ashiato.di.service.PositionEditor
 
 class PositionRecyclerViewModel(
     private val pictureEditor: PictureEditor,
-    private val positionEditor : PositionEditor,
-    private val position : Position
+    private val positionEditor: PositionEditor,
+    private val position: Position
 ) : ViewModel() {
     private val _detail: MutableLiveData<String> = MutableLiveData()
     val detail: LiveData<String> get() = _detail

@@ -13,27 +13,26 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeViewModel(
-    private val navigator : MainNavigator,
-    private val dateTimeRepository : DateTimeRepository,
+    private val navigator: MainNavigator,
+    private val dateTimeRepository: DateTimeRepository,
     private val locationRepository: LocationRepository,
-    private val  pictureRepository: PictureRepository
+    private val pictureRepository: PictureRepository
 ) :
-    ViewModel()
-{
-    private val _update : MutableLiveData<String> = MutableLiveData()
-    val update : LiveData<String> get() = _update
+    ViewModel() {
+    private val _update: MutableLiveData<String> = MutableLiveData()
+    val update: LiveData<String> get() = _update
 
-    private val _altitude : MutableLiveData<String> = MutableLiveData()
-    val altitude : LiveData<String> get() = _altitude
+    private val _altitude: MutableLiveData<String> = MutableLiveData()
+    val altitude: LiveData<String> get() = _altitude
 
-    private val _latitude : MutableLiveData<String> = MutableLiveData()
-    val latitude : LiveData<String> get() = _latitude
+    private val _latitude: MutableLiveData<String> = MutableLiveData()
+    val latitude: LiveData<String> get() = _latitude
 
-    private val _longitude : MutableLiveData<String> = MutableLiveData()
-    val longitude : LiveData<String> get() = _longitude
+    private val _longitude: MutableLiveData<String> = MutableLiveData()
+    val longitude: LiveData<String> get() = _longitude
 
-    private val df : SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd\nHH:mm:ss", Locale.getDefault())
-    private val compositeDisposable : CompositeDisposable = CompositeDisposable()
+    private val df: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd\nHH:mm:ss", Locale.getDefault())
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     init {
 
@@ -70,7 +69,7 @@ class HomeViewModel(
         compositeDisposable.add(disposable)
     }
 
-    fun takePhoto(view : View) {
+    fun takePhoto(view: View) {
         pictureRepository.take(pictureRepository.newPicture())
         navigator.navigateCamera()
     }

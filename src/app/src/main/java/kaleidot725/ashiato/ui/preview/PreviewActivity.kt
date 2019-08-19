@@ -1,7 +1,7 @@
 package kaleidot725.ashiato.ui.preview
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
@@ -22,7 +22,7 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     @Inject
-    lateinit var repository : PictureRepository
+    lateinit var repository: PictureRepository
 
     private lateinit var viewModel: PreviewViewModel
 

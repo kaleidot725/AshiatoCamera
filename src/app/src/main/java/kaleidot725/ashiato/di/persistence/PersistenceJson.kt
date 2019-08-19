@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import java.io.File
 
-open class PersistenceJson<T>(name : String, clazz : Class<T>) : Persistence<T> {
+open class PersistenceJson<T>(name: String, clazz: Class<T>) : Persistence<T> {
     val name: String = name
 
     private val moshi: Moshi = Moshi.Builder().build()

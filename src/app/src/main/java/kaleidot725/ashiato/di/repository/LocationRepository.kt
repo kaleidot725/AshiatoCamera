@@ -6,20 +6,20 @@ import io.reactivex.subjects.Subject
 import java.util.*
 
 interface LocationRepository : Disposable {
-    val running : Boolean
+    val running: Boolean
 
-    val update : Subject<Date>
-    val lastUpdate : Date
+    val update: Subject<Date>
+    val lastUpdate: Date
 
-    val altitude : Subject<Double>
-    val lastAltitude : Double
+    val altitude: Subject<Double>
+    val lastAltitude: Double
 
-    val latitude : Subject<Double>
-    val lastLatitude : Double
+    val latitude: Subject<Double>
+    val lastLatitude: Double
 
-    val longitude : Subject<Double>
-    val lastLongitude : Double
+    val longitude: Subject<Double>
+    val lastLongitude: Double
 
-    fun start(activity : Activity)
+    fun start(activity: Activity)
     fun stop()
 }

@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.MenuRecyclerItemBinding
 
-class MenuAdapter(owner : LifecycleOwner, vms: List<MenuViewModel>) : RecyclerView.Adapter<MenuViewHolder>()   {
-    private val owner : LifecycleOwner = owner
+class MenuAdapter(owner: LifecycleOwner, vms: List<MenuViewModel>) : RecyclerView.Adapter<MenuViewHolder>() {
+    private val owner: LifecycleOwner = owner
     private val vms: MutableList<MenuViewModel> = vms.toMutableList()
 
-    fun update(new : List<MenuViewModel>) {
+    fun update(new: List<MenuViewModel>) {
         vms.clear()
         vms.addAll(new)
         this.notifyDataSetChanged()
@@ -20,7 +20,8 @@ class MenuAdapter(owner : LifecycleOwner, vms: List<MenuViewModel>) : RecyclerVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<MenuRecyclerItemBinding>(inflater, R.layout.menu_recycler_item, parent, false)
+        val binding =
+            DataBindingUtil.inflate<MenuRecyclerItemBinding>(inflater, R.layout.menu_recycler_item, parent, false)
         return MenuViewHolder(owner, binding.root, binding)
     }
 

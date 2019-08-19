@@ -1,14 +1,13 @@
 package kaleidot725.ashiato.ui.main.history
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
-
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.HistoryFragmentBinding
 import kaleidot725.ashiato.di.repository.PictureRepository
@@ -20,7 +19,7 @@ enum class HistoryFragmentMode(val value: Int) {
     Action(2)
 }
 
-class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback{
+class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
 
     companion object {
         fun newInstance() = HistoryFragment()
@@ -33,7 +32,7 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback{
     lateinit var repository: PictureRepository
 
     private lateinit var viewModel: HistoryViewModel
-    private var actionMode : ActionMode? = null
+    private var actionMode: ActionMode? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         AndroidSupportInjection.inject(this)
@@ -73,7 +72,7 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback{
     }
 
     override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-        when(item?.itemId) {
+        when (item?.itemId) {
             R.id.delete -> viewModel.delete()
         }
 
@@ -81,8 +80,9 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback{
         return true
     }
 
-    private fun createView(mode : HistoryFragmentMode) {
-        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(navigator, this, repository)).get(HistoryViewModel::class.java)
+    private fun createView(mode: HistoryFragmentMode) {
+        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(navigator, this, repository))
+            .get(HistoryViewModel::class.java)
         viewModel.load(mode)
 
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)

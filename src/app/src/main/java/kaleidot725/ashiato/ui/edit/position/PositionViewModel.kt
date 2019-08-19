@@ -13,13 +13,13 @@ class PositionViewModel(
     private val positionRepository: PositionRepository
 ) : ViewModel() {
 
-    private val _positionRecyclerViewModels : MutableLiveData<List<PositionRecyclerViewModel>> = MutableLiveData()
-    val positionRecyclerViewModels : LiveData<List<PositionRecyclerViewModel>> get() = _positionRecyclerViewModels
+    private val _positionRecyclerViewModels: MutableLiveData<List<PositionRecyclerViewModel>> = MutableLiveData()
+    val positionRecyclerViewModels: LiveData<List<PositionRecyclerViewModel>> get() = _positionRecyclerViewModels
 
     init {
         val all = positionRepository.all()
         val vms = mutableListOf<PositionRecyclerViewModel>()
-        for(position in all) {
+        for (position in all) {
             vms.add(PositionRecyclerViewModel(pictureEditor, positionEditor, position))
         }
 

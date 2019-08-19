@@ -1,6 +1,5 @@
 package kaleidot725.ashiato.di.repository
 
-import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
@@ -9,45 +8,42 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import java.lang.IllegalStateException
 import java.util.*
 
 class LocationRepositoryImpl(
-    private val context : Context,
-    private val provider : String,
-    private val minTime : Int,
-    private val minDistance: Int)
-    : LocationRepository
-{
+    private val context: Context,
+    private val provider: String,
+    private val minTime: Int,
+    private val minDistance: Int
+) : LocationRepository {
 
-    private val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    private val locationManager: LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-    override var running : Boolean = false
+    override var running: Boolean = false
         private set
 
-    private val _update : PublishSubject<Date> = PublishSubject.create()
-    override val update : Subject<Date> get() = _update
+    private val _update: PublishSubject<Date> = PublishSubject.create()
+    override val update: Subject<Date> get() = _update
 
 
-    override var lastUpdate : Date = Date()
+    override var lastUpdate: Date = Date()
         private set
 
-    private val _altitude : PublishSubject<Double> = PublishSubject.create()
-    override val altitude : Subject<Double> = _altitude
-    override var lastAltitude : Double = 0.0
+    private val _altitude: PublishSubject<Double> = PublishSubject.create()
+    override val altitude: Subject<Double> = _altitude
+    override var lastAltitude: Double = 0.0
         private set
 
-    private val _latitude : PublishSubject<Double> = PublishSubject.create()
-    override val latitude : Subject<Double> = _latitude
-    override var lastLatitude : Double = 0.0
+    private val _latitude: PublishSubject<Double> = PublishSubject.create()
+    override val latitude: Subject<Double> = _latitude
+    override var lastLatitude: Double = 0.0
         private set
 
-    override val longitude : PublishSubject<Double> = PublishSubject.create()
-    override var lastLongitude : Double = 0.0
+    override val longitude: PublishSubject<Double> = PublishSubject.create()
+    override var lastLongitude: Double = 0.0
         private set
 
     private val locationListener = object : LocationListener {
@@ -72,12 +68,16 @@ class LocationRepositoryImpl(
         override fun onProviderDisabled(provider: String) {}
     }
 
-    override fun start(activity : Activity) {
+    override fun start(activity: Activity) {
         if (running) {
             throw IllegalStateException("already have started")
         }
 
-        if (!(ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED)) {
+        if (!(ContextCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED)
+        ) {
             throw IllegalStateException("don`t have permited ACCESS_FILE_LOCATION")
         }
 
@@ -85,8 +85,12 @@ class LocationRepositoryImpl(
         locationManager.requestLocationUpdates(provider, minTime.toLong(), minDistance.toFloat(), locationListener)
     }
 
-    override fun stop(){
-        if (!(ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED)) {
+    override fun stop() {
+        if (!(ContextCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED)
+        ) {
             throw IllegalStateException("don`t have permited ACCESS_FILE_LOCATION")
         }
 
@@ -106,6 +110,6 @@ class LocationRepositoryImpl(
         disposed = true
     }
 
-    private var disposed : Boolean = false
+    private var disposed: Boolean = false
     override fun isDisposed() = disposed
 }

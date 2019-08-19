@@ -5,14 +5,12 @@ import androidx.lifecycle.ViewModelProvider
 import kaleidot725.ashiato.di.data.Color
 import kaleidot725.ashiato.di.service.ColorEditor
 import kaleidot725.ashiato.di.service.PictureEditor
-import java.lang.IllegalArgumentException
 
 class ColorRecyclerViewModelFactory(
     private val pictureEditor: PictureEditor,
     private val colorEditor: ColorEditor,
     private val color: Color
-) : ViewModelProvider.Factory
-{
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == ColorRecyclerViewModel::class.java) {

@@ -7,11 +7,11 @@ import kaleidot725.ashiato.di.repository.PictureRepository
 
 class PreviewViewModel(val repository: PictureRepository) : ViewModel() {
 
-    private val _currentPage : MutableLiveData<Int> = MutableLiveData()
-    val currentPage : LiveData<Int> get() = _currentPage
+    private val _currentPage: MutableLiveData<Int> = MutableLiveData()
+    val currentPage: LiveData<Int> get() = _currentPage
 
-    private val _pageCount : MutableLiveData<Int> = MutableLiveData()
-    val pageCount : LiveData<Int> get() = _pageCount
+    private val _pageCount: MutableLiveData<Int> = MutableLiveData()
+    val pageCount: LiveData<Int> get() = _pageCount
 
     init {
         _currentPage.value = repository.all().indexOf(repository.previewed)

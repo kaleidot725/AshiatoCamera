@@ -9,9 +9,8 @@ import kaleidot725.ashiato.di.service.PositionEditor
 class PositionRecyclerViewModelFactory(
     private val pictureEditor: PictureEditor,
     private val positionEditor: PositionEditor,
-    private val position : Position
-) : ViewModelProvider.Factory
-{
+    private val position: Position
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == PositionRecyclerViewModel::class.java) {

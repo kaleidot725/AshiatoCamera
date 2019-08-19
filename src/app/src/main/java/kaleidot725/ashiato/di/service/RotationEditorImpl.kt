@@ -7,14 +7,12 @@ import kaleidot725.ashiato.di.repository.AngleRepository
 
 class RotationEditorImpl(
     private val angleRepository: AngleRepository
-)
-    : RotationEditor
-{
+) : RotationEditor {
 
-    private var _lastEnabled : Angle = angleRepository.all().first()
+    private var _lastEnabled: Angle = angleRepository.all().first()
     override val lastEnabled: Angle get() = _lastEnabled
 
-    private val _enabled : PublishSubject<Angle> = PublishSubject.create()
+    private val _enabled: PublishSubject<Angle> = PublishSubject.create()
     override val enabled: Subject<Angle> get() = _enabled
 
     override fun enable(angle: Angle) {

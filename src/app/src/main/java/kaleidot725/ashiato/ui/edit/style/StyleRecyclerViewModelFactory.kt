@@ -9,9 +9,8 @@ import kaleidot725.ashiato.di.service.StyleEditor
 class StyleRecyclerViewModelFactory(
     private val pictureEditor: PictureEditor,
     private val styleEditor: StyleEditor,
-    private val style : Style
-) : ViewModelProvider.Factory
-{
+    private val style: Style
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == StyleRecyclerViewModel::class.java) {

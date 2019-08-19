@@ -1,7 +1,7 @@
 package kaleidot725.ashiato.ui.edit
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -12,11 +12,11 @@ import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ActivityEditBinding
 import kaleidot725.ashiato.ui.edit.color.ColorFragment
-import kaleidot725.ashiato.ui.edit.style.StyleFragment
 import kaleidot725.ashiato.ui.edit.confirm.ConfirmFragment
 import kaleidot725.ashiato.ui.edit.format.FormatFragment
 import kaleidot725.ashiato.ui.edit.position.PositionFragment
 import kaleidot725.ashiato.ui.edit.rotation.RotationFragment
+import kaleidot725.ashiato.ui.edit.style.StyleFragment
 import javax.inject.Inject
 
 class EditActivity : AppCompatActivity(), HasSupportFragmentInjector, EditNavigator {
@@ -31,8 +31,8 @@ class EditActivity : AppCompatActivity(), HasSupportFragmentInjector, EditNaviga
         setContentView(R.layout.activity_edit)
 
         viewModel = ViewModelProviders.of(this, EditViewModelFactory(this)).get(EditViewModel::class.java)
-        val binding : ActivityEditBinding = DataBindingUtil.setContentView(this, R.layout.activity_edit)
-        binding.viewmodel =  viewModel
+        val binding: ActivityEditBinding = DataBindingUtil.setContentView(this, R.layout.activity_edit)
+        binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 
         supportFragmentManager.beginTransaction().replace(R.id.display_content, ConfirmFragment.newInstance()).commit()
@@ -53,18 +53,20 @@ class EditActivity : AppCompatActivity(), HasSupportFragmentInjector, EditNaviga
         return true
     }
 
-    override fun navigateColorEditor() : Boolean {
+    override fun navigateColorEditor(): Boolean {
         supportFragmentManager.beginTransaction().replace(R.id.editmenu_content, ColorFragment.newInstance()).commit()
         return true
     }
 
     override fun navigatePositionEditor(): Boolean {
-        supportFragmentManager.beginTransaction().replace(R.id.editmenu_content, PositionFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.editmenu_content, PositionFragment.newInstance())
+            .commit()
         return true
     }
 
     override fun navigateRotationEditor(): Boolean {
-        supportFragmentManager.beginTransaction().replace(R.id.editmenu_content, RotationFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.editmenu_content, RotationFragment.newInstance())
+            .commit()
         return true
     }
 

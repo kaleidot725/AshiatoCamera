@@ -12,13 +12,13 @@ class ColorViewModel(
     private val colorEditor: ColorEditor,
     private val colorRepository: ColorRepository
 ) : ViewModel() {
-    private val _colorRecyclerViewModels : MutableLiveData<List<ColorRecyclerViewModel>> = MutableLiveData()
-    val colorRecyclerViewModels : LiveData<List<ColorRecyclerViewModel>> get() = _colorRecyclerViewModels
+    private val _colorRecyclerViewModels: MutableLiveData<List<ColorRecyclerViewModel>> = MutableLiveData()
+    val colorRecyclerViewModels: LiveData<List<ColorRecyclerViewModel>> get() = _colorRecyclerViewModels
 
     init {
         val all = colorRepository.all()
         val vms = mutableListOf<ColorRecyclerViewModel>()
-        for(color in all) {
+        for (color in all) {
             vms.add(ColorRecyclerViewModel(pictureEditor, colorEditor, color))
         }
 

@@ -1,16 +1,15 @@
 package kaleidot725.ashiato.ui.edit.color
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
-
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ColorFragmentBindingImpl
 import kaleidot725.ashiato.di.repository.ColorRepository
@@ -25,24 +24,25 @@ class ColorFragment : Fragment() {
     }
 
     @Inject
-    lateinit var pictureEditor : PictureEditor
+    lateinit var pictureEditor: PictureEditor
 
     @Inject
-    lateinit var colorEditor : ColorEditor
+    lateinit var colorEditor: ColorEditor
 
     @Inject
-    lateinit var repository : ColorRepository
+    lateinit var repository: ColorRepository
 
     private lateinit var viewModel: ColorViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.color_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this, ColorViewModelFactory(pictureEditor, colorEditor, repository)).get(ColorViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, ColorViewModelFactory(pictureEditor, colorEditor, repository))
+            .get(ColorViewModel::class.java)
 
         val binding = DataBindingUtil.bind<ColorFragmentBindingImpl>(this.view as View)
         binding?.lifecycleOwner = this

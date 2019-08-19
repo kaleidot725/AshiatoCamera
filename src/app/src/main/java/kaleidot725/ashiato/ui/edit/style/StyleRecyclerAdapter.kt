@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.StyleRecyclerItemBinding
 
-class StyleRecyclerAdapter(owner : LifecycleOwner, vms: List<StyleRecyclerViewModel>) : RecyclerView.Adapter<StyleRecyclerHolder>() {
-    private val owner : LifecycleOwner = owner
+class StyleRecyclerAdapter(owner: LifecycleOwner, vms: List<StyleRecyclerViewModel>) :
+    RecyclerView.Adapter<StyleRecyclerHolder>() {
+    private val owner: LifecycleOwner = owner
     private val vms: MutableList<StyleRecyclerViewModel> = vms.toMutableList()
 
-    fun update(new : List<StyleRecyclerViewModel>) {
+    fun update(new: List<StyleRecyclerViewModel>) {
         vms.clear()
         vms.addAll(new)
         this.notifyDataSetChanged()
@@ -20,7 +21,8 @@ class StyleRecyclerAdapter(owner : LifecycleOwner, vms: List<StyleRecyclerViewMo
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StyleRecyclerHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<StyleRecyclerItemBinding>(inflater, R.layout.style_recycler_item, parent, false)
+        val binding =
+            DataBindingUtil.inflate<StyleRecyclerItemBinding>(inflater, R.layout.style_recycler_item, parent, false)
         return StyleRecyclerHolder(owner, binding.root, binding)
     }
 

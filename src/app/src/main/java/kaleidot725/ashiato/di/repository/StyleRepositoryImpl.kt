@@ -4,7 +4,7 @@ import androidx.databinding.ObservableArrayList
 import kaleidot725.ashiato.di.data.Style
 
 class StyleRepositoryImpl() : StyleRepository {
-    private val list : ArrayList<Style> = ObservableArrayList<Style>()
+    private val list: ArrayList<Style> = ObservableArrayList<Style>()
 
     init {
         list.add(Style(16f, "16"))

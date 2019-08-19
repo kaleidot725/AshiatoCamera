@@ -1,12 +1,12 @@
 package kaleidot725.ashiato.ui.setting
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.SettingFragmentBinding
@@ -31,9 +31,10 @@ class SettingFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, SettingViewModelFactory(persistenceSetting)).get(SettingViewModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, SettingViewModelFactory(persistenceSetting)).get(SettingViewModel::class.java)
         val binding = DataBindingUtil.bind<SettingFragmentBinding>(this.view as View)
-        binding?.vm =  viewModel
+        binding?.vm = viewModel
         binding?.lifecycleOwner = this
     }
 }

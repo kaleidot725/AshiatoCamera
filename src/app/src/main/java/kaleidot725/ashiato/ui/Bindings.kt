@@ -7,13 +7,13 @@ import com.squareup.picasso.Picasso
 import java.io.File
 
 @BindingAdapter("app:imageUrl")
-fun loadImage(view : ImageView, imagePath : String?) {
+fun loadImage(view: ImageView, imagePath: String?) {
     val file = File(imagePath)
     Picasso.get().load(file).fit().centerInside().into(view)
 }
 
 @BindingAdapter("app:imageUrlNoCache")
-fun loadImageNoCache(view : ImageView, imagePath : String?) {
+fun loadImageNoCache(view: ImageView, imagePath: String?) {
     val file = File(imagePath)
     Picasso.get().load(file).memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerInside().into(view)
 }

@@ -4,8 +4,7 @@ import androidx.databinding.ObservableArrayList
 import kaleidot725.ashiato.di.data.Color
 
 class ColorRepositoryImpl() : ColorRepository {
-    private val list : ArrayList<Color> = ObservableArrayList<Color>()
-
+    private val list: ArrayList<Color> = ObservableArrayList<Color>()
 
     init {
         list.add(Color(android.graphics.Color.rgb(220, 159, 180), "Nadeshiko"))

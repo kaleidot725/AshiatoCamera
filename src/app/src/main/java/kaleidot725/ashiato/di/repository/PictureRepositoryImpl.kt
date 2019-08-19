@@ -7,8 +7,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PictureRepositoryImpl(path : String) : PictureRepository {
-    private val path  = path
+class PictureRepositoryImpl(path: String) : PictureRepository {
+    private val path = path
 
     override var took: Picture? = null
         private set
@@ -19,11 +19,11 @@ class PictureRepositoryImpl(path : String) : PictureRepository {
     override var previewed: Picture? = null
         private set
 
-    override fun all() : List<Picture> {
+    override fun all(): List<Picture> {
         return update().reversed()
     }
 
-    override fun count() : Int {
+    override fun count(): Int {
         val list = update()
         return list.count()
     }
@@ -57,7 +57,7 @@ class PictureRepositoryImpl(path : String) : PictureRepository {
         previewed = picture
     }
 
-    private fun update() : List<Picture>{
+    private fun update(): List<Picture> {
         val list = ArrayList<Picture>()
         File(path).walkTopDown().forEach {
             if (it.path != path) {

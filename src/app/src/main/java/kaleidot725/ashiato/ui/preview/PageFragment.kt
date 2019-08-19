@@ -1,12 +1,12 @@
 package kaleidot725.ashiato.ui.preview
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.PreviewFragmentBinding
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class PageFragment : Fragment() {
 
     companion object {
-        fun newInstance(position : Int) = PageFragment().also {
+        fun newInstance(position: Int) = PageFragment().also {
             val bundle = Bundle()
             bundle.putInt("position", position)
             it.arguments = bundle
@@ -24,7 +24,7 @@ class PageFragment : Fragment() {
     }
 
     @Inject
-    lateinit var repository : PictureRepository
+    lateinit var repository: PictureRepository
 
     private lateinit var viewModel: PageViewModel
 

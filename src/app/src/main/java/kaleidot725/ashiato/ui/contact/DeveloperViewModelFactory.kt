@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kaleidot725.ashiato.di.data.Developer
 
-class DeveloperViewModelFactory(developer : Developer) : ViewModelProvider.Factory {
-    private val developer : Developer = developer
+class DeveloperViewModelFactory(developer: Developer) : ViewModelProvider.Factory {
+    private val developer: Developer = developer
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

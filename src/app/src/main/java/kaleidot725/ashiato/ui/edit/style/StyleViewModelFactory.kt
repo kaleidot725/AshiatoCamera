@@ -10,8 +10,7 @@ class StyleViewModelFactory(
     private val pictureEditor: PictureEditor,
     private val styleEditor: StyleEditor,
     private val styleRepository: StyleRepository
-) : ViewModelProvider.Factory
-{
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == StyleViewModel::class.java) {

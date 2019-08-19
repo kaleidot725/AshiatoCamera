@@ -12,14 +12,13 @@ import kaleidot725.ashiato.di.service.StyleEditor
 class StyleRecyclerViewModel(
     private val pictureEditor: PictureEditor,
     private val styleEditor: StyleEditor,
-    private val style : Style
-) : ViewModel()
-{
-    private val _detail : MutableLiveData<String> = MutableLiveData()
-    val detail : LiveData<String> get() = _detail
+    private val style: Style
+) : ViewModel() {
+    private val _detail: MutableLiveData<String> = MutableLiveData()
+    val detail: LiveData<String> get() = _detail
 
-    private val _enabled :  MutableLiveData<Boolean> = MutableLiveData()
-    val enabled : LiveData<Boolean> = _enabled
+    private val _enabled: MutableLiveData<Boolean> = MutableLiveData()
+    val enabled: LiveData<Boolean> = _enabled
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -27,11 +26,11 @@ class StyleRecyclerViewModel(
         _detail.value = style.detail
         _enabled.value = (styleEditor.lastEnabled == style)
         compositeDisposable.add(
-            styleEditor.enabled.subscribe { _enabled.postValue(it == style)}
+            styleEditor.enabled.subscribe { _enabled.postValue(it == style) }
         )
     }
 
-    fun click(v : View) {
+    fun click(v: View) {
         styleEditor.enable(style)
         pictureEditor.modifyTextSize(style.dp)
     }

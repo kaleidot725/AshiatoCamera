@@ -5,7 +5,7 @@ import kaleidot725.ashiato.di.data.Format
 import kaleidot725.ashiato.di.data.FormatType
 
 class FormatRepositoryImpl() : FormatRepository {
-    private val list : ArrayList<Format> = ObservableArrayList<Format>()
+    private val list: ArrayList<Format> = ObservableArrayList<Format>()
 
     init {
         list.add(Format(FormatType.Date, "Date"))

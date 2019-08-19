@@ -9,13 +9,13 @@ class DateTimeRepositoryImpl : DateTimeRepository {
     private var _running = false
     override val running: Boolean get() = _running
 
-    private val _date : PublishSubject<Date> = PublishSubject.create()
+    private val _date: PublishSubject<Date> = PublishSubject.create()
     override val date: Subject<Date> get() = _date
 
-    private val _lastDate :  Date = Date()
+    private val _lastDate: Date = Date()
     override val lastDate: Date get() = _lastDate
 
-    private var timer : Timer? = null
+    private var timer: Timer? = null
 
     override fun start(intervalMs: Long) {
         if (running) {
@@ -23,7 +23,7 @@ class DateTimeRepositoryImpl : DateTimeRepository {
         }
 
         timer = Timer()
-        timer?.scheduleAtFixedRate(timerTask { _date.onNext(Date())  }, 0, intervalMs)
+        timer?.scheduleAtFixedRate(timerTask { _date.onNext(Date()) }, 0, intervalMs)
     }
 
     override fun stop() {

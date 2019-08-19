@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.PositionRecyclerItemBinding
 
-class PositionRecyclerAdapter(owner : LifecycleOwner, vms : List<PositionRecyclerViewModel>) : RecyclerView.Adapter<PositionRecyclerHolder>() {
+class PositionRecyclerAdapter(owner: LifecycleOwner, vms: List<PositionRecyclerViewModel>) :
+    RecyclerView.Adapter<PositionRecyclerHolder>() {
 
-    private val owner : LifecycleOwner = owner
-    private val vms : MutableList<PositionRecyclerViewModel> = vms.toMutableList()
+    private val owner: LifecycleOwner = owner
+    private val vms: MutableList<PositionRecyclerViewModel> = vms.toMutableList()
 
-    fun update(new : List<PositionRecyclerViewModel>) {
+    fun update(new: List<PositionRecyclerViewModel>) {
         vms.clear()
         vms.addAll(new)
         this.notifyDataSetChanged()
@@ -21,7 +22,12 @@ class PositionRecyclerAdapter(owner : LifecycleOwner, vms : List<PositionRecycle
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PositionRecyclerHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<PositionRecyclerItemBinding>(inflater, R.layout.position_recycler_item, parent, false)
+        val binding = DataBindingUtil.inflate<PositionRecyclerItemBinding>(
+            inflater,
+            R.layout.position_recycler_item,
+            parent,
+            false
+        )
         return PositionRecyclerHolder(owner, binding.root, binding)
     }
 

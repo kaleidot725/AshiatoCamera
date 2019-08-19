@@ -7,14 +7,13 @@ import kaleidot725.ashiato.di.repository.StyleRepository
 import kaleidot725.ashiato.di.service.PictureEditor
 import kaleidot725.ashiato.di.service.StyleEditor
 
-class StyleViewModel (
+class StyleViewModel(
     private val pictureEditor: PictureEditor,
     private val styleEditor: StyleEditor,
     private val styleRepository: StyleRepository
-) : ViewModel()
-{
-    private val _styleRecyclerViewModels : MutableLiveData<List<StyleRecyclerViewModel>> = MutableLiveData()
-    val styleRecyclerViewModel : LiveData<List<StyleRecyclerViewModel>> get() = _styleRecyclerViewModels
+) : ViewModel() {
+    private val _styleRecyclerViewModels: MutableLiveData<List<StyleRecyclerViewModel>> = MutableLiveData()
+    val styleRecyclerViewModel: LiveData<List<StyleRecyclerViewModel>> get() = _styleRecyclerViewModels
 
     init {
         val all = styleRepository.all()

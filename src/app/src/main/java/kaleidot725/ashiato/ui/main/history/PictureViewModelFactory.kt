@@ -2,18 +2,16 @@ package kaleidot725.ashiato.ui.main.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.ui.main.MainNavigator
 import kaleidot725.ashiato.di.data.Picture
 import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.ui.main.MainNavigator
 
 class PictureViewModelFactory(
-    private val navigator : MainNavigator,
-    private val actor : HistoryFragmentActor,
+    private val navigator: MainNavigator,
+    private val actor: HistoryFragmentActor,
     private val pictureRepository: PictureRepository,
-    private val picture : Picture
-)
-    : ViewModelProvider.Factory
-{
+    private val picture: Picture
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == PictureViewModelForDisplay::class.java) {

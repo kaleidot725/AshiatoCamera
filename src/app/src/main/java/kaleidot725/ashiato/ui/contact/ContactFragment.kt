@@ -1,11 +1,11 @@
 package kaleidot725.ashiato.ui.contact
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
@@ -20,7 +20,7 @@ class ContactFragment : Fragment() {
     }
 
     @Inject
-    lateinit var developerRepository : DeveloperRepository
+    lateinit var developerRepository: DeveloperRepository
 
     private lateinit var viewModel: ContactViewModel
 
@@ -30,9 +30,10 @@ class ContactFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProviders.of(this, ContactViewModelFactory(developerRepository)).get(ContactViewModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, ContactViewModelFactory(developerRepository)).get(ContactViewModel::class.java)
         val recyclerView = view.findViewById<RecyclerView>(R.id.contact_recycler_view)
-        recyclerView.adapter = DeveloperAdapter(this,  viewModel.developers)
+        recyclerView.adapter = DeveloperAdapter(this, viewModel.developers)
         recyclerView.layoutManager = GridLayoutManager(context, 1)
         recyclerView.setHasFixedSize(true)
         super.onViewCreated(view, savedInstanceState)

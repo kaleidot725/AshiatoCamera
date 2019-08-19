@@ -5,7 +5,7 @@ import kaleidot725.ashiato.di.data.Position
 import kaleidot725.ashiato.di.data.PositionType
 
 class PositionRepositoryImpl() : PositionRepository {
-    private val list : ArrayList<Position> = ObservableArrayList<Position>()
+    private val list: ArrayList<Position> = ObservableArrayList<Position>()
 
     init {
         list.add(Position(PositionType.TopLeft, "TopLeft"))
@@ -23,7 +23,7 @@ class PositionRepositoryImpl() : PositionRepository {
         return list.toList()
     }
 
-    override fun count() : Int {
+    override fun count(): Int {
         return list.count()
     }
 }

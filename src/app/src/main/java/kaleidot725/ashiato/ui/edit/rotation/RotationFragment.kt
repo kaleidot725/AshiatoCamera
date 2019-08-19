@@ -1,22 +1,19 @@
 package kaleidot725.ashiato.ui.edit.rotation
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
-
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.RotationFragmentBindingImpl
 import kaleidot725.ashiato.di.repository.AngleRepository
-import kaleidot725.ashiato.di.repository.PositionRepository
 import kaleidot725.ashiato.di.service.PictureEditor
-import kaleidot725.ashiato.di.service.PositionEditor
 import kaleidot725.ashiato.di.service.RotationEditor
 import javax.inject.Inject
 
