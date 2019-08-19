@@ -113,6 +113,12 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun provideAngleRepository(myApplication: MyApplication) : AngleRepository {
+        return AngleRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
     fun provideMainMenuSelected(myApplication: MyApplication) : Holder<MainMenu> {
         return HolderImpl<MainMenu>(MainMenu.Home)
     }
@@ -121,7 +127,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideFormatEditor(myApplication: MyApplication) : FormatEditor {
-        return FormatEditorImpl(provideDateTimeRepository(myApplication), provideLocationRepository(myApplication))
+        return FormatEditorImpl()
     }
 
     @Provides
@@ -140,6 +146,12 @@ class AppModule {
     @Singleton
     fun providePositionEditor(myApplication: MyApplication) : PositionEditor {
         return PositionEditorImpl(providePositionRepository(myApplication))
+    }
+
+    @Provides
+    @Singleton
+    fun provideRotationEditor(myApplication : MyApplication) : RotationEditor {
+        return RotationEditorImpl(provideAngleRepository(myApplication))
     }
 
     @Provides

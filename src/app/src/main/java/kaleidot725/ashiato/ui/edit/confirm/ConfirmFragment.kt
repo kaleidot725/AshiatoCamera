@@ -10,10 +10,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.databinding.ConfirmFragmentBinding
+import kaleidot725.ashiato.di.repository.DateTimeRepository
 import kaleidot725.ashiato.di.repository.LocationRepository
 import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.di.service.FormatEditor
 import kaleidot725.ashiato.di.service.PictureEditor
+import kaleidot725.ashiato.di.service.RotationEditor
 import kaleidot725.ashiato.ui.edit.EditNavigator
 import javax.inject.Inject
 
@@ -33,7 +35,13 @@ class ConfirmFragment : Fragment() {
     lateinit var pictureEditor : PictureEditor
 
     @Inject
+    lateinit var rotationEditor: RotationEditor
+
+    @Inject
     lateinit var locationRepository: LocationRepository
+
+    @Inject
+    lateinit var dateTimeRepository: DateTimeRepository
 
     @Inject
     lateinit var pictureRepository: PictureRepository
@@ -48,7 +56,9 @@ class ConfirmFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         AndroidSupportInjection.inject(this)
 
-        viewModel = ViewModelProviders.of(this, ConfirmViewModelFactory(navigator, pictureRepository, formatEditor, pictureEditor)).get(ConfirmViewModel::class.java)
+        val factory = ConfirmViewModelFactory(navigator, dateTimeRepository, locationRepository, pictureRepository, formatEditor, rotationEditor, pictureEditor)
+        viewModel = ViewModelProviders.of(this, factory).get(ConfirmViewModel::class.java)
+
         val binding = DataBindingUtil.bind<ConfirmFragmentBinding>(view)
         binding?.lifecycleOwner = this
         binding?.vm = viewModel

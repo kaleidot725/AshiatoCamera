@@ -1,13 +1,14 @@
 package kaleidot725.ashiato.di.service
 
 import android.graphics.*
+import android.media.ExifInterface
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import kaleidot725.ashiato.di.data.Picture
 import kaleidot725.ashiato.di.data.PositionType
 import java.lang.Exception
 
-class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
+class PictureEditorImpl(drawableCanvas : DrawableCanvas) : PictureEditor {
 
     override var target: Picture? = null
     override var preview: Picture? = null
@@ -16,12 +17,12 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
     override val state: Subject<PictureEditorState> get() = _state
     private var lastState : PictureEditorState = PictureEditorState.Init
 
-    private var canvas : DrawableCanvas = drwableCnavas
+    private var canvas : DrawableCanvas = drawableCanvas
     private var text : String = ""
     private var color : Int = Color.WHITE
     private var textSize : Float = 16f
     private var position : PositionType = PositionType.TopLeft
-    private var degree : Int = 0
+    private var angle : Float = 0f
 
     override fun start(target : Picture, preview : Picture) {
         if (lastState != PictureEditorState.Init) {
@@ -30,8 +31,8 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.target = target
         this.preview = preview
-
         canvas.load(target.path)
+        canvas.rotation(angle)
         canvas.write(preview.path)
 
         lastState = PictureEditorState.Start
@@ -45,6 +46,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.text = text
         canvas.load(target!!.path)
+        canvas.rotation(angle)
         canvas.draw(this.position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
@@ -59,6 +61,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.textSize = size
         canvas.load(target!!.path)
+        canvas.rotation(angle)
         canvas.draw(this.position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
@@ -73,6 +76,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.color = color
         canvas.load(target!!.path)
+        canvas.rotation(angle)
         canvas.draw(this.position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
@@ -87,6 +91,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
 
         this.position = position
         canvas.load(target!!.path)
+        canvas.rotation(angle)
         canvas.draw(this.position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
@@ -94,13 +99,14 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
         _state.onNext(PictureEditorState.Update)
     }
 
-    override fun modifyRotation(degree: Int) {
+    override fun modifyRotation(angle: Float) {
         if (lastState == PictureEditorState.Init) {
             throw Exception("invalid operation")
         }
 
-        this.degree = degree
+        this.angle = angle
         canvas.load(target!!.path)
+        canvas.rotation(this.angle)
         canvas.draw(position, this.text, this.color, this.textSize)
         canvas.write(preview!!.path)
 
@@ -114,6 +120,7 @@ class PictureEditorImpl(drwableCnavas : DrawableCanvas) : PictureEditor {
         }
 
         canvas.delete(preview!!.path)
+        canvas.rotation(this.angle)
         canvas.write(target!!.path)
         lastState = PictureEditorState.Init
         _state.onComplete()

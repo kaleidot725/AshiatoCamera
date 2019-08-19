@@ -14,7 +14,7 @@ interface PictureEditor  {
     fun modifyTextSize(size : Float)
     fun modifyColor(color : Int)
     fun modifyPosition(position : PositionType)
-    fun modifyRotation(degree : Int)
+    fun modifyRotation(angle : Float)
     fun end()
     fun cancel()
 }

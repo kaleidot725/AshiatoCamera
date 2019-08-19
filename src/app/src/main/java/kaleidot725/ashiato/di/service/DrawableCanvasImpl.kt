@@ -13,11 +13,6 @@ class DrawableCanvasImpl() : DrawableCanvas {
     private lateinit var canvas : Canvas
 
     override fun load(path: String) {
-        val degree = getRotationAngle(path)
-        val matrix = Matrix().also {
-            it.postRotate(degree)
-        }
-
         val options = BitmapFactory.Options().also {
             it.inMutable = true
         }
@@ -59,8 +54,6 @@ class DrawableCanvasImpl() : DrawableCanvas {
             PositionType.BottomCenter -> return (canvas.height - bounds.height()).toFloat()
             PositionType.BottomRight  -> return (canvas.height - bounds.height()).toFloat()
         }
-
-        return 0f
     }
 
     private fun calcX(position : PositionType, text : String, paint : Paint) : Float{
@@ -96,22 +89,5 @@ class DrawableCanvasImpl() : DrawableCanvas {
 
     override fun delete(path : String) {
         File(path).delete()
-    }
-
-    private fun getRotationAngle(path : String) : Float {
-        val exif = ExifInterface(path)
-        val orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION)
-        val orientation = if (orientString != null) Integer.parseInt(orientString) else ExifInterface.ORIENTATION_NORMAL
-
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_90)
-            return 90f
-
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_180)
-            return 180f
-
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_270)
-            return 270f
-
-        return 0f
     }
 }

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="#ff00ff"
-        tools:context=".ui.edit.rotation.RotationFragment">
+        tools:context=".ui.edit.rotation.Rotation">
 
-    <TextView
+    <data>
+        <variable name="vm" type="kaleidot725.ashiato.ui.edit.rotation.RotationViewModel"/>
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rotation_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="rotation"/>
+            android:background="@android:color/black"/>
 
-</FrameLayout>
+</layout>

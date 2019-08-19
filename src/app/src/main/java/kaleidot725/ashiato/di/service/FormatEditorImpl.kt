@@ -4,12 +4,9 @@ import kaleidot725.ashiato.di.data.FormatType
 import kaleidot725.ashiato.di.repository.DateTimeRepository
 import kaleidot725.ashiato.di.repository.LocationRepository
 import java.text.SimpleDateFormat
+import java.util.*
 
-class FormatEditorImpl(
-    private val dateTimeRepository: DateTimeRepository,
-    private val locationRepository: LocationRepository
-) :
-    FormatEditor
+class FormatEditorImpl : FormatEditor
 {
     private var dateEnable: Boolean = false
     private var timeEnable: Boolean = false
@@ -21,27 +18,42 @@ class FormatEditorImpl(
     private val dateFormat : SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
     private val timeFormat : SimpleDateFormat = SimpleDateFormat("HH:mm:ss")
 
+    private var date : Date= Date()
+    private var altitude : Double = 0.0
+    private var latitude : Double = 0.0
+    private var longitude : Double = 0.0
+
+    override fun setDate(date : Date) {
+        this.date = date
+    }
+
+    override fun setLocation(altitude: Double, latitude: Double, longitude: Double) {
+        this.altitude = altitude
+        this.latitude = latitude
+        this.longitude = longitude
+    }
+
     override fun create(): String {
         var value = ""
 
         if (dateEnable) {
-            value += dateFormat.format(dateTimeRepository.lastDate) + space
+            value += dateFormat.format(date) + space
         }
 
         if (timeEnable) {
-            value += timeFormat.format(dateTimeRepository.lastDate) + space
+            value += timeFormat.format(date) + space
         }
 
         if (altitudeEnable) {
-            value += "${locationRepository.lastAltitude.toInt()}m" + space
+            value += "${altitude.toInt()}m" + space
         }
 
         if (latitudeEnable) {
-            value += "${locationRepository.lastLatitude.toInt()}°" + space
+            value += "${latitude.toInt()}°" + space
         }
 
         if (longitudeEnable) {
-            value += "${locationRepository.lastLongitude.toInt()}°" + space
+            value += "${longitude.toInt()}°" + space
         }
 
         return value
