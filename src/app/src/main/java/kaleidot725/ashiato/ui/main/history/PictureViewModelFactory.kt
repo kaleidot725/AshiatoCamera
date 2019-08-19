@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kaleidot725.ashiato.ui.main.MainNavigator
 import kaleidot725.ashiato.di.data.Picture
-import kaleidot725.michetimer.model.repository.PictureRepository
+import kaleidot725.ashiato.di.repository.PictureRepository
 
 class PictureViewModelFactory(
     private val navigator : MainNavigator,

@@ -3,7 +3,7 @@ package kaleidot725.ashiato.ui.preview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.michetimer.model.repository.PictureRepository
+import kaleidot725.ashiato.di.repository.PictureRepository
 
 class PageViewModel(repository: PictureRepository, position : Int) : ViewModel() {
 

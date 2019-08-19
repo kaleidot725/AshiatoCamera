@@ -1,4 +1,4 @@
-package kaleidot725.michetimer.model.repository
+package kaleidot725.ashiato.di.repository
 
 import android.os.Environment
 import kaleidot725.ashiato.di.data.Picture

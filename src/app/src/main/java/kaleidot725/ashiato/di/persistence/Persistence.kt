@@ -1,4 +1,4 @@
-package kaleidot725.todo.model.persistence
+package kaleidot725.ashiato.di.persistence
 
 interface Persistence<T> {
     fun save(list: T)

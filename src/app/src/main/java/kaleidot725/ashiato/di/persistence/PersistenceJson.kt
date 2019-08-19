@@ -1,11 +1,9 @@
-package kaleidot725.todo.model.persistence
+package kaleidot725.ashiato.di.persistence
 
 import android.util.Log
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
 import java.io.File
-import java.lang.reflect.ParameterizedType
 
 open class PersistenceJson<T>(name : String, clazz : Class<T>) : Persistence<T> {
     val name: String = name

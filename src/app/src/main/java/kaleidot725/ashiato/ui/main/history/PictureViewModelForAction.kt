@@ -3,7 +3,7 @@ package kaleidot725.ashiato.ui.main.history
 import android.view.View
 import kaleidot725.ashiato.ui.main.MainNavigator
 import kaleidot725.ashiato.di.data.Picture
-import kaleidot725.michetimer.model.repository.PictureRepository
+import kaleidot725.ashiato.di.repository.PictureRepository
 
 class PictureViewModelForAction(private val navigation : MainNavigator,
                                 private val actor : HistoryFragmentActor,

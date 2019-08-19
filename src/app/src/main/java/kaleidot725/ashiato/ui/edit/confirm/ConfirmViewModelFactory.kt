@@ -2,10 +2,10 @@ package kaleidot725.ashiato.ui.edit.confirm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.di.service.FormatEditor
 import kaleidot725.ashiato.di.service.PictureEditor
 import kaleidot725.ashiato.ui.edit.EditNavigator
-import kaleidot725.michetimer.model.repository.PictureRepository
 import java.lang.Exception
 
 class ConfirmViewModelFactory(

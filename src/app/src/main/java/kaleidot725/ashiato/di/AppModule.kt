@@ -15,8 +15,6 @@ import kaleidot725.ashiato.ui.main.settinglist.SettingListFragment
 import kaleidot725.ashiato.di.repository.LocationRepositoryImpl
 import kaleidot725.ashiato.ui.setting.SettingActivity
 import kaleidot725.ashiato.ui.setting.SettingFragment
-import kaleidot725.michetimer.model.repository.PictureRepositoryImpl
-import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Singleton
 import dagger.android.support.AndroidSupportInjectionModule
 import kaleidot725.ashiato.ui.MyApplication

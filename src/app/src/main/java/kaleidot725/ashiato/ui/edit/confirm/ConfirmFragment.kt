@@ -11,10 +11,10 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.databinding.ConfirmFragmentBinding
 import kaleidot725.ashiato.di.repository.LocationRepository
+import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.di.service.FormatEditor
 import kaleidot725.ashiato.di.service.PictureEditor
 import kaleidot725.ashiato.ui.edit.EditNavigator
-import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Inject
 
 class ConfirmFragment : Fragment() {

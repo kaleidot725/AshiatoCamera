@@ -15,7 +15,7 @@ import kaleidot725.ashiato.databinding.HomeFragmentBinding
 import kaleidot725.ashiato.ui.main.MainNavigator
 import kaleidot725.ashiato.di.repository.DateTimeRepository
 import kaleidot725.ashiato.di.repository.LocationRepository
-import kaleidot725.michetimer.model.repository.PictureRepository
+import kaleidot725.ashiato.di.repository.PictureRepository
 import java.lang.Exception
 import javax.inject.Inject
 

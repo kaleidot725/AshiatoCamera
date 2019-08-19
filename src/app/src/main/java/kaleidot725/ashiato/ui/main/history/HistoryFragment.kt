@@ -11,8 +11,8 @@ import dagger.android.support.AndroidSupportInjection
 
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.HistoryFragmentBinding
+import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.ui.main.MainNavigator
-import kaleidot725.michetimer.model.repository.PictureRepository
 import javax.inject.Inject
 
 enum class HistoryFragmentMode(val value: Int) {

@@ -6,10 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.di.data.Picture
+import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.di.service.FormatEditor
 import kaleidot725.ashiato.di.service.PictureEditor
 import kaleidot725.ashiato.ui.edit.EditNavigator
-import kaleidot725.michetimer.model.repository.PictureRepository
 
 class ConfirmViewModel(
     val navigator: EditNavigator,

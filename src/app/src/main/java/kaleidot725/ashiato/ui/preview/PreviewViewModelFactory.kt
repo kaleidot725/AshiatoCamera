@@ -2,7 +2,7 @@ package kaleidot725.ashiato.ui.preview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.michetimer.model.repository.PictureRepository
+import kaleidot725.ashiato.di.repository.PictureRepository
 import java.lang.Exception
 
 class PreviewViewModelFactory(val repository : PictureRepository) : ViewModelProvider.Factory {

@@ -60,7 +60,4 @@
     <string name="github">GitHub</string>
     <string name="email">Email</string>
     <string name="separator">:</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -2,9 +2,8 @@ package kaleidot725.ashiato.ui.main.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.ui.main.MainNavigator
-import kaleidot725.michetimer.model.repository.PictureRepository
-
 
 class HistoryViewModelFactory(
     private val navigator : MainNavigator,

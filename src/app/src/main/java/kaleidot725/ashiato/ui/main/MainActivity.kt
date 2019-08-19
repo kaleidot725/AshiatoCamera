@@ -32,7 +32,7 @@ import kaleidot725.ashiato.di.holder.Holder
 import kaleidot725.ashiato.di.repository.LocationRepository
 import kaleidot725.ashiato.ui.preview.PreviewActivity
 import kaleidot725.ashiato.ui.setting.SettingActivity
-import kaleidot725.michetimer.model.repository.PictureRepository
+import kaleidot725.ashiato.di.repository.PictureRepository
 import java.io.File
 import java.io.IOException
 import javax.inject.Inject

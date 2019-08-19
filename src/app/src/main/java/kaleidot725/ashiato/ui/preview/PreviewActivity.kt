@@ -13,7 +13,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.PreviewActivityBinding
-import kaleidot725.michetimer.model.repository.PictureRepository
+import kaleidot725.ashiato.di.repository.PictureRepository
 import javax.inject.Inject
 
 class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
