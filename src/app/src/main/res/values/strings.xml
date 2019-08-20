@@ -21,6 +21,8 @@
 
     <!-- Main -> History -->
     <string name="nohistory">NO HISTORY</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
 
     <!-- SettingList -> Setting -->
     <string name="menu_setting">Setting</string>

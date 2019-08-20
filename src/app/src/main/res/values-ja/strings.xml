@@ -21,6 +21,8 @@
 
     <!-- Main -> History -->
     <string name="nohistory">履歴なし</string>
+    <string name="delete">削除</string>
+    <string name="share">共有</string>
 
     <!-- SettingList -> Setting -->
     <string name="menu_setting">設定</string>
