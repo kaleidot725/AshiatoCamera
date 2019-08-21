@@ -1,6 +1,9 @@
 package kaleidot725.ashiato.ui.main.history
 
+import android.content.Intent
 import android.util.Log
+import androidx.core.app.ShareCompat
+import androidx.core.content.FileProvider
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,11 +22,6 @@ class HistoryViewModel(
 
     private val _notFound: MutableLiveData<Boolean> = MutableLiveData()
     val notFound: LiveData<Boolean> get() = _notFound
-
-    init {
-        _pictureViewModels.value = createPictureViewModels(HistoryFragmentMode.Display)
-        _notFound.value = (pictureRepository.count() == 0)
-    }
 
     fun load(mode: HistoryFragmentMode) {
         _pictureViewModels.value = createPictureViewModels(mode)
@@ -45,6 +43,23 @@ class HistoryViewModel(
         }
 
         _notFound.value = (pictureRepository.count() == 0)
+    }
+
+    fun share() {
+        val files = mutableListOf<File>()
+        _pictureViewModels.value?.forEach {
+            try {
+                val shareable = it.isChecked.value ?: false
+                if (shareable) {
+                    files.add(File(it.path.value))
+                }
+            } catch (e: Exception) {
+                Log.e("HistoryViewModel", e.toString())
+            }
+
+            Log.v("HistoryViewModel", it.path.value)
+        }
+        navigator.navigateShare(files)
     }
 
     private fun createPictureViewModels(mode: HistoryFragmentMode): List<PictureViewModelBase> {

@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -107,7 +108,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
                 tempFile = File("${storageDir}/temp.jpg")
 
                 val photoURI: Uri =
-                    FileProvider.getUriForFile(this, "com.example.android.fileprovider", tempFile as File)
+                    FileProvider.getUriForFile(this, applicationContext.packageName + ".provider", tempFile as File)
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
 
                 this.imageFile = File(pictureRepository.took!!.path)
@@ -166,6 +167,23 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         supportFragmentManager.beginTransaction().replace(R.id.main_content, SettingListFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.SettingList)
         return true
+    }
+
+    override fun navigateShare(files: List<File>) {
+        val builder = ShareCompat.IntentBuilder.from(this)
+        for (file in files) {
+            val shareUri = FileProvider.getUriForFile(applicationContext, applicationContext.packageName + ".provider", file)
+            builder.addStream(shareUri)
+        }
+
+        val intent = builder.intent
+        intent.type = "image/jpg"
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
+
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {

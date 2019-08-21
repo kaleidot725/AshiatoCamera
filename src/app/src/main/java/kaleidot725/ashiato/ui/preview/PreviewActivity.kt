@@ -28,6 +28,7 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var repository: PictureRepository
 
     private lateinit var viewModel: PreviewViewModel
+    private lateinit var viewPager : ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -41,7 +42,7 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
         binding?.lifecycleOwner = this
         binding?.viewmodel = viewModel
 
-        val viewPager = findViewById<ViewPager>(R.id.viewpager)
+        viewPager = findViewById<ViewPager>(R.id.viewpager)
         viewPager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getCount(): Int {
                 return viewModel.pageCount.value ?: 0
@@ -52,19 +53,6 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
             }
         }
         viewPager.currentItem = viewModel.currentPage.value ?: 0
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.preview_picture_menu, menu);
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
-            R.id.share -> Log.v("TEST", "TEST")
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {

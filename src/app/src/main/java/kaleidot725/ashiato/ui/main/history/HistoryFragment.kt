@@ -14,6 +14,8 @@ import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.ui.main.MainNavigator
 import javax.inject.Inject
 
+
+
 enum class HistoryFragmentMode(val value: Int) {
     Display(1),
     Action(2)
@@ -33,6 +35,7 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
 
     private lateinit var viewModel: HistoryViewModel
     private var actionMode: ActionMode? = null
+    private var recyclerView : RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         AndroidSupportInjection.inject(this)
@@ -74,6 +77,7 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
     override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.delete -> viewModel.delete()
+            R.id.share -> viewModel.share()
         }
 
         actionMode?.finish()
@@ -89,10 +93,16 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
         binding?.lifecycleOwner = this
         binding?.vm = viewModel
 
-        val recyclerView = this.view?.findViewById<RecyclerView>(R.id.picture_recycler_view)
+        var position = 0
+        if (recyclerView != null) {
+            position  = (recyclerView!!.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition()
+        }
+
+        recyclerView = this.view?.findViewById<RecyclerView>(R.id.picture_recycler_view)
         recyclerView?.adapter = PictureAdapter(this, viewModel.pictureViewModels.value ?: listOf())
         recyclerView?.layoutManager = GridLayoutManager(context, 2)
         recyclerView?.setHasFixedSize(true)
+        recyclerView?.scrollToPosition(position)
     }
 }
 
