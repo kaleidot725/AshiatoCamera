@@ -15,7 +15,6 @@ import kaleidot725.ashiato.ui.main.MainNavigator
 import javax.inject.Inject
 
 
-
 enum class HistoryFragmentMode(val value: Int) {
     Display(1),
     Action(2)

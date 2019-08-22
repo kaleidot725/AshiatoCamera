@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:myApplication="http://schemas.android.com/apk/res-auto">
+        xmlns:myApplication="http://schemas.android.com/apk/res-auto"
+        xmlns:myApplicaton="http://schemas.android.com/tools">
 
     <data>
         <variable name="vm" type="kaleidot725.ashiato.ui.main.settinglist.MenuViewModel"/>
@@ -18,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                android:onClick="@{vm::click}"
+                myApplicaton:onSafeClick="@{vm::click}"
                 android:background="?android:attr/selectableItemBackground">
 
             <ImageView
