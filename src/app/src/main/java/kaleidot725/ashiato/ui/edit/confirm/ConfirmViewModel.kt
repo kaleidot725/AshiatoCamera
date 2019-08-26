@@ -1,11 +1,13 @@
 package kaleidot725.ashiato.ui.edit.confirm
 
+import android.media.ExifInterface
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.di.data.Picture
+import kaleidot725.ashiato.di.repository.AngleRepository
 import kaleidot725.ashiato.di.repository.DateTimeRepository
 import kaleidot725.ashiato.di.repository.LocationRepository
 import kaleidot725.ashiato.di.repository.PictureRepository
@@ -19,6 +21,7 @@ class ConfirmViewModel(
     val dateTimeRepository: DateTimeRepository,
     val locationRepository: LocationRepository,
     val pictureRepository: PictureRepository,
+    val angleRepository: AngleRepository,
     val formatEditor: FormatEditor,
     val rotationEditor: RotationEditor,
     val pictureEditor: PictureEditor
@@ -42,6 +45,11 @@ class ConfirmViewModel(
         )
         val target = pictureRepository.took as Picture
         val preview = pictureRepository.tmpPicture()
+
+        val angleValue = getRotationAngle(target.path)
+        val angle = angleRepository.all().filter { angle -> angle.value == angleValue }.first()
+        rotationEditor.enable(angle)
+
         pictureEditor.start(target, preview)
         pictureEditor.modifyText(formatEditor.create())
         pictureEditor.modifyRotation(rotationEditor.lastEnabled.value)
@@ -69,4 +77,20 @@ class ConfirmViewModel(
         compositeDisposable.dispose()
         super.onCleared()
     }
-}
+
+    private fun getRotationAngle(path : String) : Float {
+        val exif = ExifInterface(path)
+        val orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+        val orientation = if (orientString != null) Integer.parseInt(orientString) else ExifInterface.ORIENTATION_NORMAL
+
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_90)
+            return 90f
+
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_180)
+            return 180f
+
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_270)
+            return 270f
+
+        return 0f
+    }}

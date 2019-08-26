@@ -118,7 +118,6 @@ class PictureEditorImpl(drawableCanvas: DrawableCanvas) : PictureEditor {
         }
 
         canvas.delete(preview!!.path)
-        canvas.rotation(this.angle)
         canvas.write(target!!.path)
         lastState = PictureEditorState.Init
         _state.onComplete()

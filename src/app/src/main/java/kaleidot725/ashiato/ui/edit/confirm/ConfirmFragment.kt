@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ConfirmFragmentBinding
+import kaleidot725.ashiato.di.repository.AngleRepository
 import kaleidot725.ashiato.di.repository.DateTimeRepository
 import kaleidot725.ashiato.di.repository.LocationRepository
 import kaleidot725.ashiato.di.repository.PictureRepository
@@ -46,6 +47,9 @@ class ConfirmFragment : Fragment() {
     @Inject
     lateinit var pictureRepository: PictureRepository
 
+    @Inject
+    lateinit var angleRepository: AngleRepository
+
     private lateinit var viewModel: ConfirmViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,6 +65,7 @@ class ConfirmFragment : Fragment() {
             dateTimeRepository,
             locationRepository,
             pictureRepository,
+            angleRepository,
             formatEditor,
             rotationEditor,
             pictureEditor

@@ -10,9 +10,9 @@ class FormatRepositoryImpl() : FormatRepository {
     init {
         list.add(Format(FormatType.Date, "Date"))
         list.add(Format(FormatType.Time, "Time"))
-        list.add(Format(FormatType.Altitude, "Alt"))
-        list.add(Format(FormatType.Latitude, "Lat"))
-        list.add(Format(FormatType.Longitude, "Lng"))
+        list.add(Format(FormatType.Altitude, "Altitude"))
+        list.add(Format(FormatType.Latitude, "Latitude"))
+        list.add(Format(FormatType.Longitude, "Lngitude"))
     }
 
     override fun all(): List<Format> {

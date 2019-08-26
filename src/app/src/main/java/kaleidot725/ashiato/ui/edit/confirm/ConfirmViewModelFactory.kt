@@ -2,6 +2,7 @@ package kaleidot725.ashiato.ui.edit.confirm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import kaleidot725.ashiato.di.repository.AngleRepository
 import kaleidot725.ashiato.di.repository.DateTimeRepository
 import kaleidot725.ashiato.di.repository.LocationRepository
 import kaleidot725.ashiato.di.repository.PictureRepository
@@ -15,6 +16,7 @@ class ConfirmViewModelFactory(
     val dateTimeRepository: DateTimeRepository,
     val locationRepository: LocationRepository,
     val pictureRepository: PictureRepository,
+    val angleRepository: AngleRepository,
     val formatEditor: FormatEditor,
     val rotationEditor: RotationEditor,
     val bitmapEditor: PictureEditor
@@ -28,6 +30,7 @@ class ConfirmViewModelFactory(
                 dateTimeRepository,
                 locationRepository,
                 pictureRepository,
+                angleRepository,
                 formatEditor,
                 rotationEditor,
                 bitmapEditor
