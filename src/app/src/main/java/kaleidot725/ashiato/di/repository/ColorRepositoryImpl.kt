@@ -7,6 +7,7 @@ class ColorRepositoryImpl() : ColorRepository {
     private val list: ArrayList<Color> = ObservableArrayList<Color>()
 
     init {
+        list.add(Color(android.graphics.Color.rgb(255, 255, 255), "White"))
         list.add(Color(android.graphics.Color.rgb(220, 159, 180), "Nadeshiko"))
         list.add(Color(android.graphics.Color.rgb(240, 94, 28), "Ohni"))
         list.add(Color(android.graphics.Color.rgb(255, 177, 27), "Yamabuki"))

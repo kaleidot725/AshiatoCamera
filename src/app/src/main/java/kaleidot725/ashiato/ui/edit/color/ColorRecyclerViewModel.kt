@@ -27,7 +27,7 @@ class ColorRecyclerViewModel(
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        _txtColor.value = color.value
+        _txtColor.value = if (color.value == android.graphics.Color.WHITE) android.graphics.Color.BLACK else color.value
         _detail.value = color.detail
         _enabled.value = (colorEditor.lastEnabled == color)
         compositeDisposable.add(

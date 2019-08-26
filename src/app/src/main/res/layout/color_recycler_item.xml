@@ -25,6 +25,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:textColor="@{vm.enabled ? @android:color/white : vm.txtColor}"
                     android:text="@{vm.detail}"/>
         </FrameLayout>

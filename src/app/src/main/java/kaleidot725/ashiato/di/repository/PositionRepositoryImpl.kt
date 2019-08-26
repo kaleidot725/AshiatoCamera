@@ -8,15 +8,15 @@ class PositionRepositoryImpl() : PositionRepository {
     private val list: ArrayList<Position> = ObservableArrayList<Position>()
 
     init {
-        list.add(Position(PositionType.TopLeft, "TopLeft"))
-        list.add(Position(PositionType.TopCenter, "TopCenter"))
-        list.add(Position(PositionType.TopRight, "TopRight"))
-        list.add(Position(PositionType.CenterLeft, "CenterLeft"))
+        list.add(Position(PositionType.TopLeft, "Top\nLeft"))
+        list.add(Position(PositionType.TopCenter, "Top\nCenter"))
+        list.add(Position(PositionType.TopRight, "Top\nRight"))
+        list.add(Position(PositionType.CenterLeft, "Center\nLeft"))
         list.add(Position(PositionType.Center, "Center"))
-        list.add(Position(PositionType.CenterRight, "CenterRight"))
-        list.add(Position(PositionType.BottomLeft, "BottomLeft"))
-        list.add(Position(PositionType.BottomCenter, "BottomCenter"))
-        list.add(Position(PositionType.BottomRight, "BottomRight"))
+        list.add(Position(PositionType.CenterRight, "Center\nRight"))
+        list.add(Position(PositionType.BottomLeft, "Bottom\nLeft"))
+        list.add(Position(PositionType.BottomCenter, "Bottom\nCenter"))
+        list.add(Position(PositionType.BottomRight, "Bottom\nRight"))
     }
 
     override fun all(): List<Position> {

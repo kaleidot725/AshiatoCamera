@@ -30,10 +30,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/navigation_bar_height"
                 android:layout_gravity="bottom"
-                android:background="@color/backgroundNegative"
+                android:background="@android:color/black"
                 android:elevation="16dp"
-                myApplication:itemIconTint="@android:color/white"
-                myApplication:itemTextColor="@android:color/white"
+                myApplication:itemIconTint="@color/bottom_nav_negcolor"
+                myApplication:itemTextColor="@color/bottom_nav_negcolor"
                 myApplication:setOnNavigationItemSelectedListener="@{viewmodel.onNavigationItemSelectedListener}"
                 myApplication:menu="@menu/edit_picture_menu" />
     </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
