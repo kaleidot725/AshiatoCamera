@@ -3,8 +3,17 @@
 このアプリを使えば日々の写真に情報を載せて管理することができます。
 
 
-![デザイン](./doc/design.png)
+![デザイン](./doc/ashiato.jpg)
+
+
 
 # このプロジェクトの技術
 
-...
+このプロジェクトでは次の技術を利用しています。
+
+* [Kotlin Programming Language](https://kotlinlang.org/)       
+* [MVVM](https://ja.wikipedia.org/wiki/Model_View_ViewModel) 
+* [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/) 
+* [Dagger2](https://github.com/google/dagger)                  
+
+  
