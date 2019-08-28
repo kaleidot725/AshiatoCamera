@@ -2,14 +2,11 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
-    <TextView
+    <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:id="@+id/action_bar_title"
-            android:text="@string/main_title"
-            android:textColor="@android:color/white"
-            android:fontFamily="monospace"
-            android:textStyle="normal"
-            android:textSize="22dp"/>
+            android:layout_margin="16dp"
+            android:src="@drawable/ashiato"
+            android:id="@+id/action_bar_title"/>
 </FrameLayout>
