@@ -22,25 +22,73 @@ class DrawableCanvasImpl() : DrawableCanvas {
     }
 
     override fun draw(x: Float, y: Float, text: String, color: Int, size: Float) {
-        val paint = Paint().also {
+        val strokePaint = Paint().also {
+            it.color = Color.WHITE
+            it.textSize = size
+            it.isAntiAlias = true
+            it.strokeWidth = 2f
+            it.strokeJoin = Paint.Join.ROUND
+            it.strokeCap = Paint.Cap.ROUND
+            it.style = Paint.Style.STROKE
+        }
+        canvas.drawText(text, x, y, strokePaint)
+
+        val textPaint = Paint().also {
             it.color = color
+            it.isAntiAlias = true
             it.textSize = size
         }
-        canvas.drawText(text, x, y, paint)
+
+        canvas.drawText(text, x, y, textPaint)
     }
 
     override fun draw(pos: PositionType, text: String, color: Int, size: Float) {
-        val paint = Paint().also {
+       val strokePaint = Paint().also {
+            it.color = Color.WHITE
+            it.textSize = size
+            it.isAntiAlias = true
+            it.strokeWidth = 2f
+            it.strokeJoin = Paint.Join.ROUND
+            it.strokeCap = Paint.Cap.ROUND
+            it.style = Paint.Style.STROKE
+        }
+        canvas.drawText(text, calcX(pos, text, strokePaint), calcY(pos, text, strokePaint), strokePaint)
+
+        val textPaint = Paint().also {
             it.color = color
+            it.isAntiAlias = true
             it.textSize = size
         }
-        canvas.drawText(text, calcX(pos, text, paint), calcY(pos, text, paint), paint)
+
+        canvas.drawText(text, calcX(pos, text, textPaint), calcY(pos, text, textPaint), textPaint)
+    }
+
+    private fun calcX(position: PositionType, text: String, paint: Paint): Float {
+        val bounds = Rect().also {
+            paint.getTextBounds(text, 0, text.length, it)
+        }
+
+        var margin = if (text.isEmpty()) { 0f }  else {bounds.width().toFloat() / text.length.toFloat() / 2f}
+
+        when (position) {
+            PositionType.TopLeft -> return 0f
+            PositionType.TopCenter -> return (canvas.width / 2 - bounds.width() / 2).toFloat()
+            PositionType.TopRight -> return (canvas.width - bounds.width()).toFloat() - margin
+            PositionType.CenterLeft -> return 0f
+            PositionType.Center -> return (canvas.width / 2 - bounds.width() / 2).toFloat()
+            PositionType.CenterRight -> return (canvas.width - bounds.width()).toFloat()  - margin
+            PositionType.BottomLeft -> return 0f
+            PositionType.BottomCenter -> return (canvas.width / 2 - bounds.width() / 2).toFloat()
+            PositionType.BottomRight -> return (canvas.width - bounds.width()).toFloat()  - margin
+        }
     }
 
     private fun calcY(position: PositionType, text: String, paint: Paint): Float {
         val bounds = Rect().also {
             paint.getTextBounds(text, 0, text.length, it)
         }
+
+        var margin = if (text.isEmpty()) { 0f }  else {bounds.height().toFloat() / 8f }
 
         when (position) {
             PositionType.TopLeft -> return bounds.height().toFloat()
@@ -49,27 +97,9 @@ class DrawableCanvasImpl() : DrawableCanvas {
             PositionType.CenterLeft -> return (canvas.height / 2 - bounds.height() / 2).toFloat()
             PositionType.Center -> return (canvas.height / 2 - bounds.height() / 2).toFloat()
             PositionType.CenterRight -> return (canvas.height / 2 - bounds.height() / 2).toFloat()
-            PositionType.BottomLeft -> return (canvas.height - bounds.height()).toFloat()
-            PositionType.BottomCenter -> return (canvas.height - bounds.height()).toFloat()
-            PositionType.BottomRight -> return (canvas.height - bounds.height()).toFloat()
-        }
-    }
-
-    private fun calcX(position: PositionType, text: String, paint: Paint): Float {
-        val bounds = Rect().also {
-            paint.getTextBounds(text, 0, text.length, it)
-        }
-
-        when (position) {
-            PositionType.TopLeft -> return 0f
-            PositionType.TopCenter -> return (canvas.width / 2 - bounds.width() / 2).toFloat()
-            PositionType.TopRight -> return (canvas.width - bounds.width()).toFloat()
-            PositionType.CenterLeft -> return 0f
-            PositionType.Center -> return (canvas.width / 2 - bounds.width() / 2).toFloat()
-            PositionType.CenterRight -> return (canvas.width - bounds.width()).toFloat()
-            PositionType.BottomLeft -> return 0f
-            PositionType.BottomCenter -> return (canvas.width / 2 - bounds.width() / 2).toFloat()
-            PositionType.BottomRight -> return (canvas.width - bounds.width()).toFloat()
+            PositionType.BottomLeft -> return canvas.height.toFloat() - margin
+            PositionType.BottomCenter -> return canvas.height.toFloat() - margin
+            PositionType.BottomRight -> return canvas.height.toFloat() - margin
         }
     }
 
