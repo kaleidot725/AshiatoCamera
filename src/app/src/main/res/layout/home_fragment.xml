@@ -21,7 +21,7 @@
             <FrameLayout
                     android:layout_gravity="top"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="@dimen/cardHeight"
                     android:layout_weight="1"
                     android:layout_margin="2dp"
                     android:elevation="4dp"
@@ -52,7 +52,7 @@
 
             <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="@dimen/cardHeight"
                     android:layout_weight="1"
                     android:layout_margin="2dp"
                     android:elevation="4dp"
@@ -83,7 +83,7 @@
                 android:orientation="horizontal">
             <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="@dimen/cardHeight"
                     android:layout_weight="1"
                     android:layout_margin="2dp"
                     android:elevation="4dp"
@@ -196,7 +196,7 @@
 
             <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="@dimen/cardHeight"
                     android:layout_weight="1"
                     android:layout_margin="2dp"
                     android:elevation="4dp"
