@@ -10,7 +10,7 @@ import kaleidot725.ashiato.di.holder.Holder
 import kaleidot725.ashiato.di.holder.HolderImpl
 import kaleidot725.ashiato.di.persistence.PersistenceSetting
 import kaleidot725.ashiato.di.repository.*
-import kaleidot725.ashiato.di.service.*
+import kaleidot725.ashiato.di.service.picture.*
 import kaleidot725.ashiato.ui.MyApplication
 import kaleidot725.ashiato.ui.contact.ContactActivity
 import kaleidot725.ashiato.ui.contact.ContactFragment

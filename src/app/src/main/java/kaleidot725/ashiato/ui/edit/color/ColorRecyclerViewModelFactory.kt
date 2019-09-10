@@ -3,8 +3,8 @@ package kaleidot725.ashiato.ui.edit.color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kaleidot725.ashiato.di.data.Color
-import kaleidot725.ashiato.di.service.ColorEditor
-import kaleidot725.ashiato.di.service.PictureEditor
+import kaleidot725.ashiato.di.service.picture.ColorEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
 
 class ColorRecyclerViewModelFactory(
     private val pictureEditor: PictureEditor,

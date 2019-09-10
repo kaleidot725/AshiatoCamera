@@ -1,4 +1,4 @@
-package kaleidot725.ashiato.di.service
+package kaleidot725.ashiato.di.service.picture
 
 import android.graphics.*
 import kaleidot725.ashiato.di.data.PositionType

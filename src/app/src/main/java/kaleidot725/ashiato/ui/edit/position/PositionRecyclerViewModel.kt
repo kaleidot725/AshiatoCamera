@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.di.data.Position
-import kaleidot725.ashiato.di.service.PictureEditor
-import kaleidot725.ashiato.di.service.PositionEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kaleidot725.ashiato.di.service.picture.PositionEditor
 
 class PositionRecyclerViewModel(
     private val pictureEditor: PictureEditor,

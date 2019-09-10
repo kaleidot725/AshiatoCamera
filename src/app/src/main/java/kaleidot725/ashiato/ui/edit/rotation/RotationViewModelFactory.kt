@@ -3,8 +3,8 @@ package kaleidot725.ashiato.ui.edit.rotation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kaleidot725.ashiato.di.repository.AngleRepository
-import kaleidot725.ashiato.di.service.PictureEditor
-import kaleidot725.ashiato.di.service.RotationEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kaleidot725.ashiato.di.service.picture.RotationEditor
 
 class RotationViewModelFactory(
     private val pictureEditor: PictureEditor,

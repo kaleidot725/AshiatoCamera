@@ -13,8 +13,8 @@ import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.PositionFragmentBindingImpl
 import kaleidot725.ashiato.di.repository.PositionRepository
-import kaleidot725.ashiato.di.service.PictureEditor
-import kaleidot725.ashiato.di.service.PositionEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kaleidot725.ashiato.di.service.picture.PositionEditor
 import javax.inject.Inject
 
 class PositionFragment : Fragment() {

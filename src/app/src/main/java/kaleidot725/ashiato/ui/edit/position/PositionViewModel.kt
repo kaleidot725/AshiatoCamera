@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import kaleidot725.ashiato.di.repository.PositionRepository
-import kaleidot725.ashiato.di.service.PictureEditor
-import kaleidot725.ashiato.di.service.PositionEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kaleidot725.ashiato.di.service.picture.PositionEditor
 
 class PositionViewModel(
     private val pictureEditor: PictureEditor,

@@ -6,9 +6,9 @@ import kaleidot725.ashiato.di.repository.AngleRepository
 import kaleidot725.ashiato.di.repository.DateTimeRepository
 import kaleidot725.ashiato.di.repository.LocationRepository
 import kaleidot725.ashiato.di.repository.PictureRepository
-import kaleidot725.ashiato.di.service.FormatEditor
-import kaleidot725.ashiato.di.service.PictureEditor
-import kaleidot725.ashiato.di.service.RotationEditor
+import kaleidot725.ashiato.di.service.picture.FormatEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kaleidot725.ashiato.di.service.picture.RotationEditor
 import kaleidot725.ashiato.ui.edit.EditNavigator
 
 class ConfirmViewModelFactory(

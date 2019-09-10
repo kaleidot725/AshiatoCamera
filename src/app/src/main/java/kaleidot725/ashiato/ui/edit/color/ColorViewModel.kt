@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import kaleidot725.ashiato.di.repository.ColorRepository
-import kaleidot725.ashiato.di.service.ColorEditor
-import kaleidot725.ashiato.di.service.PictureEditor
+import kaleidot725.ashiato.di.service.picture.ColorEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
 
 class ColorViewModel(
     private val pictureEditor: PictureEditor,

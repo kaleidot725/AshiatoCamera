@@ -1,4 +1,4 @@
-package kaleidot725.ashiato.di.service
+package kaleidot725.ashiato.di.service.picture
 
 import android.graphics.Color
 import io.reactivex.subjects.PublishSubject
@@ -6,14 +6,16 @@ import io.reactivex.subjects.Subject
 import kaleidot725.ashiato.di.data.Picture
 import kaleidot725.ashiato.di.data.PositionType
 
-class PictureEditorImpl(drawableCanvas: DrawableCanvas) : PictureEditor {
+class PictureEditorImpl(drawableCanvas: DrawableCanvas) :
+    PictureEditor {
 
     override var target: Picture? = null
     override var preview: Picture? = null
 
     private var _state: PublishSubject<PictureEditorState> = PublishSubject.create()
     override val state: Subject<PictureEditorState> get() = _state
-    private var lastState: PictureEditorState = PictureEditorState.Init
+    private var lastState: PictureEditorState =
+        PictureEditorState.Init
 
     private var canvas: DrawableCanvas = drawableCanvas
     private var text: String = ""

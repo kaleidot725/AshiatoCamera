@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.di.data.Color
-import kaleidot725.ashiato.di.service.ColorEditor
-import kaleidot725.ashiato.di.service.PictureEditor
+import kaleidot725.ashiato.di.service.picture.ColorEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
 
 class ColorRecyclerViewModel(
     private val pictureEditor: PictureEditor,

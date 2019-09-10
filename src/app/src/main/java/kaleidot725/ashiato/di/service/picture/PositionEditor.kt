@@ -1,4 +1,4 @@
-package kaleidot725.ashiato.di.service
+package kaleidot725.ashiato.di.service.picture
 
 import io.reactivex.subjects.Subject
 import kaleidot725.ashiato.di.data.Position

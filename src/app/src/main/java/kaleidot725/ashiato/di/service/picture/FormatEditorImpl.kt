@@ -1,4 +1,4 @@
-package kaleidot725.ashiato.di.service
+package kaleidot725.ashiato.di.service.picture
 
 import kaleidot725.ashiato.di.data.FormatType
 import java.text.SimpleDateFormat

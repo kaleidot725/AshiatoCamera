@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import kaleidot725.ashiato.di.repository.AngleRepository
-import kaleidot725.ashiato.di.service.PictureEditor
-import kaleidot725.ashiato.di.service.RotationEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kaleidot725.ashiato.di.service.picture.RotationEditor
 
 class RotationViewModel(
     private val pictureEditor: PictureEditor,

@@ -13,8 +13,8 @@ import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.StyleFragmentBinding
 import kaleidot725.ashiato.di.repository.StyleRepository
-import kaleidot725.ashiato.di.service.PictureEditor
-import kaleidot725.ashiato.di.service.StyleEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kaleidot725.ashiato.di.service.picture.StyleEditor
 import javax.inject.Inject
 
 class StyleFragment : Fragment() {

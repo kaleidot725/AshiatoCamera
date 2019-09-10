@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kaleidot725.ashiato.di.data.Format
-import kaleidot725.ashiato.di.service.FormatEditor
-import kaleidot725.ashiato.di.service.PictureEditor
+import kaleidot725.ashiato.di.service.picture.FormatEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
 
 class FormatRecyclerViewModel(
     private val pictureEditor: PictureEditor,

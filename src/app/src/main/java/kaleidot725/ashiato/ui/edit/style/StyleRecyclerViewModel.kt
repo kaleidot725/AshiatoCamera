@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.di.data.Style
-import kaleidot725.ashiato.di.service.PictureEditor
-import kaleidot725.ashiato.di.service.StyleEditor
+import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kaleidot725.ashiato.di.service.picture.StyleEditor
 
 class StyleRecyclerViewModel(
     private val pictureEditor: PictureEditor,
