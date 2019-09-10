@@ -20,6 +20,9 @@ interface LocationRepository : Disposable {
     val longitude: Subject<Double>
     val lastLongitude: Double
 
+    val address : Subject<String>
+    val lastAddress : String
+
     fun start(activity: Activity)
     fun stop()
 }

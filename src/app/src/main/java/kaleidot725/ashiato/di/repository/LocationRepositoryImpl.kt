@@ -3,6 +3,7 @@ package kaleidot725.ashiato.di.repository
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -11,6 +12,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+import java.lang.Exception
 import java.util.*
 
 class LocationRepositoryImpl(
@@ -19,7 +21,7 @@ class LocationRepositoryImpl(
     private val minTime: Int,
     private val minDistance: Int
 ) : LocationRepository {
-
+    private val geocdoer : Geocoder = Geocoder(context, Locale.getDefault())
     private val locationManager: LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
     override var running: Boolean = false
@@ -46,6 +48,11 @@ class LocationRepositoryImpl(
     override var lastLongitude: Double = 0.0
         private set
 
+    private val _address : PublishSubject<String> = PublishSubject.create()
+    override val address : Subject<String> = _address
+    override var lastAddress: String = "Unknown Address"
+        private set
+
     private val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             update.onNext(Date(location.time))
@@ -60,7 +67,8 @@ class LocationRepositoryImpl(
             longitude.onNext(location.longitude)
             lastLongitude = location.longitude
 
-            Log.v("GPS", "高度:${location.altitude} 緯度:${location.latitude} 経度:${location.longitude}")
+            lastAddress = getAddress(lastLatitude, lastLongitude)
+            address.onNext(lastAddress)
         }
 
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
@@ -112,4 +120,13 @@ class LocationRepositoryImpl(
 
     private var disposed: Boolean = false
     override fun isDisposed() = disposed
+
+    private fun getAddress(latitude : Double, longitude : Double) : String {
+        try {
+            val address =  geocdoer.getFromLocation(latitude, longitude, 1).first()
+            return address.getAddressLine(0)
+        } catch (e : Exception) {
+            return "Unknown Address"
+        }
+    }
 }

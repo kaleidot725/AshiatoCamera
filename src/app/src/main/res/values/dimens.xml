@@ -3,7 +3,8 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="textSizeMainDate">24dp</dimen>
-    <dimen name="textSizeMainParam">24dp</dimen>
+    <dimen name="textSizeMainAddress">24dp</dimen>
+    <dimen name="textSizeMainAltitude">24dp</dimen>
 
     <dimen name="textSizeLarge">20sp</dimen>
     <dimen name="textSizeSmall">14sp</dimen>

@@ -31,6 +31,9 @@ class HomeViewModel(
     private val _longitude: MutableLiveData<String> = MutableLiveData()
     val longitude: LiveData<String> get() = _longitude
 
+    private val _address : MutableLiveData<String> = MutableLiveData()
+    val address : LiveData<String> get() = _address
+
     private val df: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd\nHH:mm:ss", Locale.getDefault())
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -47,6 +50,9 @@ class HomeViewModel(
 
         val lastLongitude = "${locationRepository.lastLongitude.toInt()}°"
         _longitude.postValue(lastLongitude)
+
+        val lastAddress = locationRepository.lastAddress
+        _address.postValue(lastAddress)
 
         var disposable = dateTimeRepository.date.subscribe {
             _update.postValue(df.format(it))
@@ -67,6 +73,10 @@ class HomeViewModel(
             _longitude.postValue("${it.toInt()}°")
         }
         compositeDisposable.add(disposable)
+
+        disposable = locationRepository.address.subscribe {
+            _address.postValue(it)
+        }
     }
 
     fun takePhoto(view: View) {
