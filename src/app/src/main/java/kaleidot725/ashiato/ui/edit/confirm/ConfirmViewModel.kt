@@ -41,8 +41,10 @@ class ConfirmViewModel(
         formatEditor.setLocation(
             locationRepository.lastAltitude,
             locationRepository.lastLatitude,
-            locationRepository.lastLongitude
+            locationRepository.lastLongitude,
+            locationRepository.lastAddress
         )
+
         val target = pictureRepository.took as Picture
         val preview = pictureRepository.tmpPicture()
 

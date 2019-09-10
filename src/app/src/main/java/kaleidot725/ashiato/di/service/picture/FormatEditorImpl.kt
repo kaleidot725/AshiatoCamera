@@ -10,6 +10,7 @@ class FormatEditorImpl : FormatEditor {
     private var altitudeEnable: Boolean = false
     private var latitudeEnable: Boolean = false
     private var longitudeEnable: Boolean = false
+    private var addressEnable : Boolean = false
 
     private val space: String = " "
     private val dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
@@ -19,15 +20,17 @@ class FormatEditorImpl : FormatEditor {
     private var altitude: Double = 0.0
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
+    private var address : String = ""
 
     override fun setDate(date: Date) {
         this.date = date
     }
 
-    override fun setLocation(altitude: Double, latitude: Double, longitude: Double) {
+    override fun setLocation(altitude: Double, latitude: Double, longitude: Double, address : String) {
         this.altitude = altitude
         this.latitude = latitude
         this.longitude = longitude
+        this.address = address
     }
 
     override fun create(): String {
@@ -39,6 +42,10 @@ class FormatEditorImpl : FormatEditor {
 
         if (timeEnable) {
             value += timeFormat.format(date) + space
+        }
+
+        if (addressEnable) {
+            value += address + space
         }
 
         if (altitudeEnable) {
@@ -60,9 +67,11 @@ class FormatEditorImpl : FormatEditor {
         when (type) {
             FormatType.Date -> dateEnable = value
             FormatType.Time -> timeEnable = value
+            FormatType.Address -> addressEnable = value
             FormatType.Altitude -> altitudeEnable = value
             FormatType.Latitude -> latitudeEnable = value
             FormatType.Longitude -> longitudeEnable = value
+
         }
     }
 
@@ -70,6 +79,7 @@ class FormatEditorImpl : FormatEditor {
         when (type) {
             FormatType.Date -> return dateEnable
             FormatType.Time -> return timeEnable
+            FormatType.Address -> return addressEnable
             FormatType.Altitude -> return altitudeEnable
             FormatType.Latitude -> return latitudeEnable
             FormatType.Longitude -> return longitudeEnable
