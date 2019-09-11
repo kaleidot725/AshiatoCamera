@@ -1,8 +1,8 @@
 package kaleidot725.ashiato.di.repository
 
 import androidx.databinding.ObservableArrayList
-import kaleidot725.ashiato.di.data.Position
-import kaleidot725.ashiato.di.data.PositionType
+import kaleidot725.ashiato.di.service.picture.Position
+import kaleidot725.ashiato.di.service.picture.PositionType
 
 class PositionRepositoryImpl() : PositionRepository {
     private val list: ArrayList<Position> = ObservableArrayList<Position>()

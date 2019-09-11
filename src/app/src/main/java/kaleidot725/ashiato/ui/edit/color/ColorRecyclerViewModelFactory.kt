@@ -2,7 +2,7 @@ package kaleidot725.ashiato.ui.edit.color
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.data.Color
+import kaleidot725.ashiato.di.service.picture.Color
 import kaleidot725.ashiato.di.service.picture.ColorEditor
 import kaleidot725.ashiato.di.service.picture.PictureEditor
 

@@ -4,7 +4,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.ashiato.di.data.Format
+import kaleidot725.ashiato.di.service.picture.Format
 import kaleidot725.ashiato.di.service.picture.FormatEditor
 import kaleidot725.ashiato.di.service.picture.PictureEditor
 

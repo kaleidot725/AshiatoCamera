@@ -1,8 +1,8 @@
 package kaleidot725.ashiato.di.repository
 
 import androidx.databinding.ObservableArrayList
-import kaleidot725.ashiato.di.data.Format
-import kaleidot725.ashiato.di.data.FormatType
+import kaleidot725.ashiato.di.service.picture.Format
+import kaleidot725.ashiato.di.service.picture.FormatType
 
 class FormatRepositoryImpl() : FormatRepository {
     private val list: ArrayList<Format> = ObservableArrayList<Format>()

@@ -3,16 +3,31 @@ package kaleidot725.ashiato.di.repository
 import android.content.Context
 import androidx.databinding.ObservableArrayList
 import kaleidot725.ashiato.R
-import kaleidot725.ashiato.di.data.Menu
+import kaleidot725.ashiato.di.service.contact.Menu
 
 class MenuRepositoryImpl(val context: Context) : MenuRepository {
     private val list: ArrayList<Menu> = ObservableArrayList<Menu>()
     private var initialized: Boolean = false
 
     init {
-        list.add(Menu(R.drawable.ic_setting, context.getString(R.string.menu_setting)))
-        list.add(Menu(R.drawable.ic_license, context.getString(R.string.menu_license)))
-        list.add(Menu(R.drawable.ic_contact, context.getString(R.string.menu_contanct)))
+        list.add(
+            Menu(
+                R.drawable.ic_setting,
+                context.getString(R.string.menu_setting)
+            )
+        )
+        list.add(
+            Menu(
+                R.drawable.ic_license,
+                context.getString(R.string.menu_license)
+            )
+        )
+        list.add(
+            Menu(
+                R.drawable.ic_contact,
+                context.getString(R.string.menu_contanct)
+            )
+        )
         initialized = true
     }
 

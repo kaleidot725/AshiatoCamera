@@ -1,7 +1,6 @@
 package kaleidot725.ashiato.di.service.picture
 
 import android.graphics.*
-import kaleidot725.ashiato.di.data.PositionType
 import java.io.File
 import java.io.FileOutputStream
 
@@ -23,7 +22,7 @@ class DrawableCanvasImpl() : DrawableCanvas {
 
     override fun draw(x: Float, y: Float, text: String, color: Int, size: Float) {
         val strokePaint = Paint().also {
-            it.color = Color.WHITE
+            it.color = android.graphics.Color.WHITE
             it.textSize = size
             it.isAntiAlias = true
             it.strokeWidth = 2f
@@ -44,7 +43,7 @@ class DrawableCanvasImpl() : DrawableCanvas {
 
     override fun draw(pos: PositionType, text: String, color: Int, size: Float) {
        val strokePaint = Paint().also {
-            it.color = Color.WHITE
+            it.color = android.graphics.Color.WHITE
             it.textSize = size
             it.isAntiAlias = true
             it.strokeWidth = 2f

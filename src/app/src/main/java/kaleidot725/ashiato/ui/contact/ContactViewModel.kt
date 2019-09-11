@@ -1,7 +1,7 @@
 package kaleidot725.ashiato.ui.contact
 
 import androidx.lifecycle.ViewModel
-import kaleidot725.ashiato.di.data.Developer
+import kaleidot725.ashiato.di.service.contact.Developer
 
 class ContactViewModel(developerList: List<Developer>) : ViewModel() {
     private val _developers: MutableList<DeveloperViewModel> = mutableListOf()

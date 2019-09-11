@@ -1,7 +1,7 @@
 package kaleidot725.ashiato.di.repository
 
 import androidx.databinding.ObservableArrayList
-import kaleidot725.ashiato.di.data.Developer
+import kaleidot725.ashiato.di.service.contact.Developer
 
 class DeveloperRepositoryImpl : DeveloperRepository {
     private val list: ArrayList<Developer> = ObservableArrayList<Developer>()

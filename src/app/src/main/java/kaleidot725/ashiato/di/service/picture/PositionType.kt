@@ -1,4 +1,4 @@
-package kaleidot725.ashiato.di.data
+package kaleidot725.ashiato.di.service.picture
 
 enum class PositionType {
     TopLeft,

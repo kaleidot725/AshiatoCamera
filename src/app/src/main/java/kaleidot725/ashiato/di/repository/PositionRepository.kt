@@ -1,6 +1,6 @@
 package kaleidot725.ashiato.di.repository
 
-import kaleidot725.ashiato.di.data.Position
+import kaleidot725.ashiato.di.service.picture.Position
 
 interface PositionRepository {
     fun all(): List<Position>

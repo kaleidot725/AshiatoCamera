@@ -1,7 +1,7 @@
 package kaleidot725.ashiato.di.repository
 
 import androidx.databinding.ObservableArrayList
-import kaleidot725.ashiato.di.data.Style
+import kaleidot725.ashiato.di.service.picture.Style
 
 class StyleRepositoryImpl() : StyleRepository {
     private val list: ArrayList<Style> = ObservableArrayList<Style>()

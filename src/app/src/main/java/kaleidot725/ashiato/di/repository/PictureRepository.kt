@@ -1,6 +1,6 @@
 package kaleidot725.ashiato.di.repository
 
-import kaleidot725.ashiato.di.data.Picture
+import kaleidot725.ashiato.di.service.picture.Picture
 
 interface PictureRepository {
     fun all(): List<Picture>

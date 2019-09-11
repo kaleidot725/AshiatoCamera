@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kaleidot725.ashiato.R
-import kaleidot725.ashiato.di.data.Menu
+import kaleidot725.ashiato.di.service.contact.Menu
 import kaleidot725.ashiato.ui.main.MainNavigator
 
 class MenuViewModel(

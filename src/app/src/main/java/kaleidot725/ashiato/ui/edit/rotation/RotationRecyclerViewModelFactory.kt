@@ -2,7 +2,7 @@ package kaleidot725.ashiato.ui.edit.rotation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.data.Angle
+import kaleidot725.ashiato.di.service.picture.Angle
 import kaleidot725.ashiato.di.service.picture.PictureEditor
 import kaleidot725.ashiato.di.service.picture.RotationEditor
 

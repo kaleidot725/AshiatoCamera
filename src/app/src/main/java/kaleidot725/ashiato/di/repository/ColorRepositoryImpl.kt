@@ -1,7 +1,7 @@
 package kaleidot725.ashiato.di.repository
 
 import androidx.databinding.ObservableArrayList
-import kaleidot725.ashiato.di.data.Color
+import kaleidot725.ashiato.di.service.picture.Color
 
 class ColorRepositoryImpl() : ColorRepository {
     private val list: ArrayList<Color> = ObservableArrayList<Color>()

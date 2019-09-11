@@ -3,7 +3,7 @@ package kaleidot725.ashiato.ui.main.settinglist
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.data.Menu
+import kaleidot725.ashiato.di.service.contact.Menu
 import kaleidot725.ashiato.ui.main.MainNavigator
 
 class MenuViewModelFactory(

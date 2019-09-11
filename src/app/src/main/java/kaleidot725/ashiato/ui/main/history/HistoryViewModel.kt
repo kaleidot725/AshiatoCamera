@@ -1,13 +1,10 @@
 package kaleidot725.ashiato.ui.main.history
 
-import android.content.Intent
 import android.util.Log
-import androidx.core.app.ShareCompat
-import androidx.core.content.FileProvider
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.ashiato.di.data.Picture
+import kaleidot725.ashiato.di.service.picture.Picture
 import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.ui.main.MainNavigator
 import java.io.File

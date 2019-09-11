@@ -1,7 +1,7 @@
 package kaleidot725.ashiato.ui.main.history
 
 import android.view.View
-import kaleidot725.ashiato.di.data.Picture
+import kaleidot725.ashiato.di.service.picture.Picture
 import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.ui.main.MainNavigator
 

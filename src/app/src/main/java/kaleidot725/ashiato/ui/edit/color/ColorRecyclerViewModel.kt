@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import kaleidot725.ashiato.di.data.Color
+import kaleidot725.ashiato.di.service.picture.Color
 import kaleidot725.ashiato.di.service.picture.ColorEditor
 import kaleidot725.ashiato.di.service.picture.PictureEditor
 

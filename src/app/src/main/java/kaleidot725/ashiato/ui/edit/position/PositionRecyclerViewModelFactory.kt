@@ -2,7 +2,7 @@ package kaleidot725.ashiato.ui.edit.position
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.data.Position
+import kaleidot725.ashiato.di.service.picture.Position
 import kaleidot725.ashiato.di.service.picture.PictureEditor
 import kaleidot725.ashiato.di.service.picture.PositionEditor
 

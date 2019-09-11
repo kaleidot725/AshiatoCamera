@@ -5,7 +5,7 @@ import android.os.Environment
 import dagger.*
 import dagger.android.ContributesAndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
-import kaleidot725.ashiato.di.data.Settings
+import kaleidot725.ashiato.di.service.location.Settings
 import kaleidot725.ashiato.di.holder.Holder
 import kaleidot725.ashiato.di.holder.HolderImpl
 import kaleidot725.ashiato.di.persistence.PersistenceSetting

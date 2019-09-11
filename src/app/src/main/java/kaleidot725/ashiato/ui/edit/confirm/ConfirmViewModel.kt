@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import kaleidot725.ashiato.di.data.Picture
+import kaleidot725.ashiato.di.service.picture.Picture
 import kaleidot725.ashiato.di.repository.AngleRepository
 import kaleidot725.ashiato.di.repository.DateTimeRepository
 import kaleidot725.ashiato.di.repository.LocationRepository

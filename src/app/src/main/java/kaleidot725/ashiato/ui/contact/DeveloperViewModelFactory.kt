@@ -2,7 +2,7 @@ package kaleidot725.ashiato.ui.contact
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.data.Developer
+import kaleidot725.ashiato.di.service.contact.Developer
 
 class DeveloperViewModelFactory(developer: Developer) : ViewModelProvider.Factory {
     private val developer: Developer = developer

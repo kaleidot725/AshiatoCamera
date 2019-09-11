@@ -1,7 +1,7 @@
 package kaleidot725.ashiato.di.repository
 
 import android.os.Environment
-import kaleidot725.ashiato.di.data.Picture
+import kaleidot725.ashiato.di.service.picture.Picture
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*

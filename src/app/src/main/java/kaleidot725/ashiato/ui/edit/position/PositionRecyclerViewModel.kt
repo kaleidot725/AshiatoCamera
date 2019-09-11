@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import kaleidot725.ashiato.di.data.Position
+import kaleidot725.ashiato.di.service.picture.Position
 import kaleidot725.ashiato.di.service.picture.PictureEditor
 import kaleidot725.ashiato.di.service.picture.PositionEditor
 

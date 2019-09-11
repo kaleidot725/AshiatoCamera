@@ -3,8 +3,6 @@ package kaleidot725.ashiato.di.service.picture
 import android.graphics.Color
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kaleidot725.ashiato.di.data.Picture
-import kaleidot725.ashiato.di.data.PositionType
 
 class PictureEditorImpl(drawableCanvas: DrawableCanvas) :
     PictureEditor {

@@ -1,7 +1,7 @@
 package kaleidot725.ashiato.di.repository
 
 import androidx.databinding.ObservableArrayList
-import kaleidot725.ashiato.di.data.Angle
+import kaleidot725.ashiato.di.service.picture.Angle
 
 class AngleRepositoryImpl : AngleRepository {
     private val list: ArrayList<Angle> = ObservableArrayList<Angle>()

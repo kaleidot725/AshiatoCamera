@@ -1,7 +1,5 @@
 package kaleidot725.ashiato.di.service.picture
 
-import kaleidot725.ashiato.di.data.PositionType
-
 interface DrawableCanvas {
     fun load(path: String)
     fun draw(x: Float, y: Float, text: String, color: Int, size: Float)
