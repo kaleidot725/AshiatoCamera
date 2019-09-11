@@ -203,26 +203,5 @@
                     android:clickable="true">
             </FrameLayout>
         </LinearLayout>
-
-        <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <Button
-                    android:id="@+id/cameraFab"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rouding_background"
-                    myApplication:elevation="4dp"
-                    android:textStyle="bold"
-                    myApplication:onSafeClick="@{viewmodel::takePhoto}"
-                    android:textColor="@android:color/white"
-                    android:text="@string/takeapicture"/>
-        </FrameLayout>
-
     </LinearLayout>
 </layout>

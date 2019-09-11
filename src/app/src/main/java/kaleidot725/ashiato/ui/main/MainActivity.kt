@@ -61,8 +61,6 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         setContentView(R.layout.activity_main)
 
         AndroidInjection.inject(this)
-        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar?.setCustomView(R.layout.main_actionbar)
 
         val permissions = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -73,7 +71,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
 
         locationRepository.start(this)
 
-        viewModel = ViewModelProviders.of(this, MainViewModelFactory(this)).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, MainViewModelFactory(this, pictureRepository)).get(MainViewModel::class.java)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

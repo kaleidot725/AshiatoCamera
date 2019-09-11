@@ -79,11 +79,6 @@ class HomeViewModel(
         }
     }
 
-    fun takePhoto(view: View) {
-        pictureRepository.take(pictureRepository.newPicture())
-        navigator.navigateCamera()
-    }
-
     override fun onCleared() {
         compositeDisposable.dispose()
         super.onCleared()

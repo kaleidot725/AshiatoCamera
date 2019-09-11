@@ -31,7 +31,7 @@
                 android:label="@string/main_title"
                 android:screenOrientation="portrait"
                 android:exported="true"
-                android:theme="@style/AppTheme">
+                android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -1,12 +1,17 @@
 package kaleidot725.ashiato.ui.main
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
+import kaleidot725.ashiato.di.repository.DateTimeRepository
+import kaleidot725.ashiato.di.repository.LocationRepository
+import kaleidot725.ashiato.di.repository.PictureRepository
 
-class MainViewModel(navigator: MainNavigator) : ViewModel(), Disposable {
+class MainViewModel(private val navigator: MainNavigator,
+                    private val pictureRepository: PictureRepository
+) : ViewModel(), Disposable {
 
-    private val navigator: MainNavigator = navigator
     private var disposed: Boolean = false
 
     val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -27,6 +32,11 @@ class MainViewModel(navigator: MainNavigator) : ViewModel(), Disposable {
                 false
             }
         }
+    }
+
+    fun takePhoto(view: View) {
+        pictureRepository.take(pictureRepository.newPicture())
+        navigator.navigateCamera()
     }
 
     override fun dispose() {
