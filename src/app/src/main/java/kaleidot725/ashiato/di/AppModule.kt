@@ -1,5 +1,7 @@
 package kaleidot725.ashiato.di
 
+import android.content.Context
+import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Environment
 import dagger.*
@@ -11,6 +13,7 @@ import kaleidot725.ashiato.di.holder.HolderImpl
 import kaleidot725.ashiato.di.persistence.PersistenceSetting
 import kaleidot725.ashiato.di.repository.*
 import kaleidot725.ashiato.di.service.picture.*
+import kaleidot725.ashiato.di.service.weather.WeatherService
 import kaleidot725.ashiato.ui.MyApplication
 import kaleidot725.ashiato.ui.contact.ContactActivity
 import kaleidot725.ashiato.ui.contact.ContactFragment
@@ -32,6 +35,9 @@ import kaleidot725.ashiato.ui.preview.PageFragment
 import kaleidot725.ashiato.ui.preview.PreviewActivity
 import kaleidot725.ashiato.ui.setting.SettingActivity
 import kaleidot725.ashiato.ui.setting.SettingFragment
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.*
 import javax.inject.Singleton
 
 
@@ -53,15 +59,26 @@ class AppModule {
         return PictureRepositoryImpl(dirPath)
     }
 
+    private val weatherBaseUri : String = "https://api.openweathermap.org"
+    private val weatherAppId : String = "1e42a438681eeb3307f30f8086c97d35"
+
     @Provides
     @Singleton
     fun provideLocationRepository(myApplication: MyApplication): LocationRepository {
+        val geocoder : Geocoder = Geocoder(myApplication, Locale.US)
+        val locationManager: LocationManager = myApplication.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val weatherService : WeatherService = Retrofit.Builder()
+            .baseUrl(weatherBaseUri)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create(WeatherService::class.java)
+
         try {
             val s = PersistenceSetting(myApplication.filesDir.path + "settings.json").load()
-            return LocationRepositoryImpl(myApplication, s.gpsGpsLocationProvider, s.gpsMinTime, s.gpsMinDistance)
+            return LocationRepositoryImpl(myApplication, s.gpsGpsLocationProvider, s.gpsMinTime, s.gpsMinDistance, geocoder, locationManager, weatherService, weatherAppId)
         } catch (e: Exception) {
             val s = Settings(LocationManager.GPS_PROVIDER, 1, 1)
-            return LocationRepositoryImpl(myApplication, s.gpsGpsLocationProvider, s.gpsMinTime, s.gpsMinDistance)
+            return LocationRepositoryImpl(myApplication, s.gpsGpsLocationProvider, s.gpsMinTime, s.gpsMinDistance, geocoder, locationManager, weatherService, weatherAppId)
         }
     }
 

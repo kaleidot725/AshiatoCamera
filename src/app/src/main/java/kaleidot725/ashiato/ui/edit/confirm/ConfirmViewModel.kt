@@ -42,7 +42,8 @@ class ConfirmViewModel(
             locationRepository.lastAltitude,
             locationRepository.lastLatitude,
             locationRepository.lastLongitude,
-            locationRepository.lastAddress
+            locationRepository.lastAddress,
+            locationRepository.lastWeather.weather.first().main
         )
 
         val target = pictureRepository.took as Picture

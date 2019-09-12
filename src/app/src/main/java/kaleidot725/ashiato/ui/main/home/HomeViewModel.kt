@@ -1,14 +1,14 @@
 package kaleidot725.ashiato.ui.main.home
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import kaleidot725.ashiato.di.repository.DateTimeRepository
-import kaleidot725.ashiato.di.repository.LocationRepository
-import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.di.repository.*
 import kaleidot725.ashiato.ui.main.MainNavigator
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,11 +34,13 @@ class HomeViewModel(
     private val _address : MutableLiveData<String> = MutableLiveData()
     val address : LiveData<String> get() = _address
 
+    private val _weather : MutableLiveData<String> = MutableLiveData()
+    val weather : LiveData<String> get() = _weather
+
     private val df: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd\nHH:mm:ss", Locale.getDefault())
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     init {
-
         val lastUpdate = df.format(dateTimeRepository.lastDate)
         _update.postValue(lastUpdate)
 
@@ -53,6 +55,9 @@ class HomeViewModel(
 
         val lastAddress = locationRepository.lastAddress
         _address.postValue(lastAddress)
+
+        val lastWeather = locationRepository.lastWeather.weather.first().main
+        _weather.postValue(lastWeather)
 
         var disposable = dateTimeRepository.date.subscribe {
             _update.postValue(df.format(it))
@@ -77,6 +82,12 @@ class HomeViewModel(
         disposable = locationRepository.address.subscribe {
             _address.postValue(it)
         }
+        compositeDisposable.add(disposable)
+
+        disposable = locationRepository.weather.subscribe {
+            _weather.postValue(it.weather.first().main)
+        }
+        compositeDisposable.add(disposable)
     }
 
     override fun onCleared() {

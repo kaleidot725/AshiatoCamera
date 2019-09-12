@@ -10,6 +10,7 @@ class FormatRepositoryImpl() : FormatRepository {
     init {
         list.add(Format(FormatType.Date, "Date"))
         list.add(Format(FormatType.Time, "Time"))
+        list.add(Format(FormatType.Weather, "Weather"))
         list.add(Format(FormatType.Address, "Address"))
         list.add(Format(FormatType.Altitude, "Altitude"))
         list.add(Format(FormatType.Latitude, "Latitude"))

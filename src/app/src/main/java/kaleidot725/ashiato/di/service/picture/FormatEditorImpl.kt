@@ -10,6 +10,7 @@ class FormatEditorImpl : FormatEditor {
     private var latitudeEnable: Boolean = false
     private var longitudeEnable: Boolean = false
     private var addressEnable : Boolean = false
+    private var weatherEnable : Boolean = false
 
     private val space: String = " "
     private val dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
@@ -20,16 +21,18 @@ class FormatEditorImpl : FormatEditor {
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
     private var address : String = ""
+    private var weather : String = ""
 
     override fun setDate(date: Date) {
         this.date = date
     }
 
-    override fun setLocation(altitude: Double, latitude: Double, longitude: Double, address : String) {
+    override fun setLocation(altitude: Double, latitude: Double, longitude: Double, address : String, weather : String) {
         this.altitude = altitude
         this.latitude = latitude
         this.longitude = longitude
         this.address = address
+        this.weather = weather
     }
 
     override fun create(): String {
@@ -41,6 +44,10 @@ class FormatEditorImpl : FormatEditor {
 
         if (timeEnable) {
             value += timeFormat.format(date) + space
+        }
+
+        if (weatherEnable) {
+            value += weather + space
         }
 
         if (addressEnable) {
@@ -66,11 +73,11 @@ class FormatEditorImpl : FormatEditor {
         when (type) {
             FormatType.Date -> dateEnable = value
             FormatType.Time -> timeEnable = value
+            FormatType.Weather -> weatherEnable = value
             FormatType.Address -> addressEnable = value
             FormatType.Altitude -> altitudeEnable = value
             FormatType.Latitude -> latitudeEnable = value
             FormatType.Longitude -> longitudeEnable = value
-
         }
     }
 
@@ -78,6 +85,7 @@ class FormatEditorImpl : FormatEditor {
         when (type) {
             FormatType.Date -> return dateEnable
             FormatType.Time -> return timeEnable
+            FormatType.Weather -> return weatherEnable
             FormatType.Address -> return addressEnable
             FormatType.Altitude -> return altitudeEnable
             FormatType.Latitude -> return latitudeEnable
