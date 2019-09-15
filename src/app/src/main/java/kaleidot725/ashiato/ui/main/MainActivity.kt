@@ -7,6 +7,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.widget.Button
+import android.widget.ImageButton
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ShareCompat
@@ -58,6 +61,8 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.actionbar_main)
 
         AndroidInjection.inject(this)
 
@@ -74,6 +79,11 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        val cameraButton = findViewById<ImageButton>(R.id.camera_button)
+        cameraButton.setOnClickListener {
+            viewModel.takePhoto(cameraButton)
+        }
 
         restoreMenu()
     }

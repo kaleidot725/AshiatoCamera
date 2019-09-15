@@ -13,39 +13,10 @@
             android:layout_height="match_parent"
             tools:context=".ui.main.MainActivity">
 
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:padding="4dp"
-                android:background="@color/colorPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize">
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent">
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="12dp"
-                        android:src="@drawable/ashiato"
-                        android:id="@+id/action_bar_title"/>
-
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_gravity="right|center_vertical"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:onClick="@{viewModel.takePhoto}"
-                        android:src="@drawable/ic_camera"/>
-            </FrameLayout>
-        </androidx.appcompat.widget.Toolbar>
-
         <FrameLayout
                 android:id="@+id/main_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="?actionBarSize"
                 android:layout_marginBottom="@dimen/navigation_bar_height"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
