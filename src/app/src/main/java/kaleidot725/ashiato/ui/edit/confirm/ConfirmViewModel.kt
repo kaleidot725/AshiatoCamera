@@ -6,25 +6,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import kaleidot725.ashiato.di.service.picture.Picture
-import kaleidot725.ashiato.di.repository.AngleRepository
-import kaleidot725.ashiato.di.repository.DateTimeRepository
-import kaleidot725.ashiato.di.repository.LocationRepository
-import kaleidot725.ashiato.di.repository.PictureRepository
-import kaleidot725.ashiato.di.service.picture.FormatEditor
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.RotationEditor
+import kaleidot725.ashiato.di.repository.*
+import kaleidot725.ashiato.di.service.picture.*
 import kaleidot725.ashiato.ui.edit.EditNavigator
+import java.lang.Exception
 
 class ConfirmViewModel(
     val navigator: EditNavigator,
+    val pictureEditor: PictureEditor,
+    val formatEditor: FormatEditor,
+    val colorEditor : ColorEditor,
+    val styleEditor: StyleEditor,
+    val positionEditor: PositionEditor,
+    val rotationEditor: RotationEditor,
+    val pictureSetting : PermanentPictureSetting,
     val dateTimeRepository: DateTimeRepository,
     val locationRepository: LocationRepository,
+    val formatRepository: FormatRepository,
     val pictureRepository: PictureRepository,
-    val angleRepository: AngleRepository,
-    val formatEditor: FormatEditor,
-    val rotationEditor: RotationEditor,
-    val pictureEditor: PictureEditor
+    val angleRepository: AngleRepository
 ) : ViewModel() {
 
     private val _editPath: MutableLiveData<String> = MutableLiveData()
@@ -37,26 +37,35 @@ class ConfirmViewModel(
             navigator.exit()
         }
 
-        formatEditor.setDate(dateTimeRepository.lastDate)
-        formatEditor.setLocation(
-            locationRepository.lastAltitude,
-            locationRepository.lastLatitude,
-            locationRepository.lastLongitude,
-            locationRepository.lastAddress,
-            locationRepository.lastWeather.weather.first().main
-        )
-
+        // get parameter
         val target = pictureRepository.took as Picture
         val preview = pictureRepository.tmpPicture()
 
+        try {
+            val setting = pictureSetting.load()
+            formatEditor.enableAll(false)
+            for(format in setting.formats) { formatEditor.enable(format.type, true) }
+            styleEditor.enable(setting.style)
+            colorEditor.enable(setting.color)
+            positionEditor.enable(setting.position)
+        } catch (e : Exception) {
+            e.printStackTrace()
+        }
+
+        // rotation
         val angleValue = getRotationAngle(target.path)
         val angle = angleRepository.all().filter { angle -> angle.value == angleValue }.first()
         rotationEditor.enable(angle)
 
+        // picture
+        formatEditor.set(dateTimeRepository.lastDate, locationRepository.lastAltitude, locationRepository.lastLatitude,
+            locationRepository.lastLongitude, locationRepository.lastAddress, locationRepository.lastWeather.weather.first().main)
         pictureEditor.start(target, preview)
         pictureEditor.modifyText(formatEditor.create())
+        pictureEditor.modifyColor(colorEditor.lastEnabled.value)
+        pictureEditor.modifyTextSize(styleEditor.lastEnabled.dp)
         pictureEditor.modifyRotation(rotationEditor.lastEnabled.value)
-
+        pictureEditor.modifyPosition(positionEditor.lastEnabled.type)
         _editPath.value = pictureEditor.preview!!.path
         val disposable = pictureEditor.state.subscribe {
             if (pictureEditor.preview != null) {
@@ -67,11 +76,19 @@ class ConfirmViewModel(
     }
 
     fun save(view: View) {
+        val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
+        val setting = PictureSetting(colorEditor.lastEnabled, styleEditor.lastEnabled, formats, positionEditor.lastEnabled, rotationEditor.lastEnabled)
+        pictureSetting.save(setting)
+
         pictureEditor.end()
         navigator.exit()
     }
 
     fun cancel(view: View) {
+        val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
+        val setting = PictureSetting(colorEditor.lastEnabled, styleEditor.lastEnabled, formats, positionEditor.lastEnabled, rotationEditor.lastEnabled)
+        pictureSetting.save(setting)
+
         pictureEditor.cancel()
         navigator.exit()
     }
@@ -96,4 +113,5 @@ class ConfirmViewModel(
             return 270f
 
         return 0f
-    }}
+    }
+}

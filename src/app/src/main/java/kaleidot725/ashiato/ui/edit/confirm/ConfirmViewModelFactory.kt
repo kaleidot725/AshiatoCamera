@@ -2,24 +2,24 @@ package kaleidot725.ashiato.ui.edit.confirm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.repository.AngleRepository
-import kaleidot725.ashiato.di.repository.DateTimeRepository
-import kaleidot725.ashiato.di.repository.LocationRepository
-import kaleidot725.ashiato.di.repository.PictureRepository
-import kaleidot725.ashiato.di.service.picture.FormatEditor
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.RotationEditor
+import kaleidot725.ashiato.di.repository.*
+import kaleidot725.ashiato.di.service.picture.*
 import kaleidot725.ashiato.ui.edit.EditNavigator
 
 class ConfirmViewModelFactory(
     val navigator: EditNavigator,
+    val pictureEditor: PictureEditor,
+    val formatEditor: FormatEditor,
+    val colorEditor : ColorEditor,
+    val styleEditor: StyleEditor,
+    val positionEditor: PositionEditor,
+    val rotationEditor: RotationEditor,
+    val pictureSetting : PermanentPictureSetting,
     val dateTimeRepository: DateTimeRepository,
     val locationRepository: LocationRepository,
+    val formatRepository: FormatRepository,
     val pictureRepository: PictureRepository,
-    val angleRepository: AngleRepository,
-    val formatEditor: FormatEditor,
-    val rotationEditor: RotationEditor,
-    val bitmapEditor: PictureEditor
+    val angleRepository: AngleRepository
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -27,13 +27,18 @@ class ConfirmViewModelFactory(
         if (modelClass == ConfirmViewModel::class.java) {
             return ConfirmViewModel(
                 navigator,
+                pictureEditor,
+                formatEditor,
+                colorEditor,
+                styleEditor,
+                positionEditor,
+                rotationEditor,
+                pictureSetting,
                 dateTimeRepository,
                 locationRepository,
+                formatRepository,
                 pictureRepository,
-                angleRepository,
-                formatEditor,
-                rotationEditor,
-                bitmapEditor
+                angleRepository
             ) as T
         }
 

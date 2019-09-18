@@ -10,13 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ConfirmFragmentBinding
-import kaleidot725.ashiato.di.repository.AngleRepository
-import kaleidot725.ashiato.di.repository.DateTimeRepository
-import kaleidot725.ashiato.di.repository.LocationRepository
-import kaleidot725.ashiato.di.repository.PictureRepository
-import kaleidot725.ashiato.di.service.picture.FormatEditor
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.RotationEditor
+import kaleidot725.ashiato.di.repository.*
+import kaleidot725.ashiato.di.service.picture.*
 import kaleidot725.ashiato.ui.edit.EditNavigator
 import javax.inject.Inject
 
@@ -33,13 +28,28 @@ class ConfirmFragment : Fragment() {
     lateinit var formatEditor: FormatEditor
 
     @Inject
+    lateinit var colorEditor : ColorEditor
+
+    @Inject
+    lateinit var styleEditor: StyleEditor
+
+    @Inject
+    lateinit var positionEditor: PositionEditor
+
+    @Inject
     lateinit var pictureEditor: PictureEditor
 
     @Inject
     lateinit var rotationEditor: RotationEditor
 
     @Inject
+    lateinit var pictureSetting : PermanentPictureSetting
+
+    @Inject
     lateinit var locationRepository: LocationRepository
+
+    @Inject
+    lateinit var formatRepository: FormatRepository
 
     @Inject
     lateinit var dateTimeRepository: DateTimeRepository
@@ -62,13 +72,18 @@ class ConfirmFragment : Fragment() {
 
         val factory = ConfirmViewModelFactory(
             navigator,
+            pictureEditor,
+            formatEditor,
+            colorEditor,
+            styleEditor,
+            positionEditor,
+            rotationEditor,
+            pictureSetting,
             dateTimeRepository,
             locationRepository,
+            formatRepository,
             pictureRepository,
-            angleRepository,
-            formatEditor,
-            rotationEditor,
-            pictureEditor
+            angleRepository
         )
         viewModel = ViewModelProviders.of(this, factory).get(ConfirmViewModel::class.java)
 

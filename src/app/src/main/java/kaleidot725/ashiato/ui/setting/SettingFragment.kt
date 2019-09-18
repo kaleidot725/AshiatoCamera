@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.SettingFragmentBinding
-import kaleidot725.ashiato.di.persistence.PersistenceSetting
+import kaleidot725.ashiato.di.service.location.PermanentLocationSetting
 import javax.inject.Inject
 
 class SettingFragment : Fragment() {
@@ -22,7 +22,7 @@ class SettingFragment : Fragment() {
     private lateinit var viewModel: SettingViewModel
 
     @Inject
-    lateinit var persistenceSetting: PersistenceSetting
+    lateinit var persistenceSetting: PermanentLocationSetting
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         AndroidSupportInjection.inject(this)

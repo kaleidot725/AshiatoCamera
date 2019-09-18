@@ -7,11 +7,12 @@ import android.os.Environment
 import dagger.*
 import dagger.android.ContributesAndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
-import kaleidot725.ashiato.di.service.location.Settings
+import kaleidot725.ashiato.di.service.location.LocationSetting
 import kaleidot725.ashiato.di.holder.Holder
 import kaleidot725.ashiato.di.holder.HolderImpl
-import kaleidot725.ashiato.di.persistence.PersistenceSetting
+import kaleidot725.ashiato.di.permanent.PermanentJson
 import kaleidot725.ashiato.di.repository.*
+import kaleidot725.ashiato.di.service.location.PermanentLocationSetting
 import kaleidot725.ashiato.di.service.picture.*
 import kaleidot725.ashiato.di.service.weather.WeatherService
 import kaleidot725.ashiato.ui.MyApplication
@@ -46,8 +47,14 @@ class AppModule {
     // Setting
     @Provides
     @Singleton
-    fun providePersistenceSettings(myApplication: MyApplication): PersistenceSetting {
-        return PersistenceSetting(myApplication.filesDir.path + "settings.json")
+    fun providePermanentLocationSetting(myApplication: MyApplication): PermanentLocationSetting {
+        return PermanentLocationSetting(myApplication.filesDir.path + "location.json")
+    }
+
+    @Provides
+    @Singleton
+    fun providePermanentPictureSetting(myApplication: MyApplication) : PermanentPictureSetting{
+        return PermanentPictureSetting(myApplication.filesDir.path + "picture.json")
     }
 
     // Repository
@@ -74,10 +81,11 @@ class AppModule {
             .create(WeatherService::class.java)
 
         try {
-            val s = PersistenceSetting(myApplication.filesDir.path + "settings.json").load()
+            val s = PermanentLocationSetting(myApplication.filesDir.path + "settings.json")
+                .load()
             return LocationRepositoryImpl(myApplication, s.gpsGpsLocationProvider, s.gpsMinTime, s.gpsMinDistance, geocoder, locationManager, weatherService, weatherAppId)
         } catch (e: Exception) {
-            val s = Settings(LocationManager.GPS_PROVIDER, 1, 1)
+            val s = LocationSetting(LocationManager.GPS_PROVIDER, 1, 1)
             return LocationRepositoryImpl(myApplication, s.gpsGpsLocationProvider, s.gpsMinTime, s.gpsMinDistance, geocoder, locationManager, weatherService, weatherAppId)
         }
     }

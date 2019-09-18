@@ -2,10 +2,10 @@ package kaleidot725.ashiato.ui.setting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.persistence.PersistenceSetting
+import kaleidot725.ashiato.di.service.location.PermanentLocationSetting
 
-class SettingViewModelFactory(persistenceSetting: PersistenceSetting) : ViewModelProvider.Factory {
-    private val persistenceSetting: PersistenceSetting = persistenceSetting
+class SettingViewModelFactory(persistenceSetting: PermanentLocationSetting) : ViewModelProvider.Factory {
+    private val persistenceSetting: PermanentLocationSetting = persistenceSetting
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

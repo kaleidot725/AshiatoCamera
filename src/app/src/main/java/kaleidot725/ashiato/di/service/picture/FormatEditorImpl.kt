@@ -23,11 +23,8 @@ class FormatEditorImpl : FormatEditor {
     private var address : String = ""
     private var weather : String = ""
 
-    override fun setDate(date: Date) {
+    override fun set(date : Date, altitude: Double, latitude: Double, longitude: Double, address : String, weather : String) {
         this.date = date
-    }
-
-    override fun setLocation(altitude: Double, latitude: Double, longitude: Double, address : String, weather : String) {
         this.altitude = altitude
         this.latitude = latitude
         this.longitude = longitude
@@ -91,5 +88,15 @@ class FormatEditorImpl : FormatEditor {
             FormatType.Latitude -> return latitudeEnable
             FormatType.Longitude -> return longitudeEnable
         }
+    }
+
+    override fun enableAll(value: Boolean) {
+        dateEnable = value
+        timeEnable = value
+        weatherEnable = value
+        addressEnable = value
+        altitudeEnable = value
+        latitudeEnable = value
+        longitudeEnable = value
     }
 }
