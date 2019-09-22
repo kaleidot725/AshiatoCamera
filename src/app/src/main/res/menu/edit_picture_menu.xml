@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:myApplication="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/action_format"
+            android:enabled="true"
+            android:icon="@drawable/ic_format_text"
+            android:title="@string/edittitle_format"/>
+
+    <item
+            android:id="@+id/action_style"
+            android:enabled="true"
+            android:icon="@drawable/ic_format_style"
+            android:title="@string/edittitle_style"/>
+
+    <item
+            android:id="@+id/action_color"
+            android:enabled="true"
+            android:icon="@drawable/ic_palette"
+            android:title="@string/edittitle_color"/>
+
+    <item
+            android:id="@+id/action_position"
+            android:enabled="true"
+            android:icon="@drawable/ic_position"
+            android:title="@string/edittitle_position"/>
+
+    <item
+            android:id="@+id/action_rotation"
+            android:enabled="true"
+            android:icon="@drawable/ic_screen_rotation"
+            android:title="@string/edittitle_rotation"/>
+</menu>

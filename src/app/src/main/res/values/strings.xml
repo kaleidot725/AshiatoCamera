@@ -1,5 +1,65 @@
 <resources>
-    <string name="app_name">HighestPeaks</string>
-    <string name="main_title">Highest Peaks</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Ashiato</string>
+    <string name="main_title">Ashiato</string>
+
+    <!-- Main -->
+    <string name="navtitle_home">Home</string>
+    <string name="navtitle_history">History</string>
+    <string name="navtitle_setting">Setting</string>
+
+    <string name="edittitle_format">Format</string>
+    <string name="edittitle_style">Style</string>
+    <string name="edittitle_color">Color</string>
+    <string name="edittitle_position">Position</string>
+    <string name="edittitle_rotation">Rotation</string>
+
+    <!-- Main -> Home -->
+    <string name="altitude">ALT</string>
+    <string name="latitude">LAT</string>
+    <string name="longitude">LNG</string>
+    <string name="takeapicture">Take A PICTURE</string>
+
+    <!-- Main -> History -->
+    <string name="nohistory">NO HISTORY</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+
+    <!-- SettingList -> Setting -->
+    <string name="menu_setting">Setting</string>
+    <string name="menu_license">License</string>
+    <string name="menu_contanct">Contact</string>
+
+    <string name="gps">GPS</string>
+    <string name="acurracy_setting">Acurracy Setting</string>
+    <string name="provider">Provider</string>
+    <string name="minTime">MinTime</string>
+    <string name="minDistance">MinDistance</string>
+
+    <string name="gpssetting_gps">GPS</string>
+    <string name="gpssetting_network">Network</string>
+
+    <string-array name="gps_mintime">
+        <item>1Sec</item>
+        <item>5Sec</item>
+        <item>10Sec</item>
+        <item>15Sec</item>
+        <item>30Sec</item>
+        <item>60Sec</item>
+    </string-array>
+
+    <string-array name="gps_mindistance">
+        <item>1m</item>
+        <item>5m</item>
+        <item>10m</item>
+        <item>25m</item>
+        <item>50m</item>
+        <item>100m</item>
+    </string-array>
+
+    <!-- SettingList -> Contact -->
+    <string name="developer">Developer</string>
+    <string name="twitter">Twitter</string>
+    <string name="github">GitHub</string>
+    <string name="email">Email</string>
+    <string name="separator">:</string>
 </resources>

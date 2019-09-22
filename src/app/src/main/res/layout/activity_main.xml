@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:myApplication="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="kaleidot725.highestpeaks.main.MainViewModel"/>
+        <variable name="viewModel" type="kaleidot725.ashiato.ui.main.MainViewModel"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".main.MainActivity">
+            tools:context=".ui.main.MainActivity">
 
         <FrameLayout
-                android:id="@+id/content"
+                android:id="@+id/main_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/navigation_bar_height"/>
@@ -25,10 +25,11 @@
                 android:layout_height="@dimen/navigation_bar_height"
                 android:layout_gravity="bottom"
                 android:background="@color/background"
-                app:itemIconTint="@color/bottom_nav_color"
-                app:itemTextColor="@color/bottom_nav_color"
-                app:setOnNavigationItemSelectedListener="@{viewModel.onNavigationItemSelectedListener}"
-                app:menu="@menu/bottom_navigation_menu" />
+                android:elevation="16dp"
+                myApplication:itemIconTint="@color/bottom_nav_color"
+                myApplication:itemTextColor="@color/bottom_nav_color"
+                myApplication:setOnNavigationItemSelectedListener="@{viewModel.onNavigationItemSelectedListener}"
+                myApplication:menu="@menu/bottom_navigation_menu" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

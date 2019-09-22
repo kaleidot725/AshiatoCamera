@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".main.history.HistoryFragment">
+        tools:context=".ui.main.history.HistoryFragment">
 
-    <TextView
+    <data>
+        <import type="android.view.View"/>
+        <variable name="vm" type="kaleidot725.ashiato.ui.main.history.HistoryViewModel"/>
+    </data>
+
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:text="HISTORY"
-            android:textColor="@color/colorText"/>
+            android:background="@android:color/white">>
 
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/picture_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:visibility="@{vm.notFound ? View.VISIBLE : View.GONE, default=gone}"
+                android:text="@string/nohistory"/>
+    </FrameLayout>
+</layout>

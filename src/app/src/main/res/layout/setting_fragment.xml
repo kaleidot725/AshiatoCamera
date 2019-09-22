@@ -1,17 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".main.setting.SettingFragment">
+<layout>
+    <data>
+        <variable name="vm" type="kaleidot725.ashiato.ui.setting.SettingViewModel"/>
+    </data>
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/setting"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:text="SETTING"
-            android:textColor="#ffffff"/>
+            tools:context=".ui.setting.SettingFragment">
 
-</FrameLayout>
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="always">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:padding="8dp"
+                    android:orientation="vertical"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:elevation="4dp"
+                    android:foreground="?selectableItemBackground"
+                    android:background="@drawable/card_background"
+                    android:layoutDirection="ltr">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:textSize="@dimen/textSizeLarge"
+                            android:textStyle="normal"
+                            android:ellipsize="end"
+                            android:textColor="@android:color/black"
+                            android:gravity="start"
+                            android:text="@string/gps"/>
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:textSize="@dimen/textSizeSmall"
+                            android:textStyle="normal"
+                            android:gravity="end"
+                            android:text="@string/acurracy_setting"/>
+                </LinearLayout>
+
+                <View
+                        android:id="@+id/libraryDescriptionDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@android:color/darker_gray"
+                        android:layout_marginTop="@dimen/marginSmall"
+                        android:layout_marginBottom="@dimen/marginSmall"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:layout_margin="@dimen/marginSmall"
+                            android:textSize="@dimen/textSizeSmall"
+                            android:text="@string/provider"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/marginSmall"
+                            android:textSize="@dimen/textSizeSmall"
+                            android:text="@string/separator"/>
+
+                    <Spinner
+                            android:id="@+id/provider_spinner"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:layout_margin="@dimen/marginSmall"
+                            android:selectedItemPosition="@={vm.gpsProviderItemPosition}"
+                            android:entries="@{vm.gpsProviderMenus}"
+                            android:textSize="@dimen/textSizeSmall"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:layout_margin="@dimen/marginSmall"
+                            android:textSize="@dimen/textSizeSmall"
+                            android:text="@string/minTime"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/marginSmall"
+                            android:textSize="@dimen/textSizeSmall"
+                            android:text="@string/separator"/>
+
+                    <Spinner
+                            android:id="@+id/mintime_spinner"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:layout_margin="@dimen/marginSmall"
+                            android:selectedItemPosition="@={vm.gpsMinTimeItemPosition}"
+                            android:entries="@{vm.gpsMinTimeMenus}"
+                            android:textSize="@dimen/textSizeSmall"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:layout_margin="@dimen/marginSmall"
+                            android:textSize="@dimen/textSizeSmall"
+                            android:text="@string/minDistance"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/marginSmall"
+                            android:textSize="@dimen/textSizeSmall"
+                            android:text="@string/separator"/>
+
+                    <Spinner
+                            android:id="@+id/mindistance_spinner"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:layout_margin="@dimen/marginSmall"
+                            android:selectedItemPosition="@={vm.gpsMinDistancePosition}"
+                            android:entries="@{vm.gpsMinDistanceMenus}"
+                            android:textSize="@dimen/textSizeSmall"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

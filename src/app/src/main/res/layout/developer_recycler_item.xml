@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="vm" type="kaleidot725.ashiato.ui.contact.DeveloperViewModel"/>
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            android:orientation="vertical"
+            android:focusable="true"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:foreground="?selectableItemBackground"
+            android:background="@drawable/card_background"
+            android:layoutDirection="ltr">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:textSize="@dimen/textSizeLarge"
+                    android:textStyle="normal"
+                    android:ellipsize="end"
+                    android:textColor="@android:color/black"
+                    android:gravity="start"
+                    android:text="@string/developer"/>
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:textStyle="normal"
+                    android:gravity="end"
+                    android:text="@{vm.name}"/>
+        </LinearLayout>
+
+        <View
+                android:id="@+id/libraryDescriptionDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="@dimen/marginSmall"
+                android:layout_marginBottom="@dimen/marginSmall"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:text="@string/twitter"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:text="@string/separator"/>
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:text="@{vm.twitter}"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:text="@string/github"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:text="@string/separator"/>
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:text="@{vm.github}"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:text="@string/email"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:text="@string/separator"/>
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:layout_margin="@dimen/marginSmall"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:text="@{vm.email}"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
