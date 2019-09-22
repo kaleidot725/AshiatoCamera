@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.ashiato.di.service.picture.Picture
 import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.di.service.picture.Picture
 import kaleidot725.ashiato.ui.main.MainNavigator
 import java.io.File
 

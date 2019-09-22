@@ -1,11 +1,10 @@
 package kaleidot725.ashiato
 
-import kaleidot725.michetimer.model.repository.PictureRepositoryImpl
+import kaleidot725.ashiato.di.repository.PictureRepositoryImpl
 import org.junit.After
 import org.junit.Assert
-import org.junit.Test
-
 import org.junit.Before
+import org.junit.Test
 import java.io.File
 import java.nio.file.Paths
 
@@ -20,9 +19,11 @@ class PictureRepositoryImplUnitTest {
     private val directory = "tests"
     private val directoryPath = "${currentDirectory}/${directory}"
     private val names = listOf("A", "B", "C", "D", "E")
-    private lateinit var repositoryImpl : PictureRepositoryImpl
+    private lateinit var repositoryImpl: PictureRepositoryImpl
 
-    fun createFilePath(name : String) : String { return "${directoryPath}/${name}" }
+    fun createFilePath(name: String): String {
+        return "${directoryPath}/${name}"
+    }
 
     @Before
     fun initialize() {
@@ -41,7 +42,7 @@ class PictureRepositoryImplUnitTest {
     @Test
     fun all() {
         val pictures = repositoryImpl.all()
-        for (name in names ) {
+        for (name in names) {
             val picture = pictures.find { it.path == createFilePath(name) }
             Assert.assertEquals(true, picture != null)
             Assert.assertEquals(createFilePath(name), picture?.path)

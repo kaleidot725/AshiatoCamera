@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import kaleidot725.ashiato.di.service.location.LocationSetting
 import kaleidot725.ashiato.di.service.location.PermanentLocationSetting
 
-class SettingViewModel(persistenceSetting: PermanentLocationSetting) : ViewModel() {
+class SettingViewModel(private val persistenceSetting: PermanentLocationSetting) : ViewModel() {
 
     private val gpsGpsLocationProviders: List<String> =
         arrayListOf(LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER)
@@ -22,7 +22,6 @@ class SettingViewModel(persistenceSetting: PermanentLocationSetting) : ViewModel
     val gpsMinDistanceMenus: List<String> = arrayListOf("1m", "5m", "10m", "25m", "50m", "100m")
     val gpsMinDistancePosition: MutableLiveData<Int> = MutableLiveData()
 
-    private val persistenceSetting: PermanentLocationSetting = persistenceSetting
     private var setting: LocationSetting =
         LocationSetting(
             LocationManager.GPS_PROVIDER,

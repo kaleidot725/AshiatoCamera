@@ -7,19 +7,19 @@ import kaleidot725.ashiato.di.service.picture.*
 import kaleidot725.ashiato.ui.edit.EditNavigator
 
 class ConfirmViewModelFactory(
-    val navigator: EditNavigator,
-    val pictureEditor: PictureEditor,
-    val formatEditor: FormatEditor,
-    val colorEditor : ColorEditor,
-    val styleEditor: StyleEditor,
-    val positionEditor: PositionEditor,
-    val rotationEditor: RotationEditor,
-    val pictureSetting : PermanentPictureSetting,
-    val dateTimeRepository: DateTimeRepository,
-    val locationRepository: LocationRepository,
-    val formatRepository: FormatRepository,
-    val pictureRepository: PictureRepository,
-    val angleRepository: AngleRepository
+    private val navigator: EditNavigator,
+    private val pictureEditor: PictureEditor,
+    private val formatEditor: FormatEditor,
+    private val colorEditor : ColorEditor,
+    private val styleEditor: StyleEditor,
+    private val positionEditor: PositionEditor,
+    private val rotationEditor: RotationEditor,
+    private val pictureSetting : PermanentPictureSetting,
+    private val dateTimeRepository: DateTimeRepository,
+    private val locationRepository: LocationRepository,
+    private val formatRepository: FormatRepository,
+    private val pictureRepository: PictureRepository,
+    private val angleRepository: AngleRepository
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

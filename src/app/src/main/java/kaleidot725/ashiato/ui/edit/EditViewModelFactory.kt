@@ -3,7 +3,7 @@ package kaleidot725.ashiato.ui.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class EditViewModelFactory(val navigator: EditNavigator) : ViewModelProvider.Factory {
+class EditViewModelFactory(private val navigator: EditNavigator) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == EditViewModel::class.java) {

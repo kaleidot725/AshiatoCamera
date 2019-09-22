@@ -14,12 +14,6 @@ import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.ui.main.MainNavigator
 import javax.inject.Inject
 
-
-enum class HistoryFragmentMode(val value: Int) {
-    Display(1),
-    Action(2)
-}
-
 class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
 
     companion object {
