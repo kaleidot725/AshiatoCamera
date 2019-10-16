@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:myApplication="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:myApplication="http://schemas.android.com/apk/res-auto">
 
-        <data>
-                <import type="android.view.View"/>
-                <variable name="vm" type="kaleidot725.ashiato.ui.main.history.PictureViewModelBase"/>
-        </data>
+    <data>
 
-        <FrameLayout
+        <import type="android.view.View" />
+
+        <variable
+                name="vm"
+                type="kaleidot725.ashiato.ui.main.history.PictureViewModelBase" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cardHeight"
+            android:layout_margin="2dp"
+            android:elevation="4dp"
+            android:background="@drawable/card_background">
+
+        <ImageView
+                android:id="@+id/picture_image"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/cardHeight"
-                android:layout_margin="2dp"
-                android:elevation="4dp"
-                android:background="@drawable/card_background">
+                android:layout_height="match_parent"
+                myApplication:imageUrl="@{vm.path}"
+                android:clickable="true"
+                android:scaleType="centerCrop"
+                myApplication:onSafeClick="@{vm::click}"
+                android:onLongClick="@{vm::longClick}"
+                android:background="?android:attr/selectableItemBackground" />
 
-                <ImageView
-                        android:id="@+id/picture_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        myApplication:imageUrl="@{vm.path}"
-                        android:clickable="true"
-                        android:scaleType="centerCrop"
-                        myApplication:onSafeClick="@{vm::click}"
-                        android:onLongClick="@{vm::longClick}"
-                        android:background="?android:attr/selectableItemBackground"/>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{vm.isChecked ? View.VISIBLE : View.GONE, default=gone}"
+                android:background="@drawable/card_selected_border" />
 
-                <View   android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="@{vm.isChecked ? View.VISIBLE : View.GONE, default=gone}"
-                        android:background="@drawable/card_selected_border"/>
-
-        </FrameLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
