@@ -198,30 +198,14 @@
             </FrameLayout>
 
             <FrameLayout
+                    android:id="@+id/ad_container"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/cardHeight"
                     android:layout_weight="1"
                     android:layout_margin="2dp"
                     android:elevation="4dp"
                     android:clickable="true"
-                    android:visibility="invisible"
-                    android:background="@drawable/card_background">
-
-                <!--                <FrameLayout-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="match_parent"-->
-                <!--                        android:clickable="true"-->
-                <!--                        android:background="?android:attr/selectableItemBackground">-->
-
-                <!--                    <TextView-->
-                <!--                            android:layout_width="match_parent"-->
-                <!--                            android:layout_height="match_parent"-->
-                <!--                            android:gravity="center"-->
-                <!--                            android:layout_margin="15dp"-->
-                <!--                            android:text="@{viewmodel.weather}"-->
-                <!--                            android:textSize="@dimen/textSizeMainAddress"/>-->
-                <!--                </FrameLayout>-->
-            </FrameLayout>
+                    android:background="@drawable/card_background" />
         </LinearLayout>
     </LinearLayout>
 </layout>

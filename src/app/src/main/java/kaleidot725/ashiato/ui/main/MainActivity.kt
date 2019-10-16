@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -64,7 +63,6 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.actionbar_main)
 
-        AndroidInjection.inject(this)
 
         val permissions = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -73,10 +71,13 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         )
         ActivityCompat.requestPermissions(this, permissions, 0)
 
+        AndroidInjection.inject(this)
         locationRepository.start(this)
 
-        viewModel = ViewModelProviders.of(this, MainViewModelFactory(this, pictureRepository)).get(MainViewModel::class.java)
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        viewModel = ViewModelProviders.of(this, MainViewModelFactory(this, pictureRepository))
+            .get(MainViewModel::class.java)
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
@@ -115,7 +116,11 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
                 tempFile = File("${storageDir}/temp.jpg")
 
                 val photoURI: Uri =
-                    FileProvider.getUriForFile(this, applicationContext.packageName + ".provider", tempFile as File)
+                    FileProvider.getUriForFile(
+                        this,
+                        applicationContext.packageName + ".provider",
+                        tempFile as File
+                    )
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
 
                 this.imageFile = File(pictureRepository.took!!.path)
@@ -159,19 +164,22 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     }
 
     override fun navigateHome(): Boolean {
-        supportFragmentManager.beginTransaction().replace(R.id.main_content, HomeFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_content, HomeFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.Home)
         return true
     }
 
     override fun navigateHistory(): Boolean {
-        supportFragmentManager.beginTransaction().replace(R.id.main_content, HistoryFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_content, HistoryFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.History)
         return true
     }
 
     override fun navigateSettingList(): Boolean {
-        supportFragmentManager.beginTransaction().replace(R.id.main_content, SettingListFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_content, SettingListFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.SettingList)
         return true
     }
@@ -179,7 +187,11 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     override fun navigateShare(files: List<File>) {
         val builder = ShareCompat.IntentBuilder.from(this)
         for (file in files) {
-            val shareUri = FileProvider.getUriForFile(applicationContext, applicationContext.packageName + ".provider", file)
+            val shareUri = FileProvider.getUriForFile(
+                applicationContext,
+                applicationContext.packageName + ".provider",
+                file
+            )
             builder.addStream(shareUri)
         }
 

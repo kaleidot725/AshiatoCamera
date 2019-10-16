@@ -62,4 +62,8 @@
     <string name="github">GitHub</string>
     <string name="email">Email</string>
     <string name="separator">:</string>
+
+    <!-- AdMob -->
+    <string name="admob_app_id">ca-app-pub-6306836711962723/8153033013</string>
+
 </resources>

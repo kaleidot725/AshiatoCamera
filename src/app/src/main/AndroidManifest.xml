@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="kaleidot725.ashiato">
+        package="kaleidot725.ashiato">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
-    <uses-feature android:name="android.hardware.location.gps"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+            android:name="android.hardware.camera"
+            android:required="true" />
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
             android:name=".ui.MyApplication"
@@ -17,6 +20,10 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-6306836711962723~1293763584" />
+
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.provider"
@@ -24,7 +31,7 @@
                 android:grantUriPermissions="true">
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/file_paths"/>
+                    android:resource="@xml/file_paths" />
         </provider>
 
         <activity
@@ -35,9 +42,10 @@
                 android:theme="@style/AppTheme">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
@@ -45,25 +53,26 @@
                 android:name=".ui.setting.SettingActivity"
                 android:label="Setting"
                 android:screenOrientation="portrait"
-                android:parentActivityName=".ui.main.MainActivity"/>
+                android:parentActivityName=".ui.main.MainActivity" />
 
         <activity
                 android:name=".ui.contact.ContactActivity"
                 android:label="Contact"
                 android:screenOrientation="portrait"
-                android:parentActivityName=".ui.main.MainActivity"/>
+                android:parentActivityName=".ui.main.MainActivity" />
 
         <activity
                 android:name=".ui.edit.EditActivity"
                 android:label="Camera"
                 android:screenOrientation="portrait"
                 android:parentActivityName=".ui.main.MainActivity"
-                android:theme="@style/AppTheme.NoActionBar"/>
+                android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".ui.preview.PreviewActivity"
-                  android:label="Preview"
-                  android:screenOrientation="portrait"
-                  android:parentActivityName=".ui.main.MainActivity"/>
+        <activity
+                android:name=".ui.preview.PreviewActivity"
+                android:label="Preview"
+                android:screenOrientation="portrait"
+                android:parentActivityName=".ui.main.MainActivity" />
     </application>
 
 </manifest>
