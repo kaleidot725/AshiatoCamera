@@ -12,13 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.formats.UnifiedNativeAdView
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.HomeFragmentBinding
 import kaleidot725.ashiato.di.repository.DateTimeRepository
 import kaleidot725.ashiato.di.repository.LocationRepository
 import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.ui.admob.UnifiedNativeAdViewHolder
 import kaleidot725.ashiato.ui.admob.populateNativeAdView
 import kaleidot725.ashiato.ui.main.MainNavigator
 import javax.inject.Inject
@@ -62,11 +62,8 @@ class HomeFragment : Fragment() {
 
         val builder = AdLoader.Builder(this.context, getString(R.string.admob_app_id))
         builder.forUnifiedNativeAd {
-            val adView = layoutInflater.inflate(
-                R.layout.unified_native_adview,
-                null
-            ) as UnifiedNativeAdView
-            populateNativeAdView(it, adView)
+            val adView = layoutInflater.inflate(R.layout.unified_native_adview, null)
+            populateNativeAdView(it, UnifiedNativeAdViewHolder(adView))
 
             val adContainer = view.findViewById<FrameLayout>(R.id.ad_container)
             adContainer.removeAllViews()
