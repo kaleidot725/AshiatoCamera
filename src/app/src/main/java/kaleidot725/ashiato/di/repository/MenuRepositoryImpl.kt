@@ -31,7 +31,7 @@ class MenuRepositoryImpl(val context: Context) : MenuRepository {
         list.add(
             Menu(
                 R.drawable.ic_privacy_policy,
-                "Privacy Policy"
+                context.getString(R.string.menu_privacy)
             )
         )
         initialized = true
