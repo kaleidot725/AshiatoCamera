@@ -34,6 +34,7 @@ import kaleidot725.ashiato.ui.main.history.HistoryFragment
 import kaleidot725.ashiato.ui.main.home.HomeFragment
 import kaleidot725.ashiato.ui.main.settinglist.SettingListFragment
 import kaleidot725.ashiato.ui.preview.PreviewActivity
+import kaleidot725.ashiato.ui.privacy.PrivacyActivity
 import kaleidot725.ashiato.ui.setting.SettingActivity
 import java.io.File
 import java.io.IOException
@@ -163,6 +164,12 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         return true
     }
 
+    override fun navigatePrivacy(): Boolean {
+        val intent = Intent(this, PrivacyActivity::class.java)
+        startActivity(intent)
+        return true
+    }
+   
     override fun navigateHome(): Boolean {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_content, HomeFragment.newInstance()).commit()

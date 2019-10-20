@@ -31,6 +31,7 @@ class MenuViewModel(
             context.getString(R.string.menu_setting) -> navigator.navigateSetting()
             context.getString(R.string.menu_license) -> navigator.navigateLicense()
             context.getString(R.string.menu_contanct) -> navigator.navigateContact()
+            context.getString(R.string.menu_privacy) -> navigator.navigatePrivacy()
         }
     }
 }
