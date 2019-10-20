@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Ashiato</string>
     <string name="main_title">Ashiato</string>
-
+    <string name="privacy_policy_url">https://gist.githubusercontent.com/kaleidot725/3e0146c62376b098f396e0458cde5345/raw/d19cb39775852390d2a7a6af59baa07d8b957984/ashiato-privacy-policy.txt</string>
     <!-- Main -->
     <string name="navtitle_home">Home</string>
     <string name="navtitle_history">History</string>
