@@ -2,6 +2,7 @@ package kaleidot725.ashiato.ui.main
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -23,6 +24,10 @@ import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import io.github.inflationx.calligraphy3.CalligraphyConfig
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor
+import io.github.inflationx.viewpump.ViewPump
+import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ActivityMainBinding
 import kaleidot725.ashiato.di.holder.Holder
@@ -60,10 +65,16 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar?.setCustomView(R.layout.actionbar_main)
 
+        ViewPump.init(
+            ViewPump.builder()
+                .addInterceptor(
+                    CalligraphyInterceptor(
+                        CalligraphyConfig.Builder().build()
+                    )
+                )
+                .build()
+        )
 
         val permissions = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -71,6 +82,11 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
             Manifest.permission.CAMERA
         )
         ActivityCompat.requestPermissions(this, permissions, 0)
+
+        setContentView(R.layout.activity_main)
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.actionbar_main)
+
 
         AndroidInjection.inject(this)
         locationRepository.start(this)
@@ -93,6 +109,10 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     override fun onDestroy() {
         locationRepository.stop()
         super.onDestroy()
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
     }
 
     private var tempFile: File? = null
@@ -169,7 +189,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         startActivity(intent)
         return true
     }
-   
+
     override fun navigateHome(): Boolean {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_content, HomeFragment.newInstance()).commit()
