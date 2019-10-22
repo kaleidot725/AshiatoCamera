@@ -21,7 +21,10 @@ android {
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
+
+        manifestPlaceholders = [ASHIATO_ADMOB_API_ID: System.getenv("ASHIATO_ADMOB_API_ID"), ASHIATO_ADMOB_AD_ID: System.getenv("ASHIATO_ADMOB_AD_ID")]
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -93,7 +96,7 @@ dependencies {
     // Calligraphy
     implementation 'io.github.inflationx:calligraphy3:3.1.1'
     implementation 'io.github.inflationx:viewpump:2.0.3'
-    
+
     // Test Frame Work
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

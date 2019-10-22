@@ -1,20 +1,26 @@
 package kaleidot725.ashiato.ui.main.home
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.HomeFragmentBinding
 import kaleidot725.ashiato.di.repository.DateTimeRepository
 import kaleidot725.ashiato.di.repository.LocationRepository
 import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.ui.admob.UnifiedNativeAdViewHolder
+import kaleidot725.ashiato.ui.admob.populateNativeAdView
 import kaleidot725.ashiato.ui.main.MainNavigator
 import javax.inject.Inject
 
@@ -55,19 +61,25 @@ class HomeFragment : Fragment() {
         binding?.viewmodel = viewModel
         binding?.lifecycleOwner = this
 
-//        val builder = AdLoader.Builder(this.context, getString(R.string.admob_app_id))
-//        builder.forUnifiedNativeAd {
-//            val adView = layoutInflater.inflate(R.layout.unified_native_adview, null)
-//            populateNativeAdView(it, UnifiedNativeAdViewHolder(adView))
-//
-//            val adContainer = view.findViewById<FrameLayout>(R.id.ad_container)
-//            adContainer.removeAllViews()
-//            adContainer.addView(adView)
-//        }
-//
-//        val loader = builder.build()
-//        loader.loadAd(AdRequest.Builder().build())
-//        super.onViewCreated(view, savedInstanceState)
+        val appInfo = this.context?.packageManager?.getApplicationInfo(
+            this.context?.packageName,
+            PackageManager.GET_META_DATA
+        )
+        val adId = appInfo?.metaData?.getString("ASHIATO_ADMOB_AD_ID")
+
+        val builder = AdLoader.Builder(this.context, adId)
+        builder.forUnifiedNativeAd {
+            val adView = layoutInflater.inflate(R.layout.unified_native_adview, null)
+            populateNativeAdView(it, UnifiedNativeAdViewHolder(adView))
+
+            val adContainer = view.findViewById<FrameLayout>(R.id.ad_container)
+            adContainer.removeAllViews()
+            adContainer.addView(adView)
+        }
+
+        val loader = builder.build()
+        loader.loadAd(AdRequest.Builder().build())
+        super.onViewCreated(view, savedInstanceState)
     }
 
     @Suppress("UNCHECKED_CAST")

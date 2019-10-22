@@ -22,7 +22,11 @@
 
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="ca-app-pub-6306836711962723~1293763584" />
+                android:value="${ASHIATO_ADMOB_API_ID}" />
+
+        <meta-data
+                android:name="ASHIATO_ADMOB_AD_ID"
+                android:value="${ASHIATO_ADMOB_AD_ID}" />
 
         <provider
                 android:name="androidx.core.content.FileProvider"
