@@ -2,6 +2,7 @@ package kaleidot725.ashiato.ui.main.home
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,25 +62,32 @@ class HomeFragment : Fragment() {
         binding?.viewmodel = viewModel
         binding?.lifecycleOwner = this
 
-        val appInfo = this.context?.packageManager?.getApplicationInfo(
-            this.context?.packageName,
-            PackageManager.GET_META_DATA
-        )
-        val adId = appInfo?.metaData?.getString("ASHIATO_ADMOB_AD_ID")
-
-        val builder = AdLoader.Builder(this.context, adId)
-        builder.forUnifiedNativeAd {
-            val adView = layoutInflater.inflate(R.layout.unified_native_adview, null)
-            populateNativeAdView(it, UnifiedNativeAdViewHolder(adView))
-
-            val adContainer = view.findViewById<FrameLayout>(R.id.ad_container)
-            adContainer.removeAllViews()
-            adContainer.addView(adView)
-        }
-
-        val loader = builder.build()
-        loader.loadAd(AdRequest.Builder().build())
+        loadAdvertisement(view.findViewById(R.id.ad_container))
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun loadAdvertisement(view: FrameLayout) {
+        try {
+            val appInfo = this.context?.packageManager?.getApplicationInfo(
+                this.context?.packageName,
+                PackageManager.GET_META_DATA
+            )
+            val adId = appInfo?.metaData?.getString("ASHIATO_ADMOB_AD_ID")
+
+            val builder = AdLoader.Builder(this.context, adId)
+            builder.forUnifiedNativeAd {
+                val adView = layoutInflater.inflate(R.layout.unified_native_adview, null)
+                populateNativeAdView(it, UnifiedNativeAdViewHolder(adView))
+
+                view.removeAllViews()
+                view.addView(adView)
+            }
+
+            val loader = builder.build()
+            loader.loadAd(AdRequest.Builder().build())
+        } catch (e: Exception) {
+            Log.v("HomeFragment", e.toString())
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
