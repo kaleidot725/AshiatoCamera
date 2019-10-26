@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Ashiato</string>
     <string name="main_title">Ashiato</string>
-
+    <string name="privacy_policy_url">https://gist.githubusercontent.com/kaleidot725/3e0146c62376b098f396e0458cde5345/raw/5abf33ca743070dfec3e8791e748b8e594a7ec42/ashiato-privacy-policy.txt</string>
     <!-- Main -->
     <string name="navtitle_home">Home</string>
     <string name="navtitle_history">History</string>
@@ -28,6 +28,7 @@
     <string name="menu_setting">Setting</string>
     <string name="menu_license">License</string>
     <string name="menu_contanct">Contact</string>
+    <string name="menu_privacy">Privacy Policy</string>
 
     <string name="gps">GPS</string>
     <string name="acurracy_setting">Acurracy Setting</string>
@@ -62,4 +63,8 @@
     <string name="github">GitHub</string>
     <string name="email">Email</string>
     <string name="separator">:</string>
+
+    <!-- AdMob -->
+    <string name="admob_app_id">ca-app-pub-6306836711962723/8153033013</string>
+
 </resources>

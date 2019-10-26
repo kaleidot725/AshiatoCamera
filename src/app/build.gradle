@@ -4,15 +4,27 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/kaleidot725/Documents/Android App Key/ashiato')
+            storePassword 'Answer1109'
+            keyAlias = 'key0'
+            keyPassword 'Answer1109'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "kaleidot725.ashiato"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
+
+        manifestPlaceholders = [ASHIATO_ADMOB_API_ID: System.getenv("ASHIATO_ADMOB_API_ID"), ASHIATO_ADMOB_AD_ID: System.getenv("ASHIATO_ADMOB_AD_ID")]
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -32,6 +44,7 @@ dependencies {
     implementation "com.leinardi.android:speed-dial:2.0.1"
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.21'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0'
+    implementation 'com.google.android.gms:play-services-ads:18.2.0'
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -80,8 +93,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
     implementation 'com.squareup.retrofit2:converter-moshi:2.6.1'
 
+    // Calligraphy
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
+
     // Test Frame Work
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
+

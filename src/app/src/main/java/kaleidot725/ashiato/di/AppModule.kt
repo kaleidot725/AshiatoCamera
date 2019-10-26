@@ -7,11 +7,10 @@ import android.os.Environment
 import dagger.*
 import dagger.android.ContributesAndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
-import kaleidot725.ashiato.di.service.location.LocationSetting
 import kaleidot725.ashiato.di.holder.Holder
 import kaleidot725.ashiato.di.holder.HolderImpl
-import kaleidot725.ashiato.di.permanent.PermanentJson
 import kaleidot725.ashiato.di.repository.*
+import kaleidot725.ashiato.di.service.location.LocationSetting
 import kaleidot725.ashiato.di.service.location.PermanentLocationSetting
 import kaleidot725.ashiato.di.service.picture.*
 import kaleidot725.ashiato.di.service.weather.WeatherService
@@ -53,7 +52,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providePermanentPictureSetting(myApplication: MyApplication) : PermanentPictureSetting{
+    fun providePermanentPictureSetting(myApplication: MyApplication): PermanentPictureSetting {
         return PermanentPictureSetting(myApplication.filesDir.path + "picture.json")
     }
 
@@ -66,15 +65,16 @@ class AppModule {
         return PictureRepositoryImpl(dirPath)
     }
 
-    private val weatherBaseUri : String = "https://api.openweathermap.org"
-    private val weatherAppId : String = "1e42a438681eeb3307f30f8086c97d35"
+    private val weatherBaseUri: String = "https://api.openweathermap.org"
+    private val weatherAppId: String = ""
 
     @Provides
     @Singleton
     fun provideLocationRepository(myApplication: MyApplication): LocationRepository {
-        val geocoder : Geocoder = Geocoder(myApplication, Locale.US)
-        val locationManager: LocationManager = myApplication.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val weatherService : WeatherService = Retrofit.Builder()
+        val geocoder: Geocoder = Geocoder(myApplication, Locale.US)
+        val locationManager: LocationManager =
+            myApplication.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val weatherService: WeatherService = Retrofit.Builder()
             .baseUrl(weatherBaseUri)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
@@ -83,10 +83,28 @@ class AppModule {
         try {
             val s = PermanentLocationSetting(myApplication.filesDir.path + "settings.json")
                 .load()
-            return LocationRepositoryImpl(myApplication, s.gpsGpsLocationProvider, s.gpsMinTime, s.gpsMinDistance, geocoder, locationManager, weatherService, weatherAppId)
+            return LocationRepositoryImpl(
+                myApplication,
+                s.gpsGpsLocationProvider,
+                s.gpsMinTime,
+                s.gpsMinDistance,
+                geocoder,
+                locationManager,
+                weatherService,
+                weatherAppId
+            )
         } catch (e: Exception) {
             val s = LocationSetting(LocationManager.GPS_PROVIDER, 1, 1)
-            return LocationRepositoryImpl(myApplication, s.gpsGpsLocationProvider, s.gpsMinTime, s.gpsMinDistance, geocoder, locationManager, weatherService, weatherAppId)
+            return LocationRepositoryImpl(
+                myApplication,
+                s.gpsGpsLocationProvider,
+                s.gpsMinTime,
+                s.gpsMinDistance,
+                geocoder,
+                locationManager,
+                weatherService,
+                weatherAppId
+            )
         }
     }
 

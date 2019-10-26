@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="kaleidot725.ashiato">
+        package="kaleidot725.ashiato">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
-    <uses-feature android:name="android.hardware.location.gps"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+            android:name="android.hardware.camera"
+            android:required="true" />
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
             android:name=".ui.MyApplication"
@@ -17,6 +20,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="${ASHIATO_ADMOB_API_ID}" />
+
+        <meta-data
+                android:name="ASHIATO_ADMOB_AD_ID"
+                android:value="${ASHIATO_ADMOB_AD_ID}" />
+
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.provider"
@@ -24,46 +35,53 @@
                 android:grantUriPermissions="true">
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/file_paths"/>
+                    android:resource="@xml/file_paths" />
         </provider>
 
         <activity
                 android:name=".ui.main.MainActivity"
+                android:exported="true"
                 android:label="@string/main_title"
                 android:screenOrientation="portrait"
-                android:exported="true"
                 android:theme="@style/AppTheme">
-
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
                 android:name=".ui.setting.SettingActivity"
                 android:label="Setting"
-                android:screenOrientation="portrait"
-                android:parentActivityName=".ui.main.MainActivity"/>
+                android:parentActivityName=".ui.main.MainActivity"
+                android:screenOrientation="portrait" />
 
         <activity
                 android:name=".ui.contact.ContactActivity"
                 android:label="Contact"
-                android:screenOrientation="portrait"
-                android:parentActivityName=".ui.main.MainActivity"/>
+                android:parentActivityName=".ui.main.MainActivity"
+                android:screenOrientation="portrait" />
 
         <activity
                 android:name=".ui.edit.EditActivity"
                 android:label="Camera"
-                android:screenOrientation="portrait"
                 android:parentActivityName=".ui.main.MainActivity"
-                android:theme="@style/AppTheme.NoActionBar"/>
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".ui.preview.PreviewActivity"
-                  android:label="Preview"
-                  android:screenOrientation="portrait"
-                  android:parentActivityName=".ui.main.MainActivity"/>
+        <activity
+                android:name=".ui.privacy.PrivacyActivity"
+                android:label="Privacy Policy"
+                android:parentActivityName=".ui.main.MainActivity"
+                android:screenOrientation="portrait" />
+
+        <activity
+                android:name=".ui.preview.PreviewActivity"
+                android:label="Preview"
+                android:parentActivityName=".ui.main.MainActivity"
+                android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -2,12 +2,12 @@ package kaleidot725.ashiato.ui.main
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +24,10 @@ import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import io.github.inflationx.calligraphy3.CalligraphyConfig
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor
+import io.github.inflationx.viewpump.ViewPump
+import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ActivityMainBinding
 import kaleidot725.ashiato.di.holder.Holder
@@ -35,6 +39,7 @@ import kaleidot725.ashiato.ui.main.history.HistoryFragment
 import kaleidot725.ashiato.ui.main.home.HomeFragment
 import kaleidot725.ashiato.ui.main.settinglist.SettingListFragment
 import kaleidot725.ashiato.ui.preview.PreviewActivity
+import kaleidot725.ashiato.ui.privacy.PrivacyActivity
 import kaleidot725.ashiato.ui.setting.SettingActivity
 import java.io.File
 import java.io.IOException
@@ -60,11 +65,16 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar?.setCustomView(R.layout.actionbar_main)
 
-        AndroidInjection.inject(this)
+        ViewPump.init(
+            ViewPump.builder()
+                .addInterceptor(
+                    CalligraphyInterceptor(
+                        CalligraphyConfig.Builder().build()
+                    )
+                )
+                .build()
+        )
 
         val permissions = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -73,10 +83,18 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         )
         ActivityCompat.requestPermissions(this, permissions, 0)
 
+        setContentView(R.layout.activity_main)
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.actionbar_main)
+
+
+        AndroidInjection.inject(this)
         locationRepository.start(this)
 
-        viewModel = ViewModelProviders.of(this, MainViewModelFactory(this, pictureRepository)).get(MainViewModel::class.java)
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        viewModel = ViewModelProviders.of(this, MainViewModelFactory(this, pictureRepository))
+            .get(MainViewModel::class.java)
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
@@ -91,6 +109,10 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     override fun onDestroy() {
         locationRepository.stop()
         super.onDestroy()
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
     }
 
     private var tempFile: File? = null
@@ -115,7 +137,11 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
                 tempFile = File("${storageDir}/temp.jpg")
 
                 val photoURI: Uri =
-                    FileProvider.getUriForFile(this, applicationContext.packageName + ".provider", tempFile as File)
+                    FileProvider.getUriForFile(
+                        this,
+                        applicationContext.packageName + ".provider",
+                        tempFile as File
+                    )
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
 
                 this.imageFile = File(pictureRepository.took!!.path)
@@ -158,20 +184,29 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         return true
     }
 
+    override fun navigatePrivacy(): Boolean {
+        val intent = Intent(this, PrivacyActivity::class.java)
+        startActivity(intent)
+        return true
+    }
+
     override fun navigateHome(): Boolean {
-        supportFragmentManager.beginTransaction().replace(R.id.main_content, HomeFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_content, HomeFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.Home)
         return true
     }
 
     override fun navigateHistory(): Boolean {
-        supportFragmentManager.beginTransaction().replace(R.id.main_content, HistoryFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_content, HistoryFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.History)
         return true
     }
 
     override fun navigateSettingList(): Boolean {
-        supportFragmentManager.beginTransaction().replace(R.id.main_content, SettingListFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_content, SettingListFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.SettingList)
         return true
     }
@@ -179,7 +214,11 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     override fun navigateShare(files: List<File>) {
         val builder = ShareCompat.IntentBuilder.from(this)
         for (file in files) {
-            val shareUri = FileProvider.getUriForFile(applicationContext, applicationContext.packageName + ".provider", file)
+            val shareUri = FileProvider.getUriForFile(
+                applicationContext,
+                applicationContext.packageName + ".provider",
+                file
+            )
             builder.addStream(shareUri)
         }
 

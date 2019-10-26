@@ -8,7 +8,6 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import androidx.core.content.ContextCompat
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
@@ -157,8 +156,8 @@ class LocationRepositoryImpl(
         lastAddress = getAddress(lastLatitude, lastLongitude)
         address.onNext(lastAddress)
 
-        lastWeather = getWeather(lastLatitude, lastLongitude)
-        weather.onNext(lastWeather)
+//        lastWeather = getWeather(lastLatitude, lastLongitude)
+//        weather.onNext(lastWeather)
     }
 
     private fun getAddress(latitude: Double, longitude: Double): String {
@@ -170,19 +169,19 @@ class LocationRepositoryImpl(
         }
     }
 
-    private fun getWeather(latitude: Double, longitude: Double): AllWeather {
-        var weather = _nullWeather
-
-        try {
-            val response =
-                weatherService.getByCoordinates(latitude, longitude, weatherAppId).execute()
-            if (response.body() != null) {
-                weather = response.body() as AllWeather
-            }
-        } catch (e: Exception) {
-            Log.v("LocationRepositoryImpl", e.toString() + e.stackTrace.toString())
-        }
-
-        return weather
-    }
+//    private fun getWeather(latitude: Double, longitude: Double): AllWeather {
+//        var weather = _nullWeather
+//
+//        try {
+//            val response =
+//                weatherService.getByCoordinates(latitude, longitude, weatherAppId).execute()
+//            if (response.body() != null) {
+//                weather = response.body() as AllWeather
+//            }
+//        } catch (e: Exception) {
+//            Log.v("LocationRepositoryImpl", e.toString() + e.stackTrace.toString())
+//        }
+//
+//        return weather
+//    }
 }
