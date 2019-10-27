@@ -12,7 +12,7 @@ class DateTimeRepositoryImpl : DateTimeRepository {
     private val _date: PublishSubject<Date> = PublishSubject.create()
     override val date: Subject<Date> get() = _date
 
-    private val _lastDate: Date = Date()
+    private var _lastDate: Date = Date()
     override val lastDate: Date get() = _lastDate
 
     private var timer: Timer? = null
@@ -23,7 +23,11 @@ class DateTimeRepositoryImpl : DateTimeRepository {
         }
 
         timer = Timer()
-        timer?.scheduleAtFixedRate(timerTask { _date.onNext(Date()) }, 0, intervalMs)
+        timer?.scheduleAtFixedRate(timerTask {
+            val date = Date()
+            _date.onNext(date)
+            _lastDate = date
+        }, 0, intervalMs)
     }
 
     override fun stop() {
