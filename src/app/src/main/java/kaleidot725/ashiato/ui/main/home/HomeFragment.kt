@@ -76,11 +76,12 @@ class HomeFragment : Fragment() {
 
             val builder = AdLoader.Builder(this.context, adId)
             builder.forUnifiedNativeAd {
-                val adView = layoutInflater.inflate(R.layout.unified_native_adview, null)
-                populateNativeAdView(it, UnifiedNativeAdViewHolder(adView))
-
-                view.removeAllViews()
-                view.addView(adView)
+                val adView = activity?.layoutInflater?.inflate(R.layout.unified_native_adview, null)
+                if (adView != null) {
+                    populateNativeAdView(it, UnifiedNativeAdViewHolder(adView))
+                    view.removeAllViews()
+                    view.addView(adView)
+                }
             }
 
             val loader = builder.build()
