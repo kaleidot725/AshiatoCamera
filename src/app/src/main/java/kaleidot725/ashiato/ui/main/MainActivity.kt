@@ -124,21 +124,26 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     private var tempFile: File? = null
     private var imageFile: File? = null
 
-    private fun getPathFromURI(contentUri: Uri): String {
-        val cursor =
-            contentResolver.query(
-                contentUri,
-                arrayOf(MediaStore.Images.Media.DATA),
-                null,
-                null,
-                null
-            )
-        
-        val index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        val result = cursor.getString(index) ?: ""
+    private fun getFilePath(context: Context, uri: Uri): String {
+        var cursor = context.contentResolver.query(uri, null, null, null, null)
+        cursor.moveToFirst()
+        var imageId = cursor.getString(0)
+        imageId = imageId.substring(imageId.lastIndexOf(":") + 1);
         cursor.close()
-        return result
+
+        cursor = context.contentResolver.query(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            null,
+            MediaStore.Images.Media._ID + " = ? ",
+            arrayOf(imageId),
+            null
+        )
+        cursor.moveToFirst()
+        val str = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
+        cursor.close()
+        return str
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
@@ -154,7 +159,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
                 if (resultCode == Activity.RESULT_OK) {
                     val uri = data?.data
                     if (uri != null) {
-                        val path = getPathFromURI(uri)
+                        val path = getFilePath(this, uri)
                         val tempFile = File(path)
                         tempFile?.copyTo(imageFile as File)
                         navigateEdit()
