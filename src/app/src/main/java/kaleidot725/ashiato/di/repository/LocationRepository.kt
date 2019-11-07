@@ -21,12 +21,13 @@ interface LocationRepository : Disposable {
     val longitude: Subject<Double>
     val lastLongitude: Double
 
-    val address : Subject<String>
-    val lastAddress : String
+    val address: Subject<String>
+    val lastAddress: String
 
-    val weather : Subject<AllWeather>
-    val lastWeather : AllWeather
+    val weather: Subject<AllWeather>
+    val lastWeather: AllWeather
 
     fun start(activity: Activity)
+    fun getAddress(latitude: Double, longitude: Double): String
     fun stop()
 }

@@ -112,6 +112,27 @@ class LocationRepositoryImpl(
         )
     }
 
+    override fun getAddress(latitude: Double, longitude: Double): String {
+        if (!(ContextCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED)
+        ) {
+            throw IllegalStateException("don`t have permited ACCESS_FILE_LOCATION")
+        }
+
+        if (!running) {
+            throw IllegalStateException("don't start")
+        }
+
+        try {
+            val address = geocoder.getFromLocation(latitude, longitude, 1).first()
+            return address.getAddressLine(0)
+        } catch (e: Exception) {
+            return "Unknown Address"
+        }
+    }
+
     override fun stop() {
         if (!(ContextCompat.checkSelfPermission(
                 context,
@@ -140,7 +161,7 @@ class LocationRepositoryImpl(
     private var disposed: Boolean = false
     override fun isDisposed() = disposed
 
-    private suspend fun updateLocation(location: Location) {
+    private fun updateLocation(location: Location) {
         update.onNext(Date(location.time))
         lastUpdate = Date(location.time)
 
@@ -158,15 +179,6 @@ class LocationRepositoryImpl(
 
 //        lastWeather = getWeather(lastLatitude, lastLongitude)
 //        weather.onNext(lastWeather)
-    }
-
-    private fun getAddress(latitude: Double, longitude: Double): String {
-        try {
-            val address = geocoder.getFromLocation(latitude, longitude, 1).first()
-            return address.getAddressLine(0)
-        } catch (e: Exception) {
-            return "Unknown Address"
-        }
     }
 
 //    private fun getWeather(latitude: Double, longitude: Double): AllWeather {

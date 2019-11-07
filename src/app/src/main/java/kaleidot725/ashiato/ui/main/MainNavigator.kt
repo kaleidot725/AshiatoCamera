@@ -4,6 +4,8 @@ import java.io.File
 
 interface MainNavigator {
     // Activity
+    fun navigateFolder(): Boolean
+
     fun navigateCamera(): Boolean
 
     fun navigateEdit(): Boolean

@@ -9,17 +9,18 @@ import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.di.repository.*
 import kaleidot725.ashiato.di.service.picture.*
 import kaleidot725.ashiato.ui.edit.EditNavigator
-import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ConfirmViewModel(
     private val navigator: EditNavigator,
     private val pictureEditor: PictureEditor,
     private val formatEditor: FormatEditor,
-    private val colorEditor : ColorEditor,
+    private val colorEditor: ColorEditor,
     private val styleEditor: StyleEditor,
     private val positionEditor: PositionEditor,
     private val rotationEditor: RotationEditor,
-    private val pictureSetting : PermanentPictureSetting,
+    private val pictureSetting: PermanentPictureSetting,
     private val dateTimeRepository: DateTimeRepository,
     private val locationRepository: LocationRepository,
     private val formatRepository: FormatRepository,
@@ -33,33 +34,29 @@ class ConfirmViewModel(
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     init {
-        if (pictureRepository.took == null) {
+        if (pictureRepository.editPicture == null) {
             navigator.exit()
         }
 
         // get parameter
-        val target = pictureRepository.took as Picture
+        val target = pictureRepository.editPicture as Picture
         val preview = pictureRepository.tmpPicture()
 
-        try {
-            val setting = pictureSetting.load()
-            formatEditor.enableAll(false)
-            for(format in setting.formats) { formatEditor.enable(format.type, true) }
-            styleEditor.enable(setting.style)
-            colorEditor.enable(setting.color)
-            positionEditor.enable(setting.position)
-        } catch (e : Exception) {
-            e.printStackTrace()
-        }
+        loadSetting()
 
         // rotation
-        val angleValue = getRotationAngle(target.path)
-        val angle = angleRepository.all().filter { angle -> angle.value == angleValue }.first()
-        rotationEditor.enable(angle)
+        rotateAutomatically(target.path)
+
+        when (pictureRepository.editType) {
+            EditType.TOOK -> {
+                setCurrentValueToEditor()
+            }
+            EditType.FOLDER -> {
+                setPictureValueToEditor(target.path)
+            }
+        }
 
         // picture
-        formatEditor.set(dateTimeRepository.lastDate, locationRepository.lastAltitude, locationRepository.lastLatitude,
-            locationRepository.lastLongitude, locationRepository.lastAddress, locationRepository.lastWeather.weather.first().main)
         pictureEditor.start(target, preview)
         pictureEditor.modifyText(formatEditor.create())
         pictureEditor.modifyColor(colorEditor.lastEnabled.value)
@@ -67,6 +64,7 @@ class ConfirmViewModel(
         pictureEditor.modifyRotation(rotationEditor.lastEnabled.value)
         pictureEditor.modifyPosition(positionEditor.lastEnabled.type)
         _editPath.value = pictureEditor.preview!!.path
+
         val disposable = pictureEditor.state.subscribe {
             if (pictureEditor.preview != null) {
                 _editPath.postValue(pictureEditor.preview!!.path)
@@ -75,9 +73,68 @@ class ConfirmViewModel(
         compositeDisposable.add(disposable)
     }
 
+    private fun loadSetting() {
+        try {
+            val setting = pictureSetting.load()
+            formatEditor.enableAll(false)
+            for (format in setting.formats) {
+                formatEditor.enable(format.type, true)
+            }
+            styleEditor.enable(setting.style)
+            colorEditor.enable(setting.color)
+            positionEditor.enable(setting.position)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun rotateAutomatically(path: String) {
+        val angleValue = getRotationAngle(path)
+        val angle = angleRepository.all().filter { angle -> angle.value == angleValue }.first()
+        rotationEditor.enable(angle)
+    }
+
+    private fun setCurrentValueToEditor() {
+        formatEditor.set(
+            dateTimeRepository.lastDate,
+            locationRepository.lastAltitude,
+            locationRepository.lastLatitude,
+            locationRepository.lastLongitude,
+            locationRepository.lastAddress,
+            locationRepository.lastWeather.weather.first().main
+        )
+    }
+
+    private fun setPictureValueToEditor(path: String) {
+        val exif = ExifInterface(path)
+
+        val simpleDateFormat = SimpleDateFormat("yyyy:MM:dd HH:mm:ss", Locale.getDefault())
+        val lastDate =
+            simpleDateFormat.parse(exif.getAttribute(ExifInterface.TAG_DATETIME)) ?: Date()
+        val lastAltitude = exif.getAttributeInt(ExifInterface.TAG_GPS_ALTITUDE_REF, 0)
+        val lastLatitude = exif.getAttributeInt(ExifInterface.TAG_GPS_LONGITUDE, 0)
+        val lastLongitude = exif.getAttributeInt(ExifInterface.TAG_GPS_LONGITUDE, 0)
+        val lastAddress =
+            locationRepository.getAddress(lastLatitude.toDouble(), lastLongitude.toDouble())
+        formatEditor.set(
+            lastDate,
+            lastAltitude.toDouble(),
+            lastLatitude.toDouble(),
+            lastLongitude.toDouble(),
+            lastAddress,
+            locationRepository.lastWeather.weather.first().main
+        )
+    }
+
     fun save(view: View) {
         val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
-        val setting = PictureSetting(colorEditor.lastEnabled, styleEditor.lastEnabled, formats, positionEditor.lastEnabled, rotationEditor.lastEnabled)
+        val setting = PictureSetting(
+            colorEditor.lastEnabled,
+            styleEditor.lastEnabled,
+            formats,
+            positionEditor.lastEnabled,
+            rotationEditor.lastEnabled
+        )
         pictureSetting.save(setting)
 
         pictureEditor.end()
@@ -86,7 +143,13 @@ class ConfirmViewModel(
 
     fun cancel(view: View) {
         val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
-        val setting = PictureSetting(colorEditor.lastEnabled, styleEditor.lastEnabled, formats, positionEditor.lastEnabled, rotationEditor.lastEnabled)
+        val setting = PictureSetting(
+            colorEditor.lastEnabled,
+            styleEditor.lastEnabled,
+            formats,
+            positionEditor.lastEnabled,
+            rotationEditor.lastEnabled
+        )
         pictureSetting.save(setting)
 
         pictureEditor.cancel()
@@ -98,10 +161,11 @@ class ConfirmViewModel(
         super.onCleared()
     }
 
-    private fun getRotationAngle(path : String) : Float {
+    private fun getRotationAngle(path: String): Float {
         val exif = ExifInterface(path)
         val orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION)
-        val orientation = if (orientString != null) Integer.parseInt(orientString) else ExifInterface.ORIENTATION_NORMAL
+        val orientation =
+            if (orientString != null) Integer.parseInt(orientString) else ExifInterface.ORIENTATION_NORMAL
 
         if (orientation == ExifInterface.ORIENTATION_ROTATE_90)
             return 90f

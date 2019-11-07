@@ -10,7 +10,10 @@ import kotlin.collections.ArrayList
 class PictureRepositoryImpl(path: String) : PictureRepository {
     private val path = path
 
-    override var took: Picture? = null
+    override var editType: EditType? = null
+        private set
+
+    override var editPicture: Picture? = null
         private set
 
     override var actioned: Picture? = null
@@ -49,8 +52,9 @@ class PictureRepositoryImpl(path: String) : PictureRepository {
         actioned = picture
     }
 
-    override fun take(picture: Picture) {
-        took = picture
+    override fun edit(type: EditType, picture: Picture) {
+        editType = type
+        editPicture = picture
     }
 
     override fun preview(picture: Picture) {

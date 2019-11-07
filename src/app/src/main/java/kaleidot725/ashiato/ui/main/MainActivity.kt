@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
 
     private lateinit var viewModel: MainViewModel
     private val REQUEST_IMAGE_CAPTURE = 1
+    private val REQUEST_GET_CONTENT = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,6 +104,11 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
             viewModel.takePhoto(cameraButton)
         }
 
+        val folderButton = findViewById<ImageButton>(R.id.folder_button)
+        folderButton.setOnClickListener {
+            viewModel.selectPhoto(folderButton)
+        }
+
         restoreMenu()
     }
 
@@ -118,14 +124,63 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     private var tempFile: File? = null
     private var imageFile: File? = null
 
+    private fun getFilePath(context: Context, uri: Uri): String {
+        var cursor = context.contentResolver.query(uri, null, null, null, null)
+        cursor.moveToFirst()
+        var imageId = cursor.getString(0)
+        imageId = imageId.substring(imageId.lastIndexOf(":") + 1);
+        cursor.close()
+
+        cursor = context.contentResolver.query(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            null,
+            MediaStore.Images.Media._ID + " = ? ",
+            arrayOf(imageId),
+            null
+        )
+        cursor.moveToFirst()
+        val str = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
+        cursor.close()
+        return str
+    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK) {
-            if (tempFile != null && imageFile != null) {
-                tempFile?.copyTo(imageFile as File)
-                Thread.sleep(1000 * 1)
-                navigateEdit()
+        when (requestCode) {
+            REQUEST_IMAGE_CAPTURE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    if (tempFile != null && imageFile != null) {
+                        tempFile?.copyTo(imageFile as File)
+                        navigateEdit()
+                    }
+                }
+            }
+            REQUEST_GET_CONTENT -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val uri = data?.data
+                    if (uri != null) {
+                        val path = getFilePath(this, uri)
+                        val tempFile = File(path)
+                        tempFile?.copyTo(imageFile as File)
+                        navigateEdit()
+                    }
+                }
             }
         }
+
+    }
+
+    override fun navigateFolder(): Boolean {
+        Intent(Intent.ACTION_GET_CONTENT).also { getContentIntent ->
+            getContentIntent.addCategory(Intent.CATEGORY_OPENABLE)
+            getContentIntent.type = "image/*"
+
+            val intent = Intent.createChooser(getContentIntent, "Select Picture")
+            this.imageFile = File(pictureRepository.editPicture!!.path)
+            startActivityForResult(intent, REQUEST_GET_CONTENT)
+        }
+
+        return true
     }
 
     @Throws(IOException::class)
@@ -144,7 +199,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
                     )
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
 
-                this.imageFile = File(pictureRepository.took!!.path)
+                this.imageFile = File(pictureRepository.editPicture!!.path)
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             }
         }
@@ -229,7 +284,6 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
         }
-
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
