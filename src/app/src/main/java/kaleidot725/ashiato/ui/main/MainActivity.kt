@@ -174,10 +174,9 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         Intent(Intent.ACTION_GET_CONTENT).also { getContentIntent ->
             getContentIntent.addCategory(Intent.CATEGORY_OPENABLE)
             getContentIntent.type = "image/*"
-            this.imageFile = File(pictureRepository.took!!.path)
 
             val intent = Intent.createChooser(getContentIntent, "Select Picture")
-            this.imageFile = File(pictureRepository.took!!.path)
+            this.imageFile = File(pictureRepository.editPicture!!.path)
             startActivityForResult(intent, REQUEST_GET_CONTENT)
         }
 
@@ -200,7 +199,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
                     )
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
 
-                this.imageFile = File(pictureRepository.took!!.path)
+                this.imageFile = File(pictureRepository.editPicture!!.path)
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             }
         }

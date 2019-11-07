@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
+import kaleidot725.ashiato.di.repository.EditType
 import kaleidot725.ashiato.di.repository.PictureRepository
 
 class MainViewModel(
@@ -35,12 +36,12 @@ class MainViewModel(
         }
 
     fun takePhoto(view: View) {
-        pictureRepository.take(pictureRepository.newPicture())
+        pictureRepository.edit(EditType.TOOK, pictureRepository.newPicture())
         navigator.navigateCamera()
     }
 
     fun selectPhoto(view: View) {
-        pictureRepository.take(pictureRepository.newPicture())
+        pictureRepository.edit(EditType.FOLDER, pictureRepository.newPicture())
         navigator.navigateFolder()
     }
 
