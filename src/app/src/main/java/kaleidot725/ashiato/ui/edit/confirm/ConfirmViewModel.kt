@@ -109,8 +109,9 @@ class ConfirmViewModel(
         val exif = ExifInterface(path)
 
         val simpleDateFormat = SimpleDateFormat("yyyy:MM:dd HH:mm:ss", Locale.getDefault())
-        val lastDate =
-            simpleDateFormat.parse(exif.getAttribute(ExifInterface.TAG_DATETIME)) ?: Date()
+        val dateString =
+            exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL) ?: "1900:01:01 00:00:00"
+        val lastDate = simpleDateFormat.parse(dateString) ?: Date()
         val lastAltitude = exif.getAttributeInt(ExifInterface.TAG_GPS_ALTITUDE_REF, 0)
         val lastLatitude = exif.getAttributeInt(ExifInterface.TAG_GPS_LONGITUDE, 0)
         val lastLongitude = exif.getAttributeInt(ExifInterface.TAG_GPS_LONGITUDE, 0)
