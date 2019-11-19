@@ -113,13 +113,13 @@ class ConfirmViewModel(
         val lastDate = simpleDateFormat.parse(dateString) ?: Date()
 
         val lastAltitudeStr = exif.getAttribute(ExifInterface.TAG_GPS_ALTITUDE)
-        val lastAltitude = splitSlashSecond(lastAltitudeStr) ?: "0"
+        val lastAltitude = lastAltitudeStr?.split("/")?.get(1) ?: "0"
 
         val lastLatitudeStr = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE)
-        val lastLatitude = splitSlashFirst(lastLatitudeStr) ?: "0"
+        val lastLatitude = lastLatitudeStr?.split("/")?.get(0) ?: "0"
 
         val lastLongitudeStr = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE)
-        val lastLongitude = splitSlashFirst(lastLongitudeStr) ?: "0"
+        val lastLongitude = lastLongitudeStr?.split("/")?.get(0) ?: "0"
 
         val lastAddress =
             locationRepository.getAddress(lastLatitude.toDouble(), lastLongitude.toDouble())
@@ -165,22 +165,6 @@ class ConfirmViewModel(
     override fun onCleared() {
         compositeDisposable.dispose()
         super.onCleared()
-    }
-
-    private fun splitSlashFirst(str: String?): String? {
-        try {
-            return str?.split("/")?.first()
-        } catch (e: Exception) {
-            return null
-        }
-    }
-
-    private fun splitSlashSecond(str: String?): String? {
-        try {
-            return str?.split("/")?.get(1)
-        } catch (e: Exception) {
-            return null
-        }
     }
 
     private fun getRotationAngle(path: String): Float {
