@@ -3,7 +3,6 @@ package kaleidot725.ashiato.di.repository
 import android.app.Activity
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.Subject
-import kaleidot725.ashiato.di.service.weather.AllWeather
 import java.util.*
 
 interface LocationRepository : Disposable {
@@ -23,9 +22,6 @@ interface LocationRepository : Disposable {
 
     val address: Subject<String>
     val lastAddress: String
-
-    val weather: Subject<AllWeather>
-    val lastWeather: AllWeather
 
     fun start(activity: Activity)
     fun getAddress(latitude: Double, longitude: Double): String

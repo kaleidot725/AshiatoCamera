@@ -11,7 +11,6 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kaleidot725.ashiato.di.service.weather.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,9 +22,7 @@ class LocationRepositoryImpl(
     private val minTime: Int,
     private val minDistance: Int,
     private val geocoder: Geocoder,
-    private val locationManager: LocationManager,
-    private val weatherService: WeatherService,
-    private val weatherAppId: String
+    private val locationManager: LocationManager
 ) : LocationRepository {
 
     override var running: Boolean = false
@@ -55,27 +52,6 @@ class LocationRepositoryImpl(
     private val _address: PublishSubject<String> = PublishSubject.create()
     override val address: Subject<String> = _address
     override var lastAddress: String = "Unknown Address"
-        private set
-
-    private val _nullWeather = AllWeather(
-        "",
-        Clouds(0),
-        0,
-        Coord(0.0, 0.0),
-        0,
-        0,
-        Main(0, 0, 0.0, 0.0, 0.0),
-        "",
-        Sys("", 0, 0.0, 0, 0, 0),
-        0,
-        0,
-        listOf(Weather("Unknown Weather", "", 0, "Unknown Weather")),
-        Wind(0, 0.0)
-    )
-
-    private val _weather: PublishSubject<AllWeather> = PublishSubject.create()
-    override val weather: Subject<AllWeather> = _weather
-    override var lastWeather: AllWeather = _nullWeather
         private set
 
     private val locationListener = object : LocationListener {
@@ -176,24 +152,5 @@ class LocationRepositoryImpl(
 
         lastAddress = getAddress(lastLatitude, lastLongitude)
         address.onNext(lastAddress)
-
-//        lastWeather = getWeather(lastLatitude, lastLongitude)
-//        weather.onNext(lastWeather)
     }
-
-//    private fun getWeather(latitude: Double, longitude: Double): AllWeather {
-//        var weather = _nullWeather
-//
-//        try {
-//            val response =
-//                weatherService.getByCoordinates(latitude, longitude, weatherAppId).execute()
-//            if (response.body() != null) {
-//                weather = response.body() as AllWeather
-//            }
-//        } catch (e: Exception) {
-//            Log.v("LocationRepositoryImpl", e.toString() + e.stackTrace.toString())
-//        }
-//
-//        return weather
-//    }
 }
