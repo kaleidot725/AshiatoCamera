@@ -9,8 +9,7 @@ class FormatEditorImpl : FormatEditor {
     private var altitudeEnable: Boolean = false
     private var latitudeEnable: Boolean = false
     private var longitudeEnable: Boolean = false
-    private var addressEnable : Boolean = false
-    private var weatherEnable : Boolean = false
+    private var addressEnable: Boolean = false
 
     private val space: String = " "
     private val dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
@@ -20,16 +19,20 @@ class FormatEditorImpl : FormatEditor {
     private var altitude: Double = 0.0
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
-    private var address : String = ""
-    private var weather : String = ""
+    private var address: String = ""
 
-    override fun set(date : Date, altitude: Double, latitude: Double, longitude: Double, address : String, weather : String) {
+    override fun set(
+        date: Date,
+        altitude: Double,
+        latitude: Double,
+        longitude: Double,
+        address: String
+    ) {
         this.date = date
         this.altitude = altitude
         this.latitude = latitude
         this.longitude = longitude
         this.address = address
-        this.weather = weather
     }
 
     override fun create(): String {
@@ -41,10 +44,6 @@ class FormatEditorImpl : FormatEditor {
 
         if (timeEnable) {
             value += timeFormat.format(date) + space
-        }
-
-        if (weatherEnable) {
-            value += weather + space
         }
 
         if (addressEnable) {
@@ -70,7 +69,6 @@ class FormatEditorImpl : FormatEditor {
         when (type) {
             FormatType.Date -> dateEnable = value
             FormatType.Time -> timeEnable = value
-            FormatType.Weather -> weatherEnable = value
             FormatType.Address -> addressEnable = value
             FormatType.Altitude -> altitudeEnable = value
             FormatType.Latitude -> latitudeEnable = value
@@ -82,7 +80,6 @@ class FormatEditorImpl : FormatEditor {
         when (type) {
             FormatType.Date -> return dateEnable
             FormatType.Time -> return timeEnable
-            FormatType.Weather -> return weatherEnable
             FormatType.Address -> return addressEnable
             FormatType.Altitude -> return altitudeEnable
             FormatType.Latitude -> return latitudeEnable
@@ -93,7 +90,6 @@ class FormatEditorImpl : FormatEditor {
     override fun enableAll(value: Boolean) {
         dateEnable = value
         timeEnable = value
-        weatherEnable = value
         addressEnable = value
         altitudeEnable = value
         latitudeEnable = value

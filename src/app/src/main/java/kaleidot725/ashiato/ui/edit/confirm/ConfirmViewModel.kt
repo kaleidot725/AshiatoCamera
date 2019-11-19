@@ -100,8 +100,7 @@ class ConfirmViewModel(
             locationRepository.lastAltitude,
             locationRepository.lastLatitude,
             locationRepository.lastLongitude,
-            locationRepository.lastAddress,
-            locationRepository.lastWeather.weather.first().main
+            locationRepository.lastAddress
         )
     }
 
@@ -109,11 +108,19 @@ class ConfirmViewModel(
         val exif = ExifInterface(path)
 
         val simpleDateFormat = SimpleDateFormat("yyyy:MM:dd HH:mm:ss", Locale.getDefault())
-        val lastDate =
-            simpleDateFormat.parse(exif.getAttribute(ExifInterface.TAG_DATETIME)) ?: Date()
-        val lastAltitude = exif.getAttributeInt(ExifInterface.TAG_GPS_ALTITUDE_REF, 0)
-        val lastLatitude = exif.getAttributeInt(ExifInterface.TAG_GPS_LONGITUDE, 0)
-        val lastLongitude = exif.getAttributeInt(ExifInterface.TAG_GPS_LONGITUDE, 0)
+        val dateString =
+            exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL) ?: "1900:01:01 00:00:00"
+        val lastDate = simpleDateFormat.parse(dateString) ?: Date()
+
+        val lastAltitudeStr = exif.getAttribute(ExifInterface.TAG_GPS_ALTITUDE)
+        val lastAltitude = lastAltitudeStr?.split("/")?.get(1) ?: "0"
+
+        val lastLatitudeStr = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE)
+        val lastLatitude = lastLatitudeStr?.split("/")?.get(0) ?: "0"
+
+        val lastLongitudeStr = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE)
+        val lastLongitude = lastLongitudeStr?.split("/")?.get(0) ?: "0"
+
         val lastAddress =
             locationRepository.getAddress(lastLatitude.toDouble(), lastLongitude.toDouble())
         formatEditor.set(
@@ -121,8 +128,7 @@ class ConfirmViewModel(
             lastAltitude.toDouble(),
             lastLatitude.toDouble(),
             lastLongitude.toDouble(),
-            lastAddress,
-            locationRepository.lastWeather.weather.first().main
+            lastAddress
         )
     }
 

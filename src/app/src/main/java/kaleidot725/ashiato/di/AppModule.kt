@@ -13,7 +13,6 @@ import kaleidot725.ashiato.di.repository.*
 import kaleidot725.ashiato.di.service.location.LocationSetting
 import kaleidot725.ashiato.di.service.location.PermanentLocationSetting
 import kaleidot725.ashiato.di.service.picture.*
-import kaleidot725.ashiato.di.service.weather.WeatherService
 import kaleidot725.ashiato.ui.MyApplication
 import kaleidot725.ashiato.ui.contact.ContactActivity
 import kaleidot725.ashiato.ui.contact.ContactFragment
@@ -35,8 +34,6 @@ import kaleidot725.ashiato.ui.preview.PageFragment
 import kaleidot725.ashiato.ui.preview.PreviewActivity
 import kaleidot725.ashiato.ui.setting.SettingActivity
 import kaleidot725.ashiato.ui.setting.SettingFragment
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.*
 import javax.inject.Singleton
 
@@ -65,20 +62,12 @@ class AppModule {
         return PictureRepositoryImpl(dirPath)
     }
 
-    private val weatherBaseUri: String = "https://api.openweathermap.org"
-    private val weatherAppId: String = ""
-
     @Provides
     @Singleton
     fun provideLocationRepository(myApplication: MyApplication): LocationRepository {
         val geocoder: Geocoder = Geocoder(myApplication, Locale.US)
         val locationManager: LocationManager =
             myApplication.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val weatherService: WeatherService = Retrofit.Builder()
-            .baseUrl(weatherBaseUri)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build()
-            .create(WeatherService::class.java)
 
         try {
             val s = PermanentLocationSetting(myApplication.filesDir.path + "settings.json")
@@ -89,9 +78,7 @@ class AppModule {
                 s.gpsMinTime,
                 s.gpsMinDistance,
                 geocoder,
-                locationManager,
-                weatherService,
-                weatherAppId
+                locationManager
             )
         } catch (e: Exception) {
             val s = LocationSetting(LocationManager.GPS_PROVIDER, 1, 1)
@@ -101,9 +88,7 @@ class AppModule {
                 s.gpsMinTime,
                 s.gpsMinDistance,
                 geocoder,
-                locationManager,
-                weatherService,
-                weatherAppId
+                locationManager
             )
         }
     }
