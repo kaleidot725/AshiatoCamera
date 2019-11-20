@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:myApplication="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.edit.EditActivity">
 
     <data>
-        <variable name="viewmodel" type="kaleidot725.ashiato.ui.edit.EditViewModel"/>
+
+        <variable
+                name="viewmodel"
+                type="kaleidot725.ashiato.ui.edit.EditViewModel" />
     </data>
 
     <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
@@ -17,13 +19,14 @@
                 android:id="@+id/display_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="160dp"/>
+                android:layout_marginBottom="128dp" />
 
         <FrameLayout
                 android:id="@+id/editmenu_content"
                 android:layout_gravity="bottom"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"/>
+                android:layout_height="80dp"
+                android:layout_marginBottom="48dp" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigation"
