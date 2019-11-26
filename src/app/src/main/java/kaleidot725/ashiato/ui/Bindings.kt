@@ -2,32 +2,35 @@ package kaleidot725.ashiato.ui
 
 import android.os.SystemClock
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.squareup.picasso.MemoryPolicy
-import com.squareup.picasso.Picasso
+import coil.api.load
+import coil.request.CachePolicy
 import java.io.File
 
 @BindingAdapter("app:imageUrl")
 fun loadImage(view: ImageView, imagePath: String?) {
     val file = File(imagePath)
-    Picasso.get().load(file).fit().centerInside().into(view)
+    view.load(file)
 }
 
 @BindingAdapter("app:imageUrlNoCache")
 fun loadImageNoCache(view: ImageView, imagePath: String?) {
     val file = File(imagePath)
-    Picasso.get().load(file).memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerInside().into(view)
+    view.load(file) {
+        diskCachePolicy(CachePolicy.DISABLED)
+        memoryCachePolicy(CachePolicy.DISABLED)
+        networkCachePolicy(CachePolicy.DISABLED)
+    }
 }
 
 @BindingAdapter("app:onSafeClick")
-fun onSafeClick(view: View,  listener : View.OnClickListener) {
+fun onSafeClick(view: View, listener: View.OnClickListener) {
 
     class SafeClickListener(
         private var defaultInterval: Int = 1000,
-        private val listener : View.OnClickListener) : View.OnClickListener
-    {
+        private val listener: View.OnClickListener
+    ) : View.OnClickListener {
         private var lastTimeClicked: Long = 0
         override fun onClick(v: View) {
             if (SystemClock.elapsedRealtime() - lastTimeClicked < defaultInterval) {
