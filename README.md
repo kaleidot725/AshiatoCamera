@@ -1,9 +1,13 @@
 # このプロジェクトの概要
 カメラで撮影した写真に日付・高さ・緯度・経度などの情報を手軽に載せられるアプリを作ってます。  
-このアプリを使えば日々の写真に情報を載せて管理することができます。
+このアプリを使えば日々の写真に情報を載せて管理することができます。この
+
+アプリは[Play Store](https://play.google.com/store/apps/details?id=kaleidot725.ashiato)にて公開しています。
 
 
-![デザイン](./doc/ashiato.png)
+
+
+![デザイン](./doc/ashiato-feature-graphic.png)
 
 
 
