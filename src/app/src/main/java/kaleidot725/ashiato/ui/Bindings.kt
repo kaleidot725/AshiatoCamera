@@ -10,6 +10,10 @@ import java.io.File
 
 @BindingAdapter("app:imageUrl")
 fun loadImage(view: ImageView, imagePath: String?) {
+    if (imagePath == null) {
+        return
+    }
+
     val file = File(imagePath)
     view.load(file) {
         crossfade(true)
@@ -18,6 +22,10 @@ fun loadImage(view: ImageView, imagePath: String?) {
 
 @BindingAdapter("app:imageUrlNoCache")
 fun loadImageNoCache(view: ImageView, imagePath: String?) {
+    if (imagePath == null) {
+        return
+    }
+    
     val file = File(imagePath)
     view.load(file) {
         crossfade(true)

@@ -25,7 +25,6 @@ class PrivacyFragment : Fragment() {
         val webView = view.findViewById<WebView>(R.id.webview)
         webView.loadUrl(getString(R.string.privacy_policy_url))
         webView.settings.textZoom = 65
-
         super.onViewCreated(view, savedInstanceState)
     }
 }

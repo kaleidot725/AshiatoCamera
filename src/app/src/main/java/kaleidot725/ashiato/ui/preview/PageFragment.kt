@@ -28,7 +28,11 @@ class PageFragment : Fragment() {
 
     private lateinit var viewModel: PageViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.preview_fragment, container, false)
     }
@@ -39,6 +43,7 @@ class PageFragment : Fragment() {
         val position = arguments?.getInt("position")
         val factory = PageViewModelFactory(repository, position ?: 0)
         viewModel = ViewModelProviders.of(this, factory).get(PageViewModel::class.java)
+        viewModel.load()
 
         val binding = DataBindingUtil.bind<PreviewFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this
