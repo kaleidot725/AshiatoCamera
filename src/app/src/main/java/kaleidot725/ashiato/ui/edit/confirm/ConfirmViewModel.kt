@@ -5,10 +5,12 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.di.repository.*
 import kaleidot725.ashiato.di.service.picture.*
 import kaleidot725.ashiato.ui.edit.EditNavigator
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,44 +35,42 @@ class ConfirmViewModel(
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    init {
-        if (pictureRepository.editPicture == null) {
-            navigator.exit()
-        }
+    fun load() {
+        viewModelScope.launch {
+            // get parameter
+            val target = pictureRepository.editPicture as Picture
+            val preview = pictureRepository.tmpPicture()
 
-        // get parameter
-        val target = pictureRepository.editPicture as Picture
-        val preview = pictureRepository.tmpPicture()
+            loadSetting()
 
-        loadSetting()
+            // rotation
+            rotateAutomatically(target.path)
 
-        // rotation
-        rotateAutomatically(target.path)
-
-        when (pictureRepository.editType) {
-            EditType.TOOK -> {
-                setCurrentValueToEditor()
+            when (pictureRepository.editType) {
+                EditType.TOOK -> {
+                    setCurrentValueToEditor()
+                }
+                EditType.FOLDER -> {
+                    setPictureValueToEditor(target.path)
+                }
             }
-            EditType.FOLDER -> {
-                setPictureValueToEditor(target.path)
-            }
-        }
 
-        // picture
-        pictureEditor.start(target, preview)
-        pictureEditor.modifyText(formatEditor.create())
-        pictureEditor.modifyColor(colorEditor.lastEnabled.value)
-        pictureEditor.modifyTextSize(styleEditor.lastEnabled.dp)
-        pictureEditor.modifyRotation(rotationEditor.lastEnabled.value)
-        pictureEditor.modifyPosition(positionEditor.lastEnabled.type)
-        _editPath.value = pictureEditor.preview!!.path
+            // picture
+            pictureEditor.start(target, preview)
+            pictureEditor.modifyText(formatEditor.create())
+            pictureEditor.modifyColor(colorEditor.lastEnabled.value)
+            pictureEditor.modifyTextSize(styleEditor.lastEnabled.dp)
+            pictureEditor.modifyRotation(rotationEditor.lastEnabled.value)
+            pictureEditor.modifyPosition(positionEditor.lastEnabled.type)
+            _editPath.value = pictureEditor.preview!!.path
 
-        val disposable = pictureEditor.state.subscribe {
-            if (pictureEditor.preview != null) {
-                _editPath.postValue(pictureEditor.preview!!.path)
+            val disposable = pictureEditor.state.subscribe {
+                if (pictureEditor.preview != null) {
+                    _editPath.postValue(pictureEditor.preview!!.path)
+                }
             }
+            compositeDisposable.add(disposable)
         }
-        compositeDisposable.add(disposable)
     }
 
     private fun loadSetting() {
@@ -133,33 +133,37 @@ class ConfirmViewModel(
     }
 
     fun save(view: View) {
-        val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
-        val setting = PictureSetting(
-            colorEditor.lastEnabled,
-            styleEditor.lastEnabled,
-            formats,
-            positionEditor.lastEnabled,
-            rotationEditor.lastEnabled
-        )
-        pictureSetting.save(setting)
+        viewModelScope.launch {
+            val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
+            val setting = PictureSetting(
+                colorEditor.lastEnabled,
+                styleEditor.lastEnabled,
+                formats,
+                positionEditor.lastEnabled,
+                rotationEditor.lastEnabled
+            )
+            pictureSetting.save(setting)
 
-        pictureEditor.end()
-        navigator.exit()
+            pictureEditor.end()
+            navigator.exit()
+        }
     }
 
     fun cancel(view: View) {
-        val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
-        val setting = PictureSetting(
-            colorEditor.lastEnabled,
-            styleEditor.lastEnabled,
-            formats,
-            positionEditor.lastEnabled,
-            rotationEditor.lastEnabled
-        )
-        pictureSetting.save(setting)
+        viewModelScope.launch {
+            val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
+            val setting = PictureSetting(
+                colorEditor.lastEnabled,
+                styleEditor.lastEnabled,
+                formats,
+                positionEditor.lastEnabled,
+                rotationEditor.lastEnabled
+            )
+            pictureSetting.save(setting)
 
-        pictureEditor.cancel()
-        navigator.exit()
+            pictureEditor.cancel()
+            navigator.exit()
+        }
     }
 
     override fun onCleared() {

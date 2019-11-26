@@ -28,7 +28,7 @@ class ConfirmFragment : Fragment() {
     lateinit var formatEditor: FormatEditor
 
     @Inject
-    lateinit var colorEditor : ColorEditor
+    lateinit var colorEditor: ColorEditor
 
     @Inject
     lateinit var styleEditor: StyleEditor
@@ -43,7 +43,7 @@ class ConfirmFragment : Fragment() {
     lateinit var rotationEditor: RotationEditor
 
     @Inject
-    lateinit var pictureSetting : PermanentPictureSetting
+    lateinit var pictureSetting: PermanentPictureSetting
 
     @Inject
     lateinit var locationRepository: LocationRepository
@@ -62,7 +62,11 @@ class ConfirmFragment : Fragment() {
 
     private lateinit var viewModel: ConfirmViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.confirm_fragment, container, false)
     }
 
@@ -70,6 +74,10 @@ class ConfirmFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         AndroidSupportInjection.inject(this)
 
+        if (pictureRepository.editPicture == null) {
+            navigator.exit()
+        }
+        
         val factory = ConfirmViewModelFactory(
             navigator,
             pictureEditor,
@@ -86,6 +94,7 @@ class ConfirmFragment : Fragment() {
             angleRepository
         )
         viewModel = ViewModelProviders.of(this, factory).get(ConfirmViewModel::class.java)
+        viewModel.load()
 
         val binding = DataBindingUtil.bind<ConfirmFragmentBinding>(view)
         binding?.lifecycleOwner = this

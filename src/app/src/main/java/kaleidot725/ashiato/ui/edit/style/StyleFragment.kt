@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +35,11 @@ class StyleFragment : Fragment() {
     @Inject
     lateinit var repository: StyleRepository
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.style_fragment, container, false)
     }
@@ -42,7 +47,10 @@ class StyleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, StyleViewModelFactory(pictureEditor, styleEditor, repository)).get(
+        viewModel = ViewModelProviders.of(
+            this,
+            StyleViewModelFactory(pictureEditor, styleEditor, repository)
+        ).get(
             StyleViewModel::class.java
         )
 
@@ -51,8 +59,14 @@ class StyleFragment : Fragment() {
         binding?.vm = viewModel
 
         val recyclerView = this.view?.findViewById<RecyclerView>(R.id.style_recycler_view)
-        recyclerView?.adapter = StyleRecyclerAdapter(this, viewModel.styleRecyclerViewModel.value ?: listOf())
-        recyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView?.setHasFixedSize(true)
+        viewModel.styleRecyclerViewModel.observe(this, Observer {
+            recyclerView?.adapter =
+                StyleRecyclerAdapter(this, viewModel.styleRecyclerViewModel.value ?: listOf())
+            recyclerView?.layoutManager =
+                LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView?.setHasFixedSize(true)
+        })
+
+        viewModel.load()
     }
 }

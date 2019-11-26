@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,14 +35,21 @@ class ColorFragment : Fragment() {
 
     private lateinit var viewModel: ColorViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.color_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this, ColorViewModelFactory(pictureEditor, colorEditor, repository))
+        viewModel = ViewModelProviders.of(
+            this,
+            ColorViewModelFactory(pictureEditor, colorEditor, repository)
+        )
             .get(ColorViewModel::class.java)
 
         val binding = DataBindingUtil.bind<ColorFragmentBindingImpl>(this.view as View)
@@ -49,9 +57,15 @@ class ColorFragment : Fragment() {
         binding?.vm = viewModel
 
         val recyclerView = this.view?.findViewById<RecyclerView>(R.id.color_recycler_View)
-        recyclerView?.adapter = ColorRecyclerAdapter(this, viewModel.colorRecyclerViewModels.value ?: listOf())
-        recyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView?.setHasFixedSize(true)
+        viewModel.colorRecyclerViewModels.observe(this, Observer {
+            recyclerView?.adapter =
+                ColorRecyclerAdapter(this, viewModel.colorRecyclerViewModels.value ?: listOf())
+            recyclerView?.layoutManager =
+                LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView?.setHasFixedSize(true)
+        })
+        viewModel.load()
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

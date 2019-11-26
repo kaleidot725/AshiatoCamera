@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,18 +28,21 @@ class PositionFragment : Fragment() {
     lateinit var pictureEditor: PictureEditor
 
     @Inject
-    lateinit var positionEditor : PositionEditor
+    lateinit var positionEditor: PositionEditor
 
     @Inject
     lateinit var positionRepository: PositionRepository
 
     private lateinit var viewModel: PositionViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.position_fragment, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -50,9 +54,17 @@ class PositionFragment : Fragment() {
         binding?.vm = viewModel
 
         val recyclerView = this.view?.findViewById<(RecyclerView)>(R.id.position_recycler_view)
-        recyclerView?.adapter = PositionRecyclerAdapter(this, viewModel.positionRecyclerViewModels.value ?: listOf())
-        recyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView?.setHasFixedSize(true)
+        viewModel.positionRecyclerViewModels.observe(this, Observer {
+            recyclerView?.adapter = PositionRecyclerAdapter(
+                this,
+                viewModel.positionRecyclerViewModels.value ?: listOf()
+            )
+            recyclerView?.layoutManager =
+                LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView?.setHasFixedSize(true)
+        })
+
+        viewModel.load()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

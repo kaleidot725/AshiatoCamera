@@ -4,10 +4,12 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.di.service.picture.Color
 import kaleidot725.ashiato.di.service.picture.ColorEditor
 import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kotlinx.coroutines.launch
 
 class ColorRecyclerViewModel(
     private val pictureEditor: PictureEditor,
@@ -27,7 +29,8 @@ class ColorRecyclerViewModel(
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        _txtColor.value = if (color.value == android.graphics.Color.WHITE) android.graphics.Color.BLACK else color.value
+        _txtColor.value =
+            if (color.value == android.graphics.Color.WHITE) android.graphics.Color.BLACK else color.value
         _detail.value = color.detail
         _enabled.value = (colorEditor.lastEnabled == color)
         compositeDisposable.add(
@@ -36,8 +39,10 @@ class ColorRecyclerViewModel(
     }
 
     fun click(v: View) {
-        colorEditor.enable(color)
-        pictureEditor.modifyColor(color.value)
+        viewModelScope.launch {
+            colorEditor.enable(color)
+            pictureEditor.modifyColor(color.value)
+        }
     }
 
     override fun onCleared() {

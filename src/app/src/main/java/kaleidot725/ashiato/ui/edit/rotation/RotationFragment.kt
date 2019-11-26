@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +35,11 @@ class RotationFragment : Fragment() {
 
     private lateinit var viewModel: RotationViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.rotation_fragment, container, false)
     }
@@ -50,9 +55,15 @@ class RotationFragment : Fragment() {
         binding?.vm = viewModel
 
         val recyclerView = this.view?.findViewById<RecyclerView>(R.id.rotation_recycler_view)
-        recyclerView?.adapter = RotationRecyclerAdapter(this, viewModel.rotaionRecyclerViewModels.value ?: listOf())
-        recyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView?.setHasFixedSize(true)
+        viewModel.rotaionRecyclerViewModels.observe(this, Observer {
+            recyclerView?.adapter =
+                RotationRecyclerAdapter(this, viewModel.rotaionRecyclerViewModels.value ?: listOf())
+            recyclerView?.layoutManager =
+                LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView?.setHasFixedSize(true)
+        })
+
+        viewModel.load()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
