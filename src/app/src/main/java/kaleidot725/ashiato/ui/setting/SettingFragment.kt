@@ -24,7 +24,11 @@ class SettingFragment : Fragment() {
     @Inject
     lateinit var persistenceSetting: PermanentLocationSetting
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.setting_fragment, container, false)
     }
@@ -32,7 +36,10 @@ class SettingFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel =
-            ViewModelProviders.of(this, SettingViewModelFactory(persistenceSetting)).get(SettingViewModel::class.java)
+            ViewModelProviders.of(this, SettingViewModelFactory(persistenceSetting))
+                .get(SettingViewModel::class.java)
+        viewModel.load()
+        
         val binding = DataBindingUtil.bind<SettingFragmentBinding>(this.view as View)
         binding?.vm = viewModel
         binding?.lifecycleOwner = this

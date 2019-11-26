@@ -3,6 +3,7 @@ package kaleidot725.ashiato.ui.setting
 import android.location.LocationManager
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import kaleidot725.ashiato.di.service.location.LocationSetting
 import kaleidot725.ashiato.di.service.location.PermanentLocationSetting
@@ -15,7 +16,8 @@ class SettingViewModel(private val persistenceSetting: PermanentLocationSetting)
     val gpsProviderItemPosition: MutableLiveData<Int> = MutableLiveData()
 
     private val gpsMinTimes: List<Int> = arrayListOf(1, 5, 10, 15, 30, 60)
-    val gpsMinTimeMenus: List<String> = arrayListOf("1Sec", "5Sec", "10Sec", "15Sec", "30Sec", "60Sec")
+    val gpsMinTimeMenus: List<String> =
+        arrayListOf("1Sec", "5Sec", "10Sec", "15Sec", "30Sec", "60Sec")
     val gpsMinTimeItemPosition: MutableLiveData<Int> = MutableLiveData()
 
     private val gpsMinDistances: List<Int> = arrayListOf(1, 5, 10, 25, 50, 100)
@@ -29,7 +31,7 @@ class SettingViewModel(private val persistenceSetting: PermanentLocationSetting)
             gpsMinDistances[0]
         )
 
-    init {
+    fun load() {
         try {
             setting = persistenceSetting.load()
         } catch (e: Exception) {
@@ -37,33 +39,33 @@ class SettingViewModel(private val persistenceSetting: PermanentLocationSetting)
         }
 
         gpsProviderItemPosition.postValue(gpsGpsLocationProviders.indexOf(setting.gpsGpsLocationProvider))
-        gpsProviderItemPosition.observeForever {
+        gpsProviderItemPosition.observeForever(Observer {
             try {
                 setting.gpsGpsLocationProvider = gpsGpsLocationProviders[it]
                 persistenceSetting.save(setting)
             } catch (e: Exception) {
                 Log.v("SettingViewModel", e.message)
             }
-        }
+        })
 
         gpsMinTimeItemPosition.postValue(gpsMinTimes.indexOf(setting.gpsMinTime))
-        gpsMinTimeItemPosition.observeForever {
+        gpsMinTimeItemPosition.observeForever(Observer {
             try {
                 setting.gpsMinTime = gpsMinTimes[it]
                 persistenceSetting.save(setting)
             } catch (e: Exception) {
                 Log.v("SettingViewModel", e.message)
             }
-        }
+        })
 
         gpsMinDistancePosition.postValue(gpsMinDistances.indexOf(setting.gpsMinDistance))
-        gpsMinDistancePosition.observeForever {
+        gpsMinDistancePosition.observeForever(Observer {
             try {
                 setting.gpsMinDistance = gpsMinDistances[it]
                 persistenceSetting.save(setting)
             } catch (e: Exception) {
                 Log.v("SettingViewModel", e.message)
             }
-        }
+        })
     }
 }
