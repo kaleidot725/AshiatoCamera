@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,9 +29,13 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
 
     private lateinit var viewModel: HistoryViewModel
     private var actionMode: ActionMode? = null
-    private var recyclerView : RecyclerView? = null
+    private var recyclerView: RecyclerView? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.history_fragment, container, false)
     }
@@ -78,24 +83,27 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
     }
 
     private fun createView(mode: HistoryFragmentMode) {
-        viewModel = ViewModelProviders.of(this, HistoryViewModelFactory(navigator, this, repository))
-            .get(HistoryViewModel::class.java)
-        viewModel.load(mode)
+        viewModel =
+            ViewModelProviders.of(this, HistoryViewModelFactory(navigator, this, repository))
+                .get(HistoryViewModel::class.java)
 
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this
         binding?.vm = viewModel
 
-        var position = 0
-        if (recyclerView != null) {
-            position  = (recyclerView!!.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition()
-        }
+        val gridLayoutManager = (recyclerView?.layoutManager as GridLayoutManager?)
+        val position = gridLayoutManager?.findFirstCompletelyVisibleItemPosition() ?: 0
 
-        recyclerView = this.view?.findViewById<RecyclerView>(R.id.picture_recycler_view)
-        recyclerView?.adapter = PictureAdapter(this, viewModel.pictureViewModels.value ?: listOf())
-        recyclerView?.layoutManager = GridLayoutManager(context, 2)
-        recyclerView?.setHasFixedSize(true)
-        recyclerView?.scrollToPosition(position)
+        recyclerView = this.view?.findViewById(R.id.picture_recycler_view)
+        viewModel.pictureViewModels.observe(this, Observer {
+            recyclerView?.adapter =
+                PictureAdapter(this, viewModel.pictureViewModels.value ?: listOf())
+            recyclerView?.layoutManager = GridLayoutManager(context, 2)
+            recyclerView?.setHasFixedSize(true)
+            recyclerView?.scrollToPosition(position)
+        })
+
+        viewModel.load(mode)
     }
 }
 

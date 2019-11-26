@@ -4,9 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kaleidot725.ashiato.di.repository.PictureRepository
 import kaleidot725.ashiato.di.service.picture.Picture
 import kaleidot725.ashiato.ui.main.MainNavigator
+import kotlinx.coroutines.launch
 import java.io.File
 
 class HistoryViewModel(
@@ -21,42 +23,48 @@ class HistoryViewModel(
     val notFound: LiveData<Boolean> get() = _notFound
 
     fun load(mode: HistoryFragmentMode) {
-        _pictureViewModels.value = createPictureViewModels(mode)
-        _notFound.value = (pictureRepository.count() == 0)
+        viewModelScope.launch {
+            _pictureViewModels.value = createPictureViewModels(mode)
+            _notFound.value = (pictureRepository.count() == 0)
+        }
     }
 
     fun delete() {
-        _pictureViewModels.value?.forEach {
-            try {
-                val deletable = it.isChecked.value ?: false
-                if (deletable) {
-                    File(it.path.value).delete()
+        viewModelScope.launch {
+            _pictureViewModels.value?.forEach {
+                try {
+                    val deletable = it.isChecked.value ?: false
+                    if (deletable) {
+                        File(it.path.value).delete()
+                    }
+                } catch (e: Exception) {
+                    Log.e("HistoryViewModel", e.toString())
                 }
-            } catch (e: Exception) {
-                Log.e("HistoryViewModel", e.toString())
+
+                Log.v("HistoryViewModel", it.path.value)
             }
 
-            Log.v("HistoryViewModel", it.path.value)
+            _notFound.value = (pictureRepository.count() == 0)
         }
-
-        _notFound.value = (pictureRepository.count() == 0)
     }
 
     fun share() {
-        val files = mutableListOf<File>()
-        _pictureViewModels.value?.forEach {
-            try {
-                val shareable = it.isChecked.value ?: false
-                if (shareable) {
-                    files.add(File(it.path.value))
+        viewModelScope.launch {
+            val files = mutableListOf<File>()
+            _pictureViewModels.value?.forEach {
+                try {
+                    val shareable = it.isChecked.value ?: false
+                    if (shareable) {
+                        files.add(File(it.path.value))
+                    }
+                } catch (e: Exception) {
+                    Log.e("HistoryViewModel", e.toString())
                 }
-            } catch (e: Exception) {
-                Log.e("HistoryViewModel", e.toString())
-            }
 
-            Log.v("HistoryViewModel", it.path.value)
+                Log.v("HistoryViewModel", it.path.value)
+            }
+            navigator.navigateShare(files)
         }
-        navigator.navigateShare(files)
     }
 
     private fun createPictureViewModels(mode: HistoryFragmentMode): List<PictureViewModelBase> {
@@ -78,7 +86,12 @@ class HistoryViewModel(
     ): PictureViewModelBase {
 
         when (mode) {
-            HistoryFragmentMode.Action -> return PictureViewModelForAction(navigator, actor, pictureRepository, picture)
+            HistoryFragmentMode.Action -> return PictureViewModelForAction(
+                navigator,
+                actor,
+                pictureRepository,
+                picture
+            )
             HistoryFragmentMode.Display -> return PictureViewModelForDisplay(
                 navigator,
                 actor,

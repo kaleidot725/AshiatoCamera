@@ -1,9 +1,11 @@
 package kaleidot725.ashiato.ui.main.history
 
 import android.view.View
-import kaleidot725.ashiato.di.service.picture.Picture
+import androidx.lifecycle.viewModelScope
 import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.di.service.picture.Picture
 import kaleidot725.ashiato.ui.main.MainNavigator
+import kotlinx.coroutines.launch
 
 class PictureViewModelForAction(
     private val navigation: MainNavigator,
@@ -17,7 +19,9 @@ class PictureViewModelForAction(
     }
 
     override fun click(view: View) {
-        _isChecked.value = !(isChecked.value ?: true)
+        viewModelScope.launch {
+            _isChecked.value = !(isChecked.value ?: true)
+        }
     }
 
     override fun longClick(view: View): Boolean {
