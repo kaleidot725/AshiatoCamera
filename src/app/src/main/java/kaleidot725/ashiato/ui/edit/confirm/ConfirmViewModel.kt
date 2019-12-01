@@ -9,13 +9,11 @@ import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.data.repository.*
 import kaleidot725.ashiato.data.service.picture.*
-import kaleidot725.ashiato.ui.edit.EditNavigator
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ConfirmViewModel(
-    private val navigator: EditNavigator,
     private val pictureEditor: PictureEditor,
     private val formatEditor: FormatEditor,
     private val colorEditor: ColorEditor,
@@ -35,9 +33,16 @@ class ConfirmViewModel(
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
+    var navigator: ConfirmNavigator? = null
+
     fun load() {
         viewModelScope.launch {
             // get parameter
+            if (pictureRepository.editPicture == null) {
+                navigator?.exit()
+                return@launch
+            }
+            
             val target = pictureRepository.editPicture as Picture
             val preview = pictureRepository.tmpPicture()
 
@@ -145,7 +150,7 @@ class ConfirmViewModel(
             pictureSetting.save(setting)
 
             pictureEditor.end()
-            navigator.exit()
+            navigator?.exit()
         }
     }
 
@@ -162,7 +167,7 @@ class ConfirmViewModel(
             pictureSetting.save(setting)
 
             pictureEditor.cancel()
-            navigator.exit()
+            navigator?.exit()
         }
     }
 

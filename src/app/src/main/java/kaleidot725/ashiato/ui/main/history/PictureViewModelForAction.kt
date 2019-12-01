@@ -4,12 +4,11 @@ import android.view.View
 import androidx.lifecycle.viewModelScope
 import kaleidot725.ashiato.data.repository.PictureRepository
 import kaleidot725.ashiato.data.service.picture.Picture
-import kaleidot725.ashiato.ui.main.MainNavigator
 import kotlinx.coroutines.launch
 
 class PictureViewModelForAction(
-    private val navigation: MainNavigator,
-    private val actor: HistoryFragmentActor,
+    private val navigation: HistoryFragmentNavigator?,
+    private val actor: HistoryFragmentActor?,
     private val pictureRepository: PictureRepository,
     private val picture: Picture
 ) : PictureViewModelBase(navigation, actor, pictureRepository, picture) {

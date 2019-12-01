@@ -12,57 +12,36 @@ import android.widget.ImageButton
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mikepenz.aboutlibraries.Libs
-import com.mikepenz.aboutlibraries.LibsBuilder
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kaleidot725.ashiato.R
-import kaleidot725.ashiato.databinding.ActivityMainBinding
 import kaleidot725.ashiato.data.holder.Holder
-import kaleidot725.ashiato.data.repository.LocationRepository
 import kaleidot725.ashiato.data.repository.PictureRepository
-import kaleidot725.ashiato.ui.contact.ContactActivity
+import kaleidot725.ashiato.databinding.ActivityMainBinding
 import kaleidot725.ashiato.ui.edit.EditActivity
 import kaleidot725.ashiato.ui.main.history.HistoryFragment
 import kaleidot725.ashiato.ui.main.home.HomeFragment
 import kaleidot725.ashiato.ui.main.settinglist.SettingListFragment
-import kaleidot725.ashiato.ui.preview.PreviewActivity
-import kaleidot725.ashiato.ui.privacy.PrivacyActivity
-import kaleidot725.ashiato.ui.setting.SettingActivity
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
 import java.io.IOException
-import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjector {
+class MainActivity : AppCompatActivity(), MainNavigator {
+    companion object {
+        private const val REQUEST_IMAGE_CAPTURE = 1
+        private const val REQUEST_GET_CONTENT = 2
+    }
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
-
-    @Inject
-    lateinit var locationRepository: LocationRepository
-
-    @Inject
-    lateinit var mainMenuSelected: Holder<MainMenu>
-
-    @Inject
-    lateinit var pictureRepository: PictureRepository
-
-    private lateinit var viewModel: MainViewModel
-    private val REQUEST_IMAGE_CAPTURE = 1
-    private val REQUEST_GET_CONTENT = 2
+    val pictureRepository: PictureRepository by inject()
+    val mainMenuSelected: Holder<MainMenu> by inject()
+    val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,17 +67,13 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.actionbar_main)
 
+        viewModel.navigator = this
 
-        AndroidInjection.inject(this)
-        locationRepository.start(this)
-
-        viewModel = ViewModelProviders.of(this, MainViewModelFactory(this, pictureRepository))
-            .get(MainViewModel::class.java)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
+        
         val cameraButton = findViewById<ImageButton>(R.id.camera_button)
         cameraButton.setOnClickListener {
             viewModel.takePhoto(cameraButton)
@@ -113,7 +88,6 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
     }
 
     override fun onDestroy() {
-        locationRepository.stop()
         super.onDestroy()
     }
 
@@ -144,7 +118,6 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         return str
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             REQUEST_IMAGE_CAPTURE -> {
@@ -161,13 +134,13 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
                     if (uri != null) {
                         val path = getFilePath(this, uri)
                         val tempFile = File(path)
-                        tempFile?.copyTo(imageFile as File)
+                        tempFile.copyTo(imageFile as File)
                         navigateEdit()
                     }
                 }
             }
         }
-
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun navigateFolder(): Boolean {
@@ -213,35 +186,10 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
         return true
     }
 
-    override fun navigateSetting(): Boolean {
-        val intent = Intent(this, SettingActivity::class.java)
-        startActivity(intent)
-        return true
-    }
-
-    override fun navigateLicense(): Boolean {
-        LibsBuilder()
-            .withActivityTitle("License")
-            .withShowLoadingProgress(false)
-            .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR).start(this)
-        return true
-    }
-
-    override fun navigateContact(): Boolean {
-        val intent = Intent(this, ContactActivity::class.java)
-        startActivity(intent)
-        return true
-    }
-
-    override fun navigatePreview(): Boolean {
-        val intent = Intent(this, PreviewActivity::class.java)
-        startActivity(intent)
-        return true
-    }
-
-    override fun navigatePrivacy(): Boolean {
-        val intent = Intent(this, PrivacyActivity::class.java)
-        startActivity(intent)
+    override fun navigateSettingList(): Boolean {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_content, SettingListFragment.newInstance()).commit()
+        mainMenuSelected.update(MainMenu.SettingList)
         return true
     }
 
@@ -257,37 +205,6 @@ class MainActivity : AppCompatActivity(), MainNavigator, HasSupportFragmentInjec
             .replace(R.id.main_content, HistoryFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.History)
         return true
-    }
-
-    override fun navigateSettingList(): Boolean {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_content, SettingListFragment.newInstance()).commit()
-        mainMenuSelected.update(MainMenu.SettingList)
-        return true
-    }
-
-    override fun navigateShare(files: List<File>) {
-        val builder = ShareCompat.IntentBuilder.from(this)
-        for (file in files) {
-            val shareUri = FileProvider.getUriForFile(
-                applicationContext,
-                applicationContext.packageName + ".provider",
-                file
-            )
-            builder.addStream(shareUri)
-        }
-
-        val intent = builder.intent
-        intent.type = "image/jpg"
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        }
-    }
-
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return dispatchingAndroidInjector
     }
 
     private fun restoreMenu(): Boolean {

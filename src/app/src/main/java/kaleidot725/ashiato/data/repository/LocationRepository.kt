@@ -1,6 +1,5 @@
 package kaleidot725.ashiato.data.repository
 
-import android.app.Activity
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.Subject
 import java.util.*
@@ -23,7 +22,7 @@ interface LocationRepository : Disposable {
     val address: Subject<String>
     val lastAddress: String
 
-    fun start(activity: Activity)
+    fun start()
     fun getAddress(latitude: Double, longitude: Double): String
     fun stop()
 }

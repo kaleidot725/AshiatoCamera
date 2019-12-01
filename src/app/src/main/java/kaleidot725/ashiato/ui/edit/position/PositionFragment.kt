@@ -7,16 +7,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.PositionFragmentBindingImpl
-import kaleidot725.ashiato.data.repository.PositionRepository
-import kaleidot725.ashiato.data.service.picture.PictureEditor
-import kaleidot725.ashiato.data.service.picture.PositionEditor
-import javax.inject.Inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class PositionFragment : Fragment() {
 
@@ -24,50 +19,34 @@ class PositionFragment : Fragment() {
         fun newInstance() = PositionFragment()
     }
 
-    @Inject
-    lateinit var pictureEditor: PictureEditor
-
-    @Inject
-    lateinit var positionEditor: PositionEditor
-
-    @Inject
-    lateinit var positionRepository: PositionRepository
-
-    private lateinit var viewModel: PositionViewModel
+    val positionViewModel: PositionViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.position_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val factory = PositionViewModelFactory(pictureEditor, positionEditor, positionRepository)
-        viewModel = ViewModelProviders.of(this, factory).get(PositionViewModel::class.java)
 
         val binding = DataBindingUtil.bind<PositionFragmentBindingImpl>(this.view as View)
         binding?.lifecycleOwner = this
-        binding?.vm = viewModel
+        binding?.vm = positionViewModel
 
         val recyclerView = this.view?.findViewById<(RecyclerView)>(R.id.position_recycler_view)
-        viewModel.positionRecyclerViewModels.observe(this, Observer {
+        positionViewModel.positionRecyclerViewModels.observe(this, Observer {
             recyclerView?.adapter = PositionRecyclerAdapter(
                 this,
-                viewModel.positionRecyclerViewModels.value ?: listOf()
+                positionViewModel.positionRecyclerViewModels.value ?: listOf()
             )
             recyclerView?.layoutManager =
                 LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             recyclerView?.setHasFixedSize(true)
         })
 
-        viewModel.load()
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        positionViewModel.load()
     }
 }

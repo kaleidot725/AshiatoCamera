@@ -1,6 +1,5 @@
 package kaleidot725.ashiato.data.repository
 
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -66,7 +65,7 @@ class LocationRepositoryImpl(
         override fun onProviderDisabled(provider: String) {}
     }
 
-    override fun start(activity: Activity) {
+    override fun start() {
         if (running) {
             throw IllegalStateException("already have started")
         }

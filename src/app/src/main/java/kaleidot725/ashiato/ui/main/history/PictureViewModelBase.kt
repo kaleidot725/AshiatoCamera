@@ -4,13 +4,12 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.ashiato.data.service.picture.Picture
 import kaleidot725.ashiato.data.repository.PictureRepository
-import kaleidot725.ashiato.ui.main.MainNavigator
+import kaleidot725.ashiato.data.service.picture.Picture
 
 abstract class PictureViewModelBase(
-    private val navigation: MainNavigator,
-    private val actor: HistoryFragmentActor,
+    private val navigation: HistoryFragmentNavigator?,
+    private val actor: HistoryFragmentActor?,
     private val pictureRepository: PictureRepository,
     private val picture: Picture
 ) : ViewModel() {

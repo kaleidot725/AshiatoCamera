@@ -15,5 +15,4 @@ class PrivacyActivity : AppCompatActivity() {
                 .commitNow()
         }
     }
-
 }

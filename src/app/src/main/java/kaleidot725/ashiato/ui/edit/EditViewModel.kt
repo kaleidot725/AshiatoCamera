@@ -3,29 +3,31 @@ package kaleidot725.ashiato.ui.edit
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class EditViewModel(private val navigator: EditNavigator) : ViewModel() {
+class EditViewModel : ViewModel() {
+    var navigator: EditNavigator? = null
+
     val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
-        it.setChecked(true)
+        it.isChecked = true
 
         when (it.itemId) {
             kaleidot725.ashiato.R.id.action_format -> {
-                navigator.navigateFormatEditor()
+                navigator?.navigateFormatEditor()
                 true
             }
             kaleidot725.ashiato.R.id.action_style -> {
-                navigator.navigateStyleEditor()
+                navigator?.navigateStyleEditor()
                 true
             }
             kaleidot725.ashiato.R.id.action_color -> {
-                navigator.navigateColorEditor()
+                navigator?.navigateColorEditor()
                 true
             }
             kaleidot725.ashiato.R.id.action_position -> {
-                navigator.navigatePositionEditor()
+                navigator?.navigatePositionEditor()
                 true
             }
             kaleidot725.ashiato.R.id.action_rotation -> {
-                navigator.navigateRotationEditor()
+                navigator?.navigateRotationEditor()
                 true
             }
             else -> {

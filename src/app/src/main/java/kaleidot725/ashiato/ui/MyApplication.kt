@@ -1,24 +1,20 @@
 package kaleidot725.ashiato.ui
 
-import android.app.Activity
 import android.app.Application
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import kaleidot725.ashiato.data.DaggerAppComponent
-import javax.inject.Inject
+import kaleidot725.ashiato.data.appModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
-class MyApplication : Application(), HasActivityInjector {
-
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        DaggerAppComponent.builder().application(this).build().inject(this)
-    }
 
-    override fun activityInjector(): AndroidInjector<Activity> {
-        return dispatchingAndroidInjector
+        startKoin {
+            androidLogger()
+            androidContext(applicationContext)
+            modules(appModule)
+        }
     }
 }

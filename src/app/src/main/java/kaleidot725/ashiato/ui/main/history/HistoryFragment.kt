@@ -1,33 +1,31 @@
 package kaleidot725.ashiato.ui.main.history
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.core.app.ShareCompat
+import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.HistoryFragmentBinding
-import kaleidot725.ashiato.data.repository.PictureRepository
-import kaleidot725.ashiato.ui.main.MainNavigator
-import javax.inject.Inject
+import kaleidot725.ashiato.ui.preview.PreviewActivity
+import org.koin.android.viewmodel.ext.android.viewModel
+import java.io.File
 
-class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
+class HistoryFragment : Fragment(), HistoryFragmentActor, HistoryFragmentNavigator,
+    ActionMode.Callback {
 
     companion object {
         fun newInstance() = HistoryFragment()
     }
 
-    @Inject
-    lateinit var navigator: MainNavigator
+    val historyViewModel: HistoryViewModel by viewModel()
 
-    @Inject
-    lateinit var repository: PictureRepository
-
-    private lateinit var viewModel: HistoryViewModel
     private var actionMode: ActionMode? = null
     private var recyclerView: RecyclerView? = null
 
@@ -36,13 +34,37 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.history_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         createView(HistoryFragmentMode.Display)
+    }
+
+    override fun navigateShare(files: List<File>) {
+        val builder = ShareCompat.IntentBuilder.from(activity as Activity)
+        for (file in files) {
+            val shareUri = FileProvider.getUriForFile(
+                activity!!.applicationContext,
+                activity!!.applicationContext.packageName + ".provider",
+                file
+            )
+            builder.addStream(shareUri)
+        }
+
+        val intent = builder.intent
+        intent.type = "image/jpg"
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+        if (intent.resolveActivity(activity!!.packageManager) != null) {
+            startActivity(intent)
+        }
+    }
+
+    override fun navigatePreview() {
+        val intent = Intent(context, PreviewActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onPause() {
@@ -74,8 +96,8 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
 
     override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.delete -> viewModel.delete()
-            R.id.share -> viewModel.share()
+            R.id.delete -> historyViewModel.delete()
+            R.id.share -> historyViewModel.share()
         }
 
         actionMode?.finish()
@@ -83,27 +105,25 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, ActionMode.Callback {
     }
 
     private fun createView(mode: HistoryFragmentMode) {
-        viewModel =
-            ViewModelProviders.of(this, HistoryViewModelFactory(navigator, this, repository))
-                .get(HistoryViewModel::class.java)
-
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this
-        binding?.vm = viewModel
+        binding?.vm = historyViewModel
 
         val gridLayoutManager = (recyclerView?.layoutManager as GridLayoutManager?)
         val position = gridLayoutManager?.findFirstCompletelyVisibleItemPosition() ?: 0
 
         recyclerView = this.view?.findViewById(R.id.picture_recycler_view)
-        viewModel.pictureViewModels.observe(this, Observer {
+        historyViewModel.pictureViewModels.observe(this, Observer {
             recyclerView?.adapter =
-                PictureAdapter(this, viewModel.pictureViewModels.value ?: listOf())
+                PictureAdapter(this, historyViewModel.pictureViewModels.value ?: listOf())
             recyclerView?.layoutManager = GridLayoutManager(context, 2)
             recyclerView?.setHasFixedSize(true)
             recyclerView?.scrollToPosition(position)
         })
 
-        viewModel.load(mode)
+        historyViewModel.navigator = this
+        historyViewModel.actor = this
+        historyViewModel.load(mode)
     }
 }
 

@@ -7,16 +7,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.FormatFragmentBindingImpl
-import kaleidot725.ashiato.data.repository.FormatRepository
-import kaleidot725.ashiato.data.service.picture.FormatEditor
-import kaleidot725.ashiato.data.service.picture.PictureEditor
-import javax.inject.Inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class FormatFragment : Fragment() {
 
@@ -24,51 +19,35 @@ class FormatFragment : Fragment() {
         fun newInstance() = FormatFragment()
     }
 
-    @Inject
-    lateinit var pictureEditor: PictureEditor
-
-    @Inject
-    lateinit var formatEditor: FormatEditor
-
-    @Inject
-    lateinit var repository: FormatRepository
-
-    private lateinit var viewModel: FormatViewModel
+    val formatViewModel: FormatViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.format_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(
-            this,
-            FormatViewModelFactory(pictureEditor, formatEditor, repository)
-        )
-            .get(FormatViewModel::class.java)
 
         val binding = DataBindingUtil.bind<FormatFragmentBindingImpl>(this.view as View)
         binding?.lifecycleOwner = this
-        binding?.vm = viewModel
+        binding?.vm = formatViewModel
 
         val recyclerView = this.view?.findViewById<RecyclerView>(R.id.format_recycler_view)
-        viewModel.formatRecyclerViewModels.observe(this, Observer {
+        formatViewModel.formatRecyclerViewModels.observe(this, Observer {
             recyclerView?.adapter =
-                FormatRecyclerAdapter(this, viewModel.formatRecyclerViewModels.value ?: listOf())
+                FormatRecyclerAdapter(
+                    this,
+                    formatViewModel.formatRecyclerViewModels.value ?: listOf()
+                )
             recyclerView?.layoutManager =
                 LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             recyclerView?.setHasFixedSize(true)
         })
 
-        viewModel.load()
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        formatViewModel.load()
     }
 }

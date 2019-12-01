@@ -6,13 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
-import kaleidot725.ashiato.data.repository.DeveloperRepository
-import javax.inject.Inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ContactFragment : Fragment() {
 
@@ -20,29 +17,19 @@ class ContactFragment : Fragment() {
         fun newInstance() = ContactFragment()
     }
 
-    @Inject
-    lateinit var developerRepository: DeveloperRepository
-
-    private lateinit var viewModel: ContactViewModel
-    private lateinit var recyclerView: RecyclerView
+    val contactViewModel: ContactViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        AndroidSupportInjection.inject(this)
         return inflater.inflate(R.layout.contact_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = view.findViewById<RecyclerView>(R.id.contact_recycler_view)
-
-        viewModel =
-            ViewModelProviders.of(this, ContactViewModelFactory(developerRepository))
-                .get(ContactViewModel::class.java)
-
-        viewModel.developers.observe(this, Observer {
+        val recyclerView = view.findViewById<RecyclerView>(R.id.contact_recycler_view)
+        contactViewModel.developers.observe(this, Observer {
             recyclerView.adapter = DeveloperAdapter(this, it)
             recyclerView.layoutManager = GridLayoutManager(context, 1)
             recyclerView.setHasFixedSize(true)

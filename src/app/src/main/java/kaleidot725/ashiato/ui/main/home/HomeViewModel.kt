@@ -7,12 +7,10 @@ import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.data.repository.DateTimeRepository
 import kaleidot725.ashiato.data.repository.LocationRepository
 import kaleidot725.ashiato.data.repository.PictureRepository
-import kaleidot725.ashiato.ui.main.MainNavigator
 import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeViewModel(
-    private val navigator: MainNavigator,
     private val dateTimeRepository: DateTimeRepository,
     private val locationRepository: LocationRepository,
     private val pictureRepository: PictureRepository

@@ -8,25 +8,26 @@ import kaleidot725.ashiato.data.repository.EditType
 import kaleidot725.ashiato.data.repository.PictureRepository
 
 class MainViewModel(
-    private val navigator: MainNavigator,
     private val pictureRepository: PictureRepository
 ) : ViewModel(), Disposable {
 
     private var disposed: Boolean = false
 
+    var navigator: MainNavigator? = null
+
     val onNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 kaleidot725.ashiato.R.id.action_home -> {
-                    navigator.navigateHome()
+                    navigator?.navigateHome()
                     true
                 }
                 kaleidot725.ashiato.R.id.action_history -> {
-                    navigator.navigateHistory()
+                    navigator?.navigateHistory()
                     true
                 }
                 kaleidot725.ashiato.R.id.action_setting -> {
-                    navigator.navigateSettingList()
+                    navigator?.navigateSettingList()
                     true
                 }
                 else -> {
@@ -37,12 +38,12 @@ class MainViewModel(
 
     fun takePhoto(view: View) {
         pictureRepository.edit(EditType.TOOK, pictureRepository.newPicture())
-        navigator.navigateCamera()
+        navigator?.navigateCamera()
     }
 
     fun selectPhoto(view: View) {
         pictureRepository.edit(EditType.FOLDER, pictureRepository.newPicture())
-        navigator.navigateFolder()
+        navigator?.navigateFolder()
     }
 
     override fun dispose() {

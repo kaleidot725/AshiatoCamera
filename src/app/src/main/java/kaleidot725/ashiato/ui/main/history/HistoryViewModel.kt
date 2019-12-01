@@ -7,13 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kaleidot725.ashiato.data.repository.PictureRepository
 import kaleidot725.ashiato.data.service.picture.Picture
-import kaleidot725.ashiato.ui.main.MainNavigator
 import kotlinx.coroutines.launch
 import java.io.File
 
 class HistoryViewModel(
-    private val navigator: MainNavigator,
-    private val actor: HistoryFragmentActor,
     private val pictureRepository: PictureRepository
 ) : ViewModel() {
     private val _pictureViewModels: MutableLiveData<List<PictureViewModelBase>> = MutableLiveData()
@@ -21,6 +18,9 @@ class HistoryViewModel(
 
     private val _notFound: MutableLiveData<Boolean> = MutableLiveData()
     val notFound: LiveData<Boolean> get() = _notFound
+
+    var navigator: HistoryFragmentNavigator? = null
+    var actor: HistoryFragmentActor? = null
 
     fun load(mode: HistoryFragmentMode) {
         viewModelScope.launch {
@@ -63,7 +63,7 @@ class HistoryViewModel(
 
                 Log.v("HistoryViewModel", it.path.value)
             }
-            navigator.navigateShare(files)
+            navigator?.navigateShare(files)
         }
     }
 
@@ -78,8 +78,8 @@ class HistoryViewModel(
     }
 
     private fun createPictureViewModel(
-        navigator: MainNavigator,
-        actor: HistoryFragmentActor,
+        navigator: HistoryFragmentNavigator?,
+        actor: HistoryFragmentActor?,
         pictureRepository: PictureRepository,
         picture: Picture,
         mode: HistoryFragmentMode
