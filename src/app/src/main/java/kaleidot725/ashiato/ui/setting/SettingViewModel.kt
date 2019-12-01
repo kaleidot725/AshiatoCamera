@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import kaleidot725.ashiato.di.service.location.LocationSetting
-import kaleidot725.ashiato.di.service.location.PermanentLocationSetting
+import kaleidot725.ashiato.data.service.location.LocationSetting
+import kaleidot725.ashiato.data.service.location.PermanentLocationSetting
 
 class SettingViewModel(private val persistenceSetting: PermanentLocationSetting) : ViewModel() {
 

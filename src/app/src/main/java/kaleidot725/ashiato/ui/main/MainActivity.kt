@@ -30,9 +30,9 @@ import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ActivityMainBinding
-import kaleidot725.ashiato.di.holder.Holder
-import kaleidot725.ashiato.di.repository.LocationRepository
-import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.data.holder.Holder
+import kaleidot725.ashiato.data.repository.LocationRepository
+import kaleidot725.ashiato.data.repository.PictureRepository
 import kaleidot725.ashiato.ui.contact.ContactActivity
 import kaleidot725.ashiato.ui.edit.EditActivity
 import kaleidot725.ashiato.ui.main.history.HistoryFragment

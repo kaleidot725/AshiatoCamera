@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.data.repository.PictureRepository
 import kotlinx.coroutines.launch
 
 class PageViewModel(

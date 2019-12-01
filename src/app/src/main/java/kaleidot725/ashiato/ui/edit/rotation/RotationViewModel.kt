@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.viewModelScope
-import kaleidot725.ashiato.di.repository.AngleRepository
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.RotationEditor
+import kaleidot725.ashiato.data.repository.AngleRepository
+import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kaleidot725.ashiato.data.service.picture.RotationEditor
 import kotlinx.coroutines.launch
 
 class RotationViewModel(

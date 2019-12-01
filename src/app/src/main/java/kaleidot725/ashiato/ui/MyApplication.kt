@@ -5,7 +5,7 @@ import android.app.Application
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
-import kaleidot725.ashiato.di.DaggerAppComponent
+import kaleidot725.ashiato.data.DaggerAppComponent
 import javax.inject.Inject
 
 class MyApplication : Application(), HasActivityInjector {

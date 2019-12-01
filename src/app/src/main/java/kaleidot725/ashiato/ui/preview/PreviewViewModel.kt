@@ -3,7 +3,7 @@ package kaleidot725.ashiato.ui.preview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.data.repository.PictureRepository
 
 class PreviewViewModel(val repository: PictureRepository) : ViewModel() {
 

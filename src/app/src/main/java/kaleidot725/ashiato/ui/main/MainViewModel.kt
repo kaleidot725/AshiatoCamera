@@ -4,8 +4,8 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
-import kaleidot725.ashiato.di.repository.EditType
-import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.data.repository.EditType
+import kaleidot725.ashiato.data.repository.PictureRepository
 
 class MainViewModel(
     private val navigator: MainNavigator,

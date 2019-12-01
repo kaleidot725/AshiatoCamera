@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.PreviewFragmentBinding
-import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.data.repository.PictureRepository
 import javax.inject.Inject
 
 class PageFragment : Fragment() {

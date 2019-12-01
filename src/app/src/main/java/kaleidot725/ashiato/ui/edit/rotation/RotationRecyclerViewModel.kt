@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import kaleidot725.ashiato.di.service.picture.Angle
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.RotationEditor
+import kaleidot725.ashiato.data.service.picture.Angle
+import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kaleidot725.ashiato.data.service.picture.RotationEditor
 
 class RotationRecyclerViewModel(
     private val pictureEditor: PictureEditor,

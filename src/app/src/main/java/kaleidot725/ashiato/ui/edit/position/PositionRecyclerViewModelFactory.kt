@@ -2,9 +2,9 @@ package kaleidot725.ashiato.ui.edit.position
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.service.picture.Position
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.PositionEditor
+import kaleidot725.ashiato.data.service.picture.Position
+import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kaleidot725.ashiato.data.service.picture.PositionEditor
 
 class PositionRecyclerViewModelFactory(
     private val pictureEditor: PictureEditor,

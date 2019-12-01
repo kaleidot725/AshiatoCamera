@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ConfirmFragmentBinding
-import kaleidot725.ashiato.di.repository.*
-import kaleidot725.ashiato.di.service.picture.*
+import kaleidot725.ashiato.data.repository.*
+import kaleidot725.ashiato.data.service.picture.*
 import kaleidot725.ashiato.ui.edit.EditNavigator
 import javax.inject.Inject
 

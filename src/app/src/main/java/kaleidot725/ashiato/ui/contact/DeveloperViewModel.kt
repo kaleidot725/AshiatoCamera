@@ -3,7 +3,7 @@ package kaleidot725.ashiato.ui.contact
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kaleidot725.ashiato.di.service.contact.Developer
+import kaleidot725.ashiato.data.service.contact.Developer
 
 class DeveloperViewModel(developer: Developer) : ViewModel() {
     private val _name: MutableLiveData<String> = MutableLiveData<String>().apply {

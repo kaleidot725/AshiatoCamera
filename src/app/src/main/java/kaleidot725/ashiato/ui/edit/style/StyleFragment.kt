@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.StyleFragmentBinding
-import kaleidot725.ashiato.di.repository.StyleRepository
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.StyleEditor
+import kaleidot725.ashiato.data.repository.StyleRepository
+import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kaleidot725.ashiato.data.service.picture.StyleEditor
 import javax.inject.Inject
 
 class StyleFragment : Fragment() {

@@ -1,9 +1,6 @@
 package kaleidot725.ashiato.ui.preview
 
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -15,8 +12,8 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kaleidot725.ashiato.R
+import kaleidot725.ashiato.data.repository.PictureRepository
 import kaleidot725.ashiato.databinding.PreviewActivityBinding
-import kaleidot725.ashiato.di.repository.PictureRepository
 import javax.inject.Inject
 
 class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
@@ -28,7 +25,7 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var repository: PictureRepository
 
     private lateinit var viewModel: PreviewViewModel
-    private lateinit var viewPager : ViewPager
+    private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -38,7 +35,8 @@ class PreviewActivity : AppCompatActivity(), HasSupportFragmentInjector {
         val factory = PreviewViewModelFactory(repository)
         viewModel = ViewModelProviders.of(this, factory).get(PreviewViewModel::class.java)
 
-        val binding = DataBindingUtil.setContentView<PreviewActivityBinding>(this, R.layout.preview_activity)
+        val binding =
+            DataBindingUtil.setContentView<PreviewActivityBinding>(this, R.layout.preview_activity)
         binding?.lifecycleOwner = this
         binding?.viewmodel = viewModel
 

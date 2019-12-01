@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import kaleidot725.ashiato.di.repository.DateTimeRepository
-import kaleidot725.ashiato.di.repository.LocationRepository
-import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.data.repository.DateTimeRepository
+import kaleidot725.ashiato.data.repository.LocationRepository
+import kaleidot725.ashiato.data.repository.PictureRepository
 import kaleidot725.ashiato.ui.main.MainNavigator
 import java.text.SimpleDateFormat
 import java.util.*

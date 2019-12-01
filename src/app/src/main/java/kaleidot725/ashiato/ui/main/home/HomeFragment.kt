@@ -17,9 +17,9 @@ import com.google.android.gms.ads.AdRequest
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.HomeFragmentBinding
-import kaleidot725.ashiato.di.repository.DateTimeRepository
-import kaleidot725.ashiato.di.repository.LocationRepository
-import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.data.repository.DateTimeRepository
+import kaleidot725.ashiato.data.repository.LocationRepository
+import kaleidot725.ashiato.data.repository.PictureRepository
 import kaleidot725.ashiato.ui.admob.UnifiedNativeAdViewHolder
 import kaleidot725.ashiato.ui.admob.populateNativeAdView
 import kaleidot725.ashiato.ui.main.MainNavigator

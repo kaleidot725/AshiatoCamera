@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.SettingFragmentBinding
-import kaleidot725.ashiato.di.service.location.PermanentLocationSetting
+import kaleidot725.ashiato.data.service.location.PermanentLocationSetting
 import javax.inject.Inject
 
 class SettingFragment : Fragment() {

@@ -1,6 +1,6 @@
 package kaleidot725.ashiato
 
-import kaleidot725.ashiato.di.repository.PictureRepositoryImpl
+import kaleidot725.ashiato.data.repository.PictureRepositoryImpl
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before

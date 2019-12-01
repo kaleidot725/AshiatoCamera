@@ -2,9 +2,9 @@ package kaleidot725.ashiato.ui.edit.style
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.service.picture.Style
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.StyleEditor
+import kaleidot725.ashiato.data.service.picture.Style
+import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kaleidot725.ashiato.data.service.picture.StyleEditor
 
 class StyleRecyclerViewModelFactory(
     private val pictureEditor: PictureEditor,

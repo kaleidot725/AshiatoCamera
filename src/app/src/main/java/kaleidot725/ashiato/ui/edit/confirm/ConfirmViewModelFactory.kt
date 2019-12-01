@@ -2,8 +2,8 @@ package kaleidot725.ashiato.ui.edit.confirm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.repository.*
-import kaleidot725.ashiato.di.service.picture.*
+import kaleidot725.ashiato.data.repository.*
+import kaleidot725.ashiato.data.service.picture.*
 import kaleidot725.ashiato.ui.edit.EditNavigator
 
 class ConfirmViewModelFactory(

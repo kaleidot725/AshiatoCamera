@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.PositionFragmentBindingImpl
-import kaleidot725.ashiato.di.repository.PositionRepository
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.PositionEditor
+import kaleidot725.ashiato.data.repository.PositionRepository
+import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kaleidot725.ashiato.data.service.picture.PositionEditor
 import javax.inject.Inject
 
 class PositionFragment : Fragment() {

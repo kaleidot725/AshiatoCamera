@@ -2,7 +2,7 @@ package kaleidot725.ashiato.ui.setting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.service.location.PermanentLocationSetting
+import kaleidot725.ashiato.data.service.location.PermanentLocationSetting
 
 class SettingViewModelFactory(private val persistenceSetting: PermanentLocationSetting) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")

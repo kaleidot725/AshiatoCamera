@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
-import kaleidot725.ashiato.di.repository.*
-import kaleidot725.ashiato.di.service.picture.*
+import kaleidot725.ashiato.data.repository.*
+import kaleidot725.ashiato.data.service.picture.*
 import kaleidot725.ashiato.ui.edit.EditNavigator
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat

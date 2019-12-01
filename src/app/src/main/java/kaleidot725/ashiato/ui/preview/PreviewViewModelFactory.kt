@@ -2,7 +2,7 @@ package kaleidot725.ashiato.ui.preview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.repository.PictureRepository
+import kaleidot725.ashiato.data.repository.PictureRepository
 
 class PreviewViewModelFactory(val repository: PictureRepository) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")

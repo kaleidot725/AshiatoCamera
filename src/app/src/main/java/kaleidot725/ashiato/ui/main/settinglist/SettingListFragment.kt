@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
-import kaleidot725.ashiato.di.repository.MenuRepository
+import kaleidot725.ashiato.data.repository.MenuRepository
 import kaleidot725.ashiato.ui.main.MainNavigator
 import javax.inject.Inject
 

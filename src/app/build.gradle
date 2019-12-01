@@ -78,6 +78,13 @@ dependencies {
     // Coil
     implementation 'io.coil-kt:coil:0.8.0'
 
+    // Koin for Kotlin
+    def koin_version = '2.0.1'
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-core-ext:$koin_version"
+    testImplementation "org.koin:koin-test:$koin_version"
+
+
     // Dagger2
     implementation 'com.google.dagger:dagger:2.22.1'
     kapt 'com.google.dagger:dagger-compiler:2.22.1'

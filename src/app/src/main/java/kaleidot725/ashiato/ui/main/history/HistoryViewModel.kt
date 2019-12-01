@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kaleidot725.ashiato.di.repository.PictureRepository
-import kaleidot725.ashiato.di.service.picture.Picture
+import kaleidot725.ashiato.data.repository.PictureRepository
+import kaleidot725.ashiato.data.service.picture.Picture
 import kaleidot725.ashiato.ui.main.MainNavigator
 import kotlinx.coroutines.launch
 import java.io.File

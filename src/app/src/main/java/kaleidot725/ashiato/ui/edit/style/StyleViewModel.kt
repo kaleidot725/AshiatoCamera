@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.viewModelScope
-import kaleidot725.ashiato.di.repository.StyleRepository
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.StyleEditor
+import kaleidot725.ashiato.data.repository.StyleRepository
+import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kaleidot725.ashiato.data.service.picture.StyleEditor
 import kotlinx.coroutines.launch
 
 class StyleViewModel(

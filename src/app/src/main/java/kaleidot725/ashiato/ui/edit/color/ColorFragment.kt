@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ColorFragmentBindingImpl
-import kaleidot725.ashiato.di.repository.ColorRepository
-import kaleidot725.ashiato.di.service.picture.ColorEditor
-import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kaleidot725.ashiato.data.repository.ColorRepository
+import kaleidot725.ashiato.data.service.picture.ColorEditor
+import kaleidot725.ashiato.data.service.picture.PictureEditor
 import javax.inject.Inject
 
 class ColorFragment : Fragment() {

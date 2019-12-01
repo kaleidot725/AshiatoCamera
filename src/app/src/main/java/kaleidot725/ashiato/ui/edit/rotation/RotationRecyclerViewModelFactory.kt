@@ -2,9 +2,9 @@ package kaleidot725.ashiato.ui.edit.rotation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kaleidot725.ashiato.di.service.picture.Angle
-import kaleidot725.ashiato.di.service.picture.PictureEditor
-import kaleidot725.ashiato.di.service.picture.RotationEditor
+import kaleidot725.ashiato.data.service.picture.Angle
+import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kaleidot725.ashiato.data.service.picture.RotationEditor
 
 class RotationRecyclerViewModelFactory(
     private val pictureEditor: PictureEditor,

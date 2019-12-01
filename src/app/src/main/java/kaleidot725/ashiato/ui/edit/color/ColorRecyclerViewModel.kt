@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
-import kaleidot725.ashiato.di.service.picture.Color
-import kaleidot725.ashiato.di.service.picture.ColorEditor
-import kaleidot725.ashiato.di.service.picture.PictureEditor
+import kaleidot725.ashiato.data.service.picture.Color
+import kaleidot725.ashiato.data.service.picture.ColorEditor
+import kaleidot725.ashiato.data.service.picture.PictureEditor
 import kotlinx.coroutines.launch
 
 class ColorRecyclerViewModel(
