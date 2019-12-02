@@ -78,6 +78,9 @@ dependencies {
     // Coil
     implementation 'io.coil-kt:coil:0.8.0'
 
+    // Easy Permission
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
     // Koin for Kotlin
     def koin_version = '2.0.1'
     implementation "org.koin:koin-android:$koin_version"

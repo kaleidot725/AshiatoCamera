@@ -11,7 +11,6 @@ import android.provider.MediaStore
 import android.widget.ImageButton
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -29,22 +28,42 @@ import kaleidot725.ashiato.ui.main.home.HomeFragment
 import kaleidot725.ashiato.ui.main.settinglist.SettingListFragment
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 import java.io.IOException
 
 
-class MainActivity : AppCompatActivity(), MainNavigator {
+class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.PermissionCallbacks {
     companion object {
+        private const val REQUEST_PERMISSION = 0
         private const val REQUEST_IMAGE_CAPTURE = 1
         private const val REQUEST_GET_CONTENT = 2
+        private var REQUEST_RETRY: Boolean = false
     }
 
     val pictureRepository: PictureRepository by inject()
     val mainMenuSelected: Holder<MainMenu> by inject()
     val viewModel: MainViewModel by viewModel()
+    val permissions = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!EasyPermissions.hasPermissions(this, *permissions)) {
+            EasyPermissions.requestPermissions(
+                this,
+                "This application requires multiple permission.",
+                REQUEST_PERMISSION,
+                *permissions
+            )
+
+            REQUEST_RETRY = true
+            return
+        }
 
         ViewPump.init(
             ViewPump.builder()
@@ -56,13 +75,6 @@ class MainActivity : AppCompatActivity(), MainNavigator {
                 .build()
         )
 
-        val permissions = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-        )
-        ActivityCompat.requestPermissions(this, permissions, 0)
-
         setContentView(R.layout.activity_main)
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.actionbar_main)
@@ -73,7 +85,7 @@ class MainActivity : AppCompatActivity(), MainNavigator {
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        
+
         val cameraButton = findViewById<ImageButton>(R.id.camera_button)
         cameraButton.setOnClickListener {
             viewModel.takePhoto(cameraButton)
@@ -221,6 +233,27 @@ class MainActivity : AppCompatActivity(), MainNavigator {
             MainMenu.Home -> return navigateHome()
             MainMenu.History -> return navigateHistory()
             MainMenu.SettingList -> return navigateSettingList()
+        }
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, list: List<String>) {
+        recreate()
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        finishAffinity()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        val result = EasyPermissions.hasPermissions(this, *permissions)
+        if (!result && REQUEST_RETRY) {
+            finishAffinity()
+        } else {
+            recreate()
         }
     }
 }
