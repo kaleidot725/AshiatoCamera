@@ -39,16 +39,16 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
         private const val REQUEST_IMAGE_CAPTURE = 1
         private const val REQUEST_GET_CONTENT = 2
         private var REQUEST_RETRY: Boolean = false
+        private val permissions = arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+        )
     }
 
     val pictureRepository: PictureRepository by inject()
     val mainMenuSelected: Holder<MainMenu> by inject()
     val viewModel: MainViewModel by viewModel()
-    val permissions = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.CAMERA
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
