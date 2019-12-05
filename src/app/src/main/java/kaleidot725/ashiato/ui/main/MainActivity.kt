@@ -32,7 +32,6 @@ import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 import java.io.IOException
 
-
 class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.PermissionCallbacks {
     companion object {
         private const val REQUEST_PERMISSION = 0
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
         if (!EasyPermissions.hasPermissions(this, *permissions)) {
             EasyPermissions.requestPermissions(
                 this,
-                "This application requires multiple permission.",
+                this.resources.getString(R.string.permissoin_message),
                 REQUEST_PERMISSION,
                 *permissions
             )

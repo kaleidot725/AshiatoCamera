@@ -67,4 +67,8 @@
     <!-- AdMob -->
     <string name="admob_app_id">ca-app-pub-6306836711962723/8153033013</string>
 
+    <!-- permissions -->
+    <string name="permissoin_message">
+        This application requires multiple permission.
+    </string>
 </resources>
