@@ -17,8 +17,7 @@ import kaleidot725.ashiato.ui.privacy.PrivacyActivity
 import kaleidot725.ashiato.ui.setting.SettingActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class SettingListFragment : Fragment(), SettingListNaviagator {
-
+class SettingListFragment : Fragment() {
     companion object {
         fun newInstance() = SettingListFragment()
     }
@@ -41,27 +40,40 @@ class SettingListFragment : Fragment(), SettingListNaviagator {
             recycler.setHasFixedSize(true)
         })
 
-        listViewModel.navigator = this
+        listViewModel.event.observe(this, Observer { event ->
+            when (event) {
+                SettingListViewModel.NavEvent.Setting -> navigateSetting()
+                SettingListViewModel.NavEvent.License -> navigateLicense()
+                SettingListViewModel.NavEvent.Contact -> navigateContact()
+                SettingListViewModel.NavEvent.Privacy -> navigatePrivacy()
+            }
+        })
+
         listViewModel.load()
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun navigateSetting() {
+    override fun onDestroy() {
+        listViewModel.event.removeObservers(this)
+        super.onDestroy()
+    }
+
+    private fun navigateSetting() {
         val intent = Intent(context, SettingActivity::class.java)
         startActivity(intent)
     }
 
-    override fun navigateContact() {
+    private fun navigateContact() {
         val intent = Intent(context, ContactActivity::class.java)
         startActivity(intent)
     }
 
-    override fun navigatePrivacy() {
+    private fun navigatePrivacy() {
         val intent = Intent(context, PrivacyActivity::class.java)
         startActivity(intent)
     }
 
-    override fun navigateLicense() {
+    private fun navigateLicense() {
         LibsBuilder()
             .withActivityTitle("License")
             .withShowLoadingProgress(false)
