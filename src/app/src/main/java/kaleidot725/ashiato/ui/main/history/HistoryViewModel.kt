@@ -31,21 +31,16 @@ class HistoryViewModel(
 
     fun delete() {
         viewModelScope.launch {
-            _pictureViewModels.value?.forEach {
+            val deletableItems = _pictureViewModels.value?.filter { it.isChecked.value == true }
+            deletableItems?.forEach { item ->
                 try {
-                    val deletable = it.isChecked.value ?: false
-                    if (deletable) {
-                        File(it.path.value).delete()
-                    }
+                    File(item.path.value).delete()
                 } catch (e: Exception) {
                     Log.e("HistoryViewModel", e.toString())
                 }
-
-                Log.v("HistoryViewModel", it.path.value)
             }
-
-            _notFound.value = (pictureRepository.count() == 0)
         }
+        _notFound.value = (pictureRepository.count() == 0)
     }
 
     fun share() {
