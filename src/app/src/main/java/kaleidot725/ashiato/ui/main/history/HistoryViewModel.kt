@@ -1,6 +1,5 @@
 package kaleidot725.ashiato.ui.main.history
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,33 +30,17 @@ class HistoryViewModel(
 
     fun delete() {
         viewModelScope.launch {
-            val deletableItems = _pictureViewModels.value?.filter { it.isChecked.value == true }
-            deletableItems?.forEach { item ->
-                try {
-                    File(item.path.value).delete()
-                } catch (e: Exception) {
-                    Log.e("HistoryViewModel", e.toString())
-                }
-            }
+            val items = _pictureViewModels.value?.filter { it.isChecked.value == true }
+            val files = items?.map { File(it.path.value) } ?: listOf()
+            files.forEach { it.delete() }
         }
         _notFound.value = (pictureRepository.count() == 0)
     }
 
     fun share() {
         viewModelScope.launch {
-            val files = mutableListOf<File>()
-            _pictureViewModels.value?.forEach {
-                try {
-                    val shareable = it.isChecked.value ?: false
-                    if (shareable) {
-                        files.add(File(it.path.value))
-                    }
-                } catch (e: Exception) {
-                    Log.e("HistoryViewModel", e.toString())
-                }
-
-                Log.v("HistoryViewModel", it.path.value)
-            }
+            val items = _pictureViewModels.value?.filter { it.isChecked.value == true }
+            val files = items?.map { File(it.path.value) } ?: listOf()
             navigator?.navigateShare(files)
         }
     }
