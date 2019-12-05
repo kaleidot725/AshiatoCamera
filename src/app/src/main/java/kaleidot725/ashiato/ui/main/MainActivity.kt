@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
@@ -69,12 +70,20 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.actionbar_main)
 
-        viewModel.navigator = this
-
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        viewModel.navigationEvent.observe(this, Observer {
+            when (it) {
+                MainViewModel.NavEvent.Camera -> navigateCamera()
+                MainViewModel.NavEvent.Folder -> navigateFolder()
+                MainViewModel.NavEvent.Home -> navigateHome()
+                MainViewModel.NavEvent.History -> navigateHistory()
+                MainViewModel.NavEvent.SettingList -> navigateSettingList()
+            }
+        })
 
         val cameraButton = findViewById<ImageButton>(R.id.camera_button)
         cameraButton.setOnClickListener {

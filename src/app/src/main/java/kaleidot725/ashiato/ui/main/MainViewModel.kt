@@ -1,6 +1,8 @@
 package kaleidot725.ashiato.ui.main
 
 import android.view.View
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
@@ -11,23 +13,32 @@ class MainViewModel(
     private val pictureRepository: PictureRepository
 ) : ViewModel(), Disposable {
 
+    enum class NavEvent {
+        Camera,
+        Folder,
+        Home,
+        History,
+        SettingList
+    }
+
     private var disposed: Boolean = false
 
-    var navigator: MainNavigator? = null
+    private val _navigationEvent: MutableLiveData<NavEvent> = MutableLiveData()
+    val navigationEvent: LiveData<NavEvent> = _navigationEvent
 
     val onNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 kaleidot725.ashiato.R.id.action_home -> {
-                    navigator?.navigateHome()
+                    _navigationEvent.postValue(NavEvent.Home)
                     true
                 }
                 kaleidot725.ashiato.R.id.action_history -> {
-                    navigator?.navigateHistory()
+                    _navigationEvent.postValue(NavEvent.History)
                     true
                 }
                 kaleidot725.ashiato.R.id.action_setting -> {
-                    navigator?.navigateSettingList()
+                    _navigationEvent.postValue(NavEvent.SettingList)
                     true
                 }
                 else -> {
@@ -38,12 +49,12 @@ class MainViewModel(
 
     fun takePhoto(view: View) {
         pictureRepository.edit(EditType.TOOK, pictureRepository.newPicture())
-        navigator?.navigateCamera()
+        _navigationEvent.postValue(NavEvent.Camera)
     }
 
     fun selectPhoto(view: View) {
         pictureRepository.edit(EditType.FOLDER, pictureRepository.newPicture())
-        navigator?.navigateFolder()
+        _navigationEvent.postValue(NavEvent.Folder)
     }
 
     override fun dispose() {
