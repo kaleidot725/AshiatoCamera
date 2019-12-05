@@ -223,9 +223,9 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigation.menu.findItem(
             when (mainMenuSelected.lastedValue) {
-                MainMenu.Home -> kaleidot725.ashiato.R.id.action_home
-                MainMenu.History -> kaleidot725.ashiato.R.id.action_history
-                MainMenu.SettingList -> kaleidot725.ashiato.R.id.action_setting
+                MainMenu.Home -> R.id.action_home
+                MainMenu.History -> R.id.action_history
+                MainMenu.SettingList -> R.id.action_setting
             }
         ).setChecked(true)
 
