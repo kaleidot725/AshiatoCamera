@@ -10,8 +10,8 @@ import kaleidot725.ashiato.data.repository.MenuRepository
 import kotlinx.coroutines.launch
 
 class SettingListViewModel(
-    val context: Context,
-    val menuRepository: MenuRepository
+    private val context: Context,
+    private val menuRepository: MenuRepository
 ) : ViewModel() {
     enum class NavEvent {
         Setting,
