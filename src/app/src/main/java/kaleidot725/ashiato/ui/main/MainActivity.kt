@@ -223,13 +223,14 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
 
     private fun restoreMenu(): Boolean {
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigation.menu.findItem(
+        val item = bottomNavigation.menu.findItem(
             when (mainMenuSelected.lastedValue) {
                 MainMenu.Home -> R.id.action_home
                 MainMenu.History -> R.id.action_history
                 MainMenu.SettingList -> R.id.action_setting
             }
-        ).setChecked(true)
+        )
+        item.setChecked(true)
 
         when (mainMenuSelected.lastedValue) {
             MainMenu.Home -> return navigateHome()
