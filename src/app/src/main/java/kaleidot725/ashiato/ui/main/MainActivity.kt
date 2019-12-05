@@ -64,16 +64,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
             return
         }
 
-        ViewPump.init(
-            ViewPump.builder()
-                .addInterceptor(
-                    CalligraphyInterceptor(
-                        CalligraphyConfig.Builder().build()
-                    )
-                )
-                .build()
-        )
-
+        setupCalligraphy()
         setContentView(R.layout.activity_main)
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.actionbar_main)
@@ -98,12 +89,15 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
         restoreMenu()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
+    }
+
+    private fun setupCalligraphy() {
+        val config = CalligraphyConfig.Builder().build()
+        val interceptor = CalligraphyInterceptor(config)
+        val pump = ViewPump.builder().addInterceptor(interceptor).build()
+        ViewPump.init(pump)
     }
 
     private var tempFile: File? = null
