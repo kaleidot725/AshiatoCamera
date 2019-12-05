@@ -33,7 +33,7 @@ import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 import java.io.IOException
 
-class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.PermissionCallbacks {
+class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     companion object {
         private const val REQUEST_PERMISSION = 0
         private const val REQUEST_IMAGE_CAPTURE = 1
@@ -98,6 +98,11 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
         restoreMenu()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.navigationEvent.removeObservers(this)
+    }
+
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
     }
@@ -157,7 +162,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun navigateFolder(): Boolean {
+    private fun navigateFolder(): Boolean {
         Intent(Intent.ACTION_GET_CONTENT).also { getContentIntent ->
             getContentIntent.addCategory(Intent.CATEGORY_OPENABLE)
             getContentIntent.type = "image/*"
@@ -171,7 +176,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
     }
 
     @Throws(IOException::class)
-    override fun navigateCamera(): Boolean {
+    private fun navigateCamera(): Boolean {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.putExtra("android.intent.extra.quickCapture", true)
             takePictureIntent.resolveActivity(packageManager)?.also {
@@ -194,27 +199,27 @@ class MainActivity : AppCompatActivity(), MainNavigator, EasyPermissions.Permiss
         return true
     }
 
-    override fun navigateEdit(): Boolean {
+    private fun navigateEdit(): Boolean {
         val intent = Intent(this, EditActivity::class.java)
         startActivity(intent)
         return true
     }
 
-    override fun navigateSettingList(): Boolean {
+    private fun navigateSettingList(): Boolean {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_content, SettingListFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.SettingList)
         return true
     }
 
-    override fun navigateHome(): Boolean {
+    private fun navigateHome(): Boolean {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_content, HomeFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.Home)
         return true
     }
 
-    override fun navigateHistory(): Boolean {
+    private fun navigateHistory(): Boolean {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_content, HistoryFragment.newInstance()).commit()
         mainMenuSelected.update(MainMenu.History)
