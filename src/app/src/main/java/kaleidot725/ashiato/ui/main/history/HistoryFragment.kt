@@ -12,13 +12,13 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
+import kaleidot725.ashiato.data.service.picture.Picture
 import kaleidot725.ashiato.databinding.HistoryFragmentBinding
 import kaleidot725.ashiato.ui.preview.PreviewActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
 
-class HistoryFragment : Fragment(), HistoryFragmentActor, HistoryFragmentNavigator,
-    ActionMode.Callback {
+class HistoryFragment : Fragment(), ActionMode.Callback {
 
     companion object {
         fun newInstance() = HistoryFragment()
@@ -40,43 +40,26 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, HistoryFragmentNavigat
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         createView(HistoryFragmentMode.Display)
-    }
-
-    override fun navigateShare(files: List<File>) {
-        val builder = ShareCompat.IntentBuilder.from(activity as Activity)
-        for (file in files) {
-            val shareUri = FileProvider.getUriForFile(
-                activity!!.applicationContext,
-                activity!!.applicationContext.packageName + ".provider",
-                file
-            )
-            builder.addStream(shareUri)
-        }
-
-        val intent = builder.intent
-        intent.type = "image/jpg"
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-
-        if (intent.resolveActivity(activity!!.packageManager) != null) {
-            startActivity(intent)
-        }
-    }
-
-    override fun navigatePreview() {
-        val intent = Intent(context, PreviewActivity::class.java)
-        startActivity(intent)
+        historyViewModel.event.removeObservers(this)
+        historyViewModel.event.observe(this, Observer {
+            when (it) {
+                HistoryViewModel.NavEvent.ACTION -> {
+                    navigateAction()
+                }
+                HistoryViewModel.NavEvent.PREVIEW -> {
+                    navigatePreview()
+                }
+                HistoryViewModel.NavEvent.SHARE -> {
+                    navigateShare(historyViewModel.shareItems.value ?: listOf())
+                }
+            }
+        })
     }
 
     override fun onPause() {
         actionMode?.finish()
         actionMode = null
         super.onPause()
-    }
-
-    override fun action(): Boolean {
-        actionMode = this.activity?.startActionMode(this, ActionMode.TYPE_PRIMARY)
-        createView(HistoryFragmentMode.Action)
-        return true
     }
 
     override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
@@ -104,6 +87,37 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, HistoryFragmentNavigat
         return true
     }
 
+    private fun navigateShare(pictures: List<Picture>) {
+        val builder = ShareCompat.IntentBuilder.from(activity as Activity).also { builder ->
+            pictures.map { picture -> File(picture.path) }.forEach { file ->
+                val shareUri = FileProvider.getUriForFile(
+                    activity!!.applicationContext,
+                    activity!!.applicationContext.packageName + ".provider",
+                    file
+                )
+                builder.addStream(shareUri)
+            }
+        }
+
+        val intent = builder.intent
+        intent.type = "image/jpg"
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        if (intent.resolveActivity(activity!!.packageManager) != null) {
+            startActivity(intent)
+        }
+    }
+
+    private fun navigateAction(): Boolean {
+        actionMode = this.activity?.startActionMode(this, ActionMode.TYPE_PRIMARY)
+        createView(HistoryFragmentMode.Action)
+        return true
+    }
+
+    private fun navigatePreview() {
+        val intent = Intent(context, PreviewActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun createView(mode: HistoryFragmentMode) {
         val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this
@@ -121,8 +135,6 @@ class HistoryFragment : Fragment(), HistoryFragmentActor, HistoryFragmentNavigat
             recyclerView?.scrollToPosition(position)
         })
 
-        historyViewModel.navigator = this
-        historyViewModel.actor = this
         historyViewModel.load(mode)
     }
 }

@@ -18,9 +18,6 @@ interface PictureRepository {
     val editPicture: Picture?
     val editType: EditType?
 
-    fun action(picture: Picture)
-    val actioned: Picture?
-
     fun preview(picture: Picture)
     val previewed: Picture?
 }

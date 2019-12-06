@@ -8,26 +8,28 @@ import kaleidot725.ashiato.data.repository.PictureRepository
 import kaleidot725.ashiato.data.service.picture.Picture
 
 abstract class PictureViewModelBase(
-    private val navigation: HistoryFragmentNavigator?,
-    private val actor: HistoryFragmentActor?,
     private val pictureRepository: PictureRepository,
-    private val picture: Picture
+    private val p: Picture
 ) : ViewModel() {
-
-    internal val _name: MutableLiveData<String> = MutableLiveData()
+    internal val _name: MutableLiveData<String> = MutableLiveData<String>().apply {
+        value = p.name
+    }
     val name: LiveData<String> = _name
 
-    internal val _path: MutableLiveData<String> = MutableLiveData()
+    internal val _path: MutableLiveData<String> = MutableLiveData<String>().apply {
+        value = p.path
+    }
     val path: LiveData<String> get() = _path
 
-    internal val _isChecked: MutableLiveData<Boolean> = MutableLiveData()
-    val isChecked: LiveData<Boolean> = _isChecked
-
-    init {
-        _path.value = picture.path
-        _name.value = picture.name
-        _isChecked.value = false
+    internal val _picture: MutableLiveData<Picture> = MutableLiveData<Picture>().apply {
+        value = p
     }
+    val picture: LiveData<Picture> = _picture
+
+    internal val _isChecked: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    val isChecked: LiveData<Boolean> = _isChecked
 
     abstract fun click(view: View)
     abstract fun longClick(view: View): Boolean

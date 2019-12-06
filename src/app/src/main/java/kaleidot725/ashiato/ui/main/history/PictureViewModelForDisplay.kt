@@ -7,23 +7,21 @@ import kaleidot725.ashiato.data.service.picture.Picture
 import kotlinx.coroutines.launch
 
 class PictureViewModelForDisplay(
-    private val navigation: HistoryFragmentNavigator?,
-    private val actor: HistoryFragmentActor?,
     private val pictureRepository: PictureRepository,
-    private val picture: Picture
-) : PictureViewModelBase(navigation, actor, pictureRepository, picture) {
+    private val p: Picture,
+    private val clickEvent: (() -> Unit)? = null,
+    private val longClickEvent: (() -> Unit)? = null
+) : PictureViewModelBase(pictureRepository, p) {
 
     override fun click(view: View) {
         viewModelScope.launch {
-            pictureRepository.preview(picture)
-            navigation?.navigatePreview()
+            clickEvent?.invoke()
         }
     }
 
     override fun longClick(view: View): Boolean {
         viewModelScope.launch {
-            pictureRepository.action(picture)
-            actor?.action()
+            longClickEvent?.invoke()
         }
         return true
     }

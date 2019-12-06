@@ -16,9 +16,6 @@ class PictureRepositoryImpl(path: String) : PictureRepository {
     override var editPicture: Picture? = null
         private set
 
-    override var actioned: Picture? = null
-        private set
-
     override var previewed: Picture? = null
         private set
 
@@ -46,10 +43,6 @@ class PictureRepositoryImpl(path: String) : PictureRepository {
         val name = "IMG_${df.format(Date())}.jpg"
         val path = "${dirPath}/${name}"
         return Picture(path, name)
-    }
-
-    override fun action(picture: Picture) {
-        actioned = picture
     }
 
     override fun edit(type: EditType, picture: Picture) {

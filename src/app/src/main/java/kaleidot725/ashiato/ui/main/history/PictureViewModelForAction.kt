@@ -7,14 +7,13 @@ import kaleidot725.ashiato.data.service.picture.Picture
 import kotlinx.coroutines.launch
 
 class PictureViewModelForAction(
-    private val navigation: HistoryFragmentNavigator?,
-    private val actor: HistoryFragmentActor?,
     private val pictureRepository: PictureRepository,
-    private val picture: Picture
-) : PictureViewModelBase(navigation, actor, pictureRepository, picture) {
+    private val p: Picture,
+    private val selected: Boolean
+) : PictureViewModelBase(pictureRepository, p) {
 
     init {
-        _isChecked.value = pictureRepository.actioned!!.path == picture.path
+        _isChecked.value = selected
     }
 
     override fun click(view: View) {
