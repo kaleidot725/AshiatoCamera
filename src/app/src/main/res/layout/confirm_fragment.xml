@@ -14,7 +14,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
         <com.github.chrisbanes.photoview.PhotoView
                 android:id="@+id/picture_image"
@@ -23,47 +25,6 @@
                 myApplication:imageUrlNoCache="@{vm.editPath}"
                 android:clickable="true"
                 android:scaleType="fitCenter"
-                android:layout_gravity="center"
-                android:layout_marginTop="60dp"
-                android:layout_marginBottom="10dp" />
-
-        <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                myApplication:layout_constraintStart_toStartOf="parent"
-                myApplication:layout_constraintTop_toTopOf="parent"
-                android:background="@color/colorPrimary">
-
-            <ImageButton
-                    android:id="@+id/check_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|top"
-                    myApplication:onSafeClick="@{vm::save}"
-                    android:background="#00000000"
-                    android:src="@drawable/ic_check" />
-
-            <TextView
-                    android:id="@+id/action_bar_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    fontPath="fonts/Jomolhari-Regular.ttf"
-                    android:textAlignment="center"
-                    android:text="@string/app_name"
-                    android:textSize="28dp"
-                    android:textColor="@android:color/white" />
-
-            <ImageButton
-                    android:id="@+id/close_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="left|top"
-                    myApplication:onSafeClick="@{vm::cancel}"
-                    android:background="#00000000"
-                    android:src="@drawable/ic_close" />
-        </FrameLayout>
-
+                android:layout_gravity="center" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,7 +1,6 @@
 package kaleidot725.ashiato.ui.edit.confirm
 
 import android.media.ExifInterface
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,16 +32,13 @@ class ConfirmViewModel(
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    var navigator: ConfirmNavigator? = null
-
     fun load() {
         viewModelScope.launch {
             // get parameter
             if (pictureRepository.editPicture == null) {
-                navigator?.exit()
                 return@launch
             }
-            
+
             val target = pictureRepository.editPicture as Picture
             val preview = pictureRepository.tmpPicture()
 
@@ -135,40 +131,6 @@ class ConfirmViewModel(
             lastLongitude.toDouble(),
             lastAddress
         )
-    }
-
-    fun save(view: View) {
-        viewModelScope.launch {
-            val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
-            val setting = PictureSetting(
-                colorEditor.lastEnabled,
-                styleEditor.lastEnabled,
-                formats,
-                positionEditor.lastEnabled,
-                rotationEditor.lastEnabled
-            )
-            pictureSetting.save(setting)
-
-            pictureEditor.end()
-            navigator?.exit()
-        }
-    }
-
-    fun cancel(view: View) {
-        viewModelScope.launch {
-            val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
-            val setting = PictureSetting(
-                colorEditor.lastEnabled,
-                styleEditor.lastEnabled,
-                formats,
-                positionEditor.lastEnabled,
-                rotationEditor.lastEnabled
-            )
-            pictureSetting.save(setting)
-
-            pictureEditor.cancel()
-            navigator?.exit()
-        }
     }
 
     override fun onCleared() {

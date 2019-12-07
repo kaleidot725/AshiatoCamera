@@ -176,7 +176,10 @@ val appModule = module {
     }
 
     viewModel {
-        EditViewModel()
+        EditViewModel(
+            get(), get(), get(), get(), get(), get(),
+            get(), get(), get(), get(), get(), get()
+        )
     }
 
     viewModel {

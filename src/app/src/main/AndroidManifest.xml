@@ -69,7 +69,7 @@
                 android:label="Camera"
                 android:parentActivityName=".ui.main.MainActivity"
                 android:screenOrientation="portrait"
-                android:theme="@style/AppTheme.NoActionBar" />
+                android:theme="@style/AppTheme" />
 
         <activity
                 android:name=".ui.privacy.PrivacyActivity"

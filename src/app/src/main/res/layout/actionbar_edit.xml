@@ -4,11 +4,12 @@
         android:layout_height="match_parent">
 
     <ImageButton
-            android:id="@+id/close_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="left|top"
-            android:background="#00000000"
+            android:id="@+id/check_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_check" />
 
     <TextView
@@ -24,10 +25,11 @@
             android:textColor="@android:color/white" />
 
     <ImageButton
-            android:id="@+id/check_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="right|top"
-            android:background="#00000000"
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_close" />
 </FrameLayout>
