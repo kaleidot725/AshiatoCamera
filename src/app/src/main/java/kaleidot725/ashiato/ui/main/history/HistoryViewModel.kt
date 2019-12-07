@@ -24,9 +24,6 @@ class HistoryViewModel(
     private val _notFound: MutableLiveData<Boolean> = MutableLiveData()
     val notFound: LiveData<Boolean> get() = _notFound
 
-    private val _previewItem: MutableLiveData<Picture> = MutableLiveData()
-    val previewItem: LiveData<Picture> = _previewItem
-
     private val _shareItems: MutableLiveData<List<Picture>> = MutableLiveData()
     val shareItems: LiveData<List<Picture>> = _shareItems
 
@@ -88,7 +85,7 @@ class HistoryViewModel(
                 pictureRepository,
                 picture,
                 {
-                    _previewItem.postValue(picture)
+                    pictureRepository.preview(picture)
                     _event.postValue(NavEvent.PREVIEW)
                 },
                 {
