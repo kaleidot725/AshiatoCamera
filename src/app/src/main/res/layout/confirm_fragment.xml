@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:myApplication="http://schemas.android.com/apk/res-auto"
-        android:background="@android:color/black"
+        android:background="@color/background"
         tools:context=".ui.edit.confirm.ConfirmFragment">
 
     <data>
@@ -24,29 +24,46 @@
                 android:clickable="true"
                 android:scaleType="fitCenter"
                 android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:background="?android:attr/selectableItemBackground" />
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="10dp" />
 
-        <ImageButton
-                android:id="@+id/check_button"
-                android:layout_width="50dp"
+        <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_gravity="right|top"
-                myApplication:onSafeClick="@{vm::cancel}"
-                android:background="#00000000"
                 myApplication:layout_constraintStart_toStartOf="parent"
                 myApplication:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_close" />
+                android:background="@color/colorPrimary">
 
-        <ImageButton
-                android:id="@+id/close_button"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="left|top"
-                myApplication:onSafeClick="@{vm::save}"
-                android:background="#00000000"
-                myApplication:layout_constraintEnd_toEndOf="parent"
-                myApplication:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_check" />
+            <ImageButton
+                    android:id="@+id/check_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|top"
+                    myApplication:onSafeClick="@{vm::save}"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_check" />
+
+            <TextView
+                    android:id="@+id/action_bar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    fontPath="fonts/Jomolhari-Regular.ttf"
+                    android:textAlignment="center"
+                    android:text="@string/app_name"
+                    android:textSize="28dp"
+                    android:textColor="@android:color/white" />
+
+            <ImageButton
+                    android:id="@+id/close_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="left|top"
+                    myApplication:onSafeClick="@{vm::cancel}"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_close" />
+        </FrameLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

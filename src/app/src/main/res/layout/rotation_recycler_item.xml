@@ -10,9 +10,9 @@
     </data>
 
     <FrameLayout
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_margin="2dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
             android:elevation="4dp"
             android:background="@{vm.enabled ? @drawable/card_background_selected : @drawable/card_background}">
 

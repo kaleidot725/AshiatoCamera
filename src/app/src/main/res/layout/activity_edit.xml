@@ -19,6 +19,7 @@
                 android:id="@+id/display_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/background"
                 android:layout_marginBottom="128dp" />
 
         <FrameLayout
@@ -33,11 +34,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/navigation_bar_height"
                 android:layout_gravity="bottom"
-                android:background="@android:color/black"
+                android:background="@color/background"
                 android:elevation="16dp"
-                myApplication:itemIconTint="@color/bottom_nav_negcolor"
-                myApplication:itemTextColor="@color/bottom_nav_negcolor"
+                myApplication:itemIconTint="@color/bottom_nav_color"
+                myApplication:itemTextColor="@color/bottom_nav_color"
                 myApplication:setOnNavigationItemSelectedListener="@{viewmodel.onNavigationItemSelectedListener}"
                 myApplication:menu="@menu/edit_picture_menu" />
+
     </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
 </layout>

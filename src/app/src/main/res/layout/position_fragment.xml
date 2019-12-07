@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-tools:context=".ui.edit.position.PositionFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.edit.position.PositionFragment">
 
-<data>
-    <variable name="vm" type="kaleidot725.ashiato.ui.edit.position.PositionViewModel"/>
-</data>
+    <data>
 
-<androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/position_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/black"/>
+        <variable
+                name="vm"
+                type="kaleidot725.ashiato.ui.edit.position.PositionViewModel" />
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/position_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background" />
 
 </layout>

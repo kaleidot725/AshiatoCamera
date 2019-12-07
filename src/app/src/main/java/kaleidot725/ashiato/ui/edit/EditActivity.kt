@@ -27,9 +27,9 @@ class EditActivity : AppCompatActivity(), EditNavigator {
         binding.lifecycleOwner = this
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.display_content, ConfirmFragment.newInstance()).commit()
-        supportFragmentManager.beginTransaction()
             .replace(R.id.editmenu_content, FormatFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.display_content, ConfirmFragment.newInstance()).commit()
     }
 
     override fun navigateFormatEditor(): Boolean {
