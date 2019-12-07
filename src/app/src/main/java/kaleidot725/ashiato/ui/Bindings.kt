@@ -16,7 +16,7 @@ fun loadImage(view: ImageView, imagePath: String?) {
 
     val file = File(imagePath)
     view.load(file) {
-        crossfade(true)
+        crossfade(10)
     }
 }
 
@@ -25,10 +25,10 @@ fun loadImageNoCache(view: ImageView, imagePath: String?) {
     if (imagePath == null) {
         return
     }
-    
+
     val file = File(imagePath)
     view.load(file) {
-        crossfade(true)
+        crossfade(10)
         diskCachePolicy(CachePolicy.DISABLED)
         memoryCachePolicy(CachePolicy.DISABLED)
         networkCachePolicy(CachePolicy.DISABLED)
