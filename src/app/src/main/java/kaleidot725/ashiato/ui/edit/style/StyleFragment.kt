@@ -6,9 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.StyleFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -36,15 +33,16 @@ class StyleFragment : Fragment() {
         binding?.lifecycleOwner = this
         binding?.vm = styleViewModel
 
-        val recyclerView = this.view?.findViewById<RecyclerView>(R.id.style_recycler_view)
-        styleViewModel.styleRecyclerViewModel.observe(this, Observer {
-            recyclerView?.adapter =
-                StyleRecyclerAdapter(this, styleViewModel.styleRecyclerViewModel.value ?: listOf())
-            recyclerView?.layoutManager =
-                LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            recyclerView?.setHasFixedSize(true)
-        })
+//        val recyclerView = this.view?.findViewById<RecyclerView>(R.id.style_recycler_view)
+//        styleViewModel.styleRecyclerViewModel.observe(this, Observer {
+//            recyclerView?.adapter =
+//                StyleRecyclerAdapter(this, styleViewModel.styleRecyclerViewModel.value ?: listOf())
+//            recyclerView?.layoutManager =
+//                LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+//            recyclerView?.setHasFixedSize(true)
+//        })
 
+        
         styleViewModel.load()
     }
 }

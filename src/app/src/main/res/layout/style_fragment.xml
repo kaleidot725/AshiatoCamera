@@ -10,10 +10,12 @@
                 type="kaleidot725.ashiato.ui.edit.style.StyleViewModel" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/style_recycler_view"
+    <androidx.appcompat.widget.AppCompatSeekBar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background" />
-
+            android:background="@color/background"
+            android:min="1"
+            android:max="100"
+            android:progress="@{vm.value}"
+            android:setOnSeekBarChangeListener="@{vm.changedListener}" />
 </layout>
