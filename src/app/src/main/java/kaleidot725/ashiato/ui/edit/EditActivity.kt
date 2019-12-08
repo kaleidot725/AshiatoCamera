@@ -3,6 +3,7 @@ package kaleidot725.ashiato.ui.edit
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -44,6 +45,16 @@ class EditActivity : AppCompatActivity() {
                 EditViewModel.NavEvent.Exit -> navigateMain()
             }
         })
+
+        val check = findViewById<ImageButton>(R.id.check_button)
+        check.setOnClickListener {
+            exit()
+        }
+
+        val close = findViewById<ImageButton>(R.id.close_button)
+        close.setOnClickListener {
+            exit()
+        }
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.editmenu_content, FormatFragment.newInstance()).commit()
