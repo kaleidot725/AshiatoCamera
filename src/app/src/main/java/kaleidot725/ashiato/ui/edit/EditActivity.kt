@@ -40,7 +40,7 @@ class EditActivity : AppCompatActivity() {
                 EditViewModel.NavEvent.Format -> navigateFormatEditor()
                 EditViewModel.NavEvent.Style -> navigateStyleEditor()
                 EditViewModel.NavEvent.Color -> navigateColorEditor()
-                EditViewModel.NavEvent.Position -> navigateColorEditor()
+                EditViewModel.NavEvent.Position -> navigatePositionEditor()
                 EditViewModel.NavEvent.Rotation -> navigateRotationEditor()
                 EditViewModel.NavEvent.Exit -> navigateMain()
             }
