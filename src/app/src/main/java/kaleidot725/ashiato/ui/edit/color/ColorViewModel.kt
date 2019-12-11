@@ -21,14 +21,9 @@ class ColorViewModel(
 
     fun load() {
         viewModelScope.launch(Dispatchers.Default) {
-            val all = colorRepository.all()
-            val vms = mutableListOf<ColorRecyclerViewModel>()
-            for (color in all) {
-                vms.add(ColorRecyclerViewModel(pictureEditor, colorEditor, color))
-            }
-
+            val vms =
+                colorRepository.all().map { ColorRecyclerViewModel(pictureEditor, colorEditor, it) }
             _colorRecyclerViewModels.postValue(vms)
         }
     }
-
 }
