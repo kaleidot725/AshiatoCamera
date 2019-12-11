@@ -38,20 +38,6 @@ class ConfirmViewModel(
             return
         }
 
-        // get parameter
-        val target = pictureRepository.editPicture as Picture
-        val preview = pictureRepository.tmpPicture()
-        loadSetting()
-        rotateAutomatically(target.path)
-        when (pictureRepository.editType) {
-            EditType.TOOK -> {
-                setCurrentValueToEditor()
-            }
-            EditType.FOLDER -> {
-                setPictureValueToEditor(target.path)
-            }
-        }
-
         val disposable = pictureEditor.state.subscribe {
             if (it == PictureEditorState.Update) {
                 if (pictureEditor.preview != null) {
@@ -60,6 +46,18 @@ class ConfirmViewModel(
             }
         }
         compositeDisposable.add(disposable)
+
+        val target = pictureRepository.editPicture as Picture
+        val preview = pictureRepository.tmpPicture()
+
+        when (pictureRepository.editType) {
+            EditType.TOOK -> {
+                setCurrentValueToEditor(target)
+            }
+            EditType.FOLDER -> {
+                setPictureValueToEditor(target)
+            }
+        }
 
         viewModelScope.launch(Dispatchers.Default) {
             pictureEditor.start(target, preview)
@@ -72,28 +70,20 @@ class ConfirmViewModel(
         }
     }
 
-    private fun loadSetting() {
-        try {
-            val setting = pictureSetting.load()
-            formatEditor.enableAll(false)
-            for (format in setting.formats) {
-                formatEditor.enable(format.type, true)
-            }
-            styleEditor.enable(setting.style)
-            colorEditor.enable(setting.color)
-            positionEditor.enable(setting.position)
-        } catch (e: Exception) {
-            e.printStackTrace()
+    private fun setCurrentValueToEditor(target: Picture) {
+        val setting = pictureSetting.load()
+        formatEditor.enableAll(false)
+        for (format in setting.formats) {
+            formatEditor.enable(format.type, true)
         }
-    }
+        styleEditor.enable(setting.style)
+        colorEditor.enable(setting.color)
+        positionEditor.enable(setting.position)
 
-    private fun rotateAutomatically(path: String) {
-        val angleValue = getRotationAngle(path)
+        val angleValue = getRotationAngle(target.path)
         val angle = angleRepository.all().first { angle -> angle.value == angleValue }
         rotationEditor.enable(angle)
-    }
 
-    private fun setCurrentValueToEditor() {
         formatEditor.set(
             dateTimeRepository.lastDate,
             locationRepository.lastAltitude,
@@ -103,9 +93,17 @@ class ConfirmViewModel(
         )
     }
 
-    private fun setPictureValueToEditor(path: String) {
-        val exif = ExifInterface(path)
+    private fun setPictureValueToEditor(target: Picture) {
+        val setting = pictureSetting.load()
+        formatEditor.enableAll(false)
+        for (format in setting.formats) {
+            formatEditor.enable(format.type, true)
+        }
+        styleEditor.enable(setting.style)
+        colorEditor.enable(setting.color)
+        positionEditor.enable(setting.position)
 
+        val exif = ExifInterface(target.path)
         val simpleDateFormat = SimpleDateFormat("yyyy:MM:dd HH:mm:ss", Locale.getDefault())
         val dateString =
             exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL) ?: "1900:01:01 00:00:00"
