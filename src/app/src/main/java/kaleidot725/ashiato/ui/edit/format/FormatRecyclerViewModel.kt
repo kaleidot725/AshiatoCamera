@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kaleidot725.ashiato.data.service.picture.Format
 import kaleidot725.ashiato.data.service.picture.FormatEditor
 import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FormatRecyclerViewModel(
@@ -15,19 +16,18 @@ class FormatRecyclerViewModel(
     private val formatEditor: FormatEditor,
     private val format: Format
 ) : ViewModel() {
-    private val _detail: MutableLiveData<String> = MutableLiveData()
+    private val _detail: MutableLiveData<String> = MutableLiveData<String>().apply {
+        postValue(format.detail)
+    }
     val detail: LiveData<String> get() = _detail
 
-    private val _enabled: MutableLiveData<Boolean> = MutableLiveData()
+    private val _enabled: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
+        postValue(formatEditor.enabled(format.type))
+    }
     val enabled: LiveData<Boolean> get() = _enabled
 
-    init {
-        _detail.value = format.detail
-        _enabled.value = formatEditor.enabled(format.type)
-    }
-
     fun click(v: View) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Default) {
             val enable = !(_enabled.value ?: true)
             _enabled.postValue(enable)
             formatEditor.enable(format.type, enable)
