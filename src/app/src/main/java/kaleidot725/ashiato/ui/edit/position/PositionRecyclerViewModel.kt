@@ -9,6 +9,7 @@ import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.data.service.picture.PictureEditor
 import kaleidot725.ashiato.data.service.picture.Position
 import kaleidot725.ashiato.data.service.picture.PositionEditor
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PositionRecyclerViewModel(
@@ -16,24 +17,25 @@ class PositionRecyclerViewModel(
     private val positionEditor: PositionEditor,
     private val position: Position
 ) : ViewModel() {
-    private val _detail: MutableLiveData<String> = MutableLiveData()
-    val detail: LiveData<String> get() = _detail
-
-    private val _enabled: MutableLiveData<Boolean> = MutableLiveData()
-    val enabled: LiveData<Boolean> get() = _enabled
-
     private val compositeDisposable = CompositeDisposable()
 
-    init {
-        _detail.value = position.detail
-        _enabled.value = (positionEditor.lastEnabled == position)
+    private val _detail: MutableLiveData<String> = MutableLiveData<String>().apply {
+        postValue(position.detail)
+    }
+    val detail: LiveData<String> get() = _detail
+
+    private val _enabled: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
+        postValue(isEnabled(position))
         compositeDisposable.add(
-            positionEditor.enabled.subscribe { _enabled.postValue((it == position)) }
+            positionEditor.enabled.subscribe {
+                postValue(isEnabled(position))
+            }
         )
     }
+    val enabled: LiveData<Boolean> get() = _enabled
 
     fun click(v: View) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Default) {
             positionEditor.enable(position)
             pictureEditor.modifyPosition(position.type)
             pictureEditor.commit()
@@ -43,5 +45,9 @@ class PositionRecyclerViewModel(
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
+    }
+
+    private fun isEnabled(position: Position): Boolean {
+        return (positionEditor.lastEnabled == position)
     }
 }
