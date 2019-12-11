@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.data.repository.*
 import kaleidot725.ashiato.data.service.picture.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -37,26 +38,30 @@ class ConfirmViewModel(
             return
         }
 
-        viewModelScope.launch {
-            // get parameter
-            val target = pictureRepository.editPicture as Picture
-            val preview = pictureRepository.tmpPicture()
+        // get parameter
+        val target = pictureRepository.editPicture as Picture
+        val preview = pictureRepository.tmpPicture()
+        loadSetting()
+        rotateAutomatically(target.path)
+        when (pictureRepository.editType) {
+            EditType.TOOK -> {
+                setCurrentValueToEditor()
+            }
+            EditType.FOLDER -> {
+                setPictureValueToEditor(target.path)
+            }
+        }
 
-            loadSetting()
-
-            // rotation
-            rotateAutomatically(target.path)
-
-            when (pictureRepository.editType) {
-                EditType.TOOK -> {
-                    setCurrentValueToEditor()
-                }
-                EditType.FOLDER -> {
-                    setPictureValueToEditor(target.path)
+        val disposable = pictureEditor.state.subscribe {
+            if (it == PictureEditorState.Update) {
+                if (pictureEditor.preview != null) {
+                    _editPath.postValue(pictureEditor.preview!!.path)
                 }
             }
+        }
+        compositeDisposable.add(disposable)
 
-            // picture
+        viewModelScope.launch(Dispatchers.Default) {
             pictureEditor.start(target, preview)
             pictureEditor.modifyText(formatEditor.create())
             pictureEditor.modifyColor(colorEditor.lastEnabled.value)
@@ -64,14 +69,6 @@ class ConfirmViewModel(
             pictureEditor.modifyRotation(rotationEditor.lastEnabled.value)
             pictureEditor.modifyPosition(positionEditor.lastEnabled.type)
             pictureEditor.commit()
-            _editPath.value = pictureEditor.preview!!.path
-
-            val disposable = pictureEditor.state.subscribe {
-                if (pictureEditor.preview != null) {
-                    _editPath.postValue(pictureEditor.preview!!.path)
-                }
-            }
-            compositeDisposable.add(disposable)
         }
     }
 
