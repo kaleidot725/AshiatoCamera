@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kaleidot725.ashiato.data.repository.FormatRepository
 import kaleidot725.ashiato.data.service.picture.FormatEditor
 import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FormatViewModel(
@@ -19,13 +20,10 @@ class FormatViewModel(
     val formatRecyclerViewModels: LiveData<List<FormatRecyclerViewModel>> get() = _formatRecyclerViewModels
 
     fun load() {
-        viewModelScope.launch {
-            val all = formatRepository.all()
-            val vms = mutableListOf<FormatRecyclerViewModel>()
-            for (format in all) {
-                vms.add(FormatRecyclerViewModel(pictureEditor, formatEditor, format))
-            }
-            _formatRecyclerViewModels.value = vms
+        viewModelScope.launch(Dispatchers.Default) {
+            val vms = formatRepository.all()
+                .map { FormatRecyclerViewModel(pictureEditor, formatEditor, it) }
+            _formatRecyclerViewModels.postValue(vms)
         }
     }
 }
