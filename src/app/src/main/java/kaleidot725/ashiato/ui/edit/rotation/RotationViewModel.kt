@@ -2,11 +2,12 @@ package kaleidot725.ashiato.ui.edit.rotation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kaleidot725.ashiato.data.repository.AngleRepository
 import kaleidot725.ashiato.data.service.picture.PictureEditor
 import kaleidot725.ashiato.data.service.picture.RotationEditor
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RotationViewModel(
@@ -19,14 +20,11 @@ class RotationViewModel(
     val rotaionRecyclerViewModels: LiveData<List<RotationRecyclerViewModel>> get() = _rotationRecyclerViewModels
 
     fun load() {
-        viewModelScope.launch {
-            val all = rotationRepository.all()
-            val vms = mutableListOf<RotationRecyclerViewModel>()
-            for (angle in all) {
-                vms.add(RotationRecyclerViewModel(pictureEditor, rotationEditor, angle))
+        viewModelScope.launch(Dispatchers.Default) {
+            val vms = rotationRepository.all().map {
+                RotationRecyclerViewModel(pictureEditor, rotationEditor, it)
             }
-
-            _rotationRecyclerViewModels.value = vms
+            _rotationRecyclerViewModels.postValue(vms)
         }
     }
 }
