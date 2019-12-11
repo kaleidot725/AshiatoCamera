@@ -6,4 +6,7 @@ interface StyleEditor {
     val lastEnabled: Style
     val enabled: Subject<Style>
     fun enable(style: Style)
+
+    val min: Float
+    val max: Float
 }

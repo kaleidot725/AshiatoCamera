@@ -32,17 +32,5 @@ class StyleFragment : Fragment() {
         val binding = DataBindingUtil.bind<StyleFragmentBinding>(this.view as View)
         binding?.lifecycleOwner = this
         binding?.vm = styleViewModel
-
-//        val recyclerView = this.view?.findViewById<RecyclerView>(R.id.style_recycler_view)
-//        styleViewModel.styleRecyclerViewModel.observe(this, Observer {
-//            recyclerView?.adapter =
-//                StyleRecyclerAdapter(this, styleViewModel.styleRecyclerViewModel.value ?: listOf())
-//            recyclerView?.layoutManager =
-//                LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-//            recyclerView?.setHasFixedSize(true)
-//        })
-
-        
-        styleViewModel.load()
     }
 }

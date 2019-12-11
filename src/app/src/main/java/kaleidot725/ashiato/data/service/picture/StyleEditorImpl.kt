@@ -13,6 +13,9 @@ class StyleEditorImpl(
     private val _enabled: PublishSubject<Style> = PublishSubject.create()
     override val enabled: Subject<Style> get() = _enabled
 
+    override val min: Float = styleRepository.all().minBy { it.dp }?.dp ?: 0f
+    override val max: Float = styleRepository.all().maxBy { it.dp }?.dp ?: 0f
+
     override fun enable(style: Style) {
         _lastEnabled = style
         enabled.onNext(style)

@@ -14,8 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/background"
-            android:min="1"
-            android:max="100"
+            android:min="@{vm.min}"
+            android:max="@{vm.max}"
             android:progress="@{vm.value}"
             android:setOnSeekBarChangeListener="@{vm.changedListener}" />
 </layout>
