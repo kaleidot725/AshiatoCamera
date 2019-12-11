@@ -4,9 +4,11 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kaleidot725.ashiato.data.service.picture.Format
 import kaleidot725.ashiato.data.service.picture.FormatEditor
 import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kotlinx.coroutines.launch
 
 class FormatRecyclerViewModel(
     private val pictureEditor: PictureEditor,
@@ -25,10 +27,12 @@ class FormatRecyclerViewModel(
     }
 
     fun click(v: View) {
-        val enable = !(_enabled.value ?: true)
-        _enabled.postValue(enable)
-        formatEditor.enable(format.type, enable)
-        pictureEditor.modifyText(formatEditor.create())
-        pictureEditor.commit()
+        viewModelScope.launch {
+            val enable = !(_enabled.value ?: true)
+            _enabled.postValue(enable)
+            formatEditor.enable(format.type, enable)
+            pictureEditor.modifyText(formatEditor.create())
+            pictureEditor.commit()
+        }
     }
 }

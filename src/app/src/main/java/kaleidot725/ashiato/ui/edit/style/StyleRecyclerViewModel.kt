@@ -4,10 +4,12 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.data.service.picture.PictureEditor
 import kaleidot725.ashiato.data.service.picture.Style
 import kaleidot725.ashiato.data.service.picture.StyleEditor
+import kotlinx.coroutines.launch
 
 class StyleRecyclerViewModel(
     private val pictureEditor: PictureEditor,
@@ -31,9 +33,11 @@ class StyleRecyclerViewModel(
     }
 
     fun click(v: View) {
-        styleEditor.enable(style)
-        pictureEditor.modifyTextSize(style.dp)
-        pictureEditor.commit()
+        viewModelScope.launch {
+            styleEditor.enable(style)
+            pictureEditor.modifyTextSize(style.dp)
+            pictureEditor.commit()
+        }
     }
 
     override fun onCleared() {

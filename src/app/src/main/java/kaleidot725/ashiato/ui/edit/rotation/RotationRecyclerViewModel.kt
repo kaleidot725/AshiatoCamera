@@ -4,10 +4,12 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.data.service.picture.Angle
 import kaleidot725.ashiato.data.service.picture.PictureEditor
 import kaleidot725.ashiato.data.service.picture.RotationEditor
+import kotlinx.coroutines.launch
 
 class RotationRecyclerViewModel(
     private val pictureEditor: PictureEditor,
@@ -31,9 +33,11 @@ class RotationRecyclerViewModel(
     }
 
     fun click(v: View) {
-        rotationEditor.enable(angle)
-        pictureEditor.modifyRotation(angle.value)
-        pictureEditor.commit()
+        viewModelScope.launch {
+            rotationEditor.enable(angle)
+            pictureEditor.modifyRotation(angle.value)
+            pictureEditor.commit()
+        }
     }
 
     override fun onCleared() {

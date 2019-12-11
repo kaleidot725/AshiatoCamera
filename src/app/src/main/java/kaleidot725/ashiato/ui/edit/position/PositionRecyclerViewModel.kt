@@ -4,10 +4,12 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import kaleidot725.ashiato.data.service.picture.PictureEditor
 import kaleidot725.ashiato.data.service.picture.Position
 import kaleidot725.ashiato.data.service.picture.PositionEditor
+import kotlinx.coroutines.launch
 
 class PositionRecyclerViewModel(
     private val pictureEditor: PictureEditor,
@@ -31,9 +33,11 @@ class PositionRecyclerViewModel(
     }
 
     fun click(v: View) {
-        positionEditor.enable(position)
-        pictureEditor.modifyPosition(position.type)
-        pictureEditor.commit()
+        viewModelScope.launch {
+            positionEditor.enable(position)
+            pictureEditor.modifyPosition(position.type)
+            pictureEditor.commit()
+        }
     }
 
     override fun onCleared() {
