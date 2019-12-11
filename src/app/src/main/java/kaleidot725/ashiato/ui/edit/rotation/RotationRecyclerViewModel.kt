@@ -33,6 +33,7 @@ class RotationRecyclerViewModel(
     fun click(v: View) {
         rotationEditor.enable(angle)
         pictureEditor.modifyRotation(angle.value)
+        pictureEditor.commit()
     }
 
     override fun onCleared() {

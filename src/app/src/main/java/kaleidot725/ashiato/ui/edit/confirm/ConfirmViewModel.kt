@@ -33,12 +33,12 @@ class ConfirmViewModel(
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     fun load() {
+        if (pictureRepository.editPicture == null) {
+            return
+        }
+
         viewModelScope.launch {
             // get parameter
-            if (pictureRepository.editPicture == null) {
-                return@launch
-            }
-
             val target = pictureRepository.editPicture as Picture
             val preview = pictureRepository.tmpPicture()
 
@@ -63,6 +63,7 @@ class ConfirmViewModel(
             pictureEditor.modifyTextSize(styleEditor.lastEnabled.dp)
             pictureEditor.modifyRotation(rotationEditor.lastEnabled.value)
             pictureEditor.modifyPosition(positionEditor.lastEnabled.type)
+            pictureEditor.commit()
             _editPath.value = pictureEditor.preview!!.path
 
             val disposable = pictureEditor.state.subscribe {
@@ -91,7 +92,7 @@ class ConfirmViewModel(
 
     private fun rotateAutomatically(path: String) {
         val angleValue = getRotationAngle(path)
-        val angle = angleRepository.all().filter { angle -> angle.value == angleValue }.first()
+        val angle = angleRepository.all().first { angle -> angle.value == angleValue }
         rotationEditor.enable(angle)
     }
 

@@ -42,6 +42,7 @@ class ColorRecyclerViewModel(
         viewModelScope.launch {
             colorEditor.enable(color)
             pictureEditor.modifyColor(color.value)
+            pictureEditor.commit()
         }
     }
 

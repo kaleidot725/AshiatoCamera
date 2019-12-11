@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import kaleidot725.ashiato.data.service.picture.Position
 import kaleidot725.ashiato.data.service.picture.PictureEditor
+import kaleidot725.ashiato.data.service.picture.Position
 import kaleidot725.ashiato.data.service.picture.PositionEditor
 
 class PositionRecyclerViewModel(
@@ -33,6 +33,7 @@ class PositionRecyclerViewModel(
     fun click(v: View) {
         positionEditor.enable(position)
         pictureEditor.modifyPosition(position.type)
+        pictureEditor.commit()
     }
 
     override fun onCleared() {

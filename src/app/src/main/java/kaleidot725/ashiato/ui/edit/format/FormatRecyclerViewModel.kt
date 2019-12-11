@@ -29,5 +29,6 @@ class FormatRecyclerViewModel(
         _enabled.postValue(enable)
         formatEditor.enable(format.type, enable)
         pictureEditor.modifyText(formatEditor.create())
+        pictureEditor.commit()
     }
 }

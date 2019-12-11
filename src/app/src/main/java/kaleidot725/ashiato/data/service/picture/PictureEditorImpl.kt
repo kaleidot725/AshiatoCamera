@@ -43,13 +43,6 @@ class PictureEditorImpl(drawableCanvas: DrawableCanvas) :
         }
 
         this.text = text
-        canvas.load(target!!.path)
-        canvas.rotation(angle)
-        canvas.draw(this.position, this.text, this.color, this.textSize)
-        canvas.write(preview!!.path)
-
-        lastState = PictureEditorState.Update
-        _state.onNext(PictureEditorState.Update)
     }
 
     override fun modifyTextSize(size: Float) {
@@ -58,13 +51,6 @@ class PictureEditorImpl(drawableCanvas: DrawableCanvas) :
         }
 
         this.textSize = size
-        canvas.load(target!!.path)
-        canvas.rotation(angle)
-        canvas.draw(this.position, this.text, this.color, this.textSize)
-        canvas.write(preview!!.path)
-
-        lastState = PictureEditorState.Update
-        _state.onNext(PictureEditorState.Update)
     }
 
     override fun modifyColor(color: Int) {
@@ -73,13 +59,6 @@ class PictureEditorImpl(drawableCanvas: DrawableCanvas) :
         }
 
         this.color = color
-        canvas.load(target!!.path)
-        canvas.rotation(angle)
-        canvas.draw(this.position, this.text, this.color, this.textSize)
-        canvas.write(preview!!.path)
-
-        lastState = PictureEditorState.Update
-        _state.onNext(PictureEditorState.Update)
     }
 
     override fun modifyPosition(position: PositionType) {
@@ -88,13 +67,6 @@ class PictureEditorImpl(drawableCanvas: DrawableCanvas) :
         }
 
         this.position = position
-        canvas.load(target!!.path)
-        canvas.rotation(angle)
-        canvas.draw(this.position, this.text, this.color, this.textSize)
-        canvas.write(preview!!.path)
-
-        lastState = PictureEditorState.Update
-        _state.onNext(PictureEditorState.Update)
     }
 
     override fun modifyRotation(angle: Float) {
@@ -103,11 +75,17 @@ class PictureEditorImpl(drawableCanvas: DrawableCanvas) :
         }
 
         this.angle = angle
-        canvas.load(target!!.path)
-        canvas.rotation(this.angle)
-        canvas.draw(position, this.text, this.color, this.textSize)
-        canvas.write(preview!!.path)
+    }
 
+    override fun commit() {
+        if (lastState == PictureEditorState.Init) {
+            throw Exception("invalid operation")
+        }
+
+        canvas.load(target!!.path)
+        canvas.rotation(angle)
+        canvas.draw(this.position, this.text, this.color, this.textSize)
+        canvas.write(preview!!.path)
         lastState = PictureEditorState.Update
         _state.onNext(PictureEditorState.Update)
     }

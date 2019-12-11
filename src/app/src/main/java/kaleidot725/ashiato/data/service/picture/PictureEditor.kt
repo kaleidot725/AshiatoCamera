@@ -13,6 +13,7 @@ interface PictureEditor {
     fun modifyColor(color: Int)
     fun modifyPosition(position: PositionType)
     fun modifyRotation(angle: Float)
+    fun commit()
     fun end()
     fun cancel()
 }

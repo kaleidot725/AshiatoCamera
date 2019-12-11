@@ -26,6 +26,7 @@ class StyleViewModel(
             style?.let {
                 styleEditor.enable(it)
                 pictureEditor.modifyTextSize(it.dp)
+                pictureEditor.commit()
             }
         }
     }
