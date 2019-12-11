@@ -48,11 +48,13 @@ class EditActivity : AppCompatActivity() {
 
         val check = findViewById<ImageButton>(R.id.check_button)
         check.setOnClickListener {
+            editViewModel.save(it)
             exit()
         }
 
         val close = findViewById<ImageButton>(R.id.close_button)
         close.setOnClickListener {
+            editViewModel.cancel(it)
             exit()
         }
 
