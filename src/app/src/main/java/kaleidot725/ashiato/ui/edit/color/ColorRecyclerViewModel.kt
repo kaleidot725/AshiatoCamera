@@ -19,17 +19,17 @@ class ColorRecyclerViewModel(
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
     private val _detail: MutableLiveData<String> = MutableLiveData<String>().apply {
-        value = color.detail
+        postValue(color.detail)
     }
     val detail: LiveData<String> get() = _detail
 
     private val _txtColor: MutableLiveData<Int> = MutableLiveData<Int>().apply {
-        value = selectBackgroundColor(color)
+        postValue(selectBackgroundColor(color))
     }
     val txtColor: LiveData<Int> get() = _txtColor
 
     private val _enabled: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
-        value = isSelectedColor(color)
+        postValue(isSelectedColor(color))
         compositeDisposable.add(
             colorEditor.enabled.subscribe {
                 postValue(isSelectedColor(color))
