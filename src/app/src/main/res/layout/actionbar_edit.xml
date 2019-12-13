@@ -10,7 +10,7 @@
             android:layout_margin="5dp"
             android:layout_gravity="right|center_vertical"
             android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/ic_check" />
+            android:src="@drawable/ic_check_dark" />
 
     <TextView
             android:id="@+id/action_bar_title"
