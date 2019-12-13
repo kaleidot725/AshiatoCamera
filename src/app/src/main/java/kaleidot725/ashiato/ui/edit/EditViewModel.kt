@@ -1,7 +1,6 @@
 package kaleidot725.ashiato.ui.edit
 
 import android.view.MenuItem
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -43,7 +42,7 @@ class EditViewModel(
         true
     }
 
-    fun save(view: View) {
+    fun save() {
         viewModelScope.launch {
             val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
             val setting = PictureSetting(
@@ -60,7 +59,7 @@ class EditViewModel(
         }
     }
 
-    fun cancel(view: View) {
+    fun cancel() {
         viewModelScope.launch {
             val formats = formatRepository.all().filter { formatEditor.enabled(it.type) }
             val setting = PictureSetting(

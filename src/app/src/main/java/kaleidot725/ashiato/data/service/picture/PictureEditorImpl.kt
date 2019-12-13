@@ -110,6 +110,7 @@ class PictureEditorImpl(drawableCanvas: DrawableCanvas) :
         }
 
         canvas.delete(preview!!.path)
+        canvas.delete(target!!.path)
         lastState = PictureEditorState.Init
         _state.onComplete()
         _state = PublishSubject.create()
