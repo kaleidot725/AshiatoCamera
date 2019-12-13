@@ -20,6 +20,14 @@ fun loadImage(view: ImageView, imagePath: String?) {
     }
 }
 
+@BindingAdapter("app:srcId")
+fun loadImageFromId(view: ImageView, srcId: Int?) {
+    if (srcId == null) {
+        return
+    }
+    view.setImageResource(srcId)
+}
+
 @BindingAdapter("app:imageUrlNoCache")
 fun loadImageNoCache(view: ImageView, imagePath: String?) {
     if (imagePath == null) {

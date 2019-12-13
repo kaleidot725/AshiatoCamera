@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
+import kaleidot725.ashiato.R
 import kaleidot725.ashiato.data.service.picture.Color
 import kaleidot725.ashiato.data.service.picture.ColorEditor
 import kaleidot725.ashiato.data.service.picture.PictureEditor
@@ -24,9 +25,14 @@ class ColorRecyclerViewModel(
     val detail: LiveData<String> get() = _detail
 
     private val _txtColor: MutableLiveData<Int> = MutableLiveData<Int>().apply {
-        postValue(selectBackgroundColor(color))
+        postValue(color.value)
     }
     val txtColor: LiveData<Int> get() = _txtColor
+
+    private val _checkIcon: MutableLiveData<Int> = MutableLiveData<Int>().apply {
+        postValue(getCheckIcon(color))
+    }
+    val checkIcon: LiveData<Int> get() = _checkIcon
 
     private val _enabled: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
         postValue(isSelectedColor(color))
@@ -51,11 +57,11 @@ class ColorRecyclerViewModel(
         compositeDisposable.dispose()
     }
 
-    private fun selectBackgroundColor(thisColor: Color): Int {
+    private fun getCheckIcon(thisColor: Color): Int {
         return if (thisColor.value == android.graphics.Color.WHITE) {
-            android.graphics.Color.BLACK
+            R.drawable.ic_check_light
         } else {
-            thisColor.value
+            R.drawable.ic_check_dark
         }
     }
 
