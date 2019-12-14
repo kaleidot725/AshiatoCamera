@@ -58,7 +58,11 @@ class ColorRecyclerViewModel(
     }
 
     private fun getCheckIcon(thisColor: Color): Int {
-        return R.drawable.ic_check_accent
+        return if (thisColor.value == android.graphics.Color.WHITE) {
+            R.drawable.ic_check_accent
+        } else {
+            R.drawable.ic_check
+        }
     }
 
     private fun isSelectedColor(thisColor: Color): Boolean {

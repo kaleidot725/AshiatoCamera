@@ -47,7 +47,7 @@ val appModule = module {
     }
 
     single<LocationRepository> {
-        val geocoder: Geocoder = Geocoder(androidContext(), Locale.US)
+        val geocoder: Geocoder = Geocoder(androidContext(), Locale.getDefault())
         val locationManager: LocationManager =
             androidContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
