@@ -41,13 +41,11 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            fontPath="fonts/Jomolhari-Regular.ttf"
                             myApplication:layout_constraintStart_toStartOf="parent"
                             myApplication:layout_constraintTop_toTopOf="parent"
                             myApplication:layout_constraintEnd_toEndOf="parent"
                             android:fontFamily="monospace"
                             android:text="@{viewmodel.update}"
-                            android:textStyle="bold"
                             android:textSize="@dimen/textSizeMainDate"
                             android:textAlignment="center" />
                 </FrameLayout>
@@ -73,10 +71,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            fontPath="fonts/Jomolhari-Regular.ttf"
                             android:layout_margin="15dp"
                             android:text="@{viewmodel.address}"
-                            android:textStyle="bold"
                             android:textSize="@dimen/textSizeMainAddress" />
                 </FrameLayout>
             </FrameLayout>
@@ -114,7 +110,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
-                                fontPath="fonts/Jomolhari-Regular.ttf"
                                 myApplication:layout_constraintStart_toStartOf="parent"
                                 myApplication:layout_constraintTop_toTopOf="parent"
                                 myApplication:layout_constraintBottom_toTopOf="@id/latitude_title"
@@ -123,7 +118,6 @@
                                 myApplication:layout_constraintHorizontal_weight="0.5"
                                 android:fontFamily="monospace"
                                 android:text="@string/altitude"
-                                android:textStyle="bold"
                                 android:textSize="@dimen/textSizeMainLocation" />
 
                         <TextView
@@ -131,7 +125,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
-                                fontPath="fonts/Jomolhari-Regular.ttf"
                                 myApplication:layout_constraintStart_toEndOf="@id/altitude_title"
                                 myApplication:layout_constraintTop_toTopOf="parent"
                                 myApplication:layout_constraintBottom_toTopOf="@id/latitude_text"
@@ -141,7 +134,6 @@
                                 android:fontFamily="monospace"
                                 android:text="@{viewmodel.altitude}"
                                 android:textSize="@dimen/textSizeMainLocation"
-                                android:textStyle="bold"
                                 android:gravity="right" />
 
                         <TextView
@@ -149,7 +141,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
-                                fontPath="fonts/Jomolhari-Regular.ttf"
                                 myApplication:layout_constraintStart_toStartOf="parent"
                                 myApplication:layout_constraintTop_toBottomOf="@id/altitude_title"
                                 myApplication:layout_constraintEnd_toStartOf="@id/altitude_text"
@@ -157,7 +148,6 @@
                                 myApplication:layout_constraintHorizontal_weight="0.5"
                                 android:fontFamily="monospace"
                                 android:text="@string/latitude"
-                                android:textStyle="bold"
                                 android:textSize="@dimen/textSizeMainLocation" />
 
                         <TextView
@@ -165,7 +155,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
-                                fontPath="fonts/Jomolhari-Regular.ttf"
                                 myApplication:layout_constraintStart_toEndOf="@id/latitude_title"
                                 myApplication:layout_constraintTop_toBottomOf="@id/altitude_text"
                                 myApplication:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +163,6 @@
                                 android:fontFamily="monospace"
                                 android:text="@{viewmodel.latitude}"
                                 android:textSize="@dimen/textSizeMainLocation"
-                                android:textStyle="bold"
                                 android:gravity="right" />
 
                         <TextView
@@ -182,7 +170,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
-                                fontPath="fonts/Jomolhari-Regular.ttf"
                                 myApplication:layout_constraintStart_toStartOf="parent"
                                 myApplication:layout_constraintTop_toBottomOf="@id/latitude_title"
                                 myApplication:layout_constraintEnd_toStartOf="@id/longitude_text"
@@ -190,7 +177,6 @@
                                 myApplication:layout_constraintHorizontal_weight="0.5"
                                 android:fontFamily="monospace"
                                 android:text="@string/longitude"
-                                android:textStyle="bold"
                                 android:textSize="@dimen/textSizeMainLocation" />
 
                         <TextView
@@ -198,7 +184,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
-                                fontPath="fonts/Jomolhari-Regular.ttf"
                                 myApplication:layout_constraintStart_toEndOf="@id/longitude_title"
                                 myApplication:layout_constraintTop_toBottomOf="@id/latitude_text"
                                 myApplication:layout_constraintEnd_toEndOf="parent"
@@ -207,7 +192,6 @@
                                 android:fontFamily="monospace"
                                 android:text="@{viewmodel.longitude}"
                                 android:textSize="@dimen/textSizeMainLocation"
-                                android:textStyle="bold"
                                 android:gravity="right" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </FrameLayout>
