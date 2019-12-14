@@ -47,6 +47,7 @@
                             android:fontFamily="monospace"
                             android:text="@{viewmodel.update}"
                             android:textSize="@dimen/textSizeMainDate"
+                            android:textStyle="bold"
                             android:textAlignment="center" />
                 </FrameLayout>
 
@@ -73,6 +74,7 @@
                             android:gravity="center"
                             android:layout_margin="15dp"
                             android:text="@{viewmodel.address}"
+                            android:textStyle="bold"
                             android:textSize="@dimen/textSizeMainAddress" />
                 </FrameLayout>
             </FrameLayout>
@@ -118,6 +120,7 @@
                                 myApplication:layout_constraintHorizontal_weight="0.5"
                                 android:fontFamily="monospace"
                                 android:text="@string/altitude"
+                                android:textStyle="bold"
                                 android:textSize="@dimen/textSizeMainLocation" />
 
                         <TextView
@@ -134,6 +137,7 @@
                                 android:fontFamily="monospace"
                                 android:text="@{viewmodel.altitude}"
                                 android:textSize="@dimen/textSizeMainLocation"
+                                android:textStyle="bold"
                                 android:gravity="right" />
 
                         <TextView
@@ -148,6 +152,7 @@
                                 myApplication:layout_constraintHorizontal_weight="0.5"
                                 android:fontFamily="monospace"
                                 android:text="@string/latitude"
+                                android:textStyle="bold"
                                 android:textSize="@dimen/textSizeMainLocation" />
 
                         <TextView
@@ -163,6 +168,7 @@
                                 android:fontFamily="monospace"
                                 android:text="@{viewmodel.latitude}"
                                 android:textSize="@dimen/textSizeMainLocation"
+                                android:textStyle="bold"
                                 android:gravity="right" />
 
                         <TextView
@@ -177,6 +183,7 @@
                                 myApplication:layout_constraintHorizontal_weight="0.5"
                                 android:fontFamily="monospace"
                                 android:text="@string/longitude"
+                                android:textStyle="bold"
                                 android:textSize="@dimen/textSizeMainLocation" />
 
                         <TextView
@@ -192,6 +199,7 @@
                                 android:fontFamily="monospace"
                                 android:text="@{viewmodel.longitude}"
                                 android:textSize="@dimen/textSizeMainLocation"
+                                android:textStyle="bold"
                                 android:gravity="right" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </FrameLayout>

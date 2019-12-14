@@ -12,18 +12,6 @@
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_check" />
 
-    <TextView
-            android:id="@+id/action_bar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            fontPath="fonts/BebasNeue-Regular.ttf"
-            android:textAlignment="center"
-            android:text="@string/main_title"
-            android:textSize="28dp"
-            android:textColor="@android:color/white" />
-
     <ImageButton
             android:id="@+id/close_button"
             android:layout_width="wrap_content"
