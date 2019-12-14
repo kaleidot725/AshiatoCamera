@@ -21,7 +21,7 @@
             fontPath="fonts/BebasNeue-Regular.ttf"
             android:textAlignment="center"
             android:text="@string/main_title"
-            android:textSize="28dp"
+            android:textSize="@dimen/textSizeMainTitle"
             android:textColor="@android:color/white" />
 
     <ImageButton

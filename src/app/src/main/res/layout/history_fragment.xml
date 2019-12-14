@@ -4,8 +4,12 @@
         tools:context=".ui.main.history.HistoryFragment">
 
     <data>
-        <import type="android.view.View"/>
-        <variable name="vm" type="kaleidot725.ashiato.ui.main.history.HistoryViewModel"/>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="vm"
+                type="kaleidot725.ashiato.ui.main.history.HistoryViewModel" />
     </data>
 
     <FrameLayout
@@ -17,14 +21,16 @@
                 android:id="@+id/picture_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"/>
+                android:orientation="vertical" />
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textSize="@dimen/textSizeLarge"
+                android:textStyle="bold"
                 android:visibility="@{vm.notFound ? View.VISIBLE : View.GONE, default=gone}"
-                android:text="@string/nohistory"/>
+                android:text="@string/nohistory" />
     </FrameLayout>
 </layout>

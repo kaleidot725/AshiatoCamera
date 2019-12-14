@@ -2,6 +2,7 @@
     <dimen name="navigation_bar_height">48dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="textSizeMainTitle">36dp</dimen>
     <dimen name="textSizeMainDate">20dp</dimen>
     <dimen name="textSizeMainAddress">20dp</dimen>
     <dimen name="textSizeMainLocation">20dp</dimen>
