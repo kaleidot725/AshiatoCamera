@@ -23,7 +23,10 @@ class ConfirmViewModel(
     private val pictureSetting: PermanentPictureSetting,
     private val dateTimeRepository: DateTimeRepository,
     private val locationRepository: LocationRepository,
+    private val colorRepository: ColorRepository,
     private val formatRepository: FormatRepository,
+    private val postionRepository: PositionRepository,
+    private val styleRepository: StyleRepository,
     private val pictureRepository: PictureRepository,
     private val angleRepository: AngleRepository
 ) : ViewModel() {
@@ -71,7 +74,7 @@ class ConfirmViewModel(
     }
 
     private fun setCurrentValueToEditor(target: Picture) {
-        val setting = pictureSetting.load()
+        val setting = loadSetting()
         formatEditor.enableAll(false)
         for (format in setting.formats) {
             formatEditor.enable(format.type, true)
@@ -94,7 +97,7 @@ class ConfirmViewModel(
     }
 
     private fun setPictureValueToEditor(target: Picture) {
-        val setting = pictureSetting.load()
+        val setting = loadSetting()
         formatEditor.enableAll(false)
         for (format in setting.formats) {
             formatEditor.enable(format.type, true)
@@ -127,6 +130,20 @@ class ConfirmViewModel(
             lastLongitude.toDouble(),
             lastAddress
         )
+    }
+
+    private fun loadSetting(): PictureSetting {
+        try {
+            return pictureSetting.load()
+        } catch (e: Exception) {
+            return PictureSetting(
+                colorRepository.all().first(),
+                styleRepository.all().first(),
+                listOf(formatRepository.all().first()),
+                postionRepository.all().first(),
+                angleRepository.all().first()
+            )
+        }
     }
 
     override fun onCleared() {

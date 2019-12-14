@@ -151,7 +151,7 @@ val appModule = module {
     viewModel {
         ConfirmViewModel(
             get(), get(), get(), get(), get(), get(),
-            get(), get(), get(), get(), get(), get()
+            get(), get(), get(), get(), get(), get(), get(), get(), get()
         )
     }
 
