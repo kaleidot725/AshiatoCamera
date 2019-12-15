@@ -27,12 +27,13 @@ class ConfirmFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        // FIXME EditActivityに埋め込む必要がある。
+        viewModel.loadState()
 
+        super.onViewCreated(view, savedInstanceState)
         val binding = DataBindingUtil.bind<ConfirmFragmentBinding>(view)
         binding?.lifecycleOwner = this
         binding?.vm = viewModel
-        viewModel.loadState()
         viewModel.loadPicture()
     }
 }
