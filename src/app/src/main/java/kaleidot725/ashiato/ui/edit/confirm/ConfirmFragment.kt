@@ -32,6 +32,7 @@ class ConfirmFragment : Fragment() {
         val binding = DataBindingUtil.bind<ConfirmFragmentBinding>(view)
         binding?.lifecycleOwner = this
         binding?.vm = viewModel
-        viewModel.load()
+        viewModel.loadState()
+        viewModel.loadPicture()
     }
 }

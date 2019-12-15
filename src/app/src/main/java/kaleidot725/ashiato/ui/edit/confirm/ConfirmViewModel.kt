@@ -36,49 +36,61 @@ class ConfirmViewModel(
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    fun load() {
+    fun loadState() {
         if (pictureRepository.editPicture == null) {
             return
         }
 
-        val disposable = pictureEditor.state.subscribe {
-            if (it == PictureEditorState.Update) {
-                if (pictureEditor.preview != null) {
-                    _editPath.postValue(pictureEditor.preview!!.path)
+        viewModelScope.launch(Dispatchers.Default) {
+            val target = pictureRepository.editPicture as Picture
+            when (pictureRepository.editType) {
+                EditType.TOOK -> {
+                    setCurrentValueToEditor(target)
+                }
+                EditType.FOLDER -> {
+                    setPictureValueToEditor(target)
                 }
             }
         }
-        compositeDisposable.add(disposable)
+    }
 
-        val target = pictureRepository.editPicture as Picture
-        val preview = pictureRepository.tmpPicture()
-
-        when (pictureRepository.editType) {
-            EditType.TOOK -> {
-                setCurrentValueToEditor(target)
-            }
-            EditType.FOLDER -> {
-                setPictureValueToEditor(target)
-            }
+    fun loadPicture() {
+        if (pictureRepository.editPicture == null) {
+            return
         }
 
         viewModelScope.launch(Dispatchers.Default) {
-            pictureEditor.start(target, preview)
-            pictureEditor.modifyText(formatEditor.create())
-            pictureEditor.modifyColor(colorEditor.lastEnabled.value)
-            pictureEditor.modifyTextSize(styleEditor.lastEnabled.dp)
-            pictureEditor.modifyRotation(rotationEditor.lastEnabled.value)
-            pictureEditor.modifyPosition(positionEditor.lastEnabled.type)
-            pictureEditor.commit()
+            val disposable = pictureEditor.state.subscribe {
+                if (it == PictureEditorState.Update) {
+                    if (pictureEditor.preview != null) {
+                        _editPath.postValue(pictureEditor.preview!!.path)
+                    }
+                }
+            }
+            compositeDisposable.add(disposable)
+
+            val target = pictureRepository.editPicture as Picture
+            val preview = pictureRepository.tmpPicture()
+
+            viewModelScope.launch(Dispatchers.Default) {
+                pictureEditor.start(target, preview)
+                pictureEditor.modifyText(formatEditor.create())
+                pictureEditor.modifyColor(colorEditor.lastEnabled.value)
+                pictureEditor.modifyTextSize(styleEditor.lastEnabled.dp)
+                pictureEditor.modifyRotation(rotationEditor.lastEnabled.value)
+                pictureEditor.modifyPosition(positionEditor.lastEnabled.type)
+                pictureEditor.commit()
+            }
         }
     }
 
     private fun setCurrentValueToEditor(target: Picture) {
         val setting = loadSetting()
         formatEditor.enableAll(false)
-        for (format in setting.formats) {
-            formatEditor.enable(format.type, true)
+        setting.formats.forEach {
+            formatEditor.enable(it.type, true)
         }
+
         styleEditor.enable(setting.style)
         colorEditor.enable(setting.color)
         positionEditor.enable(setting.position)
@@ -99,9 +111,10 @@ class ConfirmViewModel(
     private fun setPictureValueToEditor(target: Picture) {
         val setting = loadSetting()
         formatEditor.enableAll(false)
-        for (format in setting.formats) {
-            formatEditor.enable(format.type, true)
+        setting.formats.forEach {
+            formatEditor.enable(it.type, true)
         }
+
         styleEditor.enable(setting.style)
         colorEditor.enable(setting.color)
         positionEditor.enable(setting.position)

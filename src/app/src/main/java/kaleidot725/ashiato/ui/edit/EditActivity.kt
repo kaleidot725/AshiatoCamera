@@ -59,9 +59,9 @@ class EditActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.editmenu_content, FormatFragment.newInstance()).commit()
-        supportFragmentManager.beginTransaction()
             .replace(R.id.display_content, ConfirmFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.editmenu_content, FormatFragment.newInstance()).commit()
     }
 
     override fun onBackPressed() {
