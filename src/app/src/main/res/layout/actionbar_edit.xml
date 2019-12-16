@@ -9,7 +9,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_gravity="right|center_vertical"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_check" />
 
     <ImageButton
@@ -18,6 +18,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_gravity="left|center_vertical"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_close" />
 </FrameLayout>

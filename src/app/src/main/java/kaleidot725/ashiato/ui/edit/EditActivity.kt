@@ -51,7 +51,6 @@ class EditActivity : AppCompatActivity() {
             editViewModel.save()
             exit()
         }
-
         val close = findViewById<ImageButton>(R.id.close_button)
         close.setOnClickListener {
             editViewModel.cancel()

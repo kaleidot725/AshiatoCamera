@@ -20,14 +20,6 @@ fun loadImage(view: ImageView, imagePath: String?) {
     }
 }
 
-@BindingAdapter("app:srcId")
-fun loadImageFromId(view: ImageView, srcId: Int?) {
-    if (srcId == null) {
-        return
-    }
-    view.setImageResource(srcId)
-}
-
 @BindingAdapter("app:imageUrlNoCache")
 fun loadImageNoCache(view: ImageView, imagePath: String?) {
     if (imagePath == null) {
@@ -40,6 +32,17 @@ fun loadImageNoCache(view: ImageView, imagePath: String?) {
         diskCachePolicy(CachePolicy.DISABLED)
         memoryCachePolicy(CachePolicy.DISABLED)
         networkCachePolicy(CachePolicy.DISABLED)
+    }
+}
+
+@BindingAdapter("app:imageDrawableId")
+fun loadImageFromId(view: ImageView, srcId: Int?) {
+    if (srcId == null) {
+        return
+    }
+
+    view.load(srcId) {
+        crossfade(10)
     }
 }
 
