@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             REQUEST_IMAGE_CAPTURE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     if (tempFile != null && imageFile != null) {
-                        tempFile?.copyTo(imageFile as File)
+                        setupEditByFile(imageFile as File)
                         navigateEdit()
                     }
                 }
@@ -151,15 +151,23 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 if (resultCode == Activity.RESULT_OK) {
                     val uri = data?.data
                     if (uri != null) {
-                        val path = getFilePath(this, uri)
-                        val tempFile = File(path)
-                        tempFile.copyTo(imageFile as File)
+                        setupEditByUri(uri)
                         navigateEdit()
                     }
                 }
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun setupEditByFile(file: File) {
+        tempFile?.copyTo(file as File)
+    }
+
+    private fun setupEditByUri(uri: Uri) {
+        val path = getFilePath(this, uri)
+        tempFile = File(path)
+        tempFile?.copyTo(imageFile as File)
     }
 
     private fun navigateFolder(): Boolean {
