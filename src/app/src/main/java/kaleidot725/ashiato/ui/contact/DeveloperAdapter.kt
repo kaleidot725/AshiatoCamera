@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.DeveloperRecyclerItemBinding
 
-class DeveloperAdapter(owner: LifecycleOwner, vms: List<DeveloperViewModel>) :
+class DeveloperAdapter(
+    private val owner: LifecycleOwner,
+    vms: List<DeveloperViewModel>
+) :
     RecyclerView.Adapter<DeveloperViewHolder>() {
-    private val owner: LifecycleOwner = owner
     private val vms: MutableList<DeveloperViewModel> = vms.toMutableList()
 
     fun update(new: List<DeveloperViewModel>) {

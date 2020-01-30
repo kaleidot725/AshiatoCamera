@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
+import kaleidot725.ashiato.databinding.ContactFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ContactFragment : Fragment() {
@@ -17,14 +19,18 @@ class ContactFragment : Fragment() {
         fun newInstance() = ContactFragment()
     }
 
-    val contactViewModel: ContactViewModel by viewModel()
+    private val contactViewModel: ContactViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.contact_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return DataBindingUtil.inflate<ContactFragmentBinding>(
+            inflater,
+            R.layout.contact_fragment,
+            container,
+            false
+        ).apply {
+            vm = contactViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

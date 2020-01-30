@@ -5,11 +5,12 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.databinding.DeveloperRecyclerItemBinding
 
-class DeveloperViewHolder(owner: LifecycleOwner, itemView: View, binding: DeveloperRecyclerItemBinding) :
+class DeveloperViewHolder(
+    private val owner: LifecycleOwner,
+    private val itemView: View,
+    private val binding: DeveloperRecyclerItemBinding
+) :
     RecyclerView.ViewHolder(itemView) {
-    private val binding: DeveloperRecyclerItemBinding = binding
-    private val owner = owner
-    private val itemView: View = itemView
 
     fun bind(vm: DeveloperViewModel?) {
         binding.vm = vm
