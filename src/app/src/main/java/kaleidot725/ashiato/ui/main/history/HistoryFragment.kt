@@ -24,17 +24,17 @@ class HistoryFragment : Fragment(), ActionMode.Callback {
         fun newInstance() = HistoryFragment()
     }
 
-    val historyViewModel: HistoryViewModel by viewModel()
+    private val historyViewModel: HistoryViewModel by viewModel()
 
     private var actionMode: ActionMode? = null
     private var recyclerView: RecyclerView? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.history_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return DataBindingUtil.inflate<HistoryFragmentBinding>(inflater, R.layout.history_fragment, container, false)
+            .apply {
+                vm = historyViewModel
+                lifecycleOwner = viewLifecycleOwner
+            }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -119,10 +119,6 @@ class HistoryFragment : Fragment(), ActionMode.Callback {
     }
 
     private fun createView(mode: HistoryFragmentMode) {
-        val binding = DataBindingUtil.bind<HistoryFragmentBinding>(this.view as View)
-        binding?.lifecycleOwner = this
-        binding?.vm = historyViewModel
-
         val gridLayoutManager = (recyclerView?.layoutManager as GridLayoutManager?)
         val position = gridLayoutManager?.findFirstCompletelyVisibleItemPosition() ?: 0
 

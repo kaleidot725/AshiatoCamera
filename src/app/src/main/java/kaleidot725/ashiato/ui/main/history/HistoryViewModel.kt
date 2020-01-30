@@ -9,15 +9,7 @@ import kaleidot725.ashiato.data.service.picture.Picture
 import kotlinx.coroutines.launch
 import java.io.File
 
-class HistoryViewModel(
-    private val pictureRepository: PictureRepository
-) : ViewModel() {
-    enum class NavEvent {
-        SHARE,
-        PREVIEW,
-        ACTION
-    }
-
+class HistoryViewModel(private val pictureRepository: PictureRepository) : ViewModel() {
     private val _pictureViewModels: MutableLiveData<List<PictureViewModelBase>> = MutableLiveData()
     val pictureViewModels: LiveData<List<PictureViewModelBase>> get() = _pictureViewModels
 
@@ -64,15 +56,10 @@ class HistoryViewModel(
     }
 
     private fun createPictureViewModels(mode: HistoryFragmentMode): List<PictureViewModelBase> {
-        return pictureRepository.all().map { createPictureViewModel(pictureRepository, it, mode) }
+        return pictureRepository.all().map { createPictureViewModel(it, mode) }
     }
 
-    private fun createPictureViewModel(
-        pictureRepository: PictureRepository,
-        picture: Picture,
-        mode: HistoryFragmentMode
-    ): PictureViewModelBase {
-
+    private fun createPictureViewModel(picture: Picture, mode: HistoryFragmentMode): PictureViewModelBase {
         when (mode) {
             HistoryFragmentMode.Action -> {
                 return PictureViewModelForAction(
@@ -94,5 +81,11 @@ class HistoryViewModel(
                 }
             )
         }
+    }
+
+    enum class NavEvent {
+        SHARE,
+        PREVIEW,
+        ACTION
     }
 }
