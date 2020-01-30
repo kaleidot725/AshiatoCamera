@@ -16,21 +16,17 @@ class StyleFragment : Fragment() {
         fun newInstance() = StyleFragment()
     }
 
-    val styleViewModel: StyleViewModel by viewModel()
+    private val styleViewModel: StyleViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.style_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return DataBindingUtil.inflate<StyleFragmentBinding>(inflater, R.layout.style_fragment, container, false)
+            .apply {
+                vm = styleViewModel
+                lifecycleOwner = viewLifecycleOwner
+            }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val binding = DataBindingUtil.bind<StyleFragmentBinding>(this.view as View)
-        binding?.lifecycleOwner = this
-        binding?.vm = styleViewModel
     }
 }
