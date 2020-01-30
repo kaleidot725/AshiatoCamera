@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.PositionRecyclerItemBinding
 
-class PositionRecyclerAdapter(owner: LifecycleOwner, vms: List<PositionRecyclerViewModel>) :
-    RecyclerView.Adapter<PositionRecyclerHolder>() {
-
-    private val owner: LifecycleOwner = owner
+class PositionRecyclerAdapter(
+    private val owner: LifecycleOwner,
+    vms: List<PositionRecyclerViewModel>
+) : RecyclerView.Adapter<PositionRecyclerHolder>() {
     private val vms: MutableList<PositionRecyclerViewModel> = vms.toMutableList()
 
     fun update(new: List<PositionRecyclerViewModel>) {

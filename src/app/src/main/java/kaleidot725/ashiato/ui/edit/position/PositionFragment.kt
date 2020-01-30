@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
-import kaleidot725.ashiato.databinding.PositionFragmentBindingImpl
+import kaleidot725.ashiato.databinding.PositionFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PositionFragment : Fragment() {
@@ -19,22 +19,18 @@ class PositionFragment : Fragment() {
         fun newInstance() = PositionFragment()
     }
 
-    val positionViewModel: PositionViewModel by viewModel()
+    private val positionViewModel: PositionViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.position_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return DataBindingUtil.inflate<PositionFragmentBinding>(inflater, R.layout.position_fragment, container, false)
+            .apply {
+                vm = positionViewModel
+                lifecycleOwner = viewLifecycleOwner
+            }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        val binding = DataBindingUtil.bind<PositionFragmentBindingImpl>(this.view as View)
-        binding?.lifecycleOwner = this
-        binding?.vm = positionViewModel
 
         val recyclerView = this.view?.findViewById<(RecyclerView)>(R.id.position_recycler_view)
         positionViewModel.positionRecyclerViewModels.observe(this, Observer {

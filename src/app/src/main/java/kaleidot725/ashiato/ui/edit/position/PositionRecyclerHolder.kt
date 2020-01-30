@@ -6,13 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.databinding.PositionRecyclerItemBinding
 
 class PositionRecyclerHolder(
-    owner: LifecycleOwner,
-    itemView: View, binding:
-    PositionRecyclerItemBinding
+    private val owner: LifecycleOwner,
+    private val itemView: View,
+    private val binding: PositionRecyclerItemBinding
 ) : RecyclerView.ViewHolder(itemView) {
-    private val binding: PositionRecyclerItemBinding = binding
-    private val owner = owner
-
     fun bind(vm: PositionRecyclerViewModel?) {
         binding.vm = vm
         binding.executePendingBindings()
