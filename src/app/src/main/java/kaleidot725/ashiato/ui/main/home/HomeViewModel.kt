@@ -14,8 +14,7 @@ class HomeViewModel(
     private val dateTimeRepository: DateTimeRepository,
     private val locationRepository: LocationRepository,
     private val pictureRepository: PictureRepository
-) :
-    ViewModel() {
+) : ViewModel() {
     private val _update: MutableLiveData<String> = MutableLiveData()
     val update: LiveData<String> get() = _update
 

@@ -23,21 +23,16 @@ class HomeFragment : Fragment() {
         fun newInstance() = HomeFragment()
     }
 
-    val homeViewModel: HomeViewModel by viewModel()
+    private val homeViewModel: HomeViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return DataBindingUtil.inflate<HomeFragmentBinding>(inflater, R.layout.home_fragment, container, false).apply {
+            viewmodel = homeViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val binding = DataBindingUtil.bind<HomeFragmentBinding>(view)
-        binding?.viewmodel = homeViewModel
-        binding?.lifecycleOwner = this
-
         loadAdvertisement(view.findViewById(R.id.ad_container))
         super.onViewCreated(view, savedInstanceState)
     }
