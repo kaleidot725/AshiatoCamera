@@ -16,24 +16,23 @@ class ConfirmFragment : Fragment() {
         fun newInstance() = ConfirmFragment()
     }
 
-    val viewModel: ConfirmViewModel by viewModel()
+    private val viewModel: ConfirmViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.confirm_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return DataBindingUtil.inflate<ConfirmFragmentBinding>(
+            inflater,
+            R.layout.confirm_fragment,
+            container,
+            false
+        ).apply {
+            vm = viewModel
+            lifecycleOwner = viewLifecycleOwner
+        }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // FIXME EditActivityに埋め込む必要がある。
         viewModel.loadState()
-
         super.onViewCreated(view, savedInstanceState)
-        val binding = DataBindingUtil.bind<ConfirmFragmentBinding>(view)
-        binding?.lifecycleOwner = this
-        binding?.vm = viewModel
-        viewModel.loadPicture()
     }
 }

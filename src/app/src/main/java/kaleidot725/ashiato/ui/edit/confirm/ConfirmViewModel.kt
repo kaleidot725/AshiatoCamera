@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
+// FIXME リファクタリングが必要
 class ConfirmViewModel(
     private val pictureEditor: PictureEditor,
     private val formatEditor: FormatEditor,
@@ -25,7 +26,7 @@ class ConfirmViewModel(
     private val locationRepository: LocationRepository,
     private val colorRepository: ColorRepository,
     private val formatRepository: FormatRepository,
-    private val postionRepository: PositionRepository,
+    private val positionRepository: PositionRepository,
     private val styleRepository: StyleRepository,
     private val pictureRepository: PictureRepository,
     private val angleRepository: AngleRepository
@@ -153,7 +154,7 @@ class ConfirmViewModel(
                 colorRepository.all().first(),
                 styleRepository.all().first(),
                 listOf(formatRepository.all().first()),
-                postionRepository.all().first(),
+                positionRepository.all().first(),
                 angleRepository.all().first()
             )
         }
