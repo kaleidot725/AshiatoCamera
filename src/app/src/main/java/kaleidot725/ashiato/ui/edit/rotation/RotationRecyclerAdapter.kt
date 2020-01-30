@@ -9,10 +9,9 @@ import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.RotationRecyclerItemBinding
 
 class RotationRecyclerAdapter(
-    owner: LifecycleOwner,
+    private val owner: LifecycleOwner,
     vms: List<RotationRecyclerViewModel>
 ) : RecyclerView.Adapter<RotationRecyclerHolder>() {
-    private val owner: LifecycleOwner = owner
     private val vms: MutableList<RotationRecyclerViewModel> = vms.toMutableList()
 
     fun update(new: List<RotationRecyclerViewModel>) {

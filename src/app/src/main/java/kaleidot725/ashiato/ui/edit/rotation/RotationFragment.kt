@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
-import kaleidot725.ashiato.databinding.RotationFragmentBindingImpl
+import kaleidot725.ashiato.databinding.RotationFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RotationFragment : Fragment() {
@@ -19,22 +19,18 @@ class RotationFragment : Fragment() {
         fun newInstance() = RotationFragment()
     }
 
-    val rotationViewModel: RotationViewModel by viewModel()
+    private val rotationViewModel: RotationViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.rotation_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return DataBindingUtil.inflate<RotationFragmentBinding>(inflater, R.layout.rotation_fragment, container, false)
+            .apply {
+                vm = rotationViewModel
+                lifecycleOwner = viewLifecycleOwner
+            }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val binding = DataBindingUtil.bind<RotationFragmentBindingImpl>(this.view as View)
-        binding?.lifecycleOwner = this
-        binding?.vm = rotationViewModel
 
         val recyclerView = this.view?.findViewById<RecyclerView>(R.id.rotation_recycler_view)
         rotationViewModel.rotaionRecyclerViewModels.observe(this, Observer {
