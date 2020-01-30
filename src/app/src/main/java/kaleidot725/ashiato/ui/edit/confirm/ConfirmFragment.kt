@@ -33,6 +33,7 @@ class ConfirmFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // FIXME EditActivityに埋め込む必要がある。
         viewModel.loadState()
+        viewModel.loadPicture()
         super.onViewCreated(view, savedInstanceState)
     }
 }
