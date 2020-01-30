@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
-import kaleidot725.ashiato.databinding.FormatFragmentBindingImpl
+import kaleidot725.ashiato.databinding.FormatFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class FormatFragment : Fragment() {
@@ -19,22 +19,22 @@ class FormatFragment : Fragment() {
         fun newInstance() = FormatFragment()
     }
 
-    val formatViewModel: FormatViewModel by viewModel()
+    private val formatViewModel: FormatViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.format_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return DataBindingUtil.inflate<FormatFragmentBinding>(
+            inflater,
+            R.layout.format_fragment,
+            container,
+            false
+        ).apply {
+            vm = formatViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val binding = DataBindingUtil.bind<FormatFragmentBindingImpl>(this.view as View)
-        binding?.lifecycleOwner = this
-        binding?.vm = formatViewModel
 
         val recyclerView = this.view?.findViewById<RecyclerView>(R.id.format_recycler_view)
         formatViewModel.formatRecyclerViewModels.observe(this, Observer {

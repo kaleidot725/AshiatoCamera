@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.FormatRecyclerItemBinding
 
-class FormatRecyclerAdapter(owner: LifecycleOwner, vms: List<FormatRecyclerViewModel>) :
-    RecyclerView.Adapter<FormatRecyclerHolder>() {
-    private val owner: LifecycleOwner = owner
+class FormatRecyclerAdapter(
+    private val owner: LifecycleOwner,
+    vms: List<FormatRecyclerViewModel>
+) : RecyclerView.Adapter<FormatRecyclerHolder>() {
     private val vms: MutableList<FormatRecyclerViewModel> = vms.toMutableList()
 
     fun update(new: List<FormatRecyclerViewModel>) {
