@@ -21,7 +21,7 @@ import kaleidot725.ashiato.ui.main.MainActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class EditActivity : AppCompatActivity() {
-    val editViewModel: EditViewModel by viewModel()
+    private val editViewModel: EditViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +30,7 @@ class EditActivity : AppCompatActivity() {
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.actionbar_edit)
 
-        val binding: ActivityEditBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_edit)
+        val binding: ActivityEditBinding = DataBindingUtil.setContentView(this, R.layout.activity_edit)
         binding.viewmodel = editViewModel
         binding.lifecycleOwner = this
 
