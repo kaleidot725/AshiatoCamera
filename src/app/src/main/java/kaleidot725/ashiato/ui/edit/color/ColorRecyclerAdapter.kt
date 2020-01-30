@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.ColorRecyclerItemBinding
 
-class ColorRecyclerAdapter(owner: LifecycleOwner, vms: List<ColorRecyclerViewModel>) :
+class ColorRecyclerAdapter(
+    private val owner: LifecycleOwner,
+    vms: List<ColorRecyclerViewModel>
+) :
     RecyclerView.Adapter<ColorRecyclerHolder>() {
 
-    private val owner: LifecycleOwner = owner
     private val vms: MutableList<ColorRecyclerViewModel> = vms.toMutableList()
 
     fun update(new: List<ColorRecyclerViewModel>) {
