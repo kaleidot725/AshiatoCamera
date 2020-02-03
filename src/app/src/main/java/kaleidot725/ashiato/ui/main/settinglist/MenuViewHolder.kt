@@ -5,12 +5,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.databinding.MenuRecyclerItemBinding
 
-class MenuViewHolder(owner: LifecycleOwner, itemView: View, binding: MenuRecyclerItemBinding) :
-    RecyclerView.ViewHolder(itemView) {
-    private val binding: MenuRecyclerItemBinding = binding
-    private val owner = owner
-    private val itemView: View = itemView
-
+class MenuViewHolder(
+    private val owner: LifecycleOwner,
+    private val itemView: View,
+    private val binding: MenuRecyclerItemBinding
+) : RecyclerView.ViewHolder(itemView) {
     fun bind(vm: MenuViewModel?) {
         binding.vm = vm
         binding.executePendingBindings()

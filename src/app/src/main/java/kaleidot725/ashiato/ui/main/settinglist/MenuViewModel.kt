@@ -1,6 +1,5 @@
 package kaleidot725.ashiato.ui.main.settinglist
 
-import android.content.Context
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import kaleidot725.ashiato.data.service.contact.Menu
 
 class MenuViewModel(
-    val context: Context,
     val menu: Menu,
     val clickEvent: (m: Menu) -> Unit
 ) : ViewModel() {

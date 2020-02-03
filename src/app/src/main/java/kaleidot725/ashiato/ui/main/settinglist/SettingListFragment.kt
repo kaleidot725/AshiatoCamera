@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import kaleidot725.ashiato.R
+import kaleidot725.ashiato.databinding.SettinglistFragmentBinding
 import kaleidot725.ashiato.ui.contact.ContactActivity
 import kaleidot725.ashiato.ui.privacy.PrivacyActivity
 import kaleidot725.ashiato.ui.setting.SettingActivity
@@ -22,14 +24,22 @@ class SettingListFragment : Fragment() {
         fun newInstance() = SettingListFragment()
     }
 
-    val listViewModel: SettingListViewModel by viewModel()
+    private val listViewModel: SettingListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.settinglist_fragment, container, false)
+        return DataBindingUtil.inflate<SettinglistFragmentBinding>(
+            inflater,
+            R.layout.settinglist_fragment,
+            container,
+            false
+        ).apply {
+            vm = listViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
