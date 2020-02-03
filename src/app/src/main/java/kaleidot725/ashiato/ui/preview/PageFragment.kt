@@ -22,12 +22,12 @@ class PageFragment : Fragment() {
 
     val viewModel: PageViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.preview_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return DataBindingUtil.inflate<PreviewFragmentBinding>(inflater, R.layout.preview_fragment, container, false)
+            .apply {
+                vm = viewModel
+                lifecycleOwner = viewLifecycleOwner
+            }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,9 +35,5 @@ class PageFragment : Fragment() {
 
         val position = arguments?.getInt("position") ?: 0
         viewModel.load(position)
-
-        val binding = DataBindingUtil.bind<PreviewFragmentBinding>(this.view as View)
-        binding?.lifecycleOwner = this
-        binding?.vm = viewModel
     }
 }

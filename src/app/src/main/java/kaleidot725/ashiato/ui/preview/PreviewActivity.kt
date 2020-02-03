@@ -11,16 +11,14 @@ import kaleidot725.ashiato.databinding.PreviewActivityBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PreviewActivity : AppCompatActivity() {
-    val previewViewModel: PreviewViewModel by viewModel()
-
+    private val previewViewModel: PreviewViewModel by viewModel()
     private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.preview_activity)
 
-        val binding =
-            DataBindingUtil.setContentView<PreviewActivityBinding>(this, R.layout.preview_activity)
+        val binding = DataBindingUtil.setContentView<PreviewActivityBinding>(this, R.layout.preview_activity)
         binding?.lifecycleOwner = this
         binding?.viewmodel = previewViewModel
 

@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import kaleidot725.ashiato.data.repository.PictureRepository
 
 class PreviewViewModel(val repository: PictureRepository) : ViewModel() {
-
     private val _currentPage: MutableLiveData<Int> = MutableLiveData()
     val currentPage: LiveData<Int> get() = _currentPage
 

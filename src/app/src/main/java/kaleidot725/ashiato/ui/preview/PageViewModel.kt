@@ -7,9 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kaleidot725.ashiato.data.repository.PictureRepository
 import kotlinx.coroutines.launch
 
-class PageViewModel(
-    private val repository: PictureRepository
-) : ViewModel() {
+class PageViewModel(private val repository: PictureRepository) : ViewModel() {
     private val _name: MutableLiveData<String> = MutableLiveData()
     val name: LiveData<String> = _name
 

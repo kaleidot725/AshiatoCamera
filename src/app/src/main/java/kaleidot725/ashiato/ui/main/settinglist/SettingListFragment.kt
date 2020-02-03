@@ -26,11 +26,7 @@ class SettingListFragment : Fragment() {
 
     private val listViewModel: SettingListViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return DataBindingUtil.inflate<SettinglistFragmentBinding>(
             inflater,
             R.layout.settinglist_fragment,
