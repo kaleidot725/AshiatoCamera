@@ -16,8 +16,7 @@ class SettingViewModel(private val persistenceSetting: PermanentLocationSetting)
     val gpsProviderItemPosition: MutableLiveData<Int> = MutableLiveData()
 
     private val gpsMinTimes: List<Int> = arrayListOf(1, 5, 10, 15, 30, 60)
-    val gpsMinTimeMenus: List<String> =
-        arrayListOf("1Sec", "5Sec", "10Sec", "15Sec", "30Sec", "60Sec")
+    val gpsMinTimeMenus: List<String> = arrayListOf("1Sec", "5Sec", "10Sec", "15Sec", "30Sec", "60Sec")
     val gpsMinTimeItemPosition: MutableLiveData<Int> = MutableLiveData()
 
     private val gpsMinDistances: List<Int> = arrayListOf(1, 5, 10, 25, 50, 100)

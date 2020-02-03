@@ -11,27 +11,22 @@ import kaleidot725.ashiato.databinding.SettingFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SettingFragment : Fragment() {
+    private val viewModel: SettingViewModel by viewModel()
 
-    companion object {
-        fun newInstance() = SettingFragment()
-    }
-
-    val viewModel: SettingViewModel by viewModel()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.setting_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return DataBindingUtil.inflate<SettingFragmentBinding>(inflater, R.layout.setting_fragment, container, false)
+            .apply {
+                vm = viewModel
+                lifecycleOwner = viewLifecycleOwner
+            }.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.load()
+    }
 
-        val binding = DataBindingUtil.bind<SettingFragmentBinding>(this.view as View)
-        binding?.vm = viewModel
-        binding?.lifecycleOwner = this
+    companion object {
+        fun newInstance() = SettingFragment()
     }
 }
