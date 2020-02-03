@@ -9,15 +9,11 @@ import androidx.fragment.app.Fragment
 import kaleidot725.ashiato.R
 
 class PrivacyFragment : Fragment() {
-
     companion object {
         fun newInstance() = PrivacyFragment()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.privacy_fragment, container, false)
     }
 
