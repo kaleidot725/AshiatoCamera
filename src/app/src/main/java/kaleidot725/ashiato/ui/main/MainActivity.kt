@@ -14,7 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
@@ -24,9 +25,6 @@ import kaleidot725.ashiato.data.holder.Holder
 import kaleidot725.ashiato.data.repository.PictureRepository
 import kaleidot725.ashiato.databinding.ActivityMainBinding
 import kaleidot725.ashiato.ui.edit.EditActivity
-import kaleidot725.ashiato.ui.main.history.HistoryFragment
-import kaleidot725.ashiato.ui.main.home.HomeFragment
-import kaleidot725.ashiato.ui.main.settinglist.SettingListFragment
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import pub.devrel.easypermissions.EasyPermissions
@@ -70,18 +68,16 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.actionbar_main)
 
-        val binding: ActivityMainBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        binding.bottomNavigation.setupWithNavController(findNavController(this@MainActivity, R.id.nav_host_fragment))
 
         viewModel.navigationEvent.observe(this, Observer {
             when (it) {
                 MainViewModel.NavEvent.Camera -> navigateCamera()
                 MainViewModel.NavEvent.Folder -> navigateFolder()
-                MainViewModel.NavEvent.Home -> navigateHome()
-                MainViewModel.NavEvent.History -> navigateHistory()
-                MainViewModel.NavEvent.SettingList -> navigateSettingList()
             }
         })
 
@@ -94,8 +90,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         folderButton.setOnClickListener {
             viewModel.selectPhoto(folderButton)
         }
-
-        restoreMenu()
     }
 
     override fun onDestroy() {
@@ -204,6 +198,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             }
         }
 
+
         return true
     }
 
@@ -211,45 +206,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         val intent = Intent(this, EditActivity::class.java)
         startActivity(intent)
         return true
-    }
-
-    private fun navigateSettingList(): Boolean {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_content, SettingListFragment.newInstance()).commit()
-        mainMenuSelected.update(MainMenu.SettingList)
-        return true
-    }
-
-    private fun navigateHome(): Boolean {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_content, HomeFragment.newInstance()).commit()
-        mainMenuSelected.update(MainMenu.Home)
-        return true
-    }
-
-    private fun navigateHistory(): Boolean {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_content, HistoryFragment.newInstance()).commit()
-        mainMenuSelected.update(MainMenu.History)
-        return true
-    }
-
-    private fun restoreMenu(): Boolean {
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        val item = bottomNavigation.menu.findItem(
-            when (mainMenuSelected.lastedValue) {
-                MainMenu.Home -> R.id.action_home
-                MainMenu.History -> R.id.action_history
-                MainMenu.SettingList -> R.id.action_setting
-            }
-        )
-        item.setChecked(true)
-
-        when (mainMenuSelected.lastedValue) {
-            MainMenu.Home -> return navigateHome()
-            MainMenu.History -> return navigateHistory()
-            MainMenu.SettingList -> return navigateSettingList()
-        }
     }
 
     override fun onPermissionsGranted(requestCode: Int, list: List<String>) {

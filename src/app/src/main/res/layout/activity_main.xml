@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:myApplication="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="kaleidot725.ashiato.ui.main.MainViewModel"/>
+
+        <variable
+                name="viewModel"
+                type="kaleidot725.ashiato.ui.main.MainViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -13,11 +15,14 @@
             android:layout_height="match_parent"
             tools:context=".ui.main.MainActivity">
 
-        <FrameLayout
-                android:id="@+id/main_content"
+        <fragment
+                android:id="@+id/nav_host_fragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/navigation_bar_height"/>
+                android:layout_marginBottom="@dimen/navigation_bar_height"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/root_nav_graph" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigation"
@@ -26,10 +31,9 @@
                 android:layout_gravity="bottom"
                 android:background="@color/background"
                 android:elevation="16dp"
-                myApplication:itemIconTint="@color/bottom_nav_color"
-                myApplication:itemTextColor="@color/bottom_nav_color"
-                myApplication:setOnNavigationItemSelectedListener="@{viewModel.onNavigationItemSelectedListener}"
-                myApplication:menu="@menu/bottom_navigation_menu" />
+                app:itemIconTint="@color/bottom_nav_color"
+                app:itemTextColor="@color/bottom_nav_color"
+                app:menu="@menu/bottom_navigation_menu" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

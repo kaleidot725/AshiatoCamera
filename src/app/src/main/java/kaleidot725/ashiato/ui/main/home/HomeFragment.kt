@@ -33,8 +33,8 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        loadAdvertisement(view.findViewById(R.id.ad_container))
         super.onViewCreated(view, savedInstanceState)
+        loadAdvertisement(view.findViewById(R.id.ad_container))
     }
 
     private fun loadAdvertisement(view: FrameLayout) {

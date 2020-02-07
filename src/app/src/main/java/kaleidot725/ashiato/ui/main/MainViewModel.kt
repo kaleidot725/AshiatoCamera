@@ -4,7 +4,6 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
 import kaleidot725.ashiato.data.repository.EditType
 import kaleidot725.ashiato.data.repository.PictureRepository
@@ -25,27 +24,6 @@ class MainViewModel(
 
     private val _navigationEvent: MutableLiveData<NavEvent> = MutableLiveData()
     val navigationEvent: LiveData<NavEvent> = _navigationEvent
-
-    val onNavigationItemSelectedListener =
-        BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                kaleidot725.ashiato.R.id.action_home -> {
-                    _navigationEvent.postValue(NavEvent.Home)
-                    true
-                }
-                kaleidot725.ashiato.R.id.action_history -> {
-                    _navigationEvent.postValue(NavEvent.History)
-                    true
-                }
-                kaleidot725.ashiato.R.id.action_setting -> {
-                    _navigationEvent.postValue(NavEvent.SettingList)
-                    true
-                }
-                else -> {
-                    false
-                }
-            }
-        }
 
     fun takePhoto(view: View) {
         pictureRepository.edit(EditType.TOOK, pictureRepository.newPicture())
