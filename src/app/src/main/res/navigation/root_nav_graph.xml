@@ -2,20 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/nav_graph"
-        app:startDestination="@id/homeFragment">
+        android:id="@+id/root_nav_graph"
+        app:startDestination="@id/home_fragment">
 
     <fragment
-            android:id="@+id/homeFragment"
+            android:id="@+id/home_fragment"
             android:name="kaleidot725.ashiato.ui.main.home.HomeFragment"
             android:label="HomeFragment" />
     <fragment
-            android:id="@+id/historyFragment"
+            android:id="@+id/history_fragment"
             android:name="kaleidot725.ashiato.ui.main.history.HistoryFragment"
             android:label="history_fragment"
             tools:layout="@layout/history_fragment" />
     <fragment
-            android:id="@+id/settingListFragment"
+            android:id="@+id/settinglist_fragment"
             android:name="kaleidot725.ashiato.ui.main.settinglist.SettingListFragment"
             android:label="settinglist_fragment"
             tools:layout="@layout/settinglist_fragment" />

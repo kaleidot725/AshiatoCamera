@@ -4,20 +4,14 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.Disposable
 import kaleidot725.ashiato.data.repository.EditType
 import kaleidot725.ashiato.data.repository.PictureRepository
 
-class MainViewModel(
-    private val pictureRepository: PictureRepository
-) : ViewModel(), Disposable {
+class MainViewModel(private val pictureRepository: PictureRepository) : ViewModel() {
 
     enum class NavEvent {
         Camera,
-        Folder,
-        Home,
-        History,
-        SettingList
+        Folder
     }
 
     private var disposed: Boolean = false
@@ -33,17 +27,5 @@ class MainViewModel(
     fun selectPhoto(view: View) {
         pictureRepository.edit(EditType.FOLDER, pictureRepository.newPicture())
         _navigationEvent.postValue(NavEvent.Folder)
-    }
-
-    override fun dispose() {
-        if (disposed) {
-            throw IllegalStateException("already disposed")
-        }
-
-        disposed = true
-    }
-
-    override fun isDisposed(): Boolean {
-        return disposed
     }
 }

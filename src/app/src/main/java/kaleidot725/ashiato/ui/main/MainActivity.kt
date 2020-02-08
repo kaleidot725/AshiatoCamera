@@ -12,40 +12,22 @@ import android.widget.ImageButton
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kaleidot725.ashiato.R
-import kaleidot725.ashiato.data.holder.Holder
-import kaleidot725.ashiato.data.repository.PictureRepository
-import kaleidot725.ashiato.databinding.ActivityMainBinding
 import kaleidot725.ashiato.ui.edit.EditActivity
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 import java.io.IOException
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
-    companion object {
-        private const val REQUEST_PERMISSION = 0
-        private const val REQUEST_IMAGE_CAPTURE = 1
-        private const val REQUEST_GET_CONTENT = 2
-        private var REQUEST_RETRY: Boolean = false
-        private val permissions = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-        )
-    }
-
-    val pictureRepository: PictureRepository by inject()
-    val mainMenuSelected: Holder<MainMenu> by inject()
     val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,11 +50,9 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.actionbar_main)
 
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-
-        binding.bottomNavigation.setupWithNavController(findNavController(this@MainActivity, R.id.nav_host_fragment))
+        val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val navController = findNavController(R.id.nav_host_fragment)
+        navigation.setupWithNavController(navController)
 
         viewModel.navigationEvent.observe(this, Observer {
             when (it) {
@@ -227,5 +207,17 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         } else {
             recreate()
         }
+    }
+
+    companion object {
+        private const val REQUEST_PERMISSION = 0
+        private const val REQUEST_IMAGE_CAPTURE = 1
+        private const val REQUEST_GET_CONTENT = 2
+        private var REQUEST_RETRY: Boolean = false
+        private val permissions = arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+        )
     }
 }
