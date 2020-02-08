@@ -19,7 +19,6 @@ import kaleidot725.ashiato.ui.edit.position.PositionViewModel
 import kaleidot725.ashiato.ui.edit.rotation.RotationViewModel
 import kaleidot725.ashiato.ui.edit.style.StyleViewModel
 import kaleidot725.ashiato.ui.main.MainMenu
-import kaleidot725.ashiato.ui.main.MainViewModel
 import kaleidot725.ashiato.ui.main.history.HistoryViewModel
 import kaleidot725.ashiato.ui.main.home.HomeViewModel
 import kaleidot725.ashiato.ui.main.settinglist.SettingListViewModel
@@ -188,10 +187,6 @@ val appModule = module {
 
     viewModel {
         SettingListViewModel(get(), get())
-    }
-
-    viewModel {
-        MainViewModel(get())
     }
 
     viewModel {

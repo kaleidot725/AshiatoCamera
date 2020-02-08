@@ -12,7 +12,6 @@ import android.widget.ImageButton
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,14 +20,16 @@ import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kaleidot725.ashiato.R
+import kaleidot725.ashiato.data.repository.EditType
+import kaleidot725.ashiato.data.repository.PictureRepository
 import kaleidot725.ashiato.ui.edit.EditActivity
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.inject
 import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 import java.io.IOException
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
-    val viewModel: MainViewModel by viewModel()
+    private val pictureRepository: PictureRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,34 +48,19 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         setupCalligraphy()
         setContentView(R.layout.activity_main)
+
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.actionbar_main)
 
         val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        val navController = findNavController(R.id.nav_host_fragment)
-        navigation.setupWithNavController(navController)
+        navigation.setupWithNavController(findNavController(R.id.nav_host_fragment))
 
-        viewModel.navigationEvent.observe(this, Observer {
-            when (it) {
-                MainViewModel.NavEvent.Camera -> navigateCamera()
-                MainViewModel.NavEvent.Folder -> navigateFolder()
-            }
-        })
-
-        val cameraButton = findViewById<ImageButton>(R.id.camera_button)
-        cameraButton.setOnClickListener {
-            viewModel.takePhoto(cameraButton)
-        }
-
-        val folderButton = findViewById<ImageButton>(R.id.folder_button)
-        folderButton.setOnClickListener {
-            viewModel.selectPhoto(folderButton)
-        }
+        findViewById<ImageButton>(R.id.camera_button).setOnClickListener { takePhoto() }
+        findViewById<ImageButton>(R.id.folder_button).setOnClickListener { selectPhoto() }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.navigationEvent.removeObservers(this)
     }
 
     override fun attachBaseContext(newBase: Context) {
@@ -144,6 +130,16 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         tempFile?.copyTo(imageFile as File)
     }
 
+    private fun takePhoto() {
+        pictureRepository.edit(EditType.TOOK, pictureRepository.newPicture())
+        navigateCamera()
+    }
+
+    private fun selectPhoto() {
+        pictureRepository.edit(EditType.FOLDER, pictureRepository.newPicture())
+        navigateFolder()
+    }
+
     private fun navigateFolder(): Boolean {
         Intent(Intent.ACTION_GET_CONTENT).also { getContentIntent ->
             getContentIntent.addCategory(Intent.CATEGORY_OPENABLE)
@@ -196,11 +192,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         finishAffinity()
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         val result = EasyPermissions.hasPermissions(this, *permissions)
         if (!result && REQUEST_RETRY) {
             finishAffinity()
