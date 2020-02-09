@@ -3,21 +3,63 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/root_nav_graph"
-        app:startDestination="@id/home_fragment">
+        app:startDestination="@id/settinglist_fragment">
 
     <fragment
             android:id="@+id/home_fragment"
             android:name="kaleidot725.ashiato.ui.main.home.HomeFragment"
-            android:label="HomeFragment" />
+            android:label="Ashiato">
+        <action
+                android:id="@+id/action_home_fragment_to_history_fragment"
+                app:destination="@id/history_fragment" />
+        <action
+                android:id="@+id/action_home_fragment_to_settinglist_fragment"
+                app:destination="@id/settinglist_fragment" />
+    </fragment>
     <fragment
             android:id="@+id/history_fragment"
             android:name="kaleidot725.ashiato.ui.main.history.HistoryFragment"
-            android:label="history_fragment"
-            tools:layout="@layout/history_fragment" />
+            android:label="Ashiato"
+            tools:layout="@layout/history_fragment">
+        <action
+                android:id="@+id/action_history_fragment_to_previewFragment"
+                app:destination="@id/previewFragment"
+                app:launchSingleTop="false"
+                app:popUpTo="@+id/history_fragment"
+                app:popUpToInclusive="false" />
+    </fragment>
     <fragment
             android:id="@+id/settinglist_fragment"
             android:name="kaleidot725.ashiato.ui.main.settinglist.SettingListFragment"
-            android:label="settinglist_fragment"
-            tools:layout="@layout/settinglist_fragment" />
+            android:label="Ashiato"
+            tools:layout="@layout/settinglist_fragment">
+        <action
+                android:id="@+id/action_settinglist_fragment_to_privacyFragment"
+                app:destination="@id/privacyFragment" />
+        <action
+                android:id="@+id/action_settinglist_fragment_to_contactFragment"
+                app:destination="@id/contactFragment" />
+        <action
+                android:id="@+id/action_settinglist_fragment_to_settingFragment"
+                app:destination="@id/settingFragment" />
+    </fragment>
 
+    <fragment
+            android:id="@+id/previewFragment"
+            android:name="kaleidot725.ashiato.ui.preview.PreviewFragment"
+            android:label="PreviewFragment" />
+    <fragment
+            android:id="@+id/privacyFragment"
+            android:name="kaleidot725.ashiato.ui.privacy.PrivacyFragment"
+            android:label="privacy_fragment"
+            tools:layout="@layout/privacy_fragment" />
+    <fragment
+            android:id="@+id/contactFragment"
+            android:name="kaleidot725.ashiato.ui.contact.ContactFragment"
+            android:label="contact_fragment"
+            tools:layout="@layout/contact_fragment" />
+    <fragment
+            android:id="@+id/settingFragment"
+            android:name="kaleidot725.ashiato.ui.setting.SettingFragment"
+            android:label="SettingFragment" />
 </navigation>

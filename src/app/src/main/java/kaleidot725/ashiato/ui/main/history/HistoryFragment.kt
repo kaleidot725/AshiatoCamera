@@ -9,23 +9,17 @@ import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.data.service.picture.Picture
 import kaleidot725.ashiato.databinding.HistoryFragmentBinding
-import kaleidot725.ashiato.ui.preview.PreviewActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
 
 class HistoryFragment : Fragment(), ActionMode.Callback {
-
-    companion object {
-        fun newInstance() = HistoryFragment()
-    }
-
     private val historyViewModel: HistoryViewModel by viewModel()
-
     private var actionMode: ActionMode? = null
     private var recyclerView: RecyclerView? = null
 
@@ -40,14 +34,13 @@ class HistoryFragment : Fragment(), ActionMode.Callback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         createView(HistoryFragmentMode.Display)
-        historyViewModel.event.removeObservers(this)
-        historyViewModel.event.observe(this, Observer {
+        historyViewModel.event.observe(viewLifecycleOwner, Observer {
             when (it) {
                 HistoryViewModel.NavEvent.ACTION -> {
                     navigateAction()
                 }
                 HistoryViewModel.NavEvent.PREVIEW -> {
-                    navigatePreview()
+                    view.findNavController().navigate(R.id.action_history_fragment_to_previewFragment)
                 }
                 HistoryViewModel.NavEvent.SHARE -> {
                     navigateShare(historyViewModel.shareItems.value ?: listOf())
@@ -77,8 +70,8 @@ class HistoryFragment : Fragment(), ActionMode.Callback {
         createView(HistoryFragmentMode.Display)
     }
 
-    override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onActionItemClicked(mode: ActionMode?, item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.delete -> historyViewModel.delete()
             R.id.share -> historyViewModel.share()
         }
@@ -113,19 +106,13 @@ class HistoryFragment : Fragment(), ActionMode.Callback {
         return true
     }
 
-    private fun navigatePreview() {
-        val intent = Intent(context, PreviewActivity::class.java)
-        startActivity(intent)
-    }
-
     private fun createView(mode: HistoryFragmentMode) {
         val gridLayoutManager = (recyclerView?.layoutManager as GridLayoutManager?)
         val position = gridLayoutManager?.findFirstCompletelyVisibleItemPosition() ?: 0
 
         recyclerView = this.view?.findViewById(R.id.picture_recycler_view)
-        historyViewModel.pictureViewModels.observe(this, Observer {
-            recyclerView?.adapter =
-                PictureAdapter(this, historyViewModel.pictureViewModels.value ?: listOf())
+        historyViewModel.pictureViewModels.observe(viewLifecycleOwner, Observer {
+            recyclerView?.adapter = PictureAdapter(this, historyViewModel.pictureViewModels.value ?: listOf())
             recyclerView?.layoutManager = GridLayoutManager(context, 2)
             recyclerView?.setHasFixedSize(true)
             recyclerView?.scrollToPosition(position)

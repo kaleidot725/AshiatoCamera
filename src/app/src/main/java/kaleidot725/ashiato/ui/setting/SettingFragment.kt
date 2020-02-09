@@ -25,8 +25,4 @@ class SettingFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.load()
     }
-
-    companion object {
-        fun newInstance() = SettingFragment()
-    }
 }

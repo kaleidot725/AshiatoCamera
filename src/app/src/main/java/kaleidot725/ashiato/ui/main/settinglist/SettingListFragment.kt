@@ -1,6 +1,5 @@
 package kaleidot725.ashiato.ui.main.settinglist
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,22 +7,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.databinding.SettinglistFragmentBinding
-import kaleidot725.ashiato.ui.contact.ContactActivity
-import kaleidot725.ashiato.ui.privacy.PrivacyActivity
-import kaleidot725.ashiato.ui.setting.SettingActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SettingListFragment : Fragment() {
-    companion object {
-        fun newInstance() = SettingListFragment()
-    }
-
     private val listViewModel: SettingListViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,13 +33,13 @@ class SettingListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val recycler = view.findViewById<RecyclerView>(R.id.menu_recycler_view)
-        listViewModel.menus.observe(this, Observer {
+        listViewModel.menus.observe(viewLifecycleOwner, Observer {
             recycler.adapter = MenuAdapter(this, it)
             recycler.layoutManager = GridLayoutManager(context, 2)
             recycler.setHasFixedSize(true)
         })
 
-        listViewModel.event.observe(this, Observer { event ->
+        listViewModel.event.observe(viewLifecycleOwner, Observer { event ->
             when (event) {
                 SettingListViewModel.NavEvent.Setting -> navigateSetting()
                 SettingListViewModel.NavEvent.License -> navigateLicense()
@@ -65,18 +58,16 @@ class SettingListFragment : Fragment() {
     }
 
     private fun navigateSetting() {
-        val intent = Intent(context, SettingActivity::class.java)
-        startActivity(intent)
+        val f = findNavController()
+        findNavController().navigate(R.id.action_settinglist_fragment_to_settingFragment)
     }
 
     private fun navigateContact() {
-        val intent = Intent(context, ContactActivity::class.java)
-        startActivity(intent)
+        findNavController().navigate(R.id.action_settinglist_fragment_to_contactFragment)
     }
 
     private fun navigatePrivacy() {
-        val intent = Intent(context, PrivacyActivity::class.java)
-        startActivity(intent)
+        findNavController().navigate(R.id.action_settinglist_fragment_to_privacyFragment)
     }
 
     private fun navigateLicense() {

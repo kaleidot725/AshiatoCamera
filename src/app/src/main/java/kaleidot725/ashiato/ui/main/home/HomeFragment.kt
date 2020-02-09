@@ -18,11 +18,6 @@ import kaleidot725.ashiato.ui.admob.populateNativeAdView
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
     private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

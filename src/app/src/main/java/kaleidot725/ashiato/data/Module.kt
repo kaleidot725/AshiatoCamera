@@ -4,8 +4,6 @@ import android.content.Context
 import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Environment
-import kaleidot725.ashiato.data.holder.Holder
-import kaleidot725.ashiato.data.holder.HolderImpl
 import kaleidot725.ashiato.data.repository.*
 import kaleidot725.ashiato.data.service.location.LocationSetting
 import kaleidot725.ashiato.data.service.location.PermanentLocationSetting
@@ -18,7 +16,6 @@ import kaleidot725.ashiato.ui.edit.format.FormatViewModel
 import kaleidot725.ashiato.ui.edit.position.PositionViewModel
 import kaleidot725.ashiato.ui.edit.rotation.RotationViewModel
 import kaleidot725.ashiato.ui.edit.style.StyleViewModel
-import kaleidot725.ashiato.ui.main.MainMenu
 import kaleidot725.ashiato.ui.main.history.HistoryViewModel
 import kaleidot725.ashiato.ui.main.home.HomeViewModel
 import kaleidot725.ashiato.ui.main.settinglist.SettingListViewModel
@@ -105,10 +102,6 @@ val appModule = module {
 
     single<AngleRepository> {
         AngleRepositoryImpl()
-    }
-
-    single<Holder<MainMenu>> {
-        HolderImpl<MainMenu>(MainMenu.Home)
     }
 
     single<FormatEditor> {

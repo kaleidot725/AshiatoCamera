@@ -8,17 +8,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.widget.ImageButton
-import androidx.appcompat.app.ActionBar
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import io.github.inflationx.calligraphy3.CalligraphyConfig
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor
-import io.github.inflationx.viewpump.ViewPump
-import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kaleidot725.ashiato.R
 import kaleidot725.ashiato.data.repository.EditType
 import kaleidot725.ashiato.data.repository.PictureRepository
@@ -29,7 +27,9 @@ import java.io.File
 import java.io.IOException
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
+    private val navController: NavController get() = findNavController(R.id.nav_host_fragment)
     private val pictureRepository: PictureRepository by inject()
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,33 +46,40 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             return
         }
 
-        setupCalligraphy()
         setContentView(R.layout.activity_main)
+        setupActionBarWithNavController(this, navController)
 
-        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar?.setCustomView(R.layout.actionbar_main)
-
-        val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        navigation.setupWithNavController(findNavController(R.id.nav_host_fragment))
-
-        findViewById<ImageButton>(R.id.camera_button).setOnClickListener { takePhoto() }
-        findViewById<ImageButton>(R.id.folder_button).setOnClickListener { selectPhoto() }
+        bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.home_fragment -> navController.navigate(R.id.home_fragment)
+                R.id.history_fragment -> navController.navigate(R.id.history_fragment)
+                R.id.settinglist_fragment -> navController.navigate(R.id.settinglist_fragment)
+            }
+            true
+        }
+        bottomNavigationView.setupWithNavController(navController)
+//        navController.addOnDestinationChangedListener(destinationChangedListener)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
+//    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+//        val id = navController.currentDestination?.id
+//        if (id == R.id.home_fragment || id == R.id.history_fragment || id == R.id.settinglist_fragment) {
+//            menuInflater.inflate(R.menu.action_bar_menu, menu)
+//        }
+//
+//        return super.onCreateOptionsMenu(menu)
+//    }
 
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
-    }
+//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+//        when (item?.itemId) {
+//            R.id.camera_button -> takePhoto()
+//            R.id.folder_button -> selectPhoto()
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
-    private fun setupCalligraphy() {
-        val config = CalligraphyConfig.Builder().build()
-        val interceptor = CalligraphyInterceptor(config)
-        val pump = ViewPump.builder().addInterceptor(interceptor).build()
-        ViewPump.init(pump)
-    }
+    override fun onSupportNavigateUp(): Boolean = navController.navigateUp()
 
     private var tempFile: File? = null
     private var imageFile: File? = null
@@ -176,6 +183,19 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
 
         return true
+    }
+
+    private val destinationChangedListener = object : NavController.OnDestinationChangedListener {
+        override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
+            invalidateOptionsMenu()
+
+            val id = controller.currentDestination?.id
+            if (id != R.id.home_fragment && id != R.id.history_fragment && id != R.id.settinglist_fragment) {
+                bottomNavigationView.visibility = View.INVISIBLE
+            } else {
+                bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun navigateEdit(): Boolean {

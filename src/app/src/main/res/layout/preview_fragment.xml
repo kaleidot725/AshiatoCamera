@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="vm" type="kaleidot725.ashiato.ui.preview.PageViewModel"/>
+
+        <variable
+                name="vm"
+                type="kaleidot725.ashiato.ui.preview.PreviewViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/preview"
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/black"
-            tools:context=".ui.preview.PageFragment">
+            android:background="#0000ff"
+            tools:context=".ui.preview.PreviewActivity">
 
-        <com.github.chrisbanes.photoview.PhotoView
-                android:id="@+id/picture_image"
+        <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:imageUrl="@{vm.path}"
-                android:clickable="true"
-                android:scaleType="fitCenter"
-                android:background="?android:attr/selectableItemBackground"/>
+                android:layout_height="match_parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

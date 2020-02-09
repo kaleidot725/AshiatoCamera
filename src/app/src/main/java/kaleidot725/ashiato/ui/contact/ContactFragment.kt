@@ -14,11 +14,6 @@ import kaleidot725.ashiato.databinding.ContactFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ContactFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ContactFragment()
-    }
-
     private val contactViewModel: ContactViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -35,7 +30,7 @@ class ContactFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.contact_recycler_view)
-        contactViewModel.developers.observe(this, Observer {
+        contactViewModel.developers.observe(viewLifecycleOwner, Observer {
             recyclerView.adapter = DeveloperAdapter(this, it)
             recyclerView.layoutManager = GridLayoutManager(context, 1)
             recyclerView.setHasFixedSize(true)

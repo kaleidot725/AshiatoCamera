@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import kaleidot725.ashiato.R
-import kaleidot725.ashiato.databinding.PreviewFragmentBinding
+import kaleidot725.ashiato.databinding.PageFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PageFragment : Fragment() {
@@ -23,7 +23,7 @@ class PageFragment : Fragment() {
     val viewModel: PageViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return DataBindingUtil.inflate<PreviewFragmentBinding>(inflater, R.layout.preview_fragment, container, false)
+        return DataBindingUtil.inflate<PageFragmentBinding>(inflater, R.layout.page_fragment, container, false)
             .apply {
                 vm = viewModel
                 lifecycleOwner = viewLifecycleOwner
