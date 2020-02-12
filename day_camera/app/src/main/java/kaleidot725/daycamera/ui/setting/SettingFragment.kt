@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.LibsBuilder
 import kaleidot725.daycamera.R
 import kotlinx.android.synthetic.main.fragment_setting.*
 
@@ -26,6 +28,13 @@ class SettingFragment : Fragment() {
 
         privacy_button.setOnClickListener {
             findNavController().navigate(R.id.action_settingFragment_to_privacyFragment)
+        }
+
+        license_button.setOnClickListener {
+            LibsBuilder()
+                .withActivityTitle("License")
+                .withShowLoadingProgress(false)
+                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR).start(context)
         }
     }
 }
