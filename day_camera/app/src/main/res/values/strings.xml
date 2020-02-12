@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">DayCamera</string>
+    <string name="app_name">Day Camera</string>
+
+    <!-- Permission Request -->
+    <string name="request_permission_button">Got it!!</string>
+    <string name="request_permission_title">Request Permissions</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
