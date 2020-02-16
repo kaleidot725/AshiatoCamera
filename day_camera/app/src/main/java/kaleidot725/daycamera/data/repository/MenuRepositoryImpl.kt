@@ -13,7 +13,7 @@ class MenuRepositoryImpl(val context: Context) : MenuRepository {
         list.add(
             Menu(
                 R.drawable.ic_setting,
-                context.getString(R.string.menu_setting)
+                context.getString(R.string.menu_config)
             )
         )
         list.add(
@@ -25,7 +25,7 @@ class MenuRepositoryImpl(val context: Context) : MenuRepository {
         list.add(
             Menu(
                 R.drawable.ic_contact,
-                context.getString(R.string.menu_contanct)
+                context.getString(R.string.menu_contact)
             )
         )
         list.add(
