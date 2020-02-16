@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,71 +8,8 @@
             type="kaleidot725.daycamera.ui.setting.SettingViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".ui.setting.SettingFragment">
-
-        <TextView
-            android:id="@+id/title_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorSecondaryText"
-            android:text="Setting"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.4" />
-
-        <Button
-            android:id="@+id/contact_button"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:text="Contact"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_text_view" />
-
-        <Button
-            android:id="@+id/privacy_button"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:text="Privacy"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contact_button" />
-
-        <Button
-            android:id="@+id/config_button"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:text="Config"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/privacy_button" />
-
-        <Button
-            android:id="@+id/license_button"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:text="Licanse"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/config_button" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent" />
 </layout>

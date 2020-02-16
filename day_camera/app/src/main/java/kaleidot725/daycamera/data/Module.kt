@@ -8,7 +8,9 @@ import kaleidot725.daycamera.data.repository.*
 import kaleidot725.daycamera.data.service.location.LocationSetting
 import kaleidot725.daycamera.data.service.location.PermanentLocationSetting
 import kaleidot725.daycamera.data.service.picture.*
+import kaleidot725.daycamera.ui.setting.SettingViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import java.util.*
 
@@ -117,4 +119,7 @@ val appModule = module {
         FormatRepositoryImpl()
     }
 
+    viewModel {
+        SettingViewModel(get())
+    }
 }
