@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries_list_network">
+        <item>Network</item>
+        <item>GPS</item>
+    </string-array>
+
+    <string-array name="entry_values_list_network">
+        <item>gps</item>
+        <item>network</item>
+    </string-array>
+
+    <string-array name="entries_list_gps_min_times">
+        <item>1Sec</item>
+        <item>5Sec</item>
+        <item>10Sec</item>
+        <item>15Sec</item>
+        <item>30Sec</item>
+        <item>60Sec</item>
+    </string-array>
+
+    <string-array name="entry_values_gps_min_times">
+        <item>1</item>
+        <item>5</item>
+        <item>1</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+    </string-array>
+
+    <string-array name="entries_list_gps_min_distance">
+        <item>1m</item>
+        <item>5m</item>
+        <item>10m</item>
+        <item>25m</item>
+        <item>50m</item>
+        <item>100m</item>
+    </string-array>
+
+    <string-array name="entry_values_gps_min_distance">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>25</item>
+        <item>50</item>
+        <item>100</item>
+    </string-array>
+</resources>
