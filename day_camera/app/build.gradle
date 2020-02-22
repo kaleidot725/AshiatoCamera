@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 android {
     compileSdkVersion 29
@@ -68,7 +69,7 @@ dependencies {
     implementation "org.koin:koin-android-ext:$koin_version"
 
     // License
-    implementation "com.mikepenz:aboutlibraries:6.1.1"
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
     // Moshi
     implementation("com.squareup.moshi:moshi:1.8.0")

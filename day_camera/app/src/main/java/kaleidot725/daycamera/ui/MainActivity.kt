@@ -1,5 +1,6 @@
 package kaleidot725.daycamera.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -12,8 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.mikepenz.aboutlibraries.Libs
-import com.mikepenz.aboutlibraries.LibsBuilder
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import kaleidot725.daycamera.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -45,10 +45,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             R.id.configFragment -> navController.navigate(R.id.configFragment)
             R.id.privacyFragment -> navController.navigate(R.id.privacyFragment)
             R.id.licenseFragment -> {
-                LibsBuilder()
-                    .withActivityTitle("License")
-                    .withShowLoadingProgress(false)
-                    .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR).start(applicationContext)
+                startActivity(Intent(this, OssLicensesMenuActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)
