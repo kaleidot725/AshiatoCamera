@@ -12,15 +12,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.privacy.PrivacyFragment">
+        tools:context=".ui.privacy.PrivacyFragment"
+        android:layout_margin="8dp">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:text="Privacy"
+            android:text="@string/privacy_policy"
             android:textColor="@color/colorSecondaryText"
-            android:textSize="32sp"
+            android:textSize="8sp"
             android:textStyle="bold" />
 
     </FrameLayout>
