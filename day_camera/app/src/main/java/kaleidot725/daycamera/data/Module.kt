@@ -61,10 +61,6 @@ val appModule = module {
         }
     }
 
-    single<DeveloperRepository> {
-        DeveloperRepositoryImpl()
-    }
-
     single<StyleRepository> {
         StyleRepositoryImpl()
     }

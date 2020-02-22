@@ -68,7 +68,7 @@
     <fragment
         android:id="@+id/privacyFragment"
         android:name="kaleidot725.daycamera.ui.privacy.PrivacyFragment"
-        android:label="Privacy"
+        android:label="Privacy Policy"
         tools:layout="@layout/fragment_privacy" />
     <fragment
         android:id="@+id/editFragment"
