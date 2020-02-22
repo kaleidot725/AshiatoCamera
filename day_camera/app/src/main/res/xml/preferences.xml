@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
-        android:key="network"
-        android:title="GPS Network"
-        android:summary="Using WiFi or GPS"
+        android:icon="@drawable/ic_network"
+        android:key="provider"
+        android:title="GPS Provider"
+        android:summary="WiFi GPS etc."
         android:entries="@array/entries_list_network"
         android:entryValues="@array/entry_values_list_network"
         android:dialogTitle="ListPreference" />
 
     <ListPreference
+        android:icon="@drawable/ic_time"
         android:key="gpsmintime"
-        android:title="GPS Min Time"
-        android:summary="seconds updating GPS"
+        android:title="Minimum Update Interval"
+        android:summary="1Sec 5Sec 10Sec 15Sec etc."
         android:entries="@array/entries_list_gps_min_times"
         android:entryValues="@array/entry_values_gps_min_times"
         android:dialogTitle="ListPreference" />
 
     <ListPreference
+        android:icon="@drawable/ic_map"
         android:key="gpsmindistane"
-        android:title="GPS Min Distance"
-        android:summary="distance updating GPS"
+        android:title="Minimum Update Distance"
+        android:summary="1m 5m 10m 25m etc."
         android:entries="@array/entries_list_gps_min_distance"
         android:entryValues="@array/entry_values_gps_min_distance"
         android:dialogTitle="ListPreference" />
