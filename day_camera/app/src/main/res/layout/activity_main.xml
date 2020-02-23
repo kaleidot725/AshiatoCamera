@@ -19,14 +19,12 @@
             android:id="@+id/tab_item_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_home"
-            android:text="Home" />
+            android:text="Now" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_item_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_history"
             android:text="History" />
 
     </com.google.android.material.tabs.TabLayout>

@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.text) {
-                    "Home" -> navController.navigate(R.id.homeFragment)
+                    "Now" -> navController.navigate(R.id.homeFragment)
                     "History" -> navController.navigate(R.id.historyFragment)
                 }
             }
