@@ -12,8 +12,8 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import com.google.android.material.tabs.TabLayout
 import kaleidot725.daycamera.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,7 +28,17 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         navController.addOnDestinationChangedListener(this)
         setupActionBarWithNavController(this, navController, barConfig)
-        bottom_navigation_view.setupWithNavController(navController)
+        tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.text) {
+                    "Home" -> navController.navigate(R.id.homeFragment)
+                    "History" -> navController.navigate(R.id.historyFragment)
+                }
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -54,13 +64,13 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
         val id = controller.currentDestination?.id
         if (id == R.id.permissionFragment) {
-            bottom_navigation_view.visibility = View.GONE
+            tab_layout.visibility = View.GONE
             supportActionBar?.hide()
         } else if (id != R.id.homeFragment && id != R.id.historyFragment) {
-            bottom_navigation_view.visibility = View.GONE
+            tab_layout.visibility = View.GONE
             supportActionBar?.show()
         } else {
-            bottom_navigation_view.visibility = View.VISIBLE
+            tab_layout.visibility = View.VISIBLE
             supportActionBar?.show()
         }
         invalidateOptionsMenu()
