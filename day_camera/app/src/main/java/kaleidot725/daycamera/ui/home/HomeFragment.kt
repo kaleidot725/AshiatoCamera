@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        edit_button.setOnClickListener {
+        camera_button.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_editFragment)
         }
     }
