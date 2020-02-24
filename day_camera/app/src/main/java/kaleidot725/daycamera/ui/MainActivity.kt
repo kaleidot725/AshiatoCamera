@@ -1,5 +1,6 @@
 package kaleidot725.daycamera.ui
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -16,8 +17,9 @@ import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.android.material.tabs.TabLayout
 import kaleidot725.daycamera.R
 import kotlinx.android.synthetic.main.activity_main.*
+import pub.devrel.easypermissions.EasyPermissions
 
-class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
+class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener, EasyPermissions.PermissionCallbacks {
     private val navController: NavController get() = findNavController(R.id.main_fragment)
     private val barConfig = AppBarConfiguration.Builder(R.id.homeFragment, R.id.historyFragment).build()
     private val optionVisibility get() = (navController.currentDestination?.id == R.id.homeFragment || navController.currentDestination?.id == R.id.historyFragment)
@@ -39,6 +41,16 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
         })
+
+        if (!EasyPermissions.hasPermissions(this, *permissions)) {
+            EasyPermissions.requestPermissions(
+                this,
+                "TEST",
+                REQUEST_PERMISSION,
+                *permissions
+            )
+            return
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,4 +89,23 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     override fun onSupportNavigateUp(): Boolean = navController.navigateUp()
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {}
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        val result = EasyPermissions.hasPermissions(this, *permissions)
+        if (result) {
+            navController.navigate(R.id.action_permissionFragment_to_homeFragment)
+        }
+    }
+
+
+    companion object {
+        private const val REQUEST_PERMISSION = 0
+        private val permissions = arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+        )
+    }
 }

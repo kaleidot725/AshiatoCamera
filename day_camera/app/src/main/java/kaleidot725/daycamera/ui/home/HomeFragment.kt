@@ -10,11 +10,14 @@ import androidx.navigation.fragment.findNavController
 import kaleidot725.daycamera.R
 import kaleidot725.daycamera.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
+    private val viewModel: HomeViewModel by viewModel()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return DataBindingUtil.inflate<FragmentHomeBinding>(inflater, LAYOUT_ID, container, false).apply {
-            viewModel = HomeViewModel()
+            viewModel = this@HomeFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
         }.root
     }

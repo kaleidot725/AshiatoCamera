@@ -8,7 +8,9 @@ import kaleidot725.daycamera.data.repository.*
 import kaleidot725.daycamera.data.service.location.LocationSetting
 import kaleidot725.daycamera.data.service.location.PermanentLocationSetting
 import kaleidot725.daycamera.data.service.picture.*
+import kaleidot725.daycamera.ui.home.HomeViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import java.util.*
 
@@ -29,35 +31,17 @@ val appModule = module {
 
     single<LocationRepository> {
         val geocoder: Geocoder = Geocoder(androidContext(), Locale.getDefault())
-        val locationManager: LocationManager =
-            androidContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-        try {
-            val s = PermanentLocationSetting(androidContext().filesDir.path + "settings.json")
-                .load()
-            LocationRepositoryImpl(
-                androidContext(),
-                s.gpsGpsLocationProvider,
-                s.gpsMinTime,
-                s.gpsMinDistance,
-                geocoder,
-                locationManager
-            ).apply {
-                start()
-            }
-
-        } catch (e: Exception) {
-            val s = LocationSetting(LocationManager.GPS_PROVIDER, 1, 1)
-            LocationRepositoryImpl(
-                androidContext(),
-                s.gpsGpsLocationProvider,
-                s.gpsMinTime,
-                s.gpsMinDistance,
-                geocoder,
-                locationManager
-            ).apply {
-                start()
-            }
+        val locationManager: LocationManager = androidContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val s = LocationSetting(LocationManager.GPS_PROVIDER, 1, 1)
+        LocationRepositoryImpl(
+            androidContext(),
+            s.gpsGpsLocationProvider,
+            s.gpsMinTime,
+            s.gpsMinDistance,
+            geocoder,
+            locationManager
+        ).apply {
+            start()
         }
     }
 
@@ -111,5 +95,9 @@ val appModule = module {
 
     single<FormatRepository> {
         FormatRepositoryImpl()
+    }
+
+    viewModel<HomeViewModel> {
+        HomeViewModel(get(), get())
     }
 }
